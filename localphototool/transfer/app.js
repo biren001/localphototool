@@ -14,7 +14,10 @@
   // ---------- helpers ----------
   var $ = function (id) { return document.getElementById(id); };
   var CODE_ALPHABET = 'abcdefghjkmnpqrstuvwxyz23456789';
-  var CHUNK = 16 * 1024;
+  // 15KB: just under PeerJS's internal chunking threshold (~16300 B). At 16KB
+  // every chunk got silently re-fragmented by PeerJS on top of our own
+  // slicing — pure overhead and one more layer to lose packets in.
+  var CHUNK = 15 * 1024;
 
   function randCode(n) {
     var s = '', bytes = new Uint8Array(n);
@@ -99,11 +102,20 @@
   // Liveness heartbeat: a silently departed peer (closed tab, killed browser,
   // dropped network) never fires the channel's close event, so without this
   // the other side keeps "sending" into a dead connection. Ping every 3s;
-  // 12s without any inbound data means the peer is gone.
+  // 12s without any inbound data means the peer is gone — UNLESS the send
+  // buffer is actively draining, because bufferedAmount shrinking means the
+  // peer's transport layer is consuming our bytes: the link is demonstrably
+  // alive even if pongs are momentarily delayed. Without that guard a busy
+  // mid-transfer peer could be killed for "silence" it didn't commit.
   setInterval(function () {
     var live = wires.filter(function (w) { return w.open; });
     live.forEach(function (w) { w.send(JSON.stringify({ t: 'ping' })); });
-    var dead = live.filter(function (w) { return Date.now() - w.lastSeen > 12000; });
+    var dead = live.filter(function (w) {
+      var buf = w.buffered();
+      if (typeof w._lastBuf === 'number' && buf < w._lastBuf) w.lastSeen = Date.now();
+      w._lastBuf = buf;
+      return Date.now() - (w.lastSeen || 0) > 12000;
+    });
     dead.forEach(function (w) {
       w.open = false;
       w.close();
@@ -177,6 +189,7 @@
     var wire = {
       kind: 'rtc',
       open: false,
+      lastSeen: Date.now(),  // same liveness contract as makePeerWire
       send: function (d) {
         if (ch.readyState !== 'open') return;
         if (typeof d === 'string' || d instanceof ArrayBuffer) ch.send(d);
@@ -189,7 +202,7 @@
     ch.onopen = function () { wire.open = true; handlers.open(); };
     ch.onclose = function () { wire.open = false; handlers.close(); };
     ch.onerror = function () { wire.open = false; handlers.close(); };
-    ch.onmessage = function (e) { handlers.data(e.data); };
+    ch.onmessage = function (e) { wire.lastSeen = Date.now(); handlers.data(e.data); };
     if (ch.readyState === 'open') { wire.open = true; setTimeout(handlers.open, 0); }
     return wire;
   }
@@ -229,15 +242,28 @@
     var s = typeof payload === 'string' ? payload : JSON.stringify(payload);
     wires.forEach(function (w) { if (w.open) w.send(s); });
   }
+  // Inbound messages MUST be processed strictly in wire order, but binary
+  // chunks need an async unpack (Blob.arrayBuffer) while control messages
+  // are plain strings. Handling file-end synchronously let it overtake the
+  // chunk promises still queued behind it: the receiver "finished" a file
+  // with most of its chunks unaccounted for (e.g. 0.8 KB of 184 KB), the
+  // rest were dropped as ownerless, and the heartbeat then killed a link
+  // that was actually fine. One ordered promise chain fixes the ordering
+  // for every message kind; there is exactly one live wire at a time here,
+  // so a single chain cannot cross-block.
+  var inboundQueue = Promise.resolve();
+  function queueInbound(step) {
+    inboundQueue = inboundQueue.then(step).catch(function () {});
+  }
   function onWireData(d) {
     if (typeof d === 'string') {
       var msg;
       try { msg = JSON.parse(d); } catch (e) { return; }
-      handleMessage(msg);
+      queueInbound(function () { handleMessage(msg); });
     } else if (d instanceof ArrayBuffer) {
-      pushChunk(d);
+      queueInbound(function () { pushChunk(d); });
     } else if (typeof Blob !== 'undefined' && d instanceof Blob) {
-      d.arrayBuffer().then(pushChunk);
+      d.arrayBuffer().then(function (ab) { queueInbound(function () { pushChunk(ab); }); });
     }
   }
   function pushChunk(ab) {
@@ -266,9 +292,11 @@
         var fill = document.createElement('div');
         bar.appendChild(fill);
         bubble.appendChild(name); bubble.appendChild(size); bubble.appendChild(bar);
-        wrap._bar = function (p) {
-          fill.style.width = Math.round(p * 100) + '%';
-          if (p >= 1) size.textContent = fmtBytes(msg.size) + ' · received ✓';
+        wrap._bar = function (p, ok) {
+          fill.style.width = Math.round(Math.min(p, 1) * 100) + '%';
+          if (p >= 1) size.textContent = ok === false
+            ? fmtBytes(msg.size) + ' · incomplete'
+            : fmtBytes(msg.size) + ' · received ✓';
         };
       });
       incoming[id] = { meta: msg, chunks: [], received: 0, msg: el };
@@ -284,22 +312,28 @@
       var url = URL.createObjectURL(blob);
       var bubble = st.msg.querySelector('.bubble');
       var isImg = /^image\//.test(st.meta.mime);
-      if (blob.size !== st.meta.size) {
+      // The byte count is the only truth. A short blob is a broken file: say
+      // so, keep the bar honest, and do NOT offer a download of bytes we
+      // know are incomplete.
+      var complete = blob.size === st.meta.size;
+      if (!complete) {
         var warn = document.createElement('div');
         warn.className = 'meta';
         warn.textContent = 'Received ' + fmtBytes(blob.size) + ' of ' + fmtBytes(st.meta.size) + ' — the transfer was interrupted, please send this file again.';
         bubble.appendChild(warn);
       }
-      if (isImg) {
+      if (isImg && complete) {
         var img = document.createElement('img');
         img.src = url; img.alt = st.meta.name;
         bubble.appendChild(img);
       }
-      var link = document.createElement('a');
-      link.href = url; link.download = st.meta.name;
-      link.textContent = isImg ? 'Download original' : 'Save file';
-      bubble.appendChild(link);
-      st.msg._bar(1);
+      if (complete) {
+        var link = document.createElement('a');
+        link.href = url; link.download = st.meta.name;
+        link.textContent = isImg ? 'Download original' : 'Save file';
+        bubble.appendChild(link);
+      }
+      st.msg._bar(complete ? 1 : st.received / st.meta.size, complete);
     }
   }
 
