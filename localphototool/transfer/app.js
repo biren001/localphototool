@@ -13,7 +13,7 @@
 /* Asset version — the HTML's version guard checks this. When changing this
    file, bump ALL of: __BEAM_VER__ here, the "?v=" in index.html, the guard's
    expected number in index.html, and VERSION in ../sw.js. */
-window.__BEAM_VER__ = 33;
+window.__BEAM_VER__ = 34;
 
 (function () {
   // ---------- helpers ----------
@@ -872,6 +872,10 @@ window.__BEAM_VER__ = 33;
   }
   document.addEventListener('click', function (e) {
     var t = e.target;
+    // Tapping the zoomed photo itself shrinks it — demanding a precise tap on
+    // the dark area around it was fiddly on phones. A tap inside the lightbox
+    // (image included) closes it; the thumbnail outside still re-opens it.
+    if (t && t.closest && t.closest('#beamLightbox')) { closeLightbox(); return; }
     if (t && t.tagName === 'IMG' && t.closest && t.closest('#beamApp')) {
       lightbox.querySelector('img').src = t.src;
       lightbox.hidden = false;

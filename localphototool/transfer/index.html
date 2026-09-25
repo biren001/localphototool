@@ -196,6 +196,17 @@ html[data-theme="dark"] #beamApp {
   height: auto;
   object-fit: contain;
   border-radius: 8px;
+  cursor: zoom-out;
+}
+#beamLightbox .lb-hint {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  pointer-events: none;
 }
 #beamApp .bubble .fname { font-weight: 650; }
 #beamApp .bubble a { color: inherit; font-weight: 650; }
@@ -491,9 +502,11 @@ html[data-theme="dark"] #beamApp {
     </div>
   </section>
 
-  <!-- Full-screen image viewer: tap any photo preview to zoom it -->
+  <!-- Full-screen image viewer: tap any photo preview to zoom it, tap the
+       zoomed photo or anywhere else to shrink it back -->
   <div id="beamLightbox" hidden role="dialog" aria-label="Image preview" aria-modal="true">
     <img alt="Received image, enlarged">
+    <span class="lb-hint">Tap the photo to shrink it</span>
   </div>
 
   <!-- SEO content -->
@@ -623,7 +636,7 @@ html[data-theme="dark"] #beamApp {
      cache-first, so a bare "app.js" needs TWO reloads to pick up an update
      (one to install the new SW, one to fetch past its old cache). A changed
      URL bypasses the stale entry on the very first load. -->
-<script src="./app.js?v=33"></script>
+<script src="./app.js?v=34"></script>
 <!-- Version guard: until the NEW service worker has taken control, an OLD
      service worker may still answer this request with a stale app.js it
      cached earlier. If the loaded script does not declare the version this
@@ -633,7 +646,7 @@ html[data-theme="dark"] #beamApp {
      fallback. -->
 <script>
 (function () {
-  if (window.__BEAM_VER__ === 33) return;
+  if (window.__BEAM_VER__ === 34) return;
   try {
     if (sessionStorage.getItem('beamReloadOnce')) return;
     sessionStorage.setItem('beamReloadOnce', '1');
