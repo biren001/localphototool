@@ -81,6 +81,13 @@ for (const f of files) {
     '',
   ])[1];
   const hasOg = /property=["']og:(title|description|image)["']/i.test(html);
+  const ogUrlTags = [...html.matchAll(/property=["']og:url["'][^>]+content=["']([^"']*)["']/gi)].map(
+    (m) => m[1]
+  );
+  const ogTitleCount = (html.match(/property=["']og:title["']/gi) || []).length;
+  // Signature of a page cloned from /privacy/ whose shared footer link was never
+  // rewritten: a "Privacy" label resolving to "./" lands on the page you are on.
+  const selfPrivacyLink = /href=["']\.\/["'][^>]*>\s*Privacy\s*</i.test(html);
   const imgs = [...html.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
   const imgsMissingAlt = imgs.filter((s) => !/\balt\s*=/i.test(s)).length;
   const internal = [...html.matchAll(/href=["'](?!https?:|mailto:|#)([^"'#]+)["']/g)].map(
@@ -103,6 +110,9 @@ for (const f of files) {
     types,
     internal: internal.length,
     hasOg,
+    ogUrlTags,
+    ogTitleCount,
+    selfPrivacyLink,
     imgTotal: imgs.length,
     imgNoAlt: imgsMissingAlt,
     lang,
@@ -140,6 +150,24 @@ for (const r of rows) {
   if (r.imgNoAlt > 0) gaps.push(`${r.rel}: ${r.imgNoAlt}/${r.imgTotal} images without alt`);
   if (!r.lang) gaps.push(`${r.rel}: no lang attribute on <html>`);
   if (!r.canonical) gaps.push(`${r.rel}: no canonical`);
+  if (r.canonical) {
+    // og:url must be unique and agree with canonical — a duplicated head block
+    // (typical when a page is cloned from a template) silently sends social
+    // previews and canonical signals to a different URL.
+    const expectedOgUrl = 'https://localphototool.com' + r.canonical;
+    if (r.ogUrlTags.length !== 1) {
+      gaps.push(`${r.rel}: ${r.ogUrlTags.length} og:url tags (want exactly 1)`);
+    } else if (r.ogUrlTags[0] !== expectedOgUrl) {
+      gaps.push(`${r.rel}: og:url is ${r.ogUrlTags[0]} but canonical is ${expectedOgUrl}`);
+    }
+    if (r.ogTitleCount !== 1) {
+      gaps.push(`${r.rel}: ${r.ogTitleCount} og:title tags (want exactly 1)`);
+    }
+    // On /privacy/ itself, "./" is the correct target, so only other pages can be wrong.
+    if (r.selfPrivacyLink && r.canonical !== '/privacy/') {
+      gaps.push(`${r.rel}: a "Privacy" link points at this page itself ("./" not "../privacy/")`);
+    }
+  }
 }
 
 const noSchema = rows.filter((r) => r.types.length === 0);
