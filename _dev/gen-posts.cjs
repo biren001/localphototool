@@ -51,9 +51,18 @@ they read better than a launch announcement would.
 
 ## dev.to
 
-Title and body. dev.to takes markdown, so the \`##\` headings and the bullet
-lists survive as-is. Pick a canonical URL pointing back to
-\`https://localphototool.com\` if the editor offers one.
+The block below is **title on the first line, body starting at the third**. Put
+the first line in dev.to's title field and begin the body at "Every image
+compressor I tried" — do not repeat the title in the body, because dev.to
+renders the title above it already. dev.to takes markdown, so the \`##\`
+headings and bullet lists survive as-is.
+
+**Leave the canonical URL field empty.** It is tempting to point it at
+\`https://localphototool.com\` so the site gets the credit, but canonical says
+"this page is a copy, index that one instead" — Google would drop the post from
+its index and the whole point of posting, a page that exists and links to the
+site, is gone. Only fill it in if the same text is also published on your own
+domain; if dev.to is the only place it appears, dev.to should keep the credit.
 
 \`\`\`
 ${b.get('devto-post')}
