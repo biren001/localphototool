@@ -99,19 +99,40 @@ function locate(lines, entry) {
   if (hits.length !== 1) return { error: `anchor matched ${hits.length} times, expected exactly 1` };
   const at = hits[0];
 
-  let parent = '';
-  for (let k = at; k >= 0; k--) if (/^##\s/.test(lines[k])) { parent = lines[k].trim(); break; }
-  let sub = '';
-  for (let k = at; k >= 0; k--) if (/^####\s/.test(lines[k])) { sub = lines[k].trim(); break; }
-  for (let k = at; k >= 0; k--) if (/^###\s/.test(lines[k])) { sub = ''; break; }
+  // Every heading search is bounded by the parent section. The first version
+  // scanned the whole file upward for a "###" and blanked the subsection when
+  // it found one — but `#### Web` hangs directly off `## Photo Editing and
+  // Management` with no intervening `###`, so the scan reached `### Shared
+  // Expenses` several hundred lines up, inside a *different* `##` section, and
+  // turned a correct anchor into a reported failure. Nothing caught this
+  // earlier because the guard had never run past the token check.
+  let parentIdx = -1;
+  for (let k = at; k >= 0; k--) if (/^##\s/.test(lines[k])) { parentIdx = k; break; }
+  if (parentIdx < 0) return { error: 'no "## " heading above the anchor' };
+  const parent = lines[parentIdx].trim();
+
+  let subIdx = -1;
+  for (let k = at; k > parentIdx; k--) if (/^####\s/.test(lines[k])) { subIdx = k; break; }
+
+  // A "###" between the parent and the "####" would mean the "####" belongs to
+  // that deeper section, so the subsection is not the one we claimed.
+  const limit = subIdx === -1 ? at + 1 : subIdx;
+  const strays = [];
+  for (let k = parentIdx + 1; k < limit; k++) if (/^###\s/.test(lines[k])) strays.push(k);
+  const sub = subIdx !== -1 && strays.length === 0 ? lines[subIdx].trim() : '';
 
   if (parent !== REQUIRED_PARENT) return { error: `anchor sits under ${JSON.stringify(parent)}, expected ${JSON.stringify(REQUIRED_PARENT)}` };
-  if (sub !== REQUIRED_SUB) return { error: `anchor sits under ${JSON.stringify(sub)}, expected ${JSON.stringify(REQUIRED_SUB)}` };
+  if (sub !== REQUIRED_SUB) {
+    return { error: `anchor sits under ${JSON.stringify(sub)}, expected ${JSON.stringify(REQUIRED_SUB)}` +
+      (strays.length ? ` (a "### " at line ${strays[0] + 1} sits in between)` : '') };
+  }
 
-  if (entry in lines || lines.some((l) => l.includes('localphototool.com'))) {
+  // `entry in lines` was the old test and it is an index lookup on an array, so
+  // it only ever matched a numeric string. Compare the text itself.
+  if (lines.some((l) => l.trim() === entry) || lines.some((l) => l.includes('localphototool.com'))) {
     return { error: 'the list already carries a localphototool.com link' };
   }
-  return { at, parent, sub };
+  return { at, parent, sub, parentIdx, subIdx };
 }
 
 async function main() {

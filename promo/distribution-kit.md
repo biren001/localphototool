@@ -425,15 +425,30 @@ with a copy button, so an account plus a few pastes is all that is left.
 | **Product Hunt** | <https://www.producthunt.com/posts/new> — 403 to a script | Optionally a full launch — needs a gallery (see §5) and a 12:01am PT start. A listing alone still earns a lasting link. |
 | **AlternativeTo** | 403 to a script (path not confirmed) | List as an alternative to TinyPNG, iLoveIMG, Squoosh, Compressor.io: register the app, then add it to each. |
 | **Launching Next**, **Peerlist Launchpad**, **LibHunt**, **Slant** | 403 to a script | Reach each from its own home page. Slant and LibHunt want an answer on their "best image compressor" question, not a listing. |
-| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — PR touching `README.md`, section **`## Photo Editing and Management` → `#### Web`** (not `## Cloaking` → `### Images`) | **The only one of the three that is open to us.** Its stated requirements are a privacy policy, no tracking on the project site, and open source — all three of which we meet — and it says nothing about who may open the PR. One line: `- [Name](url) - one sentence`, saying what it does and what it replaces, with the licence and whether it is self-hostable. Shipped as `awesome-privacy-entry`. **nofollow** — discovery only, and PRs are reviewed in monthly batches. |
+| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — PR touching `README.md`, section **`## Photo Editing and Management` → `#### Web`** (not `## Cloaking` → `### Images`) | **The only one of the three that is open to us.** Its stated requirements are a privacy policy, no tracking on the project site, and open source — all three of which we meet — and it says nothing about who may open the PR. One line: `- [Name](url) - one sentence`, saying what it does and what it replaces, with the licence and whether it is self-hostable. Shipped as `awesome-privacy-entry`. **PR [#1135](https://github.com/pluja/awesome-privacy/pull/1135) opened 2026-09-24** — one file, one added line, authored by `biren001`. **nofollow** — discovery only, and PRs are reviewed in monthly batches. |
 | ~~free-for-dev~~ | — | **Do not submit.** Two independent blocks. The list excludes "generic developer 'toolbox' sites - format converters, calculators etc" by name, which is exactly what `png-to-jpg` and `jpg-to-webp` are. And its template requires ticking "Large Language Models and other AI tick this box" alongside "This is not a generic browser based developer toolbox, **I agree to be banned from this list if it is**" — one box describes us and the other would not be true. |
 | ~~awesome-selfhosted~~ | — | **Do not submit, and do not let a tool submit it either.** `awesome-selfhosted-data/CONTRIBUTING.md` carries a block addressed to AI agents forbidding exactly this: do not open a PR on behalf of a user, do not write an entry a person will then submit as their own, and do not tick the "The submission was done by a human, not a machine/LLM" box, because "an agent cannot make it truthfully". It does permit explaining the rules to the person, which is what this row is. |
 
-That leaves one PR worth opening, and one PR does not justify handing over a
-credential. The token route was explored and is closed deliberately:
-`_dev/check-github-token.cjs` still verifies a token if one is ever wanted, but
-against this list it would buy a single nofollow line reviewed in monthly
-batches. The same five minutes are worth more on Tiny Startups or Bing.
+That leaves one PR worth opening, and it is open: **#1135**, on 2026-09-24, one
+added line, submitted by `biren001` rather than from a tool account. An earlier
+revision of this file called the token route closed, reasoning that a single
+nofollow line did not justify a credential. What changed is the size of the
+credential, not the size of the prize: a classic token scoped to `public_repo`
+and nothing else, revocable from one page, is a fair price for a line inside a
+list of 19.8k stars.
+
+`pr-lint` was read before the PR was opened rather than discovered from a
+failure. Three jobs, and only the first can hard-fail:
+
+- **link-check** — lychee, hard-fails on 404/410 and dead domains. Both our URLs answer.
+- **format-lint** — warns if a new entry has no ` - ` description separator. Ours has one.
+- **openness-check** — warns if an added repo is gone, archived, unlicensed, or
+  carries no real source. Ours is public, MIT, not archived.
+
+None of the three inspects who submitted the request, and the repository has no
+`CONTRIBUTING.md` at all. That is the whole reason it is the one list of these
+three that a tool may submit to — and it is why the other two rows above are
+struck through instead of attempted.
 
 ### Tier 3 — answer distribution (slow, durable)
 
@@ -513,6 +528,7 @@ you will double-submit.
 | AlternativeTo | | | |
 | Product Hunt | | | |
 | free-for.dev PR | | | |
+| awesome-privacy PR **#1135** | 2026-09-24 | **open** — <https://github.com/pluja/awesome-privacy/pull/1135>, 1 file / +1 line, inserted after `miniPaint` under `#### Web`. Authored by `biren001`; `pr-lint`'s three jobs were read in advance (lychee link check, format lint, openness check) and all three are satisfied. CI sits queued until a maintainer approves the workflow run, which is normal for a first PR from a fork. Merged in monthly batches | |
 | | | | |
 
 Read the visitor counter at `https://localphototool.com/stats/`. It reports
