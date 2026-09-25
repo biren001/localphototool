@@ -1,9 +1,13 @@
 # LocalPhotoTool — distribution kit
 
-The site is live and shareable. As of 2026-09-23 the Google Search Console
-property is verified and the sitemap has been read — status 成功, 13 URLs
-discovered, which is exactly the sitemap count. **Discovery is handled. What
-remains is authority, and authority means links.** That is what this file is
+The site is live and shareable. **As of 2026-09-24 it is also being indexed:**
+Google Search Console reports **8 of the 13 sitemap URLs indexed**, with the
+remaining 5 split between two rows that mean two different things — see §4 for
+how to read them. A brand-new domain reaching 8 indexed pages within 24 hours
+of submitting a sitemap is faster than the 1–2 weeks this file used to predict,
+and it settles the question the earlier sections were built around: **discovery
+and indexing are working, and they are no longer what to spend time on.** What
+remains is authority, and authority means links. That is what this file is
 for now.
 
 §4 is ordered for a **mainland-China connection**, and the reachability column
@@ -345,7 +349,7 @@ anymore. Re-run that script before trusting any cell marked "likely".
 | **IndexNow** | The key file at the site root (already generated) | One unauthenticated POST pushes all 13 URLs into Bing, Yandex, Seznam and Naver at once — no account, no dashboard. `node _dev/indexnow-submit.cjs` does it. This is the only *submission* channel available without a VPN, because Google's equivalent (the sitemap ping endpoint) was retired in June 2023 and now 404s. | ✅ reachable |
 | **Bing Webmaster Tools** | Microsoft account — **no DNS record needed** | 5 minutes, and Bing's index is what feeds Copilot, ChatGPT search and Yahoo — which is most of the "AI recommends a tool" surface. Choose **Import from Google Search Console**: our GSC domain verification already sits in DNS as a `google-site-verification` TXT, so Bing can take the property from Google rather than asking for a second record. Import, then submit `sitemap.xml`. | ✅ reachable |
 | **dev.to** and **Indie Hackers** | An account | Both give a followed link on a domain Google re-crawls daily, plus an English dev audience that actually needs this tool. dev.to post: the build story + the two measurement corrections in §2. | ✅ reachable |
-| **Google Search Console** | Google account — the DNS TXT was already in Cloudflare, so no verification step was needed | **Done 2026-09-23.** Sitemap read: 13 URLs discovered. Request Indexing submitted for the 8 priority URLs. This is the only channel that pushes to Google at all, and the only one where you can *ask* for a crawl instead of waiting to be found. Note that "discovered" is not "indexed" — the indexed count appears in the Page indexing report 1–2 weeks after a brand-new property is added, not in days. | ✅ done |
+| **Google Search Console** | Google account — the DNS TXT was already in Cloudflare, so no verification step was needed | **Done 2026-09-23, and reporting 2026-09-24.** Sitemap read: 13 URLs discovered. Request Indexing submitted for the 8 priority URLs. This is the only channel that pushes to Google at all, and the only one where you can *ask* for a crawl instead of waiting to be found. **First index count arrived the next day: 8 indexed, 5 not** — so the old note that this takes 1–2 weeks was wrong for a domain this small, and there is nothing left to fix on the pages themselves. See the reading guide below before treating any of the remaining 5 as a problem. | ✅ done |
 | **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ reachable (re-measured 2026-09-23; was ❌ before) |
 | **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ✅ reachable (403 to a script, fine in a browser) |
 
@@ -362,6 +366,31 @@ until that clears. And **tags are still mandatory**: a post with an empty
 would ever get the traction that lifts the gate. Check both with
 `dev.to/api/articles?username=<name>` (`tag_list`) and by reading the
 `<meta name="robots">` tags on the post itself.
+
+**How to read the 5 "Not indexed" rows — measured 2026-09-24, do not "fix" them.**
+Search Console sorts not-indexed URLs by reason, and two of those reasons look
+like faults when they are not:
+
+- *Page with redirect* (2 rows). Google lists the URL variants it met — `www.`,
+  `http://`, no trailing slash, `index.html` — separately from the canonical
+  form. `_dev/check-canonical-urls.cjs` re-checked every variant of all 13
+  pages: the canonical form answers **200**, every variant answers **301/308**
+  pointing back at it, and all 13 pages carry a `<link rel=canonical>`. Nothing
+  is wrong; Google is recording that canonicalisation holds. This is also why
+  8 indexed + 3 crawled adds to 11 rather than 13 — the missing two are here.
+- *Crawled - currently not indexed* (3 rows: `/compress-photos-for-email/`,
+  `/png-to-jpg/`, `/share/`). Google fetched the page, read it, and chose not to
+  keep it yet. The tempting explanations were tested and both failed: the pages
+  are **not** near-duplicates (`_dev/audit-duplication.cjs` compares only the
+  `<main>` region, highest similarity **20.9%**), and thin internal linking is
+  **not** the cause either — `/heic-to-jpg/` has zero body internal links and
+  was indexed anyway. What separates the indexed pages from these is query
+  competition: the ones that went in are the low-competition long tails
+  (`compress-to-50kb`), and `png-to-jpg` is a red-ocean term. That is an
+  authority problem, and **editing the page does not solve it.** Links do.
+
+So: do not rewrite those three pages, do not add internal links for their sake,
+and do not resubmit them repeatedly. Spend the time on the link channels below.
 
 ### Tier 2 — directory listings
 
@@ -394,7 +423,7 @@ with a copy button, so an account plus a few pastes is all that is left.
 | **Product Hunt** | <https://www.producthunt.com/posts/new> — 403 to a script | Optionally a full launch — needs a gallery (see §5) and a 12:01am PT start. A listing alone still earns a lasting link. |
 | **AlternativeTo** | 403 to a script (path not confirmed) | List as an alternative to TinyPNG, iLoveIMG, Squoosh, Compressor.io: register the app, then add it to each. |
 | **Launching Next**, **Peerlist Launchpad**, **LibHunt**, **Slant** | 403 to a script | Reach each from its own home page. Slant and LibHunt want an answer on their "best image compressor" question, not a listing. |
-| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — PR touching `README.md`, section `Images` | **The only one of the three that is open to us.** Its stated requirements are a privacy policy, no tracking on the project site, and open source — all three of which we meet — and it says nothing about who may open the PR. One line: `- [Name](url) - one sentence`, saying what it does and what it replaces, with the licence and whether it is self-hostable. Shipped as `awesome-privacy-entry`. **nofollow** — discovery only, and PRs are reviewed in monthly batches. |
+| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — PR touching `README.md`, section **`## Photo Editing and Management` → `#### Web`** (not `## Cloaking` → `### Images`) | **The only one of the three that is open to us.** Its stated requirements are a privacy policy, no tracking on the project site, and open source — all three of which we meet — and it says nothing about who may open the PR. One line: `- [Name](url) - one sentence`, saying what it does and what it replaces, with the licence and whether it is self-hostable. Shipped as `awesome-privacy-entry`. **nofollow** — discovery only, and PRs are reviewed in monthly batches. |
 | ~~free-for-dev~~ | — | **Do not submit.** Two independent blocks. The list excludes "generic developer 'toolbox' sites - format converters, calculators etc" by name, which is exactly what `png-to-jpg` and `jpg-to-webp` are. And its template requires ticking "Large Language Models and other AI tick this box" alongside "This is not a generic browser based developer toolbox, **I agree to be banned from this list if it is**" — one box describes us and the other would not be true. |
 | ~~awesome-selfhosted~~ | — | **Do not submit, and do not let a tool submit it either.** `awesome-selfhosted-data/CONTRIBUTING.md` carries a block addressed to AI agents forbidding exactly this: do not open a PR on behalf of a user, do not write an entry a person will then submit as their own, and do not tick the "The submission was done by a human, not a machine/LLM" box, because "an agent cannot make it truthfully". It does permit explaining the rules to the person, which is what this row is. |
 
@@ -465,14 +494,15 @@ you will double-submit.
 
 | Channel | Date | Status | Result (referrals after 7 days) |
 | --- | --- | --- | --- |
-| IndexNow submission (`node _dev/indexnow-submit.cjs`) | 2026-09-22 | done — 202 accepted, 13 URLs | | 
-| GitHub repo + README link | 2026-09-22 | live — github.com/biren001/localphototool (public, MIT, 136 files) | |
+| IndexNow submission (`node _dev/indexnow-submit.cjs`) | 2026-09-22, re-pushed **2026-09-24** | done — 202 accepted twice, 13 URLs each time (Bing, Yandex, Seznam, Naver). Day two: accepted with "key was already verified", so the second push costs nothing |  || 
+| GitHub repo + README link | 2026-09-22 | live — github.com/biren001/localphototool (public, MIT, **150 files** as of 2026-09-24; `node _dev/verify-push.cjs` re-checks the count and the commit hash) | |
 | Bing Webmaster — sitemap submitted | | | |
 | Yandex Webmaster | | | |
-| dev.to post | 2026-09-23 | live — <https://dev.to/biren001/i-built-an-image-compressor-that-cannot-upload-your-photos-4d45>. **Tags came out empty and still need adding**; dev.to held it at `noindex, nofollow` (see §4 note). | |
+| dev.to post | 2026-09-23 | live — <https://dev.to/biren001/i-built-an-image-compressor-that-cannot-upload-your-photos-4d45>. **Tags still empty** and dev.to still holds it at `noindex, nofollow` — re-checked 2026-09-24 with `check-devto-post.mjs`, 0 tags and both directives unchanged. While either is true the post passes nothing, so it is queued rather than counted (see §4 note) | |
 | Indie Hackers post | | | |
 | Google Search Console — sitemap submitted | 2026-09-23 | done — status 成功, 13 URLs discovered (= sitemap count) | |
 | Google Search Console — Request Indexing | 2026-09-23 | done — 8 priority URLs, rest left to natural crawl | |
+| Google Search Console — **first index report** | 2026-09-24 | **8 indexed / 5 not.** Not-indexed = redirect variants ×2 (canonicalisation working, no action) + crawled-not-indexed ×3 (`/compress-photos-for-email/`, `/png-to-jpg/`, `/share/` — authority, not page quality; see §4) | |
 | Show HN | | | |
 | r/SideProject | | | |
 | r/InternetIsBeautiful | | | |
