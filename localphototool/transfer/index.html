@@ -611,7 +611,11 @@ html[data-theme="dark"] #beamApp {
 
 <script src="./vendor/qrcode.min.js"></script>
 <script src="./vendor/peerjs.min.js"></script>
-<script src="./app.js"></script>
+<!-- Cache-bust on every app.js change: the SW serves same-origin assets
+     cache-first, so a bare "app.js" needs TWO reloads to pick up an update
+     (one to install the new SW, one to fetch past its old cache). A changed
+     URL bypasses the stale entry on the very first load. -->
+<script src="./app.js?v=30"></script>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/pwa.js" defer></script>
 <script src="../assets/js/stats.js" defer></script>
