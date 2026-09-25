@@ -324,6 +324,20 @@ anymore. Re-run that script before trusting any cell marked "likely".
 | **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ reachable (re-measured 2026-09-23; was ❌ before) |
 | **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ✅ reachable (403 to a script, fine in a browser) |
 
+**Measured 2026-09-23: dev.to withholds `noindex, nofollow` until a post has
+traction.** Every article we sampled from `dev.to/api/articles/latest` carried
+both tags — 6/6, with tags and without alike — while every article from
+`?top=7` was clean, 8/8, down to one that was 23.8 hours old with 27 reactions,
+and two old posts were clean too. So it is not the tag list and not a penalty
+on the account; it is dev.to's own gate, and it lifts once the post is picked
+up. Two consequences for planning. A dev.to post is worth nothing to search
+while `noindex` is on it, so do not spend a Search Console request on its URL
+until that clears. And **tags are still mandatory**: a post with an empty
+`tag_list` cannot appear in the tag feeds, and the tag feeds are the only way it
+would ever get the traction that lifts the gate. Check both with
+`dev.to/api/articles?username=<name>` (`tag_list`) and by reading the
+`<meta name="robots">` tags on the post itself.
+
 ### Tier 2 — directory listings
 
 Each of these is a one-time 5-minute form. They are weak individually and
@@ -404,7 +418,7 @@ you will double-submit.
 | GitHub repo + README link | 2026-09-22 | live — github.com/biren001/localphototool (public, MIT, 136 files) | |
 | Bing Webmaster — sitemap submitted | | | |
 | Yandex Webmaster | | | |
-| dev.to post | 2026-09-23 | live | |
+| dev.to post | 2026-09-23 | live — <https://dev.to/biren001/i-built-an-image-compressor-that-cannot-upload-your-photos-4d45>. **Tags came out empty and still need adding**; dev.to held it at `noindex, nofollow` (see §4 note). | |
 | Indie Hackers post | | | |
 | Google Search Console — sitemap submitted | 2026-09-23 | done — status 成功, 13 URLs discovered (= sitemap count) | |
 | Google Search Console — Request Indexing | 2026-09-23 | done — 8 priority URLs, rest left to natural crawl | |
