@@ -1,0 +1,38 @@
+
+===== subject
+  https://www.tinystartups.com/startup/localphototool
+  http          200
+  title         LocalPhotoTool — A browser image compressor that never… | Tiny Startups
+  robots meta   noindex, nofollow   <== will never be indexed
+  canonical     https://www.tinystartups.com/startup/localphototool
+  in sitemap    NO  (sitemap holds 10117 URLs)
+  body starts   Search Home clicks.page Revenue Spotlight founder.page Community Newsletter Deals Launch a startup Tiny Startups Revenue Domain Rating founder.page ⌘K Log in / Sign up Launch now → Press the ← → keys to move between startups. Got it Waiting
+  external anchors: 25 across 21 host(s)
+  link to localphototool.com: rel="nofollow noopener"  <== passes no weight
+     https://localphototool.com/?utm_source=tinystartups.com
+  other followed links on the page: 17 (operator's own network — same on every listing, ignore)
+
+===== control #1
+  https://www.tinystartups.com/startup/proofy
+  http          200
+  title         Proofy — Multi-layer email verification for single… | Tiny Startups
+  robots meta   (none)
+  canonical     https://www.tinystartups.com/startup/proofy
+  in sitemap    YES of 10117
+  body starts   Search Home clicks.page Revenue Spotlight founder.page Community Newsletter Deals Launch a startup Tiny Startups Revenue Domain Rating founder.page ⌘K Log in / Sign up Launch now ← → Press the ← → keys to move between startups. Got it Proof
+  external anchors: 25 across 21 host(s)
+  link to proofy.io: rel="nofollow noopener"  <== passes no weight
+     https://proofy.io/?utm_source=tinystartups.com
+  other followed links on the page: 17 (operator's own network — same on every listing, ignore)
+
+===== verdict
+  subject    WORTH NOTHING YET — cannot be indexed, cannot be found through search
+  control #1 discovery only — indexable, but the link to proofy.io is nofollow
+
+How to read it:
+  - in sitemap = NO  -> the directory does not offer this page to search engines
+  - robots noindex   -> it cannot rank or be found through search at all
+  - link rel=nofollow-> this listing passes no weight, whatever it costs
+  A control that is verified and indexable still showing nofollow is the answer
+  to "what does verification buy?" — measure that before paying for it.
+

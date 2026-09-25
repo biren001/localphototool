@@ -65,14 +65,14 @@ const SITES = [
     name: 'Tiny Startups',
     url: 'https://www.tinystartups.com/submit',
     account: '<b>No account needed</b> — the email you type in step 2 creates one',
-    rel: '<b>nofollow</b> on the free listing — measured 28 of 30 listings sampled from their sitemap carry <code>rel="nofollow noopener"</code> on the outbound link to the startup\'s own site, and the 2 clean ones are the $69 tier',
-    note: 'Their pitch is a "DR 71 do-follow backlink" and <b>the do-follow is a $69 upgrade, not the free listing</b>. Measured 2026-09-24 on 30 listings sampled evenly across their 1,117-URL sitemap: 28 nofollow, 2 without. Their own copy agrees — every startup keeps "a DR 71 backlink", and "a do-follow backlink" is listed under optional upgrades. <b>Do not buy the $69</b>: it is a link sold to pass PageRank, which is link spam under Google\'s spam policies, and the exposure is not worth one directory link. <b>It is a five-step wizard, not a form</b>, and it reads your site for you. <b>Every listing is hand-approved</b>, so this is a submission and a wait. The free tier is still worth two minutes if you already have an X account — as discovery, the same class as SaaSHub.',
+    rel: '<b>nofollow — even on a verified free listing.</b> Measured 28 of 30 listings sampled from their sitemap carry <code>rel="nofollow noopener"</code> on the outbound link to the startup\'s own site, and the 2 clean ones are the $69 tier. The control that settles it: <code>/startup/proofy</code> is verified and indexable, and its button is still nofollow',
+    note: 'Their pitch is a "DR 71 do-follow backlink" and <b>the do-follow is a $69 upgrade, not the free listing</b>. Measured 2026-09-24 on 30 listings sampled evenly across their 1,117-URL sitemap: 28 nofollow, 2 without. Their own copy agrees — every startup keeps "a DR 71 backlink", and "a do-follow backlink" is listed under optional upgrades. <b>Do not buy the $69</b>: it is a link sold to pass PageRank, which is link spam under Google\'s spam policies, and the exposure is not worth one directory link. <b>It is a five-step wizard, not a form</b>, and it reads your site for you. <b>Every listing is hand-approved</b>, so this is a submission and a wait. <b>Ours is already submitted (2026-09-24) and the page is live</b>: <code>tinystartups.com/startup/localphototool</code>, carrying <code>robots: noindex, nofollow</code> and a banner reading "live at its own link but not yet on the homepage". Verifying would buy homepage placement and indexability of their page — never a followed link — in exchange for an X post. <b>No X account, so do nothing: the saved entry is inert, harmless, and stays valid if one ever exists.</b>',
     steps: [
       'Open the URL, click <b>Launch now</b>. No signup — that button only reveals the email field later.',
       'Step 1: type <code>localphototool.com</code>. It fetches the site and pre-fills the next step: name, tagline, cover.',
       'Step 2: <b>replace the auto-filled tagline</b> with the one below. The auto text is read from our homepage meta description, which used to carry a retired claim (fixed in source on 2026-09-24, <code>sw.js</code> v16 — but if the deploy has not propagated, the wizard will still pre-fill the old wording). Then add the three features, the long description, your email, and upload the logo from <code>localphototool/icon-512.png</code>.',
       'Steps 3–5: revenue, about you, upgrades. Upgrades are paid extras — <b>skip all of them</b>.',
-      '<b>Then the verification screen.</b> The listing is saved but will not go live by itself. It asks for a public post on X naming <code>@ratheejaisal</code>, containing <code>https://www.tinystartups.com/startup/localphototool?c=ndqy</code> — <b>keep the <code>?c=ndqy</code> tracking code or verification fails</b> — visible for 24 hours, then paste the post URL back and press 核实. There is no free path that skips this.',
+      '<b>Then the verification screen — this is where ours stopped.</b> The page went live at <code>/startup/localphototool</code> straight away, but with <code>noindex, nofollow</code> and off the homepage. Verifying means a public post on X naming <code>@ratheejaisal</code>, containing <code>https://www.tinystartups.com/startup/localphototool?c=ndqy</code> — <b>keep the <code>?c=ndqy</code> tracking code or verification fails</b> — visible 24 hours, then the post URL pasted back. No free path skips it, and it buys indexability only, not a followed link.',
     ],
   },
   {
@@ -245,21 +245,25 @@ ${fieldRows}
   </tbody>
 </table>
 
-<h2 style="margin-bottom:12px">Tiny Startups — the five-step wizard</h2>
+<h2 style="margin-bottom:12px">Tiny Startups — the five-step wizard <span style="font-size:13px;font-weight:600;color:#16a34a;border:1px solid #16a34a;border-radius:999px;padding:2px 10px;vertical-align:3px;margin-left:6px">already submitted</span></h2>
 <div class="card">
-  <p class="note">Not a form. Step 1 takes the domain, then reads your site and fills in the name,
-  tagline and cover by itself. Two of those need attention: <b>replace the tagline</b> and add the
-  three features. The wizard will not advance past step 2 until the three features and an email
-  are filled — pressing Continue early just says so.</p>
+  <p class="note"><b>Submitted 2026-09-24 — do not walk this again.</b> The listing is live at
+  <code>tinystartups.com/startup/localphototool</code> with <code>robots: noindex, nofollow</code>,
+  off the homepage pending the X verification. The fields below are kept only so that the same
+  submission can be finished if an X account ever exists, or so the form does not have to be
+  rediscovered for anything else. It is not a form: step 1 takes the domain, then reads your site
+  and fills in the name, tagline and cover by itself. The wizard will not advance past step 2 until
+  the three features and an email are filled.</p>
   <table>
     <tbody>
 ${wizardRows}
     </tbody>
   </table>
-  <p class="note" style="margin-bottom:0">The auto-filled tagline is read from our homepage
-  <code>&lt;meta name="description"&gt;</code>, which still says "up to 90%" — a figure retired from
-  this pack because it holds for PNG screenshots and not for photographs. Paste the tagline above
-  over it. <b>Every listing there is hand-approved</b>, so expect a wait rather than an instant link.</p>
+  <p class="note" style="margin-bottom:0">The tagline the wizard pre-fills is read from our homepage
+  <code>&lt;meta name="description"&gt;</code>. It used to carry a claim this pack had retired, which
+  is why the tagline above exists as a replacement; the homepage description was corrected at source
+  on 2026-09-24 (<code>sw.js</code> v16), so a fresh crawl now pre-fills clean text. <b>Every listing
+  there is hand-approved.</b></p>
 </div>
 
 <h2 style="margin-bottom:12px">Sites, in the order worth doing</h2>

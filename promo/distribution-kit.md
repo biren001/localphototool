@@ -421,7 +421,7 @@ through because the mistake is easy to make twice.
 
 | Directory | Submit at | Notes |
 | --- | --- | --- |
-| **Tiny Startups** | <https://www.tinystartups.com/submit> — a five-step wizard, and **no account is needed**: the email typed in step 2 creates one. Every field, with paste-ready copy, is in the section below. | **The free listing's link is `nofollow`. The dofollow is a $69 upgrade — do not buy it** (see below). Measured 2026-09-24 on 30 listings sampled evenly across their 1,117-URL sitemap: **28 carry `rel="nofollow noopener"`** on the outbound link to the startup's own site, **2 carry no nofollow**, and that minority is the paid tier. Their own copy agrees — every startup keeps "a DR 71 backlink", while "a do-follow backlink" sits in the *optional upgrades* list. Getting it free costs a **public post on X naming @ratheejaisal, kept up 24 hours**, with the listing URL and tracking code pasted back for verification. |
+| **Tiny Startups** | <https://www.tinystartups.com/submit> — a five-step wizard, and **no account is needed**: the email typed in step 2 creates one. **Already submitted 2026-09-24 and the page is live**: `tinystartups.com/startup/localphototool`. | **The free listing's link is `nofollow` — verified listings included. The dofollow is a $69 upgrade; do not buy it** (see below). Measured 2026-09-24 on 30 listings sampled evenly across their 1,117-URL sitemap: **28 carry `rel="nofollow noopener"`** on the outbound link to the startup's own site, **2 carry no nofollow**, and that minority is the paid tier. The control that settles it is a *verified free* listing (`/startup/proofy`): indexable, but its button is still `nofollow`. So verifying our page buys homepage placement and indexability, never a followed link — and it costs a **public post on X naming @ratheejaisal, kept up 24 hours**. Without an X account, **skip and leave the entry as it stands**; the unverified page is inert. |
 | **SaaSHub** | <https://www.saashub.com/submit> — **a pitch page, not a form**; register, then *Submit Product* in the nav | Link quality is genuinely mixed: 11 of 26 outbound links on a sampled category page were dofollow, but the product placements on that same page were `nofollow sponsored`. Free and syndicates onward, so worth the five minutes, but not a ranking win. |
 | **DevHunt** | <https://devhunt.org/login> — **`/submit` is a 404 page answering 200**; the nav's *Submit your Dev Tool* points at `/login` | Dev-tool audience, which fits. Sign in with GitHub, then the form. |
 | **OpenAlternative** | <https://openalternative.co/submit> — **redirects to sign-in** | Log in first, then the form appears. |
@@ -476,6 +476,39 @@ the price of entry into a funnel the operator then re-sells. If the account or
 the network is not already there, skipping Tiny Startups entirely costs nothing
 that SaaSHub does not already provide.
 
+**What the unverified listing actually is, measured 2026-09-24.** The wizard's
+word "saved" undersells it: the page is live and public right now.
+
+```
+https://www.tinystartups.com/startup/localphototool
+  HTTP 200, title "LocalPhotoTool — A browser image compressor that never…"
+  <meta name="robots" content="noindex, nofollow">
+  banner: "Waiting on the launch post — This listing is live at its own link
+           but not yet on the homepage. Post it on X and verify →"
+```
+
+So the submission did go through, the cover was pulled from our own
+`og-cover.jpg`, and the tagline on the page is the corrected one. Nothing was
+lost — but nothing is gained yet either, and the ceiling is low:
+
+| | unverified (now) | verified free listing | paid $69 |
+| --- | --- | --- | --- |
+| page reachable | yes | yes | yes |
+| in their sitemap | no | yes | yes |
+| `robots` on the page | `noindex, nofollow` | no robots meta → indexable | indexable |
+| on the homepage | no | yes | yes |
+| outbound link `rel` | `nofollow noopener` | **`nofollow noopener`** | do-follow |
+
+The fourth row is the one that decides this. A verified **free** listing was
+read for comparison (`/startup/proofy`: no robots meta, present in the sitemap)
+and its *Visit Website* button is still `rel="nofollow noopener"`. **Verifying
+buys placement and indexability of their page; it never buys a followed link.**
+The post on X is the price of a nofollow citation.
+
+That makes this a clean skip: no X account to create, nothing to delete. The
+unverified page is inert and harmless, and it stays there — if an X account ever
+exists, the verification door is still open and the submitted data is intact.
+
 ### Back to the awesome-lists
 
 That leaves one PR worth opening, and it is open: **#1135**, on 2026-09-24, one
@@ -500,6 +533,12 @@ three that a tool may submit to — and it is why the other two rows above are
 struck through instead of attempted.
 
 ### Tiny Startups — what the wizard actually asks (measured 2026-09-24)
+
+**Already done — do not walk this again.** Steps 1–5 were submitted on
+2026-09-24 and the listing is live (see *the X verification screen* above for
+what that page is and is not). What follows is kept so that a future submission
+— or the same one, if an X account ever exists and the verification is worth
+doing — does not have to rediscover the form.
 
 `/submit` is a five-step wizard, not a form, and it reads your site for you.
 Walked with a real browser; these are the fields it renders, in order.
@@ -661,7 +700,7 @@ you will double-submit.
 | Product Hunt | | | |
 | free-for.dev PR | | | |
 | awesome-privacy PR **#1135** | 2026-09-24 | **open** — <https://github.com/pluja/awesome-privacy/pull/1135>, 1 file / +1 line, inserted after `miniPaint` under `#### Web`. Authored by `biren001`; `pr-lint`'s three jobs were read in advance (lychee link check, format lint, openness check) and all three are satisfied. CI sits queued until a maintainer approves the workflow run, which is normal for a first PR from a fork. Merged in monthly batches | |
-| Tiny Startups — wizard submitted (free tier) | 2026-09-24 | **saved, not live.** Steps 1–5 completed; the email in step 2 created the account, so no signup was needed. It now sits on the X verification screen: a public post naming `@ratheejaisal`, carrying `tinystartups.com/startup/localphototool?c=ndqy`, held up 24 hours, then the post URL pasted back | |
+| Tiny Startups — wizard submitted (free tier) | 2026-09-24 | **The listing is live, unverified.** Steps 1–5 completed; the email in step 2 created the account, so no signup was needed. `https://www.tinystartups.com/startup/localphototool` answers 200 with our own `og-cover.jpg`, our logo and the corrected tagline. It carries `robots: noindex, nofollow` and a banner saying it is "live at its own link but not yet on the homepage". Verification (the X post) is what unlocks the homepage and indexability — and it does **not** unlock a followed link. No X account exists, so the decision is to skip; the saved entry stays as it is | |
 | Tiny Startups — link `rel` measured | 2026-09-24 | **28 of 30 listings carry `rel="nofollow noopener"`** on the outbound link to the startup's own site; the 2 clean ones are the $69 tier. The free listing therefore passes no weight, and the "$69 instant listing … switches your backlink to do-follow" line confirms the link *is* the product. Do not buy it (see §4) | |
 | Tiny Startups — $69 upgrade | — | **declined on policy**, not on price: a dofollow link purchased specifically to pass PageRank is link spam under Google's spam policies, and this is that case in plain text | |
 | Homepage meta description — retired claim removed | 2026-09-24 | **done in source, not yet live.** `localphototool/index.html`, `sw.js` v16. Waits on the next package upload. Guard widened the same day: `check-listing-copy.cjs` now scans `localphototool/**/*.{html,txt}` too (19 files), **37/37**, and the new check was reverse-verified by planting the claim back in and requiring a failure that named the file | |
