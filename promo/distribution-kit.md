@@ -236,19 +236,20 @@ bottom of the list because the top ones need a bit of writing.
 ### Tier 1 — do these first
 
 **Read the reachability column first.** It is measured from a mainland-China
-connection (`node _dev/check-reachability.cjs`), and it reorders this list: the
-two channels with the best traffic-to-effort ratio, Hacker News and Reddit, are
-unreachable without a VPN, while GitHub and dev.to are not.
+connection (`node _dev/check-reachability.cjs`), and it reorders this list —
+which is why Google Search Console now sits at the top instead of near the
+bottom: it was unreachable when this table was first written, and it is not
+anymore. Re-run that script before trusting any cell marked "likely".
 
 | Channel | What it needs | Why it is first | From mainland China |
 | --- | --- | --- | --- |
-| **GitHub** | A public repo + README with the live URL | **This is the substitute for Search Console.** Google discovers a brand-new host by following a link from a page it already crawls, and github.com is re-crawled continuously; dev.to and Indie Hackers work the same way. A link from any of the three is how Google learns the domain exists, without ever signing in to anything. | ✅ reachable |
+| **GitHub** | A public repo + README with the live URL | **Already done** (2026-09-22). Google discovers a brand-new host by following a link from a page it already crawls, and github.com is re-crawled continuously; dev.to and Indie Hackers work the same way. Search Console is what tells Google to come look — this is the other half, the link it follows once it does. | ✅ reachable |
 | **IndexNow** | The key file at the site root (already generated) | One unauthenticated POST pushes all 13 URLs into Bing, Yandex, Seznam and Naver at once — no account, no dashboard. `node _dev/indexnow-submit.cjs` does it. This is the only *submission* channel available without a VPN, because Google's equivalent (the sitemap ping endpoint) was retired in June 2023 and now 404s. | ✅ reachable |
 | **Bing Webmaster Tools** | Microsoft account, DNS TXT record in Cloudflare | 5 minutes, and Bing's index is what feeds Copilot, ChatGPT search and Yahoo — which is most of the "AI recommends a tool" surface. Verify the domain, then submit `sitemap.xml`. | ✅ reachable |
 | **dev.to** and **Indie Hackers** | An account | Both give a followed link on a domain Google re-crawls daily, plus an English dev audience that actually needs this tool. dev.to post: the build story + the two measurement corrections in §2. | ✅ reachable |
-| **Google Search Console** | Google account, DNS or HTML verification | Still the single best step — nothing else compounds like being indexed, and it is the only channel left that pushes to Google at all. **Not reachable from here**, so do it the first time you have a VPN, or have someone abroad click Verify for you: verification is one-time, and after that the property keeps working without you. | ❌ needs VPN |
-| **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ❌ blocked |
-| **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ❌ blocked |
+| **Google Search Console** | Google account, DNS TXT in Cloudflare (or the HTML-file method) | **Do this one first.** It is the only channel that pushes to Google at all, and it is the only one where you can *ask* for a crawl instead of waiting to be found: URL Inspection → Request Indexing works per URL, immediately, and is repeatable. Verification is one-time — after it, the property keeps working without you. | ✅ reachable (was ❌ until 2026-09-23) |
+| **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ likely reachable now — was ❌ when Google was; re-measure with `node _dev/check-reachability.cjs` before trusting this |
+| **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ✅ likely reachable now — same caveat as HN |
 
 ### Tier 2 — directory listings
 

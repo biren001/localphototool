@@ -50,8 +50,12 @@ var OFFLINE = ROOT + 'offline.html';
    compress-photos-for-email) joined the shell. They had been live and linked
    from every nav since the previous deploy while sitting outside the shell
    cache, the page tests and the live checker, so an installed copy dropped to
-   the offline page when a visitor followed one of those links. */
-var VERSION = 'v14';
+   the offline page when a visitor followed one of those links.
+   v15 — two titles that still ran past the ~60 characters Google shows before
+   truncating: /compress/ (61) and /compress-photos-for-email/ (63). The words
+   that got cut were the ones that make the result worth clicking ("No Upload"),
+   so both now fit with the differentiator intact. */
+var VERSION = 'v15';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
