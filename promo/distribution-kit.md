@@ -372,12 +372,18 @@ compress an image without uploading it" traffic now starts.
 | Desktop screenshot 1440×900 | `promo/screenshot-compress-desktop.png` | Product Hunt gallery, directory listings. |
 | Mobile screenshot 390×844 | `promo/screenshot-home-mobile.png` | Product Hunt gallery. |
 | Share posters | `localphototool/share/poster-{cn,en}.png` | Not for directories — those are for personal shares. |
+| dev.to cover 1000×420 | `promo/devto-cover.jpg` | dev.to crops every cover to 1000:420, so the 1200×630 OG card loses its headline to the crop. This is a re-layout at that ratio, not a resize. |
 
 Regenerate the screenshots with:
 
 ```
 node _dev/shot-promo.cjs
+node _dev/gen-devto-cover.cjs    # promo/devto-cover.jpg, 1000x420 @2x
 ```
+
+Note that dev.to's cover field takes a **URL, not an upload** — paste
+`https://raw.githubusercontent.com/biren001/localphototool/main/promo/devto-cover.jpg`.
+That is the only reason these assets live in a public repo at all.
 
 ---
 
