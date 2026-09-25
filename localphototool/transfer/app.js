@@ -510,20 +510,29 @@
   // ---------- signaling backend B: PeerJS public cloud (static-only hosting) ----------
   var peer = null;
   var backendCloud = false;
-  function cloudHost(onCode, onStatus, onError, onWire) {
+  function cloudHost(onCode, onStatus, onError) {
     backendCloud = true;
     var code = randCode(6);
     // The code is generated locally, so the invite goes on screen before the
-    // signaling connection opens. If the network blocks the pairing service,
-    // the user sees a QR code plus an honest error after the timeout — not a
-    // spinner that never resolves.
-    onCode(code);
+    // signaling connection opens — but as PENDING: it is not a valid session
+    // until the pairing service has accepted the registration. A device that
+    // types this code too early gets a retry, not a dead end.
+    onCode(code, true);
     var open = false;
     var timer = setTimeout(function () {
       if (!open) onError('Could not reach the pairing service. This network appears to block it — try a different network, for example a mobile hotspot.');
     }, 12000);
     peer = new Peer('beam-' + code, { config: ICE });
-    peer.on('open', function () { open = true; clearTimeout(timer); });
+    peer.on('open', function () {
+      open = true;
+      clearTimeout(timer);
+      onCode(code, false); // now actually registered and reachable
+    });
+    // Mobile networks drop long-lived sockets; re-register so the shown code
+    // stays alive instead of silently dying.
+    peer.on('disconnected', function () {
+      if (!peer.destroyed) { try { peer.reconnect(); } catch (e) {} }
+    });
     peer.on('connection', function (conn) {
       var wire = makePeerWire(conn, {
         open: function () { registerWire(wire); onStatus('Connected', 'ok'); },
@@ -533,36 +542,52 @@
       if (onWire) onWire(wire);
     });
     peer.on('error', function (err) {
-      clearTimeout(timer);
       var t = (err && err.type) || 'unknown';
-      if (t === 'unavailable-id') { if (peer) peer.destroy(); cloudHost(onCode, onStatus, onError, onWire); return; }
-      if (!open) onError('Could not reach the pairing service (' + t + '). This network appears to block it — try a different network, for example a mobile hotspot.');
+      if (t === 'unavailable-id') { if (peer) peer.destroy(); cloudHost(onCode, onStatus, onError); return; }
+      if (t === 'network' && open) { try { peer.reconnect(); } catch (e) {} return; }
+      if (!open) { clearTimeout(timer); onError('Could not reach the pairing service (' + t + '). This network appears to block it — try a different network, for example a mobile hotspot.'); }
     });
   }
   function cloudGuest(code, onStatus, onError, onWire) {
     backendCloud = true;
+    if (peer) { try { peer.destroy(); } catch (e) {} }
     peer = new Peer({ config: ICE });
     var open = false;
+    var attempts = 0;
+    var settled = false;
     var timer = setTimeout(function () {
       if (!open) onError('Could not reach the pairing service. This network appears to block it — try a different network, for example a mobile hotspot.');
     }, 12000);
-    function attempt(n) {
+    // The host's code may not be registered yet (it shows before its signaling
+    // connection opens), and a mistyped code looks identical. Retry a few
+    // times, then say so plainly instead of hanging on "Connecting…".
+    function fail() {
+      if (settled) return;
+      settled = true;
+      onError('No session answered that code. Make sure the other device still shows it (its pairing service must be reachable), then try again.');
+    }
+    function retry() {
+      if (settled) return;
+      if (attempts < 4) { setTimeout(function () { if (!settled) attempt(); }, 1200); }
+      else fail();
+    }
+    function attempt() {
+      attempts++;
       var conn = peer.connect('beam-' + code, { reliable: true });
       var wire = makePeerWire(conn, {
-        open: function () { registerWire(wire); onStatus('Connected', 'ok'); },
+        open: function () { settled = true; registerWire(wire); onStatus('Connected', 'ok'); },
         close: function () { wires = wires.filter(function (w) { return w !== wire; }); if (!wires.some(function (w) { return w.open; })) markDisconnected(); },
         data: onWireData,
       });
       if (onWire) onWire(wire);
-      conn.on('error', function () {
-        if (n < 2) setTimeout(function () { attempt(n + 1); }, 900);
-        else onError('Could not reach that session. Check the code and try again.');
-      });
+      conn.on('error', retry);
     }
-    peer.on('open', function () { open = true; clearTimeout(timer); onStatus('Connecting…'); attempt(0); });
+    peer.on('open', function () { open = true; clearTimeout(timer); onStatus('Connecting…'); attempt(); });
     peer.on('error', function (err) {
+      var t = (err && err.type) || 'unknown';
+      if (t === 'peer-unavailable') { retry(); return; }
       clearTimeout(timer);
-      if (!open) onError('Connection problem (' + ((err && err.type) || 'unknown') + '). This network appears to block the pairing service.');
+      if (!open) onError('Connection problem (' + t + '). This network appears to block the pairing service.');
     });
   }
 
@@ -600,9 +625,12 @@
   function startHost(ignore) {
     backendName = 'a direct peer-to-peer link';
     setStatus(hostStatus, 'Starting session…');
-    var onCode = function (code) {
+    var onCode = function (code, pending) {
       renderInvite(code);
-      setStatus(hostStatus, 'Waiting for the other device to scan or enter the code…');
+      codeDisplay.classList.toggle('pending', !!pending);
+      setStatus(hostStatus, pending
+        ? 'Reaching the pairing service — the code will be ready in a moment…'
+        : 'Waiting for the other device to scan or enter the code…', pending ? 'wait' : undefined);
       // Heartbeat: keeps the room on the server even if the process recycles,
       // so a code already shown / scanned never silently dies. Cloud signaling
       // has no server-side room to keep alive — skip the pointless POSTs.
