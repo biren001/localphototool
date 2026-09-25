@@ -318,7 +318,7 @@ anymore. Re-run that script before trusting any cell marked "likely".
 | --- | --- | --- | --- |
 | **GitHub** | A public repo + README with the live URL | **Already done** (2026-09-22). Google discovers a brand-new host by following a link from a page it already crawls, and github.com is re-crawled continuously; dev.to and Indie Hackers work the same way. Search Console is what tells Google to come look — this is the other half, the link it follows once it does. | ✅ reachable |
 | **IndexNow** | The key file at the site root (already generated) | One unauthenticated POST pushes all 13 URLs into Bing, Yandex, Seznam and Naver at once — no account, no dashboard. `node _dev/indexnow-submit.cjs` does it. This is the only *submission* channel available without a VPN, because Google's equivalent (the sitemap ping endpoint) was retired in June 2023 and now 404s. | ✅ reachable |
-| **Bing Webmaster Tools** | Microsoft account, DNS TXT record in Cloudflare | 5 minutes, and Bing's index is what feeds Copilot, ChatGPT search and Yahoo — which is most of the "AI recommends a tool" surface. Verify the domain, then submit `sitemap.xml`. | ✅ reachable |
+| **Bing Webmaster Tools** | Microsoft account — **no DNS record needed** | 5 minutes, and Bing's index is what feeds Copilot, ChatGPT search and Yahoo — which is most of the "AI recommends a tool" surface. Choose **Import from Google Search Console**: our GSC domain verification already sits in DNS as a `google-site-verification` TXT, so Bing can take the property from Google rather than asking for a second record. Import, then submit `sitemap.xml`. | ✅ reachable |
 | **dev.to** and **Indie Hackers** | An account | Both give a followed link on a domain Google re-crawls daily, plus an English dev audience that actually needs this tool. dev.to post: the build story + the two measurement corrections in §2. | ✅ reachable |
 | **Google Search Console** | Google account — the DNS TXT was already in Cloudflare, so no verification step was needed | **Done 2026-09-23.** Sitemap read: 13 URLs discovered. Request Indexing submitted for the 8 priority URLs. This is the only channel that pushes to Google at all, and the only one where you can *ask* for a crawl instead of waiting to be found. Note that "discovered" is not "indexed" — the indexed count appears in the Page indexing report 1–2 weeks after a brand-new property is added, not in days. | ✅ done |
 | **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ reachable (re-measured 2026-09-23; was ❌ before) |
@@ -404,7 +404,7 @@ you will double-submit.
 | GitHub repo + README link | 2026-09-22 | live — github.com/biren001/localphototool (public, MIT, 136 files) | |
 | Bing Webmaster — sitemap submitted | | | |
 | Yandex Webmaster | | | |
-| dev.to post | | | |
+| dev.to post | 2026-09-23 | live | |
 | Indie Hackers post | | | |
 | Google Search Console — sitemap submitted | 2026-09-23 | done — status 成功, 13 URLs discovered (= sitemap count) | |
 | Google Search Console — Request Indexing | 2026-09-23 | done — 8 priority URLs, rest left to natural crawl | |
