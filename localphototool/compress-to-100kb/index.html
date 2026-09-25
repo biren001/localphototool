@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-compressor-defaults='{"mode":"target","targetKB":100}'>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compress an Image to Under 100 KB — Free, No Upload</title>
+<meta name="description" content="Shrink a photo or screenshot to under 100 KB in your browser. The engine finds the highest quality that still fits. No uploads, no account, no limits.">
+<link rel="canonical" href="https://localphototool.com/compress-to-100kb/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Compress an Image to Under 100 KB — Free, No Upload">
+<meta property="og:description" content="Shrink a photo or screenshot to under 100 KB in your browser. Set the budget once and the engine finds the highest quality that still fits. No uploads, no account, no limits.">
+<meta property="og:url" content="https://localphototool.com/compress-to-100kb/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compress an Image to Under 100 KB — Free, No Upload">
+<meta name="twitter:description" content="Shrink a photo or screenshot to under 100 KB in your browser. Set the budget once and the engine finds the highest quality that still fits. No uploads, no account, no limits.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css" as="style">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/compress-to-100kb/#page",
+      "url": "https://localphototool.com/compress-to-100kb/",
+      "name": "Compress an Image to Under 100 KB — Free, No Upload",
+      "description": "Shrink a photo or screenshot to under 100 KB in your browser. Set the budget once and the engine finds the highest quality that still fits. No uploads, no account, no limits.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/compress-to-100kb/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/compress-to-100kb/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Compress an Image to Under 100 KB — Free, No Upload",
+          "item": "https://localphototool.com/compress-to-100kb/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/compress-to-100kb/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I compress an image to exactly 100 KB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — pick Target size and enter 100. The engine binary-searches encoder quality until the output fits under 100 KB, and reports the real byte count of the finished file rather than an estimate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my photo cannot fit in 100 KB at full size?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Then the engine reduces the pixel dimensions in steps until it fits. A very detailed 12-megapixel photograph will usually need some downscaling to reach 100 KB; a 1–2 megapixel image typically reaches the budget on quality alone and keeps every pixel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does compressing to 100 KB destroy the quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It costs quality, and there is no way around that — 100 KB is a hard budget. What this tool does is spend the budget well: it finds the highest quality that fits instead of applying a fixed preset that might have come in at 40 KB and thrown away detail you were entitled to keep."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I do this on my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The page is touch-first and the compressor runs on any modern mobile browser, so you can shrink a photo to 100 KB straight from an iPhone or Android photo library without installing anything."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a limit on how many images I can shrink?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. There is no file-count limit, no daily cap and no watermark. The only practical ceiling is your device's memory, because every image is processed on your own hardware rather than on a server that would have to meter it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my images uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This is a static site with no upload endpoint. Your images are decoded, resampled and re-encoded inside your own browser, so they cannot leave your device even by accident."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "logo": "https://localphototool.com/favicon.svg",
+      "email": "hello@localphototool.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the compressor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#compare">Why it is better</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> Compress to 100 KB</span>
+      </nav>
+      <h1>Compress an image to under 100 KB</h1>
+      <p class="hero__lead" style="max-width:660px">Application forms, visa portals, job sites and email attachments all draw the line somewhere, and 100 KB is where it usually lands. Set the budget once and the engine searches for the highest quality that still fits — lowering the resolution only if no quality setting can get there.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Nothing is uploaded
+        </li>
+        <li class="badge">Budget: 100 KB</li>
+        <li class="badge">JPEG · WebP · AVIF</li>
+        <li class="badge">Unlimited &amp; free</li>
+      </ul>
+      <p class="hero__share" style="max-width:660px">
+        <a href="../share/">On a phone? Scan this QR code to open the tool there &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+<section class="tool" id="tool">
+    <div class="container">
+
+      <!-- Drop zone -->
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your images here</h2>
+        <p class="dropzone__hint">or paste from the clipboard · <span id="pasteHint" hidden>⌘V / Ctrl+V works too</span></p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad btn--lg" id="pickBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+            Choose images
+          </button>
+        </div>
+        <p class="dropzone__formats">JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit</p>
+        <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple aria-label="Choose image files">
+      </div>
+
+      <!-- Settings -->
+      <div class="settings">
+        <div class="settings__head">
+          <h2 class="settings__title">Compression settings</h2>
+          <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
+        </div>
+
+        <div class="settings__body">
+          <div class="field">
+            <span class="field__label">Strategy</span>
+            <div class="segmented" role="radiogroup" aria-label="Compression strategy">
+              <input type="radio" name="mode" id="modeAuto" value="auto" checked>
+              <label for="modeAuto">Auto</label>
+              <input type="radio" name="mode" id="modeQuality" value="quality">
+              <label for="modeQuality">Quality</label>
+              <input type="radio" name="mode" id="modeTarget" value="target">
+              <label for="modeTarget">Target size</label>
+            </div>
+          </div>
+
+          <div class="field" id="autoNote">
+            <p class="muted mb-0" style="font-size:0.82rem">
+              Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor.
+            </p>
+          </div>
+
+          <div class="field hidden" id="qualityField">
+            <div class="field__label">
+              <label for="quality">Encoder quality</label>
+              <span class="hint">higher keeps more detail</span>
+            </div>
+            <div class="field__row">
+              <input type="range" id="quality" min="10" max="100" step="1" value="80">
+              <span class="field__value" id="qualityValue">80%</span>
+            </div>
+          </div>
+
+          <div class="field hidden" id="targetField">
+            <div class="field__label">
+              <label for="targetKB">Target file size</label>
+              <span class="hint">downscales automatically if needed</span>
+            </div>
+            <div class="input-group">
+              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="100" inputmode="numeric">
+              <span class="input-group__suffix">KB</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field__label">Output format</span>
+            <div class="segmented segmented--wrap" role="radiogroup" aria-label="Output format">
+              <input type="radio" name="format" id="fmtAuto" value="auto" checked>
+              <label for="fmtAuto">Auto</label>
+              <input type="radio" name="format" id="fmtOriginal" value="original">
+              <label for="fmtOriginal">Keep format</label>
+              <input type="radio" name="format" id="fmtJpeg" value="jpeg">
+              <label for="fmtJpeg">JPEG</label>
+              <input type="radio" name="format" id="fmtWebp" value="webp">
+              <label for="fmtWebp">WebP</label>
+              <input type="radio" name="format" id="fmtAvif" value="avif">
+              <label for="fmtAvif">AVIF</label>
+              <input type="radio" name="format" id="fmtPng" value="png">
+              <label for="fmtPng">PNG</label>
+            </div>
+          </div>
+        </div>
+
+        <details class="advanced">
+          <summary>
+            <svg class="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            Advanced options
+          </summary>
+          <div class="advanced__body">
+            <div class="field">
+              <label class="field__label" for="maxDimension">Resize — maximum edge
+                <span class="hint">original size is preserved by default</span>
+              </label>
+              <select class="select" id="maxDimension">
+                <option value="0" selected>Keep original dimensions</option>
+                <option value="4096">4096 px — large prints</option>
+                <option value="2560">2560 px — web hero images</option>
+                <option value="2048">2048 px — retina screens</option>
+                <option value="1600">1600 px — blog &amp; article images</option>
+                <option value="1280">1280 px — email &amp; social</option>
+                <option value="1024">1024 px — thumbnails</option>
+                <option value="800">800 px — very small</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Sharpening after resize</span>
+              <div class="segmented" role="radiogroup" aria-label="Sharpening">
+                <input type="radio" name="sharpen" id="shAuto" value="auto" checked>
+                <label for="shAuto">Auto</label>
+                <input type="radio" name="sharpen" id="shOn" value="on">
+                <label for="shOn">Always</label>
+                <input type="radio" name="sharpen" id="shOff" value="off">
+                <label for="shOff">Never</label>
+              </div>
+              <p class="muted mb-0" style="font-size:0.78rem">Auto applies a halo-free unsharp mask only when an image is scaled below 82%.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="pngColors">PNG palette reduction
+                <span class="hint">the biggest PNG win</span>
+              </label>
+              <select class="select" id="pngColors">
+                <option value="auto" selected>Auto — 256 colors for graphics</option>
+                <option value="256">256 colors</option>
+                <option value="128">128 colors</option>
+                <option value="64">64 colors</option>
+                <option value="off">Off — lossless PNG only</option>
+              </select>
+              <label class="switch switch--sm" for="dither">
+                <input type="checkbox" id="dither" checked>
+                <span class="switch__track"></span>
+                <span class="switch__text">Floyd–Steinberg dithering (smoother gradients)</span>
+              </label>
+            </div>
+
+            <div class="field">
+              <span class="field__label">When a batch finishes</span>
+              <label class="switch switch--sm" for="chimeOn">
+                <input type="checkbox" id="chimeOn" checked>
+                <span class="switch__track"></span>
+                <span class="switch__text">Play a soft chime — only if it took a while, or while you were on another tab</span>
+              </label>
+              <p class="muted mb-0" style="font-size:0.78rem">
+                Generated in your browser by a synth — no audio file is downloaded, and it stays silent when a batch finishes in a couple of seconds.
+                <button class="linkish" type="button" id="chimeTest">Preview the sound</button>
+              </p>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Processing engine</span>
+              <div class="engine-status" id="engineStatus" aria-live="polite"></div>
+              <p class="muted mb-0" style="font-size:0.78rem">
+                WASM codecs are fetched from a public CDN on first use and give slightly smaller files. Every fallback still works offline.
+              </p>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Results -->
+      <section class="results" id="results" hidden aria-live="polite">
+        <div class="results__head">
+          <h2 class="results__title">Results</h2>
+          <p class="results__summary" id="resSummary"></p>
+          <div class="results__actions">
+            <button class="btn btn--primary btn--sm" id="downloadAll" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4z"/><path d="M9 6V4h6v2"/><path d="M10 10h4M10 14h4"/></svg>
+              <span id="downloadAllLabel">Save all</span>
+            </button>
+            <button class="btn btn--ghost btn--sm" id="clearAll" type="button">Clear</button>
+            <button class="icon-btn chime-toggle" id="chimeToggle" type="button" aria-pressed="true" title="Sound when a batch finishes">
+              <svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              <svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/><path d="M3 3l18 18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="result-list" id="resultList"></div>
+
+        <div class="action-bar" id="actionBar" hidden>
+          <p class="save-hint" id="saveHint" hidden></p>
+          <div class="action-bar__info">
+            <span class="action-bar__big" id="actionSaved">—</span>
+            <span class="action-bar__sub" id="actionSub"></span>
+          </div>
+          <div class="action-bar__btns">
+            <button class="btn btn--grad" id="barDownload" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+              <span id="barDownloadLabel">Save all</span>
+            </button>
+            <button class="btn btn--ghost" id="barClear" type="button">Clear list</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>Why 100 KB is the limit you keep hitting</h2>
+      <p>It is not an arbitrary number. Scanning software stores every application as a database row, and the image column is sized generously enough for a passport photo and no more. The limits people actually run into look like this:</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Where</th><th>Typical limit</th><th>Usual format rule</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Visa and government application portals</td><td>50 KB – 300 KB</td><td>JPG almost always</td></tr>
+            <tr><td>Job applications and ATS uploads</td><td>100 KB – 500 KB</td><td>JPG or PNG</td></tr>
+            <tr><td>University and scholarship forms</td><td>100 KB – 200 KB</td><td>JPG</td></tr>
+            <tr><td>Passport and ID photo services</td><td>30 KB – 100 KB</td><td>JPG, fixed dimensions</td></tr>
+            <tr><td>Email attachments</td><td>~25 MB total, but 100 KB keeps replies light</td><td>Anything</td></tr>
+            <tr><td>Marketplace and classified listings</td><td>200 KB – 1 MB</td><td>JPG or WebP</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The frustrating part is that the form rarely tells you <em>how</em> to get there. Guessing at a quality slider and re-uploading five times is the normal workflow. It does not have to be.</p>
+
+      <h2>How the target-size search works</h2>
+      <p>The compressor does not apply a preset and hope. It runs a search.</p>
+
+      <h3>It searches quality first</h3>
+      <p>Starting from a high setting, it encodes the image, weighs the result, and halves the distance to the target — up to seven passes. Because the relationship between quality and file size is monotonic but not linear, a binary search converges on the largest file that still lands under your budget in a handful of attempts rather than a dozen.</p>
+
+      <h3>It only reduces the resolution if it has to</h3>
+      <p>Dimensions are sacred. Most tools jump straight to resizing, which is what makes a 100 KB photo look like it was taken through a window. Here the pixel size is touched only when <em>no</em> quality setting can reach the budget — and then in gentle steps, so you keep as much of the original frame as the limit allows.</p>
+
+      <h3>It never hands back a file that is over budget</h3>
+      <p>If the last pass overshoots, it keeps searching downwards. The number you see in the results panel is the real byte count of the file you are about to download, not an estimate.</p>
+
+      <h2>Getting the most out of a tight limit</h2>
+      <ul>
+        <li><strong>Crop before you compress.</strong> Removing the empty sky around a subject removes detail the encoder no longer has to spend bits on. This buys more quality per kilobyte than any setting.</li>
+        <li><strong>Do not send a photograph as PNG.</strong> A photo in PNG is routinely five to ten times larger than the same picture in JPG. If the form accepts JPG, use it.</li>
+        <li><strong>Use WebP or AVIF when the form allows it.</strong> Where JPG needs 100 KB, WebP often needs around 70 KB for the same look, and AVIF less again — which means more of your original detail survives inside the budget.</li>
+        <li><strong>Check whether the form also caps dimensions.</strong> Many ask for exactly 300 × 400 or similar. Compress first, then resize, or you may compress twice.</li>
+      </ul>
+
+      <h2>Other budgets in one place</h2>
+      <p>Some limits come up so often that they have their own page: <a href="../compress-to-50kb/">compress an image to 50 KB</a> for passport and ID uploads, <a href="../compress-to-200kb/">compress an image to 200 KB</a> for university forms and marketplace listings, and <a href="../compress-photos-for-email/">compressing photos for email</a> when a whole batch has to fit in one message. The same control also works for any number — type <code>500</code> or <code>2000</code> into the target field, it is kilobytes and it is the only setting you need to change. On the <a href="../compress/">main compressor</a> you can switch between target size, a fixed quality, and full auto.</p>
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>Can I compress an image to exactly 100 KB?</summary>
+          <div class="faq__body"><p>Yes — pick Target size and enter <code>100</code>. The engine binary-searches encoder quality until the output fits under 100 KB, and reports the real byte count of the finished file rather than an estimate.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What if my photo cannot fit in 100 KB at full size?</summary>
+          <div class="faq__body"><p>Then the engine reduces the pixel dimensions in steps until it fits. A very detailed 12-megapixel photograph will usually need some downscaling to reach 100 KB; a 1–2 megapixel image typically reaches the budget on quality alone and keeps every pixel.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does compressing to 100 KB destroy the quality?</summary>
+          <div class="faq__body"><p>It costs quality, and there is no way around that — 100 KB is a hard budget. What this tool does is spend the budget well: it finds the highest quality that fits instead of applying a fixed preset that might have come in at 40 KB and thrown away detail you were entitled to keep.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I do this on my phone?</summary>
+          <div class="faq__body"><p>Yes. The page is touch-first and the compressor runs on any modern mobile browser, so you can shrink a photo to 100 KB straight from an iPhone or Android photo library without installing anything.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is there a limit on how many images I can shrink?</summary>
+          <div class="faq__body"><p>No. There is no file-count limit, no daily cap and no watermark. The only practical ceiling is your device's memory, because every image is processed on your own hardware rather than on a server that would have to meter it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Are my images uploaded to a server?</summary>
+          <div class="faq__body"><p>No. This is a static site with no upload endpoint. Your images are decoded, resampled and re-encoded inside your own browser, so they cannot leave your device even by accident.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Before / after viewer -->
+<div class="modal" id="compareModal" hidden role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+  <div class="modal__panel">
+    <div class="modal__head">
+      <h2 class="modal__title" id="compareTitle">Comparison</h2>
+      <span class="badge badge--success" id="compareBadge"></span>
+      <button class="icon-btn" id="compareClose" type="button" aria-label="Close comparison">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="compare" id="compare" style="--split:50%;--zoom:1;--panx:0px;--pany:0px">
+      <div class="compare__layer compare__layer--base"><img id="compareBase" alt="Original image"></div>
+      <div class="compare__layer compare__layer--over"><img id="compareOver" alt="Compressed image"></div>
+      <span class="compare__label compare__label--l">Original</span>
+      <span class="compare__label compare__label--r">Compressed</span>
+      <div class="compare__handle" id="compareHandle" role="slider" tabindex="0"
+           aria-label="Comparison position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <div class="compare__grip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-4 5 4 5M15 7l4 5-4 5"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal__foot">
+      <div class="segmented" id="compareView" style="width:auto" role="group" aria-label="View mode">
+        <button class="btn btn--ghost btn--sm" data-view="split" type="button">Split</button>
+        <button class="btn btn--ghost btn--sm" data-view="original" type="button">Original</button>
+        <button class="btn btn--ghost btn--sm" data-view="result" type="button">Compressed</button>
+      </div>
+      <div class="segmented" id="compareZoom" style="width:auto" role="group" aria-label="Zoom">
+        <button class="btn btn--primary btn--sm" data-zoom="1" type="button">1×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="2" type="button">2×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="4" type="button">4×</button>
+      </div>
+      <div class="compare-stats" id="compareStats"></div>
+      <button class="btn btn--primary btn--sm" id="compareSave" type="button">Save this file</button>
+    </div>
+  </div>
+</div>
+
+<!-- How to save several images on a phone -->
+<div class="modal" id="saveGuide" hidden role="dialog" aria-modal="true" aria-labelledby="saveGuideTitle">
+  <div class="modal__panel modal__panel--narrow">
+    <div class="modal__head">
+      <h2 class="modal__title" id="saveGuideTitle">Saving to Photos</h2>
+      <button class="icon-btn" id="saveGuideClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="save-guide" id="saveGuideBody"></div>
+
+    <div class="modal__foot">
+      <button class="btn btn--ghost" id="saveGuideCancel" type="button">Cancel</button>
+      <button class="btn btn--grad" id="saveGuideGo" type="button">Open share menu</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/zip.js"></script>
+<script src="../assets/js/compressor/engine.js"></script>
+<script src="../assets/js/chime.js"></script>
+<script src="../assets/js/compressor/app.js"></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/pwa.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+</body>
+</html>

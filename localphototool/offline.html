@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You are offline — LocalPhotoTool</title>
+<meta name="description" content="No connection right now. The compressor still runs from your device's cache.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .offline__wrap { max-width: 620px; margin: 0 auto; text-align: center; }
+  .offline__mark {
+    width: 62px; height: 62px; border-radius: 18px; margin: 0 auto 1.2rem;
+    display: grid; place-items: center; background: var(--grad-brand);
+    box-shadow: var(--shadow-brand);
+  }
+  .offline__mark svg { width: 30px; height: 30px; }
+  .offline__list { text-align: left; margin: 1.6rem auto 0; max-width: 460px; }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="hero hero--compact" style="padding-bottom:0">
+    <div class="container offline__wrap">
+      <div class="offline__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+      </div>
+      <h1 style="font-size:clamp(1.6rem,1.2rem + 2vw,2.3rem)">You are offline — that's fine</h1>
+      <p class="hero__lead">There is no internet connection right now, but the compressor runs entirely on your device. Anything already cached will keep working.</p>
+      <div class="hero__cta" style="justify-content:center">
+        <a class="btn btn--grad btn--lg" href="compress/">Open the compressor</a>
+        <button class="btn btn--ghost btn--lg" type="button" onclick="location.reload()">Try again</button>
+      </div>
+      <ul class="offline__list">
+        <li>Compressing JPG, PNG and WebP works offline once the page has been opened before.</li>
+        <li>AVIF encoding needs the AOM codec, which is fetched once and then cached — open the tool once online to have it available offline too.</li>
+        <li>Nothing you do offline leaves your device, exactly like when you are online.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var y = document.querySelector('[data-year]');
+    if (y) y.textContent = new Date().getFullYear();
+  } catch (e) {}
+  window.addEventListener('online', function () { location.replace('compress/'); });
+});
+</script>
+</body>
+</html>

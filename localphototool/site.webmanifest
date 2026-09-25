@@ -1,0 +1,37 @@
+{
+  "id": "/",
+  "name": "LocalPhotoTool — Compress Images Without Uploading",
+  "short_name": "LocalPhotoTool",
+  "description": "Compress images in your browser without uploading them. Private, free and unlimited.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/compress/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "categories": ["utilities", "photo", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Compress images",
+      "short_name": "Compress",
+      "description": "Open the compressor",
+      "url": "/compress/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "About LocalPhotoTool",
+      "short_name": "About",
+      "description": "How the in-browser compression works",
+      "url": "/about/"
+    }
+  ]
+}

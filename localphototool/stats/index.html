@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+  Private traffic dashboard for the site owner.
+  Not linked from anywhere and excluded from search engines.
+  Bookmark it: https://localphototool.com/stats/
+-->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visitor stats (private) — LocalPhotoTool</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .stats-page { max-width: 720px; margin: 0 auto; }
+  .stats-note { font-size: 0.82rem; color: var(--text-faint); margin: 1.1rem 0 0; }
+  .stats-json { margin-top: 1rem; }
+  .stats-json summary { cursor: pointer; font-size: 0.82rem; color: var(--text-muted); }
+  .stats-mute {
+    display: flex; align-items: center; gap: 0.6rem; margin: 1.1rem 0 0;
+    padding: 0.75rem 0.9rem; background: var(--bg-sunken);
+    border: 1px solid var(--border); border-radius: var(--r-md);
+    font-size: 0.86rem; cursor: pointer;
+  }
+  .stats-mute input {
+    width: 1.05rem; height: 1.05rem; margin: 0; flex: none;
+    accent-color: var(--accent-500); cursor: pointer;
+  }
+  html[data-theme="dark"] .stats-mute { background: var(--surface-2); }
+  .stats-json pre {
+    margin-top: 0.6rem; padding: 0.9rem 1rem; overflow: auto; max-height: 260px;
+    background: var(--bg-sunken); border: 1px solid var(--border);
+    border-radius: var(--r-md); font-size: 0.75rem; line-height: 1.5;
+  }
+  html[data-theme="dark"] .stats-json pre { background: var(--surface-2); }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Stats</span>
+      </nav>
+      <h1>Visitor stats</h1>
+      <p class="hero__lead">Your own traffic read-out — the same numbers Cloudflare shows, minus the bots.</p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container stats-page">
+      <div class="live-stats" data-stats-block>
+        <div class="live-stats__head">
+          <span class="live-dot" aria-hidden="true"></span>
+          <h2 class="live-stats__title">Real visitors</h2>
+          <span class="live-stats__sub">Anonymous · no cookies · de-duplicated</span>
+        </div>
+        <div class="live-stats__grid">
+          <div>
+            <div class="live-stats__num" data-stats="visitors">0</div>
+            <div class="live-stats__label">All-time unique visitors</div>
+          </div>
+          <div>
+            <div class="live-stats__num" data-stats="today">0</div>
+            <div class="live-stats__label">Today</div>
+          </div>
+          <div>
+            <div class="live-stats__num" data-stats="week">0</div>
+            <div class="live-stats__label">Last 7 days</div>
+          </div>
+        </div>
+        <div class="live-stats__chart">
+          <div class="spark" data-stats="days" aria-hidden="true"></div>
+          <div class="spark__axis" data-stats="axis" aria-hidden="true"></div>
+        </div>
+        <p class="live-stats__note">One person = one count per day, no matter how many tabs or visits. Crawlers, uptime robots and link previews are excluded.</p>
+      </div>
+
+      <label class="stats-mute" for="muteMine">
+        <input type="checkbox" id="muteMine">
+        <span>Don’t count my own visits from this browser</span>
+      </label>
+
+      <p class="stats-note" id="statsWarn" hidden>
+        The counter is not configured yet, or the KV binding is missing. The site itself is fine — see the note below.
+      </p>
+
+      <details class="stats-json">
+        <summary>Raw data (JSON from /api/count)</summary>
+        <pre id="rawJson">Loading…</pre>
+      </details>
+
+      <p class="stats-note">
+        Opening this page never counts as a visit. The checkbox covers the rest:
+        while it is ticked, this browser is not counted anywhere on the site —
+        useful when you are the one testing or sharing links. It is stored in
+        this browser only and never sent anywhere.
+      </p>
+
+      <p class="stats-note">
+        This page is not linked anywhere and is hidden from search engines — bookmark it.
+        Numbers are stored in Cloudflare KV under <code>lpt:main</code>.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="sep"></span>
+      <a href="../">Back to the site</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var pre = document.getElementById('rawJson');
+  var warn = document.getElementById('statsWarn');
+
+  var mute = document.getElementById('muteMine');
+  if (mute && window.LPTStats) {
+    mute.checked = window.LPTStats.muted();
+    mute.addEventListener('change', function () { window.LPTStats.setMuted(mute.checked); });
+  }
+
+  fetch('/api/count', { method: 'GET' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      pre.textContent = JSON.stringify(d, null, 2);
+      if (!d || d.ok !== true) warn.hidden = false;
+    })
+    .catch(function (e) {
+      pre.textContent = 'Could not reach /api/count — ' + e;
+      warn.hidden = false;
+    });
+});
+</script>
+</body>
+</html>

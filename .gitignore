@@ -1,0 +1,16 @@
+# --- private working data: never publish ---
+.workbuddy/
+_dev/.tmp/
+_dev/.indexnow-key
+_dev/pipcheck.txt
+
+# --- generated, large, or machine-local ---
+_dev/out/
+_dev/corpus/
+_dev/*.log
+*.zip
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+node_modules/

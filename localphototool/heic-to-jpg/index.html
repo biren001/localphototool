@@ -1,0 +1,648 @@
+<!--
+  HEIC to JPG converter.
+
+  The header, tool block, footer, modals and script tags are shared
+  verbatim with /compress/ — edit one, edit both. _dev/test-pages.cjs
+  compares the regions and fails the suite if they drift apart.
+  The <html> element pins the output format, so a tool that promises
+  JPG can never hand back a PNG chosen by the compressor's "auto"
+  format logic.
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-compressor-defaults='{"format":"jpeg"}'>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HEIC to JPG Converter — Convert iPhone Photos Privately</title>
+<meta name="description" content="Convert HEIC and HEIF photos to JPG in your browser — no upload, no account, no file limit. Batch convert iPhone photos into a format that opens everywhere.">
+<link rel="canonical" href="https://localphototool.com/heic-to-jpg/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="HEIC to JPG Converter — Free, Private, No Upload">
+<meta property="og:description" content="iPhone photos that open everywhere. Convert HEIC to JPG inside your browser — your pictures never leave your device.">
+<meta property="og:url" content="https://localphototool.com/heic-to-jpg/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEIC to JPG Converter — Free, Private, No Upload">
+<meta name="twitter:description" content="Convert HEIC to JPG entirely in your browser. Batch conversion, correct orientation, nothing uploaded.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css" as="style">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "LocalPhotoTool HEIC to JPG Converter",
+      "url": "https://localphototool.com/heic-to-jpg/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "description": "Browser-based HEIC and HEIF to JPG converter. Photos are decoded on the user's own device with WebAssembly and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "HEIC to JPG",
+          "item": "https://localphototool.com/heic-to-jpg/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to convert HEIC photos to JPG",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Add your HEIC photos",
+          "text": "Drag the .heic or .heif files onto the page, paste them, or pick them from your photo library."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Let the decoder run",
+          "text": "The HEIC decoder runs inside your browser tab and produces a JPG. Nothing is uploaded, and portrait photos keep their upright orientation."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Save the JPGs",
+          "text": "Download files individually, take them all as one ZIP on desktop, or save straight to your photo library on a phone."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a HEIC file and why won't it open on my computer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HEIC is the format iPhones have used for photos since iOS 11. It stores the same picture at roughly half the size of a JPEG, but it is built on HEVC, and support outside Apple's ecosystem is patchy: Windows needs an extra codec pack, Android support depends on the version, and many web forms and older editors refuse the file outright. Converting to JPG solves the compatibility problem permanently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this HEIC to JPG converter free, and is there a limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is free and unlimited. There is no account, no file count limit and no file size limit, because the conversion runs on your own device rather than on a server that would have to meter it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my photos uploaded anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The HEIC decoder is a WebAssembly module served from this site and executed inside your browser tab, so your photos are never transmitted. The page makes no request that carries image data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does converting HEIC to JPG reduce quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The photo is decoded once from the original and encoded once at high fidelity, and the pixel dimensions are preserved. JPG is a lossy format, so it cannot be perfectly lossless for photographs — keep your original HEIC files as the master copies and convert the versions you need to share."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the JPG sometimes larger than the HEIC file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HEIC compresses roughly twice as efficiently as JPG, so a JPG of the same picture usually weighs more. That is expected. The converter still re-encodes the result to keep the file as small as it can at a high fidelity floor, and it always gives you a JPG rather than handing the original HEIC back just because it happened to be smaller."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will portrait photos come out sideways?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. An iPhone portrait photo is stored as a landscape image plus a rotation tag. The decoder applies that tag to the pixels during conversion, so a portrait photo arrives as a portrait JPG."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert many photos at once, and does it work on a phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Drop an entire folder and the files are converted in sequence. On desktop you can take everything as a single ZIP archive; on an iPhone the finished JPGs can be handed to the system share sheet so they land directly in your photo library."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert HEIC on Windows, Android or Linux?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on any of them. The HEIC decoder is bundled with this site and runs inside the browser, so the operating system's own HEIC support is irrelevant — you do not need a codec pack on Windows, a particular Android version, or any software installed at all. If your browser can open this page, it can convert the file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to change my iPhone camera settings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Leave the camera on High Efficiency and keep shooting HEIC — it stores the same photo at about half the size of JPEG, so it is the better format to keep your originals in. Convert to JPG only at the moment you need to share, upload or print, and let your iPhone keep the higher-quality master."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the compressor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/" aria-current="page">HEIC to JPG</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#compare">Why it is better</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> HEIC to JPG</span>
+      </nav>
+      <h1>Convert HEIC to JPG — without uploading your photos</h1>
+      <p class="hero__lead" style="max-width:660px">Your iPhone saves photos as HEIC, and half the world cannot open them. Drop them here and get ordinary JPGs back, decoded on your own device.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Nothing is uploaded
+        </li>
+        <li class="badge">HEIC &amp; HEIF in, JPG out</li>
+        <li class="badge">Portrait photos stay upright</li>
+        <li class="badge">Unlimited &amp; free</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="tool" id="tool">
+    <div class="container">
+
+      <!-- Drop zone -->
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your images here</h2>
+        <p class="dropzone__hint">or paste from the clipboard · <span id="pasteHint" hidden>⌘V / Ctrl+V works too</span></p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad btn--lg" id="pickBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+            Choose images
+          </button>
+        </div>
+        <p class="dropzone__formats">JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit</p>
+        <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple aria-label="Choose image files">
+      </div>
+
+      <!-- Settings -->
+      <div class="settings">
+        <div class="settings__head">
+          <h2 class="settings__title">Compression settings</h2>
+          <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
+        </div>
+
+        <div class="settings__body">
+          <div class="field">
+            <span class="field__label">Strategy</span>
+            <div class="segmented" role="radiogroup" aria-label="Compression strategy">
+              <input type="radio" name="mode" id="modeAuto" value="auto" checked>
+              <label for="modeAuto">Auto</label>
+              <input type="radio" name="mode" id="modeQuality" value="quality">
+              <label for="modeQuality">Quality</label>
+              <input type="radio" name="mode" id="modeTarget" value="target">
+              <label for="modeTarget">Target size</label>
+            </div>
+          </div>
+
+          <div class="field" id="autoNote">
+            <p class="muted mb-0" style="font-size:0.82rem">
+              Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor.
+            </p>
+          </div>
+
+          <div class="field hidden" id="qualityField">
+            <div class="field__label">
+              <label for="quality">Encoder quality</label>
+              <span class="hint">higher keeps more detail</span>
+            </div>
+            <div class="field__row">
+              <input type="range" id="quality" min="10" max="100" step="1" value="80">
+              <span class="field__value" id="qualityValue">80%</span>
+            </div>
+          </div>
+
+          <div class="field hidden" id="targetField">
+            <div class="field__label">
+              <label for="targetKB">Target file size</label>
+              <span class="hint">downscales automatically if needed</span>
+            </div>
+            <div class="input-group">
+              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="200" inputmode="numeric">
+              <span class="input-group__suffix">KB</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field__label">Output format</span>
+            <div class="segmented segmented--wrap" role="radiogroup" aria-label="Output format">
+              <input type="radio" name="format" id="fmtAuto" value="auto" checked>
+              <label for="fmtAuto">Auto</label>
+              <input type="radio" name="format" id="fmtOriginal" value="original">
+              <label for="fmtOriginal">Keep format</label>
+              <input type="radio" name="format" id="fmtJpeg" value="jpeg">
+              <label for="fmtJpeg">JPEG</label>
+              <input type="radio" name="format" id="fmtWebp" value="webp">
+              <label for="fmtWebp">WebP</label>
+              <input type="radio" name="format" id="fmtAvif" value="avif">
+              <label for="fmtAvif">AVIF</label>
+              <input type="radio" name="format" id="fmtPng" value="png">
+              <label for="fmtPng">PNG</label>
+            </div>
+          </div>
+        </div>
+
+        <details class="advanced">
+          <summary>
+            <svg class="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            Advanced options
+          </summary>
+          <div class="advanced__body">
+            <div class="field">
+              <label class="field__label" for="maxDimension">Resize — maximum edge
+                <span class="hint">original size is preserved by default</span>
+              </label>
+              <select class="select" id="maxDimension">
+                <option value="0" selected>Keep original dimensions</option>
+                <option value="4096">4096 px — large prints</option>
+                <option value="2560">2560 px — web hero images</option>
+                <option value="2048">2048 px — retina screens</option>
+                <option value="1600">1600 px — blog &amp; article images</option>
+                <option value="1280">1280 px — email &amp; social</option>
+                <option value="1024">1024 px — thumbnails</option>
+                <option value="800">800 px — very small</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Sharpening after resize</span>
+              <div class="segmented" role="radiogroup" aria-label="Sharpening">
+                <input type="radio" name="sharpen" id="shAuto" value="auto" checked>
+                <label for="shAuto">Auto</label>
+                <input type="radio" name="sharpen" id="shOn" value="on">
+                <label for="shOn">Always</label>
+                <input type="radio" name="sharpen" id="shOff" value="off">
+                <label for="shOff">Never</label>
+              </div>
+              <p class="muted mb-0" style="font-size:0.78rem">Auto applies a halo-free unsharp mask only when an image is scaled below 82%.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="pngColors">PNG palette reduction
+                <span class="hint">the biggest PNG win</span>
+              </label>
+              <select class="select" id="pngColors">
+                <option value="auto" selected>Auto — 256 colors for graphics</option>
+                <option value="256">256 colors</option>
+                <option value="128">128 colors</option>
+                <option value="64">64 colors</option>
+                <option value="off">Off — lossless PNG only</option>
+              </select>
+              <label class="switch switch--sm" for="dither">
+                <input type="checkbox" id="dither" checked>
+                <span class="switch__track"></span>
+                <span class="switch__text">Floyd–Steinberg dithering (smoother gradients)</span>
+              </label>
+            </div>
+
+            <div class="field">
+              <span class="field__label">When a batch finishes</span>
+              <label class="switch switch--sm" for="chimeOn">
+                <input type="checkbox" id="chimeOn" checked>
+                <span class="switch__track"></span>
+                <span class="switch__text">Play a soft chime — only if it took a while, or while you were on another tab</span>
+              </label>
+              <p class="muted mb-0" style="font-size:0.78rem">
+                Generated in your browser by a synth — no audio file is downloaded, and it stays silent when a batch finishes in a couple of seconds.
+                <button class="linkish" type="button" id="chimeTest">Preview the sound</button>
+              </p>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Processing engine</span>
+              <div class="engine-status" id="engineStatus" aria-live="polite"></div>
+              <p class="muted mb-0" style="font-size:0.78rem">
+                WASM codecs are fetched from a public CDN on first use and give slightly smaller files. Every fallback still works offline.
+              </p>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Results -->
+      <section class="results" id="results" hidden aria-live="polite">
+        <div class="results__head">
+          <h2 class="results__title">Results</h2>
+          <p class="results__summary" id="resSummary"></p>
+          <div class="results__actions">
+            <button class="btn btn--primary btn--sm" id="downloadAll" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4z"/><path d="M9 6V4h6v2"/><path d="M10 10h4M10 14h4"/></svg>
+              <span id="downloadAllLabel">Save all</span>
+            </button>
+            <button class="btn btn--ghost btn--sm" id="clearAll" type="button">Clear</button>
+            <button class="icon-btn chime-toggle" id="chimeToggle" type="button" aria-pressed="true" title="Sound when a batch finishes">
+              <svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              <svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/><path d="M3 3l18 18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="result-list" id="resultList"></div>
+
+        <div class="action-bar" id="actionBar" hidden>
+          <p class="save-hint" id="saveHint" hidden></p>
+          <div class="action-bar__info">
+            <span class="action-bar__big" id="actionSaved">—</span>
+            <span class="action-bar__sub" id="actionSub"></span>
+          </div>
+          <div class="action-bar__btns">
+            <button class="btn btn--grad" id="barDownload" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+              <span id="barDownloadLabel">Save all</span>
+            </button>
+            <button class="btn btn--ghost" id="barClear" type="button">Clear list</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>What is a HEIC file, and why won't it open?</h2>
+      <p>Since iOS 11 an iPhone camera has saved photos as <strong>HEIC</strong> — High Efficiency Image Container. It is genuinely better at its job: the same picture at roughly half the size of a JPEG. The catch is that it is built on HEVC, and support outside Apple's world is patchy. Windows needs an optional codec pack from the Microsoft Store. Android support depends on the version and the app. Many web forms, content systems and older editors refuse the file outright, sometimes without even a useful error.</p>
+      <p>The fix is unglamorous but permanent: turn the photo into a JPG, a format every device made in the last twenty-five years can open.</p>
+
+      <h2>What this converter does differently</h2>
+      <ol>
+        <li><strong>Your photos are decoded on your device.</strong> The HEIC decoder is a WebAssembly build of libheif, served from this site and executed in your browser tab. Nothing is uploaded. That matters here more than elsewhere: a camera roll is about as personal as data gets, and uploading it to an unknown server to change a file extension is a bad trade.</li>
+        <li><strong>It converts <em>and</em> optimises.</strong> HEIC is already efficiently compressed, so a naive conversion often produces a <em>larger</em> JPG. This tool runs the result through the same perceptual engine as the <a href="../compress/">image compressor</a>: it measures the picture, picks an encoder setting that keeps fidelity high, and strips the metadata that would otherwise ride along. You always get a JPG back — the tool never hands your original HEIC back just because it happened to be the smaller file.</li>
+        <li><strong>Portrait photos stay upright.</strong> An iPhone portrait photo is physically stored as a landscape image with a note attached saying "rotate this". Tools that ignore the note hand you a sideways picture, which is worse than an error message. The decoder here applies the rotation to the pixels, so what you see is what you save.</li>
+        <li><strong>Batch, with no artificial limits.</strong> Drop a whole folder at once. On a desktop you can take everything as one ZIP archive. On an iPhone the finished JPGs go through the system share sheet straight into your photo library, because iOS cannot unzip an archive from a web page and nobody wants to save forty photos one at a time.</li>
+      </ol>
+
+      <h2>How to convert HEIC to JPG</h2>
+      <ol>
+        <li><strong>Add the files.</strong> Drag <code>.heic</code> or <code>.heif</code> photos onto the page, paste them from the clipboard, or use the file picker. A whole folder is fine.</li>
+        <li><strong>Wait for the decoder.</strong> The first conversion downloads a 1.4 MB decoder once; the browser caches it, so later conversions start instantly. Progress is shown per file.</li>
+        <li><strong>Save the results.</strong> Download each JPG individually, take them all as a single ZIP on a computer, or save straight to the photo library on a phone.</li>
+      </ol>
+
+      <h3>HEIC vs JPG — what you gain and what you give up</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>HEIC</th><th>JPG</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>File size at equal quality</strong></td><td>About half</td><td>Larger</td></tr>
+            <tr><td><strong>Opens on Windows, Android, older apps</strong></td><td>Often not</td><td>Always</td></tr>
+            <tr><td><strong>Accepted by upload forms and CMSs</strong></td><td>Inconsistently</td><td>Universally</td></tr>
+            <tr><td><strong>Transparency</strong></td><td>Supports it</td><td>Flattens it</td></tr>
+            <tr><td><strong>Editing latitude</strong></td><td>Good</td><td>Good</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        <p><strong>Keep your originals.</strong> Converting is one-way: JPG discards some information and cannot be converted back into an identical HEIC. This tool never modifies your files — it reads them and writes new ones — so your original photos stay exactly as they were.</p>
+      </div>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>What is a HEIC file and why won't it open on my computer?</summary>
+          <div class="faq__body"><p>HEIC is the format iPhones have used for photos since iOS 11. It stores the same picture at roughly half the size of a JPEG, but it is built on HEVC, and support outside Apple's ecosystem is patchy: Windows needs an extra codec pack, Android support depends on the version, and many web forms and older editors refuse the file outright. Converting to JPG solves the compatibility problem permanently.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is this HEIC to JPG converter free, and is there a limit?</summary>
+          <div class="faq__body"><p>It is free and unlimited. There is no account, no file count limit and no file size limit, because the conversion runs on your own device rather than on a server that would have to meter it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Are my photos uploaded anywhere?</summary>
+          <div class="faq__body"><p>No. The HEIC decoder is a WebAssembly module served from this site and executed inside your browser tab, so your photos are never transmitted. The page makes no request that carries image data.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does converting HEIC to JPG reduce quality?</summary>
+          <div class="faq__body"><p>The photo is decoded once from the original and encoded once at high fidelity, and the pixel dimensions are preserved. JPG is a lossy format, so it cannot be perfectly lossless for photographs — keep your original HEIC files as the master copies and convert the versions you need to share.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why is the JPG sometimes larger than the HEIC file?</summary>
+          <div class="faq__body"><p>HEIC compresses roughly twice as efficiently as JPG, so a JPG of the same picture usually weighs more. That is expected. The converter still re-encodes the result to keep the file as small as it can at a high fidelity floor, and it always gives you a JPG rather than handing the original HEIC back just because it happened to be smaller.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Will portrait photos come out sideways?</summary>
+          <div class="faq__body"><p>No. An iPhone portrait photo is stored as a landscape image plus a rotation tag. The decoder applies that tag to the pixels during conversion, so a portrait photo arrives as a portrait JPG.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I convert many photos at once, and does it work on a phone?</summary>
+          <div class="faq__body"><p>Yes. Drop an entire folder and the files are converted in sequence. On desktop you can take everything as a single ZIP archive; on an iPhone the finished JPGs can be handed to the system share sheet so they land directly in your photo library.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I convert HEIC on Windows, Android or Linux?</summary>
+          <div class="faq__body"><p>Yes, on any of them. The HEIC decoder is bundled with this site and runs inside the browser, so the operating system's own HEIC support is irrelevant — you do not need a codec pack on Windows, a particular Android version, or any software installed at all. If your browser can open this page, it can convert the file.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Do I need to change my iPhone camera settings?</summary>
+          <div class="faq__body"><p>No. Leave the camera on <strong>High Efficiency</strong> and keep shooting HEIC — it stores the same photo at about half the size of JPEG, so it is the better format to keep your originals in. Convert to JPG only at the moment you need to share, upload or print, and let your iPhone keep the higher-quality master.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Before / after viewer -->
+<div class="modal" id="compareModal" hidden role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+  <div class="modal__panel">
+    <div class="modal__head">
+      <h2 class="modal__title" id="compareTitle">Comparison</h2>
+      <span class="badge badge--success" id="compareBadge"></span>
+      <button class="icon-btn" id="compareClose" type="button" aria-label="Close comparison">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="compare" id="compare" style="--split:50%;--zoom:1;--panx:0px;--pany:0px">
+      <div class="compare__layer compare__layer--base"><img id="compareBase" alt="Original image"></div>
+      <div class="compare__layer compare__layer--over"><img id="compareOver" alt="Compressed image"></div>
+      <span class="compare__label compare__label--l">Original</span>
+      <span class="compare__label compare__label--r">Compressed</span>
+      <div class="compare__handle" id="compareHandle" role="slider" tabindex="0"
+           aria-label="Comparison position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <div class="compare__grip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-4 5 4 5M15 7l4 5-4 5"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal__foot">
+      <div class="segmented" id="compareView" style="width:auto" role="group" aria-label="View mode">
+        <button class="btn btn--ghost btn--sm" data-view="split" type="button">Split</button>
+        <button class="btn btn--ghost btn--sm" data-view="original" type="button">Original</button>
+        <button class="btn btn--ghost btn--sm" data-view="result" type="button">Compressed</button>
+      </div>
+      <div class="segmented" id="compareZoom" style="width:auto" role="group" aria-label="Zoom">
+        <button class="btn btn--primary btn--sm" data-zoom="1" type="button">1×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="2" type="button">2×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="4" type="button">4×</button>
+      </div>
+      <div class="compare-stats" id="compareStats"></div>
+      <button class="btn btn--primary btn--sm" id="compareSave" type="button">Save this file</button>
+    </div>
+  </div>
+</div>
+
+<!-- How to save several images on a phone -->
+<div class="modal" id="saveGuide" hidden role="dialog" aria-modal="true" aria-labelledby="saveGuideTitle">
+  <div class="modal__panel modal__panel--narrow">
+    <div class="modal__head">
+      <h2 class="modal__title" id="saveGuideTitle">Saving to Photos</h2>
+      <button class="icon-btn" id="saveGuideClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="save-guide" id="saveGuideBody"></div>
+
+    <div class="modal__foot">
+      <button class="btn btn--ghost" id="saveGuideCancel" type="button">Cancel</button>
+      <button class="btn btn--grad" id="saveGuideGo" type="button">Open share menu</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/zip.js"></script>
+<script src="../assets/js/compressor/engine.js"></script>
+<script src="../assets/js/chime.js"></script>
+<script src="../assets/js/compressor/app.js"></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/pwa.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+</body>
+</html>

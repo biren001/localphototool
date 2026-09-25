@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-compressor-defaults='{"format":"webp"}'>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JPG to WebP Converter — Smaller Files, Same Picture</title>
+<meta name="description" content="Convert JPG to WebP in your browser and cut file size by a quarter to a half with no visible difference. Batch conversion, nothing uploaded.">
+<link rel="canonical" href="https://localphototool.com/jpg-to-webp/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="JPG to WebP Converter — Smaller Files, Same Picture">
+<meta property="og:description" content="Convert JPG to WebP in your browser and cut file size by roughly a quarter to a half with no visible difference. Batch conversion, transparency preserved, nothing uploaded.">
+<meta property="og:url" content="https://localphototool.com/jpg-to-webp/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JPG to WebP Converter — Smaller Files, Same Picture">
+<meta name="twitter:description" content="Convert JPG to WebP in your browser and cut file size by roughly a quarter to a half with no visible difference. Batch conversion, transparency preserved, nothing uploaded.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css" as="style">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/jpg-to-webp/#page",
+      "url": "https://localphototool.com/jpg-to-webp/",
+      "name": "JPG to WebP Converter — Smaller Files, Same Picture",
+      "description": "Convert JPG to WebP in your browser and cut file size by roughly a quarter to a half with no visible difference. Batch conversion, transparency preserved, nothing uploaded.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/jpg-to-webp/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/jpg-to-webp/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JPG to WebP Converter — Smaller Files, Same Picture",
+          "item": "https://localphototool.com/jpg-to-webp/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/jpg-to-webp/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is WebP supported everywhere now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In browsers, effectively yes — Chrome, Firefox, Safari and Edge have all supported WebP for years, as has iOS since 14. Support in older desktop editors, some print workflows and a minority of upload forms is still patchy, so check what the destination accepts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much smaller is WebP than JPG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends which comparison you mean, so here are both from our own measurements. In Auto mode the saving against the original JPG was 24–54%, because the engine picks the lowest quality that still clears a ~40 dB fidelity floor. At matched 40 dB fidelity WebP came out roughly level with MozJPEG — the commonly quoted 25–50% compares WebP against a baseline JPEG encoder rather than MozJPEG, which is what this tool uses. On flat-colour graphics the saving is larger either way, because WebP handles hard edges far better than JPG does."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does WebP keep transparency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. WebP stores a full alpha channel, so a transparent PNG converted to WebP keeps its transparency — something JPG cannot do at all, since it flattens transparent areas onto white."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is converting JPG to WebP lossy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, both formats are lossy. The image is decoded once from your original and encoded once at high fidelity, so you pay for one generation of loss rather than two. Keep your original JPG as the master and convert the copy you publish."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my images uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. There is no upload endpoint on this site. The conversion happens in your browser tab, and the only network requests are for the site's own files and the optional WebP encoder module."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "logo": "https://localphototool.com/favicon.svg",
+      "email": "hello@localphototool.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the compressor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#compare">Why it is better</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> JPG to WebP</span>
+      </nav>
+      <h1>Convert JPG to WebP in your browser</h1>
+      <p class="hero__lead" style="max-width:660px">WebP holds the same picture as a JPG in meaningfully fewer bytes, every current browser can display it, and unlike JPG it keeps transparency. Convert one file or a whole folder, on your own device.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Nothing is uploaded
+        </li>
+        <li class="badge">24–54% smaller in Auto mode</li>
+        <li class="badge">Keeps transparency</li>
+        <li class="badge">Unlimited &amp; free</li>
+      </ul>
+      <p class="hero__share" style="max-width:660px">
+        <a href="../share/">On a phone? Scan this QR code to open the tool there &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+<section class="tool" id="tool">
+    <div class="container">
+
+      <!-- Drop zone -->
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your images here</h2>
+        <p class="dropzone__hint">or paste from the clipboard · <span id="pasteHint" hidden>⌘V / Ctrl+V works too</span></p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad btn--lg" id="pickBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+            Choose images
+          </button>
+        </div>
+        <p class="dropzone__formats">JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit</p>
+        <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple aria-label="Choose image files">
+      </div>
+
+      <!-- Settings -->
+      <div class="settings">
+        <div class="settings__head">
+          <h2 class="settings__title">Compression settings</h2>
+          <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
+        </div>
+
+        <div class="settings__body">
+          <div class="field">
+            <span class="field__label">Strategy</span>
+            <div class="segmented" role="radiogroup" aria-label="Compression strategy">
+              <input type="radio" name="mode" id="modeAuto" value="auto" checked>
+              <label for="modeAuto">Auto</label>
+              <input type="radio" name="mode" id="modeQuality" value="quality">
+              <label for="modeQuality">Quality</label>
+              <input type="radio" name="mode" id="modeTarget" value="target">
+              <label for="modeTarget">Target size</label>
+            </div>
+          </div>
+
+          <div class="field" id="autoNote">
+            <p class="muted mb-0" style="font-size:0.82rem">
+              Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor.
+            </p>
+          </div>
+
+          <div class="field hidden" id="qualityField">
+            <div class="field__label">
+              <label for="quality">Encoder quality</label>
+              <span class="hint">higher keeps more detail</span>
+            </div>
+            <div class="field__row">
+              <input type="range" id="quality" min="10" max="100" step="1" value="80">
+              <span class="field__value" id="qualityValue">80%</span>
+            </div>
+          </div>
+
+          <div class="field hidden" id="targetField">
+            <div class="field__label">
+              <label for="targetKB">Target file size</label>
+              <span class="hint">downscales automatically if needed</span>
+            </div>
+            <div class="input-group">
+              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="200" inputmode="numeric">
+              <span class="input-group__suffix">KB</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field__label">Output format</span>
+            <div class="segmented segmented--wrap" role="radiogroup" aria-label="Output format">
+              <input type="radio" name="format" id="fmtAuto" value="auto" checked>
+              <label for="fmtAuto">Auto</label>
+              <input type="radio" name="format" id="fmtOriginal" value="original">
+              <label for="fmtOriginal">Keep format</label>
+              <input type="radio" name="format" id="fmtJpeg" value="jpeg">
+              <label for="fmtJpeg">JPEG</label>
+              <input type="radio" name="format" id="fmtWebp" value="webp">
+              <label for="fmtWebp">WebP</label>
+              <input type="radio" name="format" id="fmtAvif" value="avif">
+              <label for="fmtAvif">AVIF</label>
+              <input type="radio" name="format" id="fmtPng" value="png">
+              <label for="fmtPng">PNG</label>
+            </div>
+          </div>
+        </div>
+
+        <details class="advanced">
+          <summary>
+            <svg class="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            Advanced options
+          </summary>
+          <div class="advanced__body">
+            <div class="field">
+              <label class="field__label" for="maxDimension">Resize — maximum edge
+                <span class="hint">original size is preserved by default</span>
+              </label>
+              <select class="select" id="maxDimension">
+                <option value="0" selected>Keep original dimensions</option>
+                <option value="4096">4096 px — large prints</option>
+                <option value="2560">2560 px — web hero images</option>
+                <option value="2048">2048 px — retina screens</option>
+                <option value="1600">1600 px — blog &amp; article images</option>
+                <option value="1280">1280 px — email &amp; social</option>
+                <option value="1024">1024 px — thumbnails</option>
+                <option value="800">800 px — very small</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Sharpening after resize</span>
+              <div class="segmented" role="radiogroup" aria-label="Sharpening">
+                <input type="radio" name="sharpen" id="shAuto" value="auto" checked>
+                <label for="shAuto">Auto</label>
+                <input type="radio" name="sharpen" id="shOn" value="on">
+                <label for="shOn">Always</label>
+                <input type="radio" name="sharpen" id="shOff" value="off">
+                <label for="shOff">Never</label>
+              </div>
+              <p class="muted mb-0" style="font-size:0.78rem">Auto applies a halo-free unsharp mask only when an image is scaled below 82%.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="pngColors">PNG palette reduction
+                <span class="hint">the biggest PNG win</span>
+              </label>
+              <select class="select" id="pngColors">
+                <option value="auto" selected>Auto — 256 colors for graphics</option>
+                <option value="256">256 colors</option>
+                <option value="128">128 colors</option>
+                <option value="64">64 colors</option>
+                <option value="off">Off — lossless PNG only</option>
+              </select>
+              <label class="switch switch--sm" for="dither">
+                <input type="checkbox" id="dither" checked>
+                <span class="switch__track"></span>
+                <span class="switch__text">Floyd–Steinberg dithering (smoother gradients)</span>
+              </label>
+            </div>
+
+            <div class="field">
+              <span class="field__label">When a batch finishes</span>
+              <label class="switch switch--sm" for="chimeOn">
+                <input type="checkbox" id="chimeOn" checked>
+                <span class="switch__track"></span>
+                <span class="switch__text">Play a soft chime — only if it took a while, or while you were on another tab</span>
+              </label>
+              <p class="muted mb-0" style="font-size:0.78rem">
+                Generated in your browser by a synth — no audio file is downloaded, and it stays silent when a batch finishes in a couple of seconds.
+                <button class="linkish" type="button" id="chimeTest">Preview the sound</button>
+              </p>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Processing engine</span>
+              <div class="engine-status" id="engineStatus" aria-live="polite"></div>
+              <p class="muted mb-0" style="font-size:0.78rem">
+                WASM codecs are fetched from a public CDN on first use and give slightly smaller files. Every fallback still works offline.
+              </p>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Results -->
+      <section class="results" id="results" hidden aria-live="polite">
+        <div class="results__head">
+          <h2 class="results__title">Results</h2>
+          <p class="results__summary" id="resSummary"></p>
+          <div class="results__actions">
+            <button class="btn btn--primary btn--sm" id="downloadAll" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4z"/><path d="M9 6V4h6v2"/><path d="M10 10h4M10 14h4"/></svg>
+              <span id="downloadAllLabel">Save all</span>
+            </button>
+            <button class="btn btn--ghost btn--sm" id="clearAll" type="button">Clear</button>
+            <button class="icon-btn chime-toggle" id="chimeToggle" type="button" aria-pressed="true" title="Sound when a batch finishes">
+              <svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              <svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/><path d="M3 3l18 18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="result-list" id="resultList"></div>
+
+        <div class="action-bar" id="actionBar" hidden>
+          <p class="save-hint" id="saveHint" hidden></p>
+          <div class="action-bar__info">
+            <span class="action-bar__big" id="actionSaved">—</span>
+            <span class="action-bar__sub" id="actionSub"></span>
+          </div>
+          <div class="action-bar__btns">
+            <button class="btn btn--grad" id="barDownload" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+              <span id="barDownloadLabel">Save all</span>
+            </button>
+            <button class="btn btn--ghost" id="barClear" type="button">Clear list</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>What WebP does better than JPG</h2>
+      <p>WebP is a modern format from the same era as AVIF, built on the video codec work that produced VP8 and VP9. Two comparisons get quoted for it and they disagree, so here are both, measured on our own encoders. Running a 2400×1600 camera JPEG through Auto mode — where the engine finds the lowest quality that still clears a ~40 dB fidelity floor — the saving was 24–54%. Measured the other way round, at equal 40 dB fidelity, WebP came out roughly <em>level</em> with MozJPEG: the lead WebP is usually credited with shows up in perceptual metrics and at lower quality settings, not in PSNR against a strong JPEG encoder. On graphics with flat colour the picture is less ambiguous, because JPG smudges hard edges and WebP does not.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>JPG</th><th>WebP</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Photograph, Auto mode</td><td>Baseline</td><td>24–54% smaller (measured)</td></tr>
+            <tr><td>Photograph at matched 40 dB fidelity</td><td>Baseline</td><td>About level (measured)</td></tr>
+            <tr><td>Flat-colour graphics</td><td>Baseline</td><td>Clearly smaller</td></tr>
+            <tr><td>Transparency</td><td>Not supported</td><td>Supported, with alpha</td></tr>
+            <tr><td>Animation</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Browser support</td><td>Universal</td><td>Every current browser</td></tr>
+            <tr><td>Older editors and some upload forms</td><td>Always accepted</td><td>Occasionally rejected</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Where WebP is not the answer</h2>
+      <p>Be honest about the trade-off. WebP is the wrong choice when the file has to open in software you do not control: a client's legacy CMS, a print workflow, a government upload form that whitelists <code>.jpg</code> by extension. It is also pointless if you will re-edit the image repeatedly — every lossy save costs something, so keep a master and export WebP at the end.</p>
+      <p>And if you want the smallest file that current browsers can read, <a href="../compress/">AVIF</a> usually beats WebP by a further 20–30%, at the cost of noticeably slower encoding.</p>
+
+      <h2>How the conversion is done here</h2>
+      <p>Your JPG is decoded once, and encoded once to WebP — this is not a re-compression of an already-compressed file, which is what quietly destroys quality in naive converters. In Auto mode the engine measures the image first and chooses the lowest quality that still clears a perceptual fidelity floor, so a smooth sky does not get the same treatment as a hedge full of leaves.</p>
+      <p>Because everything runs locally, the page never needs to see your image on a server. The optional WebP encoder is a WebAssembly module fetched from a public CDN on first use; if that CDN is unreachable the browser's own WebP encoder takes over, and the conversion still works.</p>
+
+      <h2>Batch conversion</h2>
+      <p>Drop a whole folder in and the files convert in parallel background workers. On desktop, <strong>Download all</strong> gives you a single ZIP; on an iPhone the results can be handed to the share sheet so they go straight into your photo library.</p>
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>Is WebP supported everywhere now?</summary>
+          <div class="faq__body"><p>In browsers, effectively yes — Chrome, Firefox, Safari and Edge have all supported WebP for years, as has iOS since 14. Support in older desktop editors, some print workflows and a minority of upload forms is still patchy, so check what the destination accepts.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How much smaller is WebP than JPG?</summary>
+          <div class="faq__body"><p>It depends which comparison you mean, so here are both from our own measurements. In Auto mode the saving against the original JPG was 24–54%, because the engine picks the lowest quality that still clears a ~40 dB fidelity floor. At <em>matched</em> 40 dB fidelity WebP came out roughly level with MozJPEG — the commonly quoted 25–50% compares WebP against a baseline JPEG encoder rather than MozJPEG, which is what this tool uses. On flat-colour graphics the saving is larger either way, because WebP handles hard edges far better than JPG does.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does WebP keep transparency?</summary>
+          <div class="faq__body"><p>Yes. WebP stores a full alpha channel, so a transparent PNG converted to WebP keeps its transparency — something JPG cannot do at all, since it flattens transparent areas onto white.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is converting JPG to WebP lossy?</summary>
+          <div class="faq__body"><p>Yes, both formats are lossy. The image is decoded once from your original and encoded once at high fidelity, so you pay for one generation of loss rather than two. Keep your original JPG as the master and convert the copy you publish.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Are my images uploaded to a server?</summary>
+          <div class="faq__body"><p>No. There is no upload endpoint on this site. The conversion happens in your browser tab, and the only network requests are for the site's own files and the optional WebP encoder module.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Before / after viewer -->
+<div class="modal" id="compareModal" hidden role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+  <div class="modal__panel">
+    <div class="modal__head">
+      <h2 class="modal__title" id="compareTitle">Comparison</h2>
+      <span class="badge badge--success" id="compareBadge"></span>
+      <button class="icon-btn" id="compareClose" type="button" aria-label="Close comparison">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="compare" id="compare" style="--split:50%;--zoom:1;--panx:0px;--pany:0px">
+      <div class="compare__layer compare__layer--base"><img id="compareBase" alt="Original image"></div>
+      <div class="compare__layer compare__layer--over"><img id="compareOver" alt="Compressed image"></div>
+      <span class="compare__label compare__label--l">Original</span>
+      <span class="compare__label compare__label--r">Compressed</span>
+      <div class="compare__handle" id="compareHandle" role="slider" tabindex="0"
+           aria-label="Comparison position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <div class="compare__grip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-4 5 4 5M15 7l4 5-4 5"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal__foot">
+      <div class="segmented" id="compareView" style="width:auto" role="group" aria-label="View mode">
+        <button class="btn btn--ghost btn--sm" data-view="split" type="button">Split</button>
+        <button class="btn btn--ghost btn--sm" data-view="original" type="button">Original</button>
+        <button class="btn btn--ghost btn--sm" data-view="result" type="button">Compressed</button>
+      </div>
+      <div class="segmented" id="compareZoom" style="width:auto" role="group" aria-label="Zoom">
+        <button class="btn btn--primary btn--sm" data-zoom="1" type="button">1×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="2" type="button">2×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="4" type="button">4×</button>
+      </div>
+      <div class="compare-stats" id="compareStats"></div>
+      <button class="btn btn--primary btn--sm" id="compareSave" type="button">Save this file</button>
+    </div>
+  </div>
+</div>
+
+<!-- How to save several images on a phone -->
+<div class="modal" id="saveGuide" hidden role="dialog" aria-modal="true" aria-labelledby="saveGuideTitle">
+  <div class="modal__panel modal__panel--narrow">
+    <div class="modal__head">
+      <h2 class="modal__title" id="saveGuideTitle">Saving to Photos</h2>
+      <button class="icon-btn" id="saveGuideClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="save-guide" id="saveGuideBody"></div>
+
+    <div class="modal__foot">
+      <button class="btn btn--ghost" id="saveGuideCancel" type="button">Cancel</button>
+      <button class="btn btn--grad" id="saveGuideGo" type="button">Open share menu</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/zip.js"></script>
+<script src="../assets/js/compressor/engine.js"></script>
+<script src="../assets/js/chime.js"></script>
+<script src="../assets/js/compressor/app.js"></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/pwa.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>OG rasterizer</title>
+<img id="src" src="/localphototool/assets/img/og-cover.svg" width="1200" height="630">
+<script>
+window.OG_READY = false;
+const img = document.getElementById('src');
+img.onload = () => {
+  const c = document.createElement('canvas');
+  c.width = 1200; c.height = 630;
+  const x = c.getContext('2d');
+  x.drawImage(img, 0, 0, 1200, 630);
+  try {
+    window.OG_DATA = c.toDataURL('image/png');
+    window.OG_READY = true;
+  } catch (e) {
+    document.title = 'TAINTED: ' + e.message;
+  }
+};
+img.onerror = () => { document.title = 'SVG LOAD FAILED'; };
+</script>

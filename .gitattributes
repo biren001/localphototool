@@ -1,0 +1,5 @@
+# This project is deployed as a zip built from the working tree (Cloudflare
+# Pages drag-and-drop), so a checkout has to reproduce the exact bytes that were
+# committed. Any newline normalisation would make the deployed zip differ from
+# the repository without anything looking wrong in a diff.
+* -text
