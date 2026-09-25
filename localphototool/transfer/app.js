@@ -83,12 +83,34 @@
     chat.hidden = false;
     connState.className = 'dot';
     connText.textContent = 'Connected over ' + backendName + ' — you can close this page any time; nothing is kept.';
+    refreshCompose();
     textInput.focus();
   }
   function markDisconnected() {
     connState.className = 'dot bad';
-    connText.textContent = 'Disconnected — nothing was kept. Refresh to start a new session.';
+    connText.textContent = 'The other device went offline — sending is disabled. Nothing was kept. Re-pair to continue.';
+    refreshCompose();
   }
+  // Compose controls are only live while at least one wire is actually open.
+  function refreshCompose() {
+    var live = wires.some(function (w) { return w.open; });
+    [textInput, sendBtn, attachBtn, fileInput].forEach(function (el) { el.disabled = !live; });
+  }
+  // Liveness heartbeat: a silently departed peer (closed tab, killed browser,
+  // dropped network) never fires the channel's close event, so without this
+  // the other side keeps "sending" into a dead connection. Ping every 3s;
+  // 12s without any inbound data means the peer is gone.
+  setInterval(function () {
+    var live = wires.filter(function (w) { return w.open; });
+    live.forEach(function (w) { w.send(JSON.stringify({ t: 'ping' })); });
+    var dead = live.filter(function (w) { return Date.now() - w.lastSeen > 12000; });
+    dead.forEach(function (w) {
+      w.open = false;
+      w.close();
+      wires = wires.filter(function (x) { return x !== w; });
+    });
+    if (dead.length && wires.filter(function (w) { return w.open; }).length === 0 && !chat.hidden) markDisconnected();
+  }, 3000);
   // Connection status where the user can actually see it. A guest arriving via
   // an invite link never sees #home, so joinStatus alone is invisible: every
   // connection state must ALSO land in the chat header. Before this fix the
@@ -175,12 +197,13 @@
     var wire = {
       kind: 'peerjs',
       open: false,
+      lastSeen: Date.now(),   // any inbound data refreshes this; the heartbeat judges liveness by it
       send: function (d) { if (conn.open) conn.send(d); },
       buffered: function () { return conn.dataChannel ? conn.dataChannel.bufferedAmount : 0; },
       close: function () { try { conn.close(); } catch (e) {} },
     };
     conn.on('open', function () { wire.open = true; handlers.open(); });
-    conn.on('data', function (d) { handlers.data(d); });
+    conn.on('data', function (d) { wire.lastSeen = Date.now(); handlers.data(d); });
     conn.on('close', function () { wire.open = false; handlers.close(); });
     conn.on('error', function () { wire.open = false; handlers.close(); });
     if (conn.open) { wire.open = true; setTimeout(handlers.open, 0); }
@@ -226,6 +249,8 @@
     st.msg._bar(Math.min(st.received / st.meta.size, 1));
   }
   function handleMessage(msg) {
+    if (msg.t === 'ping') { broadcast({ t: 'pong' }); return; }
+    if (msg.t === 'pong') return;   // liveness only — lastSeen already refreshed on receipt
     if (msg.t === 'text') { addText(false, msg.v, msg.at); return; }
     if (msg.t === 'file-head') {
       var id = msg.id;

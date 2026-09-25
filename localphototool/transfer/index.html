@@ -326,7 +326,7 @@ html[data-theme="dark"] #beamApp {
           "name": "Does it work if the phone is on mobile data and the computer is on Wi-Fi?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually yes — the two devices connect directly across networks. The exception is some corporate or campus networks that deliberately block peer-to-peer connections; in that case the transfer fails with a clear message rather than routing through a relay. A mobile hotspot is a reliable workaround."
+            "text": "Sometimes — but treat it as best-effort. On the same Wi-Fi network the connection is always reliable. Across networks, the two devices must first punch a direct link through both routers, and whether that succeeds depends on how strict each network is: many home broadband lines and most corporate networks make it fail. When a direct link and the encrypted relay both fail, the transfer stops with a clear message rather than hanging."
           }
         },
         {
@@ -413,15 +413,15 @@ html[data-theme="dark"] #beamApp {
         <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> Transfer phone to computer</span>
       </nav>
       <h1>Send photos from your phone to your computer</h1>
-      <p class="hero__lead" style="max-width:660px">Just edited a photo here on your phone and want it on your computer? Open this page on both devices, scan the code, and the files travel directly between them — no cable, no app, no account, no cloud storage, and no upload to any server.</p>
+      <p class="hero__lead" style="max-width:660px">Just edited a photo here on your phone and want it on your computer? Open this page on both devices, scan the code, and the files travel directly between them — no cable, no app, no account, no cloud storage, and no upload to any server. Both devices should be on the same Wi-Fi network, where the connection is always reliable; other network combinations are best-effort.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
           Direct device-to-device
         </li>
+        <li class="badge">Same Wi-Fi recommended</li>
         <li class="badge">Original quality, byte for byte</li>
         <li class="badge">Files and text</li>
-        <li class="badge">Unlimited &amp; free</li>
       </ul>
     </div>
   </section>
@@ -533,7 +533,7 @@ html[data-theme="dark"] #beamApp {
         </details>
         <details class="faq__item">
           <summary>Does it work if the phone is on mobile data and the computer is on Wi-Fi?</summary>
-          <div class="faq__body"><p>Usually yes — the two devices connect directly across networks. The exception is some corporate or campus networks that deliberately block peer-to-peer connections; in that case the transfer fails with a clear message rather than routing through a relay. A mobile hotspot is a reliable workaround.</p></div>
+          <div class="faq__body"><p>Sometimes — but treat it as best-effort. On the same Wi-Fi network the connection is always reliable. Across networks, the two devices must first punch a direct link through both routers, and whether that succeeds depends on how strict each network is: many home broadband lines and most corporate networks make it fail. When a direct link and the encrypted relay both fail, the transfer stops with a clear message rather than hanging.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is the transfer quality-lossless?</summary>
