@@ -313,8 +313,8 @@ you will double-submit.
 
 | Channel | Date | Status | Result (referrals after 7 days) |
 | --- | --- | --- | --- |
-| IndexNow submission (`node _dev/indexnow-submit.cjs`) | | | |
-| GitHub repo + README link | | | |
+| IndexNow submission (`node _dev/indexnow-submit.cjs`) | 2026-09-22 | done — 202 accepted, 13 URLs | | 
+| GitHub repo + README link | 2026-09-22 | live — github.com/biren001/localphototool (public, MIT, 136 files) | |
 | Bing Webmaster — sitemap submitted | | | |
 | Yandex Webmaster | | | |
 | dev.to post | | | |

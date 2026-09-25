@@ -74,6 +74,11 @@ function repoSlug() {
   check('remote root tree hash === local tree', remoteTree === localTree, remoteTree.slice(0, 12));
 
   console.log('\n--- supporting evidence ---');
+  /* Without this the script answers "is HEAD published?" but a clean-looking
+     result would hide edits that were never committed in the first place. */
+  const dirty = git('status --porcelain');
+  check('working tree has no uncommitted changes', dirty === '',
+    dirty ? dirty.split('\n').length + ' path(s) not committed' : 'clean');
   check('repository is public', repo.private === false, 'visibility=' + (repo.private ? 'private' : 'public'));
   check('default branch is main', repo.default_branch === 'main', repo.default_branch);
   check('remote file count matches local', remoteBlobs.length === localFiles.length,
