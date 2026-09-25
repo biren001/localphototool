@@ -510,6 +510,7 @@
   // ---------- signaling backend B: PeerJS public cloud (static-only hosting) ----------
   var peer = null;
   var backendCloud = false;
+  var serverRetries = 0; // reset per pairing attempt in startHost/startGuest
   function cloudHost(onCode, onStatus, onError) {
     backendCloud = true;
     var code = randCode(6);
@@ -545,6 +546,19 @@
       var t = (err && err.type) || 'unknown';
       if (t === 'unavailable-id') { if (peer) peer.destroy(); cloudHost(onCode, onStatus, onError); return; }
       if (t === 'network' && open) { try { peer.reconnect(); } catch (e) {} return; }
+      // server-error: the pairing service failed the registration itself —
+      // usually transient, and VPN / proxy exit IPs are frequent offenders.
+      if (t === 'server-error' && !open) {
+        clearTimeout(timer);
+        if (serverRetries < 2) {
+          serverRetries++;
+          onStatus('The pairing service hiccuped — retrying…');
+          setTimeout(function () { cloudHost(onCode, onStatus, onError); }, 1500);
+        } else {
+          onError('The pairing service itself reported an error (server-error), not this network. It is usually temporary — wait a few seconds and try again; if you are on a VPN or proxy, retry with it off.');
+        }
+        return;
+      }
       if (!open) { clearTimeout(timer); onError('Could not reach the pairing service (' + t + '). This network appears to block it — try a different network, for example a mobile hotspot.'); }
     });
   }
@@ -586,6 +600,22 @@
     peer.on('error', function (err) {
       var t = (err && err.type) || 'unknown';
       if (t === 'peer-unavailable') { retry(); return; }
+      // server-error: the pairing service itself rejected or failed the
+      // request. It is usually transient (the free service is shared), and
+      // VPN / proxy exit IPs are frequent offenders — a fresh peer often
+      // just works, so retry the whole bootstrap before blaming the network.
+      if (t === 'server-error') {
+        clearTimeout(timer);
+        settled = true;
+        if (serverRetries < 2) {
+          serverRetries++;
+          onStatus('The pairing service hiccuped — retrying…');
+          setTimeout(function () { cloudGuest(code, onStatus, onError, onWire); }, 1500);
+        } else {
+          onError('The pairing service itself reported an error (server-error), not this network. It is usually temporary — wait a few seconds and try again; if you are on a VPN or proxy, retry with it off.');
+        }
+        return;
+      }
       clearTimeout(timer);
       if (!open) onError('Connection problem (' + t + '). This network appears to block the pairing service.');
     });
@@ -623,6 +653,7 @@
   var hostKeepalive = null;
 
   function startHost(ignore) {
+    serverRetries = 0;
     backendName = 'a direct peer-to-peer link';
     setStatus(hostStatus, 'Starting session…');
     var onCode = function (code, pending) {
@@ -660,6 +691,7 @@
   }
 
   function startGuest(code) {
+    serverRetries = 0;
     backendName = 'a direct peer-to-peer link';
     guestStatus('Connecting…');
     var onStatus = guestStatus;
