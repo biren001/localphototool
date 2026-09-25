@@ -19,7 +19,8 @@ const PORT = 8902;
 const BASE = 'http://127.0.0.1:' + PORT;
 const CHROME = 'C:/Users/Administrator/AppData/Local/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-win64/chrome-headless-shell.exe';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const PAGES = ['/', '/compress/', '/heic-to-jpg/', '/about/', '/privacy/', '/terms/', '/share/'];
+const PAGES = ['/', '/compress/', '/heic-to-jpg/', '/compress-without-uploading/',
+  '/about/', '/privacy/', '/terms/', '/share/'];
 
 /* Below the breakpoint the stylesheet swaps the row for the hamburger, so a
    narrow viewport stops describing the inline layout we are measuring. This

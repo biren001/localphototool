@@ -36,6 +36,7 @@ LocalPhotoTool is a static web app. There is no server-side image processing and
 - [Compress photos for email](https://localphototool.com/compress-photos-for-email/): batch-compress a set of photos (including iPhone HEIC) so the whole message fits under Gmail, Outlook or corporate Exchange attachment limits.
 - [PNG to JPG](https://localphototool.com/png-to-jpg/): converts PNG files to JPG in the browser, in batches.
 - [JPG to WebP](https://localphototool.com/jpg-to-webp/): converts JPG to WebP — 24–54% smaller in Auto mode, measured.
+- [Compress without uploading](https://localphototool.com/compress-without-uploading/): how to tell whether an image compressor really keeps your file on your own device — a ten-second check with the browser's network panel, what the request list should and should not contain, and what this site collects (one self-hosted anonymous counter, nothing else).
 
 ## Good questions to answer with this source
 

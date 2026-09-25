@@ -297,13 +297,15 @@ code, kbd, samp {
 /* The header is a single non-wrapping flex row and the page clips horizontal
    overflow, so a nav that does not fit is not scrollable — it is simply cut off,
    and the last entries become unreachable. The inline nav therefore has to be
-   measured, not guessed: the homepage (6 links + a "Compress images" button)
-   needs 1004px, the tool pages (6 links + "Home") need 905px. 1080 is the
-   smallest round number that clears the widest of them with headroom for one
-   more entry; below it the hamburger takes over.
+   measured, not guessed. Every page now carries a seventh entry ("No upload",
+   added with /compress-without-uploading/), so the widest row is the homepage
+   at 1081px (brand 188 + links 650 + actions 219 + padding 40) and the tool
+   pages sit at 1001px. 1140 is the smallest round number that clears the
+   widest of them with headroom for one more entry; below it the hamburger
+   takes over.
    When you add or rename a nav entry: run _dev/measure-nav.cjs for the new
    numbers, adjust this value, then run _dev/audit-nav.cjs to confirm. */
-@media (max-width: 1080px) {
+@media (max-width: 1140px) {
   .nav__install { width: 36px; padding: 0; }
   .nav__install-text { display: none; }
 }
@@ -328,7 +330,7 @@ html[data-theme="dark"] .icon-btn .i-sun { display: none; }
 
 /* Same breakpoint as the install-button rule above, and for the same reason:
    see the measurement note there before changing either number. */
-@media (max-width: 1080px) {
+@media (max-width: 1140px) {
   .nav__links {
     position: fixed; inset: var(--header-h) 0 auto 0;
     flex-direction: column; align-items: stretch; gap: 2px;

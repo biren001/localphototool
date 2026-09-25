@@ -171,6 +171,76 @@ def json_ld(slug, title, description, faq):
 
 SPECS = [
     {
+        "slug": "compress-without-uploading",
+        "crumb": "Compress without uploading",
+        "title": "Compress Images Without Uploading — Verifiable in Browser",
+        "description": "Compress images without uploading them. Runs entirely in your browser — open the network panel and confirm nothing leaves your device. No account, no analytics.",
+        "h1": "A private image compressor you can verify",
+        "lead": "Most image compressors ask you to take their word for it. This one invites you to check: open your browser's network panel and watch what leaves your device while a photo is being compressed. Nothing does — the file is decoded, resampled and re-encoded on your own hardware, and there is no upload endpoint to send it to.",
+        "badges": ["Nothing is uploaded", "Verifiable in DevTools", "No analytics scripts", "Unlimited &amp; free"],
+        "defaults": {"format": "jpeg"},
+        "body": """      <h2>“No upload” is a claim, not a guarantee</h2>
+      <p>A great many online compressors describe themselves as private. The words are on the page; the architecture behind them is not. Server-side compression is simply easier to build: the same code runs for everyone, batches are trivial, and file limits are easy to enforce. The cost is invisible to you — your photograph is copied onto someone else's machine, processed there, and hopefully deleted afterwards.</p>
+      <p>You cannot tell which kind you are using by looking at it. Both kinds show a drop zone, a quality slider and a download button. The difference is entirely in what happens underneath, which is why the promise is worth testing rather than trusting.</p>
+
+      <h2>Verify it yourself in ten seconds</h2>
+      <p>This method works on any image tool, including this one. It takes one photo and a browser you already have.</p>
+      <ol>
+        <li>Open the page and press <kbd>F12</kbd> (on macOS, <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd>) to open developer tools.</li>
+        <li>Switch to the <strong>Network</strong> tab, tick <em>Preserve log</em>, then clear the list.</li>
+        <li>Drop in a photo, compress it, and download the result.</li>
+        <li>Read the request list that appeared.</li>
+      </ol>
+      <p><strong>What you will see:</strong> the page's own HTML, CSS and JavaScript, plus a WebAssembly codec fetched on demand when you pick a format that needs one. Those are pieces of the program — they are code, not your picture.</p>
+      <p><strong>What you will not see:</strong> any request carrying your image. No upload, no POST, no multipart form. If a tool that advertises privacy shows a request containing your file at this step, then its privacy was marketing copy.</p>
+
+      <h2>What actually happens to your file</h2>
+      <p>Locally, the sequence is short: the browser decodes the image into raw pixels, optionally resamples it if you asked for a smaller size, re-encodes it in the format you chose, and hands you a download from memory. At no point does the data cross a network boundary, because there is nothing on the other end to cross it to.</p>
+      <p>One useful side effect: re-encoding copies pixels and nothing else, so <strong>EXIF metadata — including the GPS coordinates most phones write into every photo — is dropped</strong>. You do not have to remember to strip it; it simply does not survive the trip.</p>
+
+      <h2>When this actually matters</h2>
+      <ul>
+        <li><strong>Identity documents.</strong> Passport scans, national ID cards, visa photos. These are the files you would least want sitting in a stranger's storage bucket.</li>
+        <li><strong>Medical images.</strong> X-rays, scans and clinical photographs carry some of the most sensitive data a person has.</li>
+        <li><strong>Work under an NDA.</strong> Unreleased product renders, client artwork, internal documents.</li>
+        <li><strong>Ordinary family photos.</strong> Faces, homes, school uniforms and embedded location data — plenty of people would rather those never left their laptop.</li>
+      </ul>
+      <p>For a picture headed to a public website, a server-based compressor is perfectly adequate. The distinction only bites when the image is one that should not be seen by anyone else.</p>
+
+      <h2>What this site does collect</h2>
+      <p>Being precise matters more than being flattering, so here is the whole of it. There is one self-hosted, anonymous counter: your browser keeps a random identifier, hashes it, and sends that hash to our own <code>/api/count</code> endpoint at most once a day. It carries no filename, no image content and no IP-derived profile, and it exists only so the footer can show that anyone is here at all.</p>
+      <p>There is no Google Analytics and no third-party analytics script of any kind — nothing that would let an advertising network learn that you visited. If you would rather not be counted either, disconnect from the internet after the page loads: the compressor keeps working, because it was already downloaded.</p>
+
+      <h2>If you need a specific target instead</h2>
+      <p>Sometimes the requirement is not privacy but a hard number — a portal that rejects anything above 100 KB. The <a href="../compress-to-100kb/">compress to 100 KB</a> page does that with the same no-upload guarantee, and the <a href="../compress/">main compressor</a> switches between target size, fixed quality and full auto. iPhone photos in HEIC format go through <a href="../heic-to-jpg/">HEIC to JPG</a>.</p>""",
+        "faq": [
+            (
+                "How can I be sure my image is really not uploaded?",
+                "Open developer tools, switch to the Network tab and clear it before compressing. You will see the page's own assets and, on demand, a WebAssembly codec — but no request that carries your file. That observation is the proof; there is no upload endpoint for it to go to.",
+            ),
+            (
+                "Does the compressor work without an internet connection?",
+                "Yes. Once the page has loaded, the tool and its codecs are cached by the service worker, so you can go offline and keep compressing. For files that must not travel at all, this is the most private mode available.",
+            ),
+            (
+                "What does the visitor counter send?",
+                "A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no third-party analytics. The count is used only to decide whether to show a number in the footer.",
+            ),
+            (
+                "Is browser-based compression lower quality than server-based?",
+                "No. It is the same encoders — libjpeg, libwebp, libaom — compiled to WebAssembly and run on your own CPU. The output is byte-for-byte what a server running the same library would produce; only the location of the work has changed.",
+            ),
+            (
+                "Do I need an account, and are there limits?",
+                "No account, no sign-up, no watermark, no daily cap and no file-count limit. The ceiling is your device's memory, since your machine is doing the work.",
+            ),
+            (
+                "What happens to the EXIF data in my photos?",
+                "It is removed. Re-encoding copies pixel data only, so camera settings, timestamps and GPS coordinates do not survive. If you need to preserve location data deliberately, this tool is not the right one for that photo.",
+            ),
+        ],
+    },
+    {
         "slug": "compress-to-100kb",
         "crumb": "Compress to 100 KB",
         "title": "Compress an Image to Under 100 KB — Free, No Upload",

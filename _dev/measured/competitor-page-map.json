@@ -1,0 +1,558 @@
+{
+  "generatedAt": "2026-09-24T03:29:39.327Z",
+  "sites": [
+    {
+      "name": "iloveimg",
+      "root": "https://www.iloveimg.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 1622,
+      "title": "iLoveIMG | The fastest free web app for easy image modification.",
+      "top": [
+        [
+          "de/…(3层)",
+          35
+        ],
+        [
+          "es/…(3层)",
+          35
+        ],
+        [
+          "it/…(3层)",
+          35
+        ],
+        [
+          "fr/…(3层)",
+          35
+        ],
+        [
+          "ru/…(3层)",
+          35
+        ],
+        [
+          "ca/…(3层)",
+          35
+        ],
+        [
+          "pt/…(3层)",
+          35
+        ],
+        [
+          "hi/…(3层)",
+          34
+        ],
+        [
+          "zh-cn/…(3层)",
+          34
+        ],
+        [
+          "ms/…(3层)",
+          34
+        ],
+        [
+          "el/…(3层)",
+          34
+        ],
+        [
+          "vi/…(3层)",
+          34
+        ],
+        [
+          "ar/…(3层)",
+          34
+        ],
+        [
+          "uk/…(3层)",
+          34
+        ],
+        [
+          "zh-tw/…(3层)",
+          34
+        ],
+        [
+          "id/…(3层)",
+          34
+        ],
+        [
+          "bg/…(3层)",
+          34
+        ],
+        [
+          "ja/…(3层)",
+          34
+        ]
+      ],
+      "sample": [
+        "https://www.iloveimg.com/resize-image",
+        "https://www.iloveimg.com/ms/resize-image",
+        "https://www.iloveimg.com/el/resize-image",
+        "https://www.iloveimg.com/ar/resize-image",
+        "https://www.iloveimg.com/uk/resize-image",
+        "https://www.iloveimg.com/zh-tw/resize-image",
+        "https://www.iloveimg.com/id/tingkatkan-gambar",
+        "https://www.iloveimg.com/id/kompres-gambar",
+        "https://www.iloveimg.com/id/html-ke-gambar",
+        "https://www.iloveimg.com/id/jpg-ke-gambar",
+        "https://www.iloveimg.com/id/potong-gambar",
+        "https://www.iloveimg.com/id/tanda-air-untuk-gambar"
+      ]
+    },
+    {
+      "name": "tinypng",
+      "root": "https://tinypng.com",
+      "status": "FAIL",
+      "via": null,
+      "total": 0,
+      "title": "TinyPNG – Compress WebP, PNG and JPEG images intelligently",
+      "top": [],
+      "sample": []
+    },
+    {
+      "name": "imagecompressor",
+      "root": "https://imagecompressor.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 16,
+      "title": "Image Compressor – Compress JPEG, PNG, WebP, GIF, SVG Online",
+      "top": [
+        [
+          "(root)",
+          1
+        ],
+        [
+          "de",
+          1
+        ],
+        [
+          "es",
+          1
+        ],
+        [
+          "fr",
+          1
+        ],
+        [
+          "id",
+          1
+        ],
+        [
+          "it",
+          1
+        ],
+        [
+          "ja",
+          1
+        ],
+        [
+          "ko",
+          1
+        ],
+        [
+          "nl",
+          1
+        ],
+        [
+          "pl",
+          1
+        ],
+        [
+          "pt",
+          1
+        ],
+        [
+          "ru",
+          1
+        ],
+        [
+          "tr",
+          1
+        ],
+        [
+          "uk",
+          1
+        ],
+        [
+          "vi",
+          1
+        ],
+        [
+          "zh",
+          1
+        ]
+      ],
+      "sample": []
+    },
+    {
+      "name": "freeconvert",
+      "root": "https://www.freeconvert.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 101002,
+      "title": "File Converter - FreeConvert.com",
+      "top": [
+        [
+          "ja/…(3层)",
+          3822
+        ],
+        [
+          "sv/…(3层)",
+          3822
+        ],
+        [
+          "es/…(3层)",
+          3822
+        ],
+        [
+          "it/…(3层)",
+          3822
+        ],
+        [
+          "pt/…(3层)",
+          3822
+        ],
+        [
+          "ko/…(3层)",
+          3822
+        ],
+        [
+          "de/…(3层)",
+          3822
+        ],
+        [
+          "id/…(3层)",
+          3822
+        ],
+        [
+          "fr/…(3层)",
+          3822
+        ],
+        [
+          "nl/…(3层)",
+          3822
+        ],
+        [
+          "tr/…(3层)",
+          3822
+        ],
+        [
+          "pl/…(3层)",
+          3822
+        ],
+        [
+          "zh-CN/…(3层)",
+          3822
+        ],
+        [
+          "zh-TW/…(3层)",
+          3822
+        ],
+        [
+          "time/…(2层)",
+          3080
+        ],
+        [
+          "ja/…(2层)",
+          2908
+        ],
+        [
+          "sv/…(2层)",
+          2908
+        ],
+        [
+          "es/…(2层)",
+          2908
+        ]
+      ],
+      "sample": [
+        "https://www.freeconvert.com/ja/resize-pdf",
+        "https://www.freeconvert.com/sv/resize-pdf",
+        "https://www.freeconvert.com/es/resize-pdf",
+        "https://www.freeconvert.com/it/resize-pdf",
+        "https://www.freeconvert.com/pt/resize-pdf",
+        "https://www.freeconvert.com/ko/resize-pdf",
+        "https://www.freeconvert.com/resize-pdf",
+        "https://www.freeconvert.com/de/resize-pdf",
+        "https://www.freeconvert.com/id/resize-pdf",
+        "https://www.freeconvert.com/fr/resize-pdf",
+        "https://www.freeconvert.com/nl/resize-pdf",
+        "https://www.freeconvert.com/tr/resize-pdf"
+      ]
+    },
+    {
+      "name": "picresize",
+      "root": "https://www.picresize.com",
+      "status": "FAIL",
+      "via": null,
+      "total": 0,
+      "title": null,
+      "top": [],
+      "sample": []
+    },
+    {
+      "name": "compressjpeg",
+      "root": "https://compressjpeg.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 16,
+      "title": "Reduce JPEG File Size Online",
+      "top": [
+        [
+          "(root)",
+          1
+        ],
+        [
+          "de",
+          1
+        ],
+        [
+          "es",
+          1
+        ],
+        [
+          "fr",
+          1
+        ],
+        [
+          "id",
+          1
+        ],
+        [
+          "it",
+          1
+        ],
+        [
+          "ja",
+          1
+        ],
+        [
+          "ko",
+          1
+        ],
+        [
+          "nl",
+          1
+        ],
+        [
+          "pl",
+          1
+        ],
+        [
+          "pt",
+          1
+        ],
+        [
+          "ru",
+          1
+        ],
+        [
+          "tr",
+          1
+        ],
+        [
+          "uk",
+          1
+        ],
+        [
+          "vi",
+          1
+        ],
+        [
+          "zh",
+          1
+        ]
+      ],
+      "sample": []
+    },
+    {
+      "name": "jpeg-optimizer",
+      "root": "https://jpeg-optimizer.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 173,
+      "title": "JPEG Optimizer - Bulk Reduce &amp; Compress JPEG Images",
+      "top": [
+        [
+          "compress-pdf/…(2层)",
+          37
+        ],
+        [
+          "(root)",
+          1
+        ],
+        [
+          "resize-image",
+          1
+        ],
+        [
+          "compress-jpeg-to-100kb",
+          1
+        ],
+        [
+          "compress-image-to-20kb",
+          1
+        ],
+        [
+          "compress-jpeg-to-1kb",
+          1
+        ],
+        [
+          "compress-jpeg-to-10kb",
+          1
+        ],
+        [
+          "compress-jpeg-to-50kb",
+          1
+        ],
+        [
+          "compress-jpeg-to-500kb",
+          1
+        ],
+        [
+          "increase-image-size-in-kb-mb",
+          1
+        ],
+        [
+          "data-uri-to-image-converter",
+          1
+        ],
+        [
+          "blur-image-area",
+          1
+        ],
+        [
+          "pixelate-image-area",
+          1
+        ],
+        [
+          "heic-to-jpg",
+          1
+        ],
+        [
+          "instagram-video-download",
+          1
+        ],
+        [
+          "emoji",
+          1
+        ],
+        [
+          "contact",
+          1
+        ],
+        [
+          "ai-blur-face-jpeg",
+          1
+        ]
+      ],
+      "sample": [
+        "https://jpeg-optimizer.com/resize-image/",
+        "https://jpeg-optimizer.com/compress-jpeg-to-100kb/",
+        "https://jpeg-optimizer.com/compress-image-to-20kb/",
+        "https://jpeg-optimizer.com/compress-jpeg-to-1kb/",
+        "https://jpeg-optimizer.com/compress-jpeg-to-10kb/",
+        "https://jpeg-optimizer.com/compress-jpeg-to-50kb/",
+        "https://jpeg-optimizer.com/compress-jpeg-to-500kb/",
+        "https://jpeg-optimizer.com/compress-pdf/100kb/",
+        "https://jpeg-optimizer.com/compress-pdf/200kb/",
+        "https://jpeg-optimizer.com/compress-pdf/300kb/",
+        "https://jpeg-optimizer.com/compress-pdf/500kb/",
+        "https://jpeg-optimizer.com/increase-image-size-in-kb-mb/"
+      ]
+    },
+    {
+      "name": "bulkresizephotos",
+      "root": "https://bulkresizephotos.com",
+      "status": "FAIL",
+      "via": null,
+      "total": 0,
+      "title": "Free Unlimited Image Resizer - Bulk Resize Photos",
+      "top": [],
+      "sample": []
+    },
+    {
+      "name": "squoosh",
+      "root": "https://squoosh.app",
+      "status": "FAIL",
+      "via": null,
+      "total": 0,
+      "title": "Squoosh",
+      "top": [],
+      "sample": []
+    },
+    {
+      "name": "compresss",
+      "root": "https://www.imgcompress.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 15,
+      "title": "Free Image Compressor & Resizer Online - Compress JPG, PNG, WebP | ImgCompress",
+      "top": [
+        [
+          "(root)",
+          1
+        ],
+        [
+          "compress-jpg.html",
+          1
+        ],
+        [
+          "compress-png.html",
+          1
+        ],
+        [
+          "compress-webp.html",
+          1
+        ],
+        [
+          "compress-gif.html",
+          1
+        ],
+        [
+          "resize-images.html",
+          1
+        ],
+        [
+          "resize-social-media.html",
+          1
+        ],
+        [
+          "resize-custom.html",
+          1
+        ],
+        [
+          "batch-compress.html",
+          1
+        ],
+        [
+          "convert-format.html",
+          1
+        ],
+        [
+          "convert-jpg-to-png.html",
+          1
+        ],
+        [
+          "convert-png-to-jpg.html",
+          1
+        ],
+        [
+          "convert-to-webp.html",
+          1
+        ],
+        [
+          "terms.html",
+          1
+        ],
+        [
+          "privacy.html",
+          1
+        ]
+      ],
+      "sample": [
+        "https://imgcompress.com/resize-images.html",
+        "https://imgcompress.com/resize-social-media.html",
+        "https://imgcompress.com/resize-custom.html"
+      ]
+    }
+  ]
+}

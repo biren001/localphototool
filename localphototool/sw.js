@@ -63,8 +63,14 @@ var OFFLINE = ROOT + 'offline.html';
    reading this tag and handed the retired sentence back to be published.
    check-listing-copy.cjs now scans the site files, not only the kit. The
    replacement is the same length (151), so nothing else about the snippet
-   changes. */
-var VERSION = 'v16';
+   changes.
+   v17 — /compress-without-uploading/ joined the site. The nav row grew by one
+   entry ("No upload"), so every page's shell changed: an installed copy would
+   otherwise render the new link from a cached nav that predates it. The page
+   also had to enter the sitemap before it entered the shell — a page inside the
+   shell but outside the sitemap is a page the offline copy serves to visitors
+   while no crawler is ever told it exists. */
+var VERSION = 'v17';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
@@ -78,6 +84,7 @@ var SHELL = [
   'compress-to-50kb/',
   'compress-to-200kb/',
   'compress-photos-for-email/',
+  'compress-without-uploading/',
   'png-to-jpg/',
   'jpg-to-webp/',
   'share/',

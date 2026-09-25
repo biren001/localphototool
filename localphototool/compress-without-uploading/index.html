@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-compressor-defaults='{"format":"webp"}'>
+<html lang="en" data-theme="light" data-compressor-defaults='{"format":"jpeg"}'>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>JPG to WebP Converter — Smaller Files, Same Picture</title>
-<meta name="description" content="Convert JPG to WebP in your browser and cut file size by a quarter to a half with no visible difference. Batch conversion, nothing uploaded.">
-<link rel="canonical" href="https://localphototool.com/jpg-to-webp/">
+<title>Compress Images Without Uploading — Verifiable in Browser</title>
+<meta name="description" content="Compress images without uploading them. Runs entirely in your browser — open the network panel and confirm nothing leaves your device. No account, no analytics.">
+<link rel="canonical" href="https://localphototool.com/compress-without-uploading/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
-<meta property="og:title" content="JPG to WebP Converter — Smaller Files, Same Picture">
-<meta property="og:description" content="Convert JPG to WebP in your browser and cut file size by roughly a quarter to a half with no visible difference. Batch conversion, transparency preserved, nothing uploaded.">
-<meta property="og:url" content="https://localphototool.com/jpg-to-webp/">
+<meta property="og:title" content="Private Image Compressor — No Upload, Runs in Your Browser">
+<meta property="og:description" content="Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no analytics, no limits.">
+<meta property="og:url" content="https://localphototool.com/compress-without-uploading/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="JPG to WebP Converter — Smaller Files, Same Picture">
-<meta name="twitter:description" content="Convert JPG to WebP in your browser and cut file size by roughly a quarter to a half with no visible difference. Batch conversion, transparency preserved, nothing uploaded.">
+<meta name="twitter:title" content="Private Image Compressor — No Upload, Runs in Your Browser">
+<meta name="twitter:description" content="Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no analytics, no limits.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -55,10 +55,10 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://localphototool.com/jpg-to-webp/#page",
-      "url": "https://localphototool.com/jpg-to-webp/",
-      "name": "JPG to WebP Converter — Smaller Files, Same Picture",
-      "description": "Convert JPG to WebP in your browser and cut file size by roughly a quarter to a half with no visible difference. Batch conversion, transparency preserved, nothing uploaded.",
+      "@id": "https://localphototool.com/compress-without-uploading/#page",
+      "url": "https://localphototool.com/compress-without-uploading/",
+      "name": "Private Image Compressor — No Upload, Runs in Your Browser",
+      "description": "Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no analytics, no limits.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://localphototool.com/#website"
@@ -67,12 +67,12 @@
         "@id": "https://localphototool.com/#org"
       },
       "breadcrumb": {
-        "@id": "https://localphototool.com/jpg-to-webp/#breadcrumb"
+        "@id": "https://localphototool.com/compress-without-uploading/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://localphototool.com/jpg-to-webp/#breadcrumb",
+      "@id": "https://localphototool.com/compress-without-uploading/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -89,53 +89,61 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "JPG to WebP Converter — Smaller Files, Same Picture",
-          "item": "https://localphototool.com/jpg-to-webp/"
+          "name": "Private Image Compressor — No Upload, Runs in Your Browser",
+          "item": "https://localphototool.com/compress-without-uploading/"
         }
       ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://localphototool.com/jpg-to-webp/#faq",
+      "@id": "https://localphototool.com/compress-without-uploading/#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is WebP supported everywhere now?",
+          "name": "How can I be sure my image is really not uploaded?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In browsers, effectively yes — Chrome, Firefox, Safari and Edge have all supported WebP for years, as has iOS since 14. Support in older desktop editors, some print workflows and a minority of upload forms is still patchy, so check what the destination accepts."
+            "text": "Open developer tools, switch to the Network tab and clear it before compressing. You will see the page's own assets and, on demand, a WebAssembly codec — but no request that carries your file. That observation is the proof; there is no upload endpoint for it to go to."
           }
         },
         {
           "@type": "Question",
-          "name": "How much smaller is WebP than JPG?",
+          "name": "Does the compressor work without an internet connection?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends which comparison you mean, so here are both from our own measurements. In Auto mode the saving against the original JPG was 24–54%, because the engine picks the lowest quality that still clears a ~40 dB fidelity floor. At matched 40 dB fidelity WebP came out roughly level with MozJPEG — the commonly quoted 25–50% compares WebP against a baseline JPEG encoder rather than MozJPEG, which is what this tool uses. On flat-colour graphics the saving is larger either way, because WebP handles hard edges far better than JPG does."
+            "text": "Yes. Once the page has loaded, the tool and its codecs are cached by the service worker, so you can go offline and keep compressing. For files that must not travel at all, this is the most private mode available."
           }
         },
         {
           "@type": "Question",
-          "name": "Does WebP keep transparency?",
+          "name": "What does the visitor counter send?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. WebP stores a full alpha channel, so a transparent PNG converted to WebP keeps its transparency — something JPG cannot do at all, since it flattens transparent areas onto white."
+            "text": "A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no third-party analytics. The count is used only to decide whether to show a number in the footer."
           }
         },
         {
           "@type": "Question",
-          "name": "Is converting JPG to WebP lossy?",
+          "name": "Is browser-based compression lower quality than server-based?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, both formats are lossy. The image is decoded once from your original and encoded once at high fidelity, so you pay for one generation of loss rather than two. Keep your original JPG as the master and convert the copy you publish."
+            "text": "No. It is the same encoders — libjpeg, libwebp, libaom — compiled to WebAssembly and run on your own CPU. The output is byte-for-byte what a server running the same library would produce; only the location of the work has changed."
           }
         },
         {
           "@type": "Question",
-          "name": "Are my images uploaded to a server?",
+          "name": "Do I need an account, and are there limits?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. There is no upload endpoint on this site. The conversion happens in your browser tab, and the only network requests are for the site's own files and the optional WebP encoder module."
+            "text": "No account, no sign-up, no watermark, no daily cap and no file-count limit. The ceiling is your device's memory, since your machine is doing the work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to the EXIF data in my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is removed. Re-encoding copies pixel data only, so camera settings, timestamps and GPS coordinates do not survive. If you need to preserve location data deliberately, this tool is not the right one for that photo."
           }
         }
       ]
@@ -203,17 +211,17 @@
   <section class="hero hero--compact">
     <div class="container">
       <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
-        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> JPG to WebP</span>
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> Compress without uploading</span>
       </nav>
-      <h1>Convert JPG to WebP in your browser</h1>
-      <p class="hero__lead" style="max-width:660px">WebP holds the same picture as a JPG in meaningfully fewer bytes, every current browser can display it, and unlike JPG it keeps transparency. Convert one file or a whole folder, on your own device.</p>
+      <h1>A private image compressor you can verify</h1>
+      <p class="hero__lead" style="max-width:660px">Most image compressors ask you to take their word for it. This one invites you to check: open your browser's network panel and watch what leaves your device while a photo is being compressed. Nothing does — the file is decoded, resampled and re-encoded on your own hardware, and there is no upload endpoint to send it to.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
           Nothing is uploaded
         </li>
-        <li class="badge">24–54% smaller in Auto mode</li>
-        <li class="badge">Keeps transparency</li>
+        <li class="badge">Verifiable in DevTools</li>
+        <li class="badge">No analytics scripts</li>
         <li class="badge">Unlimited &amp; free</li>
       </ul>
       <p class="hero__share" style="max-width:660px">
@@ -426,56 +434,65 @@
   <!-- SEO content -->
   <section class="section section--subtle">
     <div class="container prose">
-      <h2>What WebP does better than JPG</h2>
-      <p>WebP is a modern format from the same era as AVIF, built on the video codec work that produced VP8 and VP9. Two comparisons get quoted for it and they disagree, so here are both, measured on our own encoders. Running a 2400×1600 camera JPEG through Auto mode — where the engine finds the lowest quality that still clears a ~40 dB fidelity floor — the saving was 24–54%. Measured the other way round, at equal 40 dB fidelity, WebP came out roughly <em>level</em> with MozJPEG: the lead WebP is usually credited with shows up in perceptual metrics and at lower quality settings, not in PSNR against a strong JPEG encoder. On graphics with flat colour the picture is less ambiguous, because JPG smudges hard edges and WebP does not.</p>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr><th></th><th>JPG</th><th>WebP</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Photograph, Auto mode</td><td>Baseline</td><td>24–54% smaller (measured)</td></tr>
-            <tr><td>Photograph at matched 40 dB fidelity</td><td>Baseline</td><td>About level (measured)</td></tr>
-            <tr><td>Flat-colour graphics</td><td>Baseline</td><td>Clearly smaller</td></tr>
-            <tr><td>Transparency</td><td>Not supported</td><td>Supported, with alpha</td></tr>
-            <tr><td>Animation</td><td>No</td><td>Yes</td></tr>
-            <tr><td>Browser support</td><td>Universal</td><td>Every current browser</td></tr>
-            <tr><td>Older editors and some upload forms</td><td>Always accepted</td><td>Occasionally rejected</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <h2>“No upload” is a claim, not a guarantee</h2>
+      <p>A great many online compressors describe themselves as private. The words are on the page; the architecture behind them is not. Server-side compression is simply easier to build: the same code runs for everyone, batches are trivial, and file limits are easy to enforce. The cost is invisible to you — your photograph is copied onto someone else's machine, processed there, and hopefully deleted afterwards.</p>
+      <p>You cannot tell which kind you are using by looking at it. Both kinds show a drop zone, a quality slider and a download button. The difference is entirely in what happens underneath, which is why the promise is worth testing rather than trusting.</p>
 
-      <h2>Where WebP is not the answer</h2>
-      <p>Be honest about the trade-off. WebP is the wrong choice when the file has to open in software you do not control: a client's legacy CMS, a print workflow, a government upload form that whitelists <code>.jpg</code> by extension. It is also pointless if you will re-edit the image repeatedly — every lossy save costs something, so keep a master and export WebP at the end.</p>
-      <p>And if you want the smallest file that current browsers can read, <a href="../compress/">AVIF</a> usually beats WebP by a further 20–30%, at the cost of noticeably slower encoding.</p>
+      <h2>Verify it yourself in ten seconds</h2>
+      <p>This method works on any image tool, including this one. It takes one photo and a browser you already have.</p>
+      <ol>
+        <li>Open the page and press <kbd>F12</kbd> (on macOS, <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd>) to open developer tools.</li>
+        <li>Switch to the <strong>Network</strong> tab, tick <em>Preserve log</em>, then clear the list.</li>
+        <li>Drop in a photo, compress it, and download the result.</li>
+        <li>Read the request list that appeared.</li>
+      </ol>
+      <p><strong>What you will see:</strong> the page's own HTML, CSS and JavaScript, plus a WebAssembly codec fetched on demand when you pick a format that needs one. Those are pieces of the program — they are code, not your picture.</p>
+      <p><strong>What you will not see:</strong> any request carrying your image. No upload, no POST, no multipart form. If a tool that advertises privacy shows a request containing your file at this step, then its privacy was marketing copy.</p>
 
-      <h2>How the conversion is done here</h2>
-      <p>Your JPG is decoded once, and encoded once to WebP — this is not a re-compression of an already-compressed file, which is what quietly destroys quality in naive converters. In Auto mode the engine measures the image first and chooses the lowest quality that still clears a perceptual fidelity floor, so a smooth sky does not get the same treatment as a hedge full of leaves.</p>
-      <p>Because everything runs locally, the page never needs to see your image on a server. The optional WebP encoder is a WebAssembly module fetched from a public CDN on first use; if that CDN is unreachable the browser's own WebP encoder takes over, and the conversion still works.</p>
+      <h2>What actually happens to your file</h2>
+      <p>Locally, the sequence is short: the browser decodes the image into raw pixels, optionally resamples it if you asked for a smaller size, re-encodes it in the format you chose, and hands you a download from memory. At no point does the data cross a network boundary, because there is nothing on the other end to cross it to.</p>
+      <p>One useful side effect: re-encoding copies pixels and nothing else, so <strong>EXIF metadata — including the GPS coordinates most phones write into every photo — is dropped</strong>. You do not have to remember to strip it; it simply does not survive the trip.</p>
 
-      <h2>Batch conversion</h2>
-      <p>Drop a whole folder in and the files convert in parallel background workers. On desktop, <strong>Download all</strong> gives you a single ZIP; on an iPhone the results can be handed to the share sheet so they go straight into your photo library.</p>
+      <h2>When this actually matters</h2>
+      <ul>
+        <li><strong>Identity documents.</strong> Passport scans, national ID cards, visa photos. These are the files you would least want sitting in a stranger's storage bucket.</li>
+        <li><strong>Medical images.</strong> X-rays, scans and clinical photographs carry some of the most sensitive data a person has.</li>
+        <li><strong>Work under an NDA.</strong> Unreleased product renders, client artwork, internal documents.</li>
+        <li><strong>Ordinary family photos.</strong> Faces, homes, school uniforms and embedded location data — plenty of people would rather those never left their laptop.</li>
+      </ul>
+      <p>For a picture headed to a public website, a server-based compressor is perfectly adequate. The distinction only bites when the image is one that should not be seen by anyone else.</p>
+
+      <h2>What this site does collect</h2>
+      <p>Being precise matters more than being flattering, so here is the whole of it. There is one self-hosted, anonymous counter: your browser keeps a random identifier, hashes it, and sends that hash to our own <code>/api/count</code> endpoint at most once a day. It carries no filename, no image content and no IP-derived profile, and it exists only so the footer can show that anyone is here at all.</p>
+      <p>There is no Google Analytics and no third-party analytics script of any kind — nothing that would let an advertising network learn that you visited. If you would rather not be counted either, disconnect from the internet after the page loads: the compressor keeps working, because it was already downloaded.</p>
+
+      <h2>If you need a specific target instead</h2>
+      <p>Sometimes the requirement is not privacy but a hard number — a portal that rejects anything above 100 KB. The <a href="../compress-to-100kb/">compress to 100 KB</a> page does that with the same no-upload guarantee, and the <a href="../compress/">main compressor</a> switches between target size, fixed quality and full auto. iPhone photos in HEIC format go through <a href="../heic-to-jpg/">HEIC to JPG</a>.</p>
       <h2>Frequently asked questions</h2>
       <div class="faq mt-4">
         <details class="faq__item" open>
-          <summary>Is WebP supported everywhere now?</summary>
-          <div class="faq__body"><p>In browsers, effectively yes — Chrome, Firefox, Safari and Edge have all supported WebP for years, as has iOS since 14. Support in older desktop editors, some print workflows and a minority of upload forms is still patchy, so check what the destination accepts.</p></div>
+          <summary>How can I be sure my image is really not uploaded?</summary>
+          <div class="faq__body"><p>Open developer tools, switch to the Network tab and clear it before compressing. You will see the page's own assets and, on demand, a WebAssembly codec — but no request that carries your file. That observation is the proof; there is no upload endpoint for it to go to.</p></div>
         </details>
         <details class="faq__item">
-          <summary>How much smaller is WebP than JPG?</summary>
-          <div class="faq__body"><p>It depends which comparison you mean, so here are both from our own measurements. In Auto mode the saving against the original JPG was 24–54%, because the engine picks the lowest quality that still clears a ~40 dB fidelity floor. At <em>matched</em> 40 dB fidelity WebP came out roughly level with MozJPEG — the commonly quoted 25–50% compares WebP against a baseline JPEG encoder rather than MozJPEG, which is what this tool uses. On flat-colour graphics the saving is larger either way, because WebP handles hard edges far better than JPG does.</p></div>
+          <summary>Does the compressor work without an internet connection?</summary>
+          <div class="faq__body"><p>Yes. Once the page has loaded, the tool and its codecs are cached by the service worker, so you can go offline and keep compressing. For files that must not travel at all, this is the most private mode available.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Does WebP keep transparency?</summary>
-          <div class="faq__body"><p>Yes. WebP stores a full alpha channel, so a transparent PNG converted to WebP keeps its transparency — something JPG cannot do at all, since it flattens transparent areas onto white.</p></div>
+          <summary>What does the visitor counter send?</summary>
+          <div class="faq__body"><p>A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no third-party analytics. The count is used only to decide whether to show a number in the footer.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Is converting JPG to WebP lossy?</summary>
-          <div class="faq__body"><p>Yes, both formats are lossy. The image is decoded once from your original and encoded once at high fidelity, so you pay for one generation of loss rather than two. Keep your original JPG as the master and convert the copy you publish.</p></div>
+          <summary>Is browser-based compression lower quality than server-based?</summary>
+          <div class="faq__body"><p>No. It is the same encoders — libjpeg, libwebp, libaom — compiled to WebAssembly and run on your own CPU. The output is byte-for-byte what a server running the same library would produce; only the location of the work has changed.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Are my images uploaded to a server?</summary>
-          <div class="faq__body"><p>No. There is no upload endpoint on this site. The conversion happens in your browser tab, and the only network requests are for the site's own files and the optional WebP encoder module.</p></div>
+          <summary>Do I need an account, and are there limits?</summary>
+          <div class="faq__body"><p>No account, no sign-up, no watermark, no daily cap and no file-count limit. The ceiling is your device's memory, since your machine is doing the work.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What happens to the EXIF data in my photos?</summary>
+          <div class="faq__body"><p>It is removed. Re-encoding copies pixel data only, so camera settings, timestamps and GPS coordinates do not survive. If you need to preserve location data deliberately, this tool is not the right one for that photo.</p></div>
         </details>
       </div>
     </div>
