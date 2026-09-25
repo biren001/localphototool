@@ -31,14 +31,28 @@
   function now() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
 
   // ICE servers: Google STUN first (most of this site's audience is outside
-  // CN); the CN-reachable ones stay as fallbacks for visitors behind the
-  // GFW. STUN only helps establish the direct link — it relays nothing.
+  // CN); the CN-reachable ones stay as fallbacks for visitors behind the GFW.
+  // STUN only helps punch a hole for the direct link — it relays nothing.
+  // When both networks are too strict for hole-punching (carrier-grade NAT,
+  // locked-down office firewalls), ICE falls back to the public TURN relay.
+  // TURN forwards the already-encrypted DTLS stream; it cannot read the
+  // content and stores nothing. Self-hosting a relay later only means
+  // swapping these URLs.
   var ICE = {
     iceServers: [
       { urls: 'stun:stun.l.google.com:19302' },
       { urls: 'stun:stun1.l.google.com:19302' },
       { urls: 'stun:stun.miwifi.com:3478' },
       { urls: 'stun:stun.chat.bilibili.com:3478' },
+      {
+        urls: [
+          'turn:openrelay.metered.ca:80',
+          'turn:openrelay.metered.ca:80?transport=tcp',
+          'turn:openrelay.metered.ca:443?transport=tcp',
+        ],
+        username: 'openrelayproject',
+        credential: 'openrelayproject',
+      },
     ],
   };
 
@@ -587,9 +601,18 @@
     }
     function attempt() {
       attempts++;
+      // If the session exists but the two networks cannot punch a direct link
+      // and TURN cannot carry it either, the browser stays silent forever.
+      // Give the handshake a deadline and say what actually failed.
+      var iceTimer = setTimeout(function () {
+        if (!settled) {
+          settled = true;
+          onError('The devices found each other but could not establish the connection — at least one of the two networks is blocking peer-to-peer traffic. A different network (for example phone cellular data instead of office WiFi) usually works.');
+        }
+      }, 25000);
       var conn = peer.connect('beam-' + code, { reliable: true });
       var wire = makePeerWire(conn, {
-        open: function () { settled = true; registerWire(wire); onStatus('Connected', 'ok'); },
+        open: function () { clearTimeout(iceTimer); settled = true; registerWire(wire); onStatus('Connected', 'ok'); },
         close: function () { wires = wires.filter(function (w) { return w !== wire; }); if (!wires.some(function (w) { return w.open; })) markDisconnected(); },
         data: onWireData,
       });

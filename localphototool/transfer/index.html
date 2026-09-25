@@ -302,7 +302,7 @@ html[data-theme="dark"] #beamApp {
           "name": "Are my files uploaded to a server?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The two devices negotiate a direct encrypted connection and the files travel straight across it, byte for byte. No server receives, stores or relays the file contents — the transfer fails rather than falling back to a relay."
+            "text": "No. The devices connect through an encrypted WebRTC link: when the two networks allow it, the files travel straight between them, byte for byte. If both networks are too strict for a direct link, the encrypted stream is relayed through a public TURN relay so the page still works — the relay only forwards already-encrypted bytes, cannot read the content, and never stores anything. What no server ever receives is unencrypted data."
           }
         },
         {
@@ -431,8 +431,9 @@ html[data-theme="dark"] #beamApp {
 
       <div class="transfer-notice" role="note">
         <strong>One honest difference from the other tools on this site:</strong>
-        everything here is processed locally, and this page works the same way — your files travel directly between your two devices and never pass through any server.
+        everything here is processed locally, and this page works the same way — your files travel directly between your two devices.
         To introduce the two devices, the page exchanges connection details with a public signaling service, like an operator connecting a call: it can see that two browsers are connecting, but nothing about what they send afterwards.
+        When both networks are too strict for a direct link, the encrypted stream is relayed through a public TURN relay — it forwards already-encrypted bytes, cannot read them, and stores nothing.
         The <a href="../privacy/">privacy policy</a> has the details.
       </div>
 
@@ -520,7 +521,7 @@ html[data-theme="dark"] #beamApp {
       <div class="faq mt-4">
         <details class="faq__item" open>
           <summary>Are my files uploaded to a server?</summary>
-          <div class="faq__body"><p>No. The two devices negotiate a direct encrypted connection and the files travel straight across it, byte for byte. No server receives, stores or relays the file contents — the transfer fails rather than falling back to a relay.</p></div>
+          <div class="faq__body"><p>No. The devices connect through an encrypted WebRTC link: when the two networks allow it, the files travel straight between them, byte for byte. If both networks are too strict for a direct link, the encrypted stream is relayed through a public TURN relay so the page still works — the relay only forwards already-encrypted bytes, cannot read the content, and never stores anything. What no server ever receives is unencrypted data.</p></div>
         </details>
         <details class="faq__item">
           <summary>What is the signaling service, and what does it see?</summary>

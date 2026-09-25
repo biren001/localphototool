@@ -70,7 +70,7 @@ var OFFLINE = ROOT + 'offline.html';
    also had to enter the sitemap before it entered the shell — a page inside the
    shell but outside the sitemap is a page the offline copy serves to visitors
    while no crawler is ever told it exists. */
-var VERSION = 'v26';
+var VERSION = 'v27';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
