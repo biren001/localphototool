@@ -97,6 +97,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://localphototool.com/transfer/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://localphototool.com/image-compressor-upload-test/</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>

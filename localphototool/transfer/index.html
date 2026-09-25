@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Transfer Photos From Phone to Computer — No Upload, No App</title>
+<meta name="description" content="Send photos and files from your phone to your computer over a direct peer-to-peer connection. No cable, no app, no account, no cloud — and no upload.">
+<link rel="canonical" href="https://localphototool.com/transfer/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Transfer Photos From Phone to Computer — No Upload, No App">
+<meta property="og:description" content="Send photos and files from your phone to your computer over a direct peer-to-peer connection. No cable, no app, no account, no cloud — and no upload.">
+<meta property="og:url" content="https://localphototool.com/transfer/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Transfer Photos From Phone to Computer — No Upload, No App">
+<meta name="twitter:description" content="Send photos and files from your phone to your computer over a direct peer-to-peer connection. No cable, no app, no account, no cloud — and no upload.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css" as="style">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<style>
+/* Transfer tool — scoped so it cannot collide with the site stylesheet */
+#beamApp {
+  --b-bg: #f6f7fb;
+  --b-surface: #ffffff;
+  --b-text: #1c2333;
+  --b-muted: #5c6478;
+  --b-line: #e3e6ef;
+  --b-accent: #3556e0;
+  --b-accent-soft: #e8edff;
+  --b-ok: #178a50;
+  --b-err: #c0392b;
+  --b-radius: 14px;
+  color: var(--b-text);
+}
+html[data-theme="dark"] #beamApp {
+  --b-bg: #14161f;
+  --b-surface: #1e2130;
+  --b-text: #e8eaf2;
+  --b-muted: #9aa1b5;
+  --b-line: #2d3143;
+  --b-accent: #7d95ff;
+  --b-accent-soft: #262c47;
+  --b-ok: #4ec98a;
+  --b-err: #ff7b6b;
+}
+#beamApp [hidden] { display: none !important; }
+
+#beamApp .b-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+#beamApp .b-card {
+  background: var(--b-surface);
+  border: 1px solid var(--b-line);
+  border-radius: var(--b-radius);
+  padding: 22px;
+  min-width: 0;
+}
+#beamApp .b-card h2 { font-size: 16px; font-weight: 650; margin-bottom: 14px; color: var(--b-text); }
+#beamApp #qrBox { display: flex; justify-content: center; margin-bottom: 12px; }
+#beamApp #qrBox svg { width: 168px; height: 168px; background: #fff; border-radius: 10px; padding: 8px; }
+#beamApp .b-codeline { text-align: center; color: var(--b-muted); font-size: 13px; }
+#beamApp .b-code {
+  display: block;
+  font-size: 32px;
+  letter-spacing: 0.28em;
+  font-weight: 750;
+  color: var(--b-text);
+  margin: 4px 0 2px;
+  font-variant-numeric: tabular-nums;
+}
+#beamApp .status { color: var(--b-muted); font-size: 13px; min-height: 1.4em; margin: 8px 0; }
+#beamApp .status.err { color: var(--b-err); }
+#beamApp .status.ok { color: var(--b-ok); }
+
+#beamApp button, #beamApp input[type="text"] { font: inherit; color: inherit; }
+#beamApp button {
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--b-line);
+  background: var(--b-surface);
+  color: var(--b-text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+}
+@media (hover: hover) and (pointer: fine) {
+  #beamApp button:hover { background: var(--b-accent-soft); border-color: var(--b-accent); }
+}
+#beamApp #joinBtn, #beamApp #sendBtn { background: var(--b-accent); border-color: var(--b-accent); color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  #beamApp #joinBtn:hover, #beamApp #sendBtn:hover { filter: brightness(1.08); background: var(--b-accent); }
+}
+#beamApp #copyLinkBtn { width: 100%; }
+#beamApp input[type="text"] {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--b-line);
+  background: var(--b-bg);
+  font-size: 16px; /* prevent iOS focus zoom */
+}
+#beamApp input[type="text"]:focus { outline: 2px solid var(--b-accent); outline-offset: 1px; }
+#beamApp #joinCode {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#beamApp #chat { max-width: 640px; margin: 8px auto 0; }
+#beamApp .chat-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--b-muted);
+  padding: 10px 2px;
+}
+#beamApp .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--b-ok); flex: 0 0 auto; }
+#beamApp .dot.bad { background: var(--b-err); }
+#beamApp .dot.wait { background: var(--b-muted); }
+#beamApp #leaveBtn {
+  margin-left: auto; flex: 0 0 auto;
+  font-size: 12px; padding: 5px 12px;
+  background: transparent; color: var(--b-muted);
+  border-color: var(--b-line);
+}
+#beamApp #leaveBtn:hover { color: var(--b-err); border-color: var(--b-err); background: transparent; }
+#beamApp #messages {
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--b-surface);
+  border: 1px solid var(--b-line);
+  border-radius: var(--b-radius);
+  padding: 16px;
+  min-height: 260px;
+  max-height: 52vh;
+  overflow-y: auto;
+}
+#beamApp .msg { max-width: 82%; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+#beamApp .msg.mine { align-self: flex-end; align-items: flex-end; }
+#beamApp .bubble {
+  background: var(--b-accent-soft);
+  border-radius: 14px;
+  padding: 9px 13px;
+  font-size: 15px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+}
+#beamApp .msg.mine .bubble { background: var(--b-accent); color: #fff; }
+#beamApp .meta { font-size: 11px; color: var(--b-muted); padding: 0 4px; }
+#beamApp .bubble img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  display: block;
+}
+#beamApp .bubble .fname { font-weight: 650; }
+#beamApp .bubble a { color: inherit; font-weight: 650; }
+#beamApp .progress {
+  height: 6px; border-radius: 3px; overflow: hidden;
+  background: rgba(128,128,128,0.25);
+  width: 160px;
+}
+#beamApp .progress > div { height: 100%; width: 0; background: var(--b-accent); transition: width 0.15s; }
+#beamApp .composer {
+  display: flex; gap: 8px; align-items: center;
+  margin-top: 12px;
+  min-width: 0;
+}
+#beamApp .composer > * { min-width: 0; }
+#beamApp #textInput { flex: 1 1 0; }
+#beamApp #attachBtn { flex: 0 0 44px; padding: 0; font-size: 18px; }
+#beamApp #sendBtn { flex: 0 0 auto; }
+#beamApp .hint { color: var(--b-muted); font-size: 12px; text-align: center; margin-top: 10px; }
+
+@media (pointer: coarse) {
+  #beamApp button, #beamApp input[type="text"] { font-size: 16px; }
+}
+@media (max-width: 680px) {
+  #beamApp .b-cards { grid-template-columns: minmax(0, 1fr); }
+  #beamApp .b-code { font-size: 27px; letter-spacing: 0.22em; }
+  #beamApp .msg { max-width: 92%; }
+}
+
+/* The disclosure banner the user sees before using the tool */
+.transfer-notice {
+  border: 1px solid var(--b-line);
+  border-left: 4px solid var(--b-accent);
+  background: var(--b-surface);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: var(--b-muted);
+}
+.transfer-notice strong { color: var(--b-text); }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/transfer/#page",
+      "url": "https://localphototool.com/transfer/",
+      "name": "Transfer Photos From Phone to Computer — No Upload, No App",
+      "description": "Send photos and files from your phone to your computer over a direct peer-to-peer connection. No cable, no app, no account, no cloud — and no upload.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/transfer/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/transfer/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Transfer photos from phone to computer",
+          "item": "https://localphototool.com/transfer/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/transfer/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are my files uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The two devices negotiate a direct encrypted connection and the files travel straight across it, byte for byte. No server receives, stores or relays the file contents — the transfer fails rather than falling back to a relay."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the signaling service, and what does it see?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Before two devices can talk directly, they have to find each other — like an operator connecting a call. A public signaling service exchanges the connection details (network addresses and encryption keys) between your two devices. It can see that two browsers are connecting, and nothing about what they send afterwards. File bytes never touch it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a file size limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No hard limit. Files are streamed in small chunks, so even large videos transfer. Very large files take proportionally longer, and the speed depends on the slower of the two connections — the data goes over your networks, not through our servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work if the phone is on mobile data and the computer is on Wi-Fi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually yes — the two devices connect directly across networks. The exception is some corporate or campus networks that deliberately block peer-to-peer connections; in that case the transfer fails with a clear message rather than routing through a relay. A mobile hotspot is a reliable workaround."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the transfer quality-lossless?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — the files arrive byte for byte identical to the originals. Nothing is re-encoded, resized or recompressed. If you want a smaller version first, compress the photo on this site before sending it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does anything stay on the page after I close it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The pairing code, the messages and the files exist only inside the browser tab while it is open. Refresh or close the tab and everything is gone — there is no history and no account."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "logo": "https://localphototool.com/favicon.svg",
+      "email": "hello@localphototool.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the tool</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../compress-without-uploading/">No upload</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#compare">Why it is better</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> Transfer phone to computer</span>
+      </nav>
+      <h1>Send photos from your phone to your computer</h1>
+      <p class="hero__lead" style="max-width:660px">Just edited a photo here on your phone and want it on your computer? Open this page on both devices, scan the code, and the files travel directly between them — no cable, no app, no account, no cloud storage, and no upload to any server.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Direct device-to-device
+        </li>
+        <li class="badge">Original quality, byte for byte</li>
+        <li class="badge">Files and text</li>
+        <li class="badge">Unlimited &amp; free</li>
+      </ul>
+    </div>
+  </section>
+
+<section class="tool" id="tool">
+    <div class="container">
+
+      <div class="transfer-notice" role="note">
+        <strong>One honest difference from the other tools on this site:</strong>
+        everything here is processed locally, and this page works the same way — your files travel directly between your two devices and never pass through any server.
+        To introduce the two devices, the page exchanges connection details with a public signaling service, like an operator connecting a call: it can see that two browsers are connecting, but nothing about what they send afterwards.
+        The <a href="../privacy/">privacy policy</a> has the details.
+      </div>
+
+      <div id="beamApp">
+        <!-- Landing / pairing -->
+        <section id="home">
+          <div class="b-cards">
+            <div class="b-card" id="hostCard">
+              <h2>Open this page on your other device</h2>
+              <div id="qrBox" aria-label="QR code with invite link"></div>
+              <div class="b-codeline">
+                <span>or enter this code on the other device:</span>
+                <strong id="codeDisplay" class="b-code">······</strong>
+              </div>
+              <p id="hostStatus" class="status">Starting session…</p>
+              <button id="copyLinkBtn" type="button" title="Copy invite link">Copy invite link</button>
+            </div>
+
+            <div class="b-card">
+              <h2>Or join with a code</h2>
+              <input id="joinCode" type="text" inputmode="latin" autocomplete="off"
+                     placeholder="6-character code" maxlength="6" spellcheck="false">
+              <button id="joinBtn" type="button">Connect</button>
+              <p id="joinStatus" class="status"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Connected chat -->
+        <section id="chat" hidden>
+          <div class="chat-head">
+            <span id="connState" class="dot wait"></span>
+            <span id="connText">Connecting…</span>
+            <button id="leaveBtn" type="button" title="End this session, clear this page and start over">Leave</button>
+          </div>
+          <div id="messages" aria-live="polite"></div>
+          <div class="composer">
+            <button id="attachBtn" type="button" title="Attach a photo, video or file" aria-label="Attach a file">📎</button>
+            <input id="fileInput" type="file" multiple hidden>
+            <input id="textInput" type="text" placeholder="Type a message…" autocomplete="off" aria-label="Message">
+            <button id="sendBtn" type="button">Send</button>
+          </div>
+          <p class="hint">Everything on this page lives only in this browser tab. Refresh or close and it's gone.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>How the transfer works</h2>
+      <p>Open this page on both devices — for example your phone and your computer. One device shows a six-character code and a QR code; the other scans it or types the code in. The two browsers then negotiate a direct, encrypted peer-to-peer connection using WebRTC, the same technology video call sites use. From that moment the files flow straight from one device to the other.</p>
+      <p>This is the same promise as the rest of the site: nothing is uploaded. There is no server in the middle holding your photos, and there is no account anywhere. The connection details are exchanged through a signaling service — the operator that connects the call — and once the direct link is up, it is not involved any more.</p>
+
+      <h2>Why not just email the photos to yourself?</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Method</th><th>What you give up</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Email or a chat app to yourself</td><td>The file is stored on a mail or chat provider's servers, usually recompressed, and size caps get in the way</td></tr>
+            <tr><td>A cloud drive link</td><td>An account, an upload, and a copy of the file sitting on someone else's server</td></tr>
+            <tr><td>A USB cable</td><td>Fiddly drivers, different plugs on every phone, and the cable is never where you are</td></tr>
+            <tr><td>This page</td><td>Nothing leaves your devices — the trade-off is that both screens need the page open at the same time</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>When you actually need this</h2>
+      <ul>
+        <li><strong>Right after editing here.</strong> Compressed a photo on your phone and want to keep working on the desktop — send the result over in one tap, at original quality.</li>
+        <li><strong>Bulk phone-to-PC moves.</strong> Offload a camera roll after a trip without a cable and without trusting a cloud folder.</li>
+        <li><strong>Sensitive files.</strong> Documents, ID scans, anything you would rather not hand to a cloud provider — a direct link means there is no third copy anywhere.</li>
+        <li><strong>Quick text handoff.</strong> A link, a Wi-Fi password, a tracking number — type it on one device, paste it on the other.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>Are my files uploaded to a server?</summary>
+          <div class="faq__body"><p>No. The two devices negotiate a direct encrypted connection and the files travel straight across it, byte for byte. No server receives, stores or relays the file contents — the transfer fails rather than falling back to a relay.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What is the signaling service, and what does it see?</summary>
+          <div class="faq__body"><p>Before two devices can talk directly, they have to find each other — like an operator connecting a call. A public signaling service exchanges the connection details (network addresses and encryption keys) between your two devices. It can see that two browsers are connecting, and nothing about what they send afterwards. File bytes never touch it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is there a file size limit?</summary>
+          <div class="faq__body"><p>No hard limit. Files are streamed in small chunks, so even large videos transfer. Very large files take proportionally longer, and the speed depends on the slower of the two connections — the data goes over your networks, not through our servers.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it work if the phone is on mobile data and the computer is on Wi-Fi?</summary>
+          <div class="faq__body"><p>Usually yes — the two devices connect directly across networks. The exception is some corporate or campus networks that deliberately block peer-to-peer connections; in that case the transfer fails with a clear message rather than routing through a relay. A mobile hotspot is a reliable workaround.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is the transfer quality-lossless?</summary>
+          <div class="faq__body"><p>Yes — the files arrive byte for byte identical to the originals. Nothing is re-encoded, resized or recompressed. If you want a smaller version first, <a href="../compress/">compress the photo on this site</a> before sending it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does anything stay on the page after I close it?</summary>
+          <div class="faq__body"><p>No. The pairing code, the messages and the files exist only inside the browser tab while it is open. Refresh or close the tab and everything is gone — there is no history and no account.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+          <li><a href="./">Transfer phone to PC</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./vendor/qrcode.min.js"></script>
+<script src="./vendor/peerjs.min.js"></script>
+<script src="./app.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/pwa.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+</body>
+</html>

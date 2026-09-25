@@ -15,7 +15,7 @@
    simply reports ok:false and the homepage hides the widget.
    ========================================================================== */
 
-var CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://esm.sh https://cdn.jsdelivr.net https://cloudflareinsights.com https://static.cloudflareinsights.com; worker-src 'self' blob:; font-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'";
+var CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://esm.sh https://cdn.jsdelivr.net https://cloudflareinsights.com https://static.cloudflareinsights.com wss://0.peerjs.com; worker-src 'self' blob:; font-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'";
 
 var SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',

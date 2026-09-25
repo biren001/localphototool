@@ -35,6 +35,7 @@ LocalPhotoTool is a static web app. There is no server-side image processing and
 - [Compress an image to under 200 KB](https://localphototool.com/compress-to-200kb/): for university forms, job portals and marketplace listings.
 - [Compress an image to under 500 KB](https://localphototool.com/compress-to-500kb/): the headroom budget for job portals, marketplaces and CMS media libraries.
 - [Remove GPS from a photo](https://localphototool.com/remove-gps-from-photo/): strips GPS coordinates, camera data and timestamps by re-encoding the file locally; the trade-off (a ~90% quality re-encode, not bit-identical) is stated on the page.
+- [Transfer photos from phone to computer](https://localphototool.com/transfer/): direct peer-to-peer file and text transfer over WebRTC, byte-for-byte originals; a notice on the page discloses that pairing uses a public signaling service which never sees file contents.
 - [Compress photos for email](https://localphototool.com/compress-photos-for-email/): batch-compress a set of photos (including iPhone HEIC) so the whole message fits under Gmail, Outlook or corporate Exchange attachment limits.
 - [PNG to JPG](https://localphototool.com/png-to-jpg/): converts PNG files to JPG in the browser, in batches.
 - [JPG to WebP](https://localphototool.com/jpg-to-webp/): converts JPG to WebP — 24–54% smaller in Auto mode, measured.

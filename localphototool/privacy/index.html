@@ -156,6 +156,7 @@
       <h2>Third-party requests</h2>
       <p>The site loads its own styles and scripts from its own domain. Optionally, when a browser cannot encode a format natively, the page may fetch a WebAssembly codec module (for example MozJPEG or libwebp) from a public CDN such as <code>esm.sh</code> or <code>jsDelivr</code>. That request contains no image data, no identifiers and no personal information — it is the same kind of request as loading a library from a script tag.</p>
       <p>If those modules cannot be reached, the site falls back to the encoders built into your browser and every feature continues to work.</p>
+      <p>The one exception is the <a href="../transfer/">device-to-device transfer page</a>. To introduce your two devices to each other, that page exchanges connection details (network addresses and encryption keys) with a public signaling service — the same kind of handshake any video call makes. The signaling service relays nothing else: file and message contents travel directly between your two devices over an encrypted connection and never touch any server. The page states this in a notice at the top of the tool.</p>
 
       <h2>What we do not do</h2>
       <ul>
