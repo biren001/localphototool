@@ -1,0 +1,345 @@
+{
+  "id": "freeconvert",
+  "name": "FreeConvert",
+  "url": "https://www.freeconvert.com/image-compressor",
+  "control": false,
+  "measuredAt": "2026-09-25T02:10:37.904Z",
+  "probe": {
+    "marker": "LPTPROBE-e191f205213b4f34b9b8f6408eca32b3",
+    "bytes": 341529,
+    "sha256": "f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209",
+    "path": "generated per run, see gen-probe-image.py"
+  },
+  "ok": true,
+  "fileInputsFound": 2,
+  "fileSet": true,
+  "clicked": [],
+  "downloads": 0,
+  "status": "completed",
+  "hookEvents": [
+    {
+      "url": "https://www.google.com/ccm/collect?rcb=2&frm=0&apvc=1&ae=g&auid=1941636063.1790302240&dt=Image%20Compressor%20-%20FreeConvert.com&en=page_view&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&scrsrc=www.googletagmanager.com&rnd=2115005489.1790302240&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He69n1v9103624727za200zd9103624727xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938465~115938469~117776795~118897920~118897930~120385423~120469145~120469153&tft=1790302239650&tfd=1743&_gsid=qOhTAiQlga3P5brcL7FXRNX0jxh4oxKyeA&fmt=8",
+      "method": "POST",
+      "ts": 1790302239651,
+      "seq": 1
+    },
+    {
+      "url": "https://ad.doubleclick.net/ccm/s/collect?_gsid=qOhTAiQlga3P5brcL7FXRNX0jxh4oxKyeA&auid=1941636063.1790302240&gtm=45He69n1v9103624727za200zd9103624727xeaxf1&fmt=8",
+      "method": "POST",
+      "ts": 1790302239653,
+      "seq": 2
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-86D7BPSZHC&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&_p=1790302238702&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAEAC&cid=854856917.1790302240&frm=0&pscdl=noapi&rcb=11&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=1&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153&sid=1790302240&sct=1&seg=0&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&dt=Image%20Compressor%20-%20FreeConvert.com&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=2140",
+      "method": "POST",
+      "ts": 1790302240047,
+      "seq": 3
+    },
+    {
+      "url": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-86D7BPSZHC&cid=854856917.1790302240&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&rcb=11&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153",
+      "method": "BEACON",
+      "ts": 1790302240048,
+      "seq": 4
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302240115,
+      "seq": 5
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302240116,
+      "seq": 6
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302241885,
+      "seq": 7
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/account/guest",
+      "method": "GET",
+      "ts": 1790302242890,
+      "seq": 8
+    },
+    {
+      "url": "/cdn-cgi/rum?",
+      "method": "POST",
+      "ts": 1790302242900,
+      "seq": 9
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302243390,
+      "seq": 10
+    },
+    {
+      "url": "https://notification.freeconvert.com/auth/session",
+      "method": "POST",
+      "ts": 1790302243730,
+      "seq": 11
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-86D7BPSZHC&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&_p=1790302238702&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAEQC&cid=854856917.1790302240&frm=0&pscdl=noapi&rcb=11&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=2&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153&sid=1790302240&sct=1&seg=0&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&dt=Image%20Compressor%20-%20FreeConvert.com&en=upload_button_loaded&ep.page=%2Fimage-compressor&ep.event_category=upload&_et=7&tfd=7151",
+      "method": "POST",
+      "ts": 1790302245057,
+      "seq": 12
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302245127,
+      "seq": 13
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/query/view/conversion-support",
+      "method": "GET",
+      "ts": 1790302245459,
+      "seq": 14
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/process/user/free-subscription",
+      "method": "GET",
+      "ts": 1790302245462,
+      "seq": 15
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/server/settings/guest_minutes_per_task",
+      "method": "GET",
+      "ts": 1790302245821,
+      "seq": 16
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302304386,
+      "seq": 17
+    },
+    {
+      "url": "https://www.google.com/ccm/collect?rcb=2&frm=0&apvc=1&ae=g&auid=1941636063.1790302240&dt=Image%20Compressor%20-%20FreeConvert.com&en=page_view&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&scrsrc=www.googletagmanager.com&rnd=2115005489.1790302240&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He69n1v9103624727za200zd9103624727xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938465~115938469~117776795~118897920~118897930~120385423~120469145~120469153&tft=1790302239650&tfd=1743&_gsid=qOhTAiQlga3P5brcL7FXRNX0jxh4oxKyeA&fmt=8",
+      "method": "POST",
+      "ts": 1790302239651,
+      "seq": 1
+    },
+    {
+      "url": "https://ad.doubleclick.net/ccm/s/collect?_gsid=qOhTAiQlga3P5brcL7FXRNX0jxh4oxKyeA&auid=1941636063.1790302240&gtm=45He69n1v9103624727za200zd9103624727xeaxf1&fmt=8",
+      "method": "POST",
+      "ts": 1790302239653,
+      "seq": 2
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-86D7BPSZHC&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&_p=1790302238702&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAEAC&cid=854856917.1790302240&frm=0&pscdl=noapi&rcb=11&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=1&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153&sid=1790302240&sct=1&seg=0&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&dt=Image%20Compressor%20-%20FreeConvert.com&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=2140",
+      "method": "POST",
+      "ts": 1790302240047,
+      "seq": 3
+    },
+    {
+      "url": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-86D7BPSZHC&cid=854856917.1790302240&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&rcb=11&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153",
+      "method": "BEACON",
+      "ts": 1790302240048,
+      "seq": 4
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302240115,
+      "seq": 5
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302240116,
+      "seq": 6
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302241885,
+      "seq": 7
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/account/guest",
+      "method": "GET",
+      "ts": 1790302242890,
+      "seq": 8
+    },
+    {
+      "url": "/cdn-cgi/rum?",
+      "method": "POST",
+      "ts": 1790302242900,
+      "seq": 9
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302243390,
+      "seq": 10
+    },
+    {
+      "url": "https://notification.freeconvert.com/auth/session",
+      "method": "POST",
+      "ts": 1790302243730,
+      "seq": 11
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-86D7BPSZHC&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&_p=1790302238702&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAEQC&cid=854856917.1790302240&frm=0&pscdl=noapi&rcb=11&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=2&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153&sid=1790302240&sct=1&seg=0&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&dt=Image%20Compressor%20-%20FreeConvert.com&en=upload_button_loaded&ep.page=%2Fimage-compressor&ep.event_category=upload&_et=7&tfd=7151",
+      "method": "POST",
+      "ts": 1790302245057,
+      "seq": 12
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302245127,
+      "seq": 13
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/query/view/conversion-support",
+      "method": "GET",
+      "ts": 1790302245459,
+      "seq": 14
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/process/user/free-subscription",
+      "method": "GET",
+      "ts": 1790302245462,
+      "seq": 15
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/server/settings/guest_minutes_per_task",
+      "method": "GET",
+      "ts": 1790302245821,
+      "seq": 16
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302304386,
+      "seq": 17
+    },
+    {
+      "url": "https://www.google.com/ccm/collect?rcb=2&frm=0&apvc=1&ae=g&auid=1941636063.1790302240&dt=Image%20Compressor%20-%20FreeConvert.com&en=page_view&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&scrsrc=www.googletagmanager.com&rnd=2115005489.1790302240&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He69n1v9103624727za200zd9103624727xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938465~115938469~117776795~118897920~118897930~120385423~120469145~120469153&tft=1790302239650&tfd=1743&_gsid=qOhTAiQlga3P5brcL7FXRNX0jxh4oxKyeA&fmt=8",
+      "method": "POST",
+      "ts": 1790302239651,
+      "seq": 1
+    },
+    {
+      "url": "https://ad.doubleclick.net/ccm/s/collect?_gsid=qOhTAiQlga3P5brcL7FXRNX0jxh4oxKyeA&auid=1941636063.1790302240&gtm=45He69n1v9103624727za200zd9103624727xeaxf1&fmt=8",
+      "method": "POST",
+      "ts": 1790302239653,
+      "seq": 2
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-86D7BPSZHC&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&_p=1790302238702&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAEAC&cid=854856917.1790302240&frm=0&pscdl=noapi&rcb=11&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=1&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153&sid=1790302240&sct=1&seg=0&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&dt=Image%20Compressor%20-%20FreeConvert.com&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=2140",
+      "method": "POST",
+      "ts": 1790302240047,
+      "seq": 3
+    },
+    {
+      "url": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-86D7BPSZHC&cid=854856917.1790302240&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&rcb=11&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=0&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153",
+      "method": "BEACON",
+      "ts": 1790302240048,
+      "seq": 4
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302240115,
+      "seq": 5
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302240116,
+      "seq": 6
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302241885,
+      "seq": 7
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/account/guest",
+      "method": "GET",
+      "ts": 1790302242890,
+      "seq": 8
+    },
+    {
+      "url": "/cdn-cgi/rum?",
+      "method": "POST",
+      "ts": 1790302242900,
+      "seq": 9
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302243390,
+      "seq": 10
+    },
+    {
+      "url": "https://notification.freeconvert.com/auth/session",
+      "method": "POST",
+      "ts": 1790302243730,
+      "seq": 11
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-86D7BPSZHC&gtm=45je69n1v9102426947z89103624727za20gzb9103624727zd9103624727xf1&_p=1790302238702&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAEQC&cid=854856917.1790302240&frm=0&pscdl=noapi&rcb=11&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=2&tag_exp=115616986~115938465~115938469~118897920~118897930~120213116~120385422~120420414~120469145~120469153&sid=1790302240&sct=1&seg=0&dl=https%3A%2F%2Fwww.freeconvert.com%2Fimage-compressor&dt=Image%20Compressor%20-%20FreeConvert.com&en=upload_button_loaded&ep.page=%2Fimage-compressor&ep.event_category=upload&_et=7&tfd=7151",
+      "method": "POST",
+      "ts": 1790302245057,
+      "seq": 12
+    },
+    {
+      "url": "https://asc-a.hbwrapper.com/",
+      "method": "GET",
+      "ts": 1790302245127,
+      "seq": 13
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/query/view/conversion-support",
+      "method": "GET",
+      "ts": 1790302245459,
+      "seq": 14
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/process/user/free-subscription",
+      "method": "GET",
+      "ts": 1790302245462,
+      "seq": 15
+    },
+    {
+      "url": "https://api.freeconvert.com/v1/server/settings/guest_minutes_per_task",
+      "method": "GET",
+      "ts": 1790302245821,
+      "seq": 16
+    },
+    {
+      "url": "https://k.clarity.ms/collect",
+      "method": "POST",
+      "ts": 1790302304386,
+      "seq": 17
+    }
+  ],
+  "pageSnippet": "Log In Sign Up Convert ▼ Video & Audio ▼ Video Converter Audio Converter MP3 Converter MP4 to MP3 Video to MP3 MP4 Converter MOV to MP4 MP3 to OGG Image ▼ Image Converter WEBP to PNG JFIF to PNG PNG to SVG HEIC to JPG HEIC to PNG WEBP to JPG SVG Converter PDF & Documents ▼ PDF Converter Document Converter Ebook Converter PDF to Word PDF to JPG PDF to EPUB EPUB to PDF HEIC to PDF DOCX to PDF JPG to PDF GIF ▼ Video to GIF MP4 to GIF WEBM to GIF APNG to GIF GIF to MP4 GIF to APNG Image to GIF MOV to GIF AVI to GIF Others ▼ Unit Converter Time Converter Archive Converter Compress ▼ Video & Audio ▼ Video Compressor MP3 Compressor WAV Compressor Image ▼ Image Compressor JPEG Compressor PNG Compressor PDF & Documents ▼ PDF Compressor GIF ▼ GIF Compressor Tools ▼ Video Tools ▼ Crop Video Trim Video Image Tools ▼ GIF Maker Resize Image Crop Image Color Picker Rotate Image Flip Image Image Enlarger PDF Tools ▼ PDF Merge PDF Split Flatten PDF Resize PDF Unlock PDF Rotate PDF Protect PDF Crop PDF Organize PDF Extract image from PDF PDF page remover Extract Pages from PDF API ▼ Documentation ▼ API Job Builder API Documentation Conversion APIs ▼ File Conversion API Image Conversion API Audio Conversion API Document Conversion API PDF Conversion API MP4 Conversion API Video Conversion API Specific APIs ▼ JPG to PDF API Video to MP3 API HEIC to JPG API PDF to JPG API Webp to PNG API PDF to WORD API MP4 to MP3 API Webp to JPG API WORD to PDF API HTML to PDF API Website Screenshot API Compress",
+  "evidence": {
+    "requestsSeen": 121,
+    "hookEvents": 51,
+    "bodiesWithBytes": 0,
+    "markerHits": 0,
+    "markerHitUrls": [],
+    "maxPayloadBytes": 0,
+    "fileSizedPayload": false,
+    "uploadEndpointCalls": 0,
+    "uploadEndpointUrls": [],
+    "largestPayloads": [],
+    "ingestShown": false,
+    "downloadFired": false,
+    "finalUrl": "https://www.freeconvert.com/image-compressor"
+  },
+  "verdict": "inconclusive",
+  "confidence": "low"
+}

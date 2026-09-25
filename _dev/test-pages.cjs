@@ -40,6 +40,7 @@ const PAGES = [
   'compress-to-200kb/index.html',
   'compress-photos-for-email/index.html',
   'compress-without-uploading/index.html',
+  'image-compressor-upload-test/index.html',
   'png-to-jpg/index.html',
   'jpg-to-webp/index.html',
   'about/index.html',
@@ -51,7 +52,7 @@ const PAGES = [
 /* Pages that are meant to be found by a human or a crawler. /stats/ is
    deliberately absent from both the sitemap and the shell cache. */
 const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'compress-to-100kb/', 'compress-to-50kb/',
-  'compress-to-200kb/', 'compress-photos-for-email/', 'compress-without-uploading/',
+  'compress-to-200kb/', 'compress-photos-for-email/', 'compress-without-uploading/', 'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/', 'about/', 'privacy/', 'terms/', 'share/'];
 
 let pass = 0, fail = 0;
@@ -241,6 +242,7 @@ PUBLIC.forEach(function (p) {
 ['', 'compress/', 'heic-to-jpg/', 'share/', 'about/',
   'compress-to-100kb/', 'compress-to-50kb/', 'compress-to-200kb/',
   'compress-photos-for-email/', 'compress-without-uploading/',
+  'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/'].forEach(function (p) {
   ok('the offline shell precaches /' + p, new RegExp("'" + (p || '') + "',").test(sw));
 });

@@ -448,6 +448,7 @@
       </ol>
       <p><strong>What you will see:</strong> the page's own HTML, CSS and JavaScript, plus a WebAssembly codec fetched on demand when you pick a format that needs one. Those are pieces of the program — they are code, not your picture.</p>
       <p><strong>What you will not see:</strong> any request carrying your image. No upload, no POST, no multipart form. If a tool that advertises privacy shows a request containing your file at this step, then its privacy was marketing copy.</p>
+      <p>We ran exactly this check against nine well-known compressors, with a photo carrying a hidden marker so there was no need to interpret anything: two of them sent the entire file to a server, six did not. <a href="../image-compressor-upload-test/">See the measured results</a>.</p>
 
       <h2>What actually happens to your file</h2>
       <p>Locally, the sequence is short: the browser decodes the image into raw pixels, optionally resamples it if you asked for a smaller size, re-encodes it in the format you chose, and hands you a download from memory. At no point does the data cross a network boundary, because there is nothing on the other end to cross it to.</p>

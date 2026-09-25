@@ -1,0 +1,38 @@
+{
+  "id": "privateimagecompressor",
+  "name": "Private Image Compressor",
+  "url": "https://privateimagecompressor.com/",
+  "control": false,
+  "measuredAt": "2026-09-25T02:11:49.449Z",
+  "probe": {
+    "marker": "LPTPROBE-e191f205213b4f34b9b8f6408eca32b3",
+    "bytes": 341529,
+    "sha256": "f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209",
+    "path": "generated per run, see gen-probe-image.py"
+  },
+  "ok": true,
+  "fileInputsFound": 1,
+  "fileSet": true,
+  "clicked": [],
+  "downloads": 0,
+  "status": "completed",
+  "hookEvents": [],
+  "pageSnippet": "🛡️ PrivateImageCompressor GDPR & Safety No-Upload Guide Is TinyPNG Safe? Compress to Size Email Guide Social Media Best Compressors Local Compressor Make Image Files Smaller — Locally, No Upload Reduce or decrease JPG, PNG, WebP, and AVIF file size in your browser. No upload, no account, and no image data leaves your device. Image Preview Compression Quality 80% Lower quality = smaller file size. Output Format Chrome / Edge only JPG WebP AVIF LIVE STATS Original Size 333.52 KB New Size 257.32 KB % Saved 22.8% Start Over Download Compressed Image POPULAR GUIDES FILE SIZE & QUALITY How to Reduce or Decrease Image File Size (Step-by-Step) Settings for JPG, WebP, and AVIF, plus when to resize vs. compress — written for the way people search. TOOL COMPARISON Best Free Image Compressors 2026: TinyPNG vs Squoosh vs Alternatives Honest side-by-side — quality, privacy, AVIF and JPEG XL support, and which tool fits your workflow. Guides: reduce, decrease, and compress image file size — privately Learn when to choose JPG, PNG, or WebP, how to stay GDPR-safe, how to make picture files smaller, and how to get tiny file sizes without sacrificing quality. Start here: Reduce Image File Size Without Losing Quality Is It Safe to Use Online Image Compressors? GDPR Risks Explained How to Compress Images Without Uploading Them How to Compress Images for the Web Without Losing Quality JPG vs PNG vs WebP: Which Image Format Should You Use? What Is Client-Side Image Compression? Is TinyPNG Safe? Wh",
+  "evidence": {
+    "requestsSeen": 8,
+    "hookEvents": 0,
+    "bodiesWithBytes": 0,
+    "markerHits": 0,
+    "markerHitUrls": [],
+    "maxPayloadBytes": 0,
+    "fileSizedPayload": false,
+    "uploadEndpointCalls": 0,
+    "uploadEndpointUrls": [],
+    "largestPayloads": [],
+    "ingestShown": true,
+    "downloadFired": false,
+    "finalUrl": "https://www.privateimagecompressor.com/"
+  },
+  "verdict": "local",
+  "confidence": "medium"
+}

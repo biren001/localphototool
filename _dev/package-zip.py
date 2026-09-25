@@ -53,6 +53,7 @@ must = {
     "compress/index.html", "heic-to-jpg/index.html", "sitemap.xml",
     "compress-to-100kb/index.html", "png-to-jpg/index.html", "jpg-to-webp/index.html",
     "compress-without-uploading/index.html",
+    "image-compressor-upload-test/index.html",
     # GEO: machine-readable entry point for AI assistants.
     "llms.txt", "robots.txt",
     # The HEIC decoder is self-hosted on purpose: the CDN builds either break

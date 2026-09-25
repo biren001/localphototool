@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Do Image Compressors Upload Your Photos? 9 Tools Tested</title>
+<meta name="description" content="We fed a marked JPEG to nine online image compressors and watched every outbound request. Two sent the whole file to a server, six did not. Method and raw data included.">
+<link rel="canonical" href="https://localphototool.com/image-compressor-upload-test/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Do Image Compressors Upload Your Photos? 9 Tools Tested">
+<meta property="og:description" content="We fed a marked JPEG to nine online image compressors and watched every outbound request. Two sent the whole file to a server, six did not. Method and raw data included.">
+<meta property="og:url" content="https://localphototool.com/image-compressor-upload-test/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LocalPhotoTool — image tools that run in your browser">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Do Image Compressors Upload Your Photos? 9 Tools Tested">
+<meta name="twitter:description" content="We fed a marked JPEG to nine online image compressors and watched every outbound request. Two sent the whole file to a server, six did not. Method and raw data included.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/image-compressor-upload-test/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Image compressor upload test",
+          "item": "https://localphototool.com/image-compressor-upload-test/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/image-compressor-upload-test/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does TinyPNG upload my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In our test the full file — all 341,529 bytes — was sent to TinyPNG's own backend, and our marker was found in the request body three times. That is not a defect: TinyPNG is a server-side compressor by design, and it says so. It does mean your photo, including any GPS coordinates still in it, travels to their servers and is briefly stored there while it is processed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does iLoveIMG upload my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our file was posted to an iLoveIMG upload endpoint and the marker was found in the request body. iLoveIMG is also server-side by design, and the compression happens on their infrastructure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which compressors actually keep the file on my device?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In this test: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor and LocalPhotoTool. For each of these the tool displayed a before-and-after size for our file while sending nothing that could have contained it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I check a compressor myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open your browser's developer tools, go to the Network tab, then compress a photo. Look for a request roughly as large as your file. If the largest request is a few kilobytes, the image was processed locally; if one is about the size of your photo, it went to a server. We wrote up the exact steps at compress images without uploading."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does \"uploads\" mean the tool is unsafe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Uploading is a legitimate architecture, and it is how most of these services work. What it changes is where your photo physically goes and who could technically see it. If you are compressing anything sensitive, that difference is the whole point."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How reliable is this test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is one run, one file, one browser, on one date. Tools change their code without announcing it, and a result here says nothing about what a server does with a file after receiving it. We publish the method and the raw per-site data so you can re-run it rather than take our word."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy — LocalPhotoTool">
+<meta property="og:description" content="No uploads, no accounts, no file tracking. How a static site handles your images.">
+<meta property="og:url" content="https://localphototool.com/privacy/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../compress-without-uploading/">No upload</a>
+        <a class="nav__link" href="../about/">About</a>
+        <a class="nav__link" href="./" aria-current="page">Privacy</a>
+      </div>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--primary" href="../compress/">Compress images</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Upload test</span>
+      </nav>
+      <h1>Do online image compressors upload your photos?</h1>
+      <p class="hero__lead">Most of them say your files never leave your device. We tested nine with a photo carrying a hidden marker, and watched every request each page made. Two sent the entire file to a server. Six did not.</p>
+      <p class="muted" style="font-size:0.82rem">Measured 25 September 2026 · one run per tool · method and raw data below</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>How the test works</h2>
+      <p>Marketing copy is not evidence, so we did not take any of it at face value. We built a 333.52 KB JPEG and hid a unique marker inside its EXIF data — a random string that exists nowhere else on the internet. If that string shows up in a request leaving the browser, then bytes from that file left the browser. There is no way to argue with it.</p>
+      <p>The probe photo is 341,529 bytes, 1600 × 1200, saved at quality 88 with GPS coordinates in its metadata, so it behaves like a real photograph rather than a test pattern. Its SHA-256 is <code>f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209</code>.</p>
+      <p>Then, for each tool: load the page in a headless browser, hand it the photo, press whatever button starts the work, and record every outbound request. We record from inside the page rather than from the browser's debugging protocol, because the protocol quietly drops large and streamed request bodies — using it made one upload look like a 1,144 byte request with nothing in it.</p>
+      <p>We also ran the whole thing against <a href="../compress/">our own compressor</a> as a control. A test that cannot show a file staying home is not fit to show one leaving.</p>
+
+      <h2>Results</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Tool</th><th>Largest thing it sent</th><th>Where it went</th><th>Result</th></tr>
+          </thead>
+          <tbody>
+        <tr><td>TinyPNG</td><td>The whole file — 341,529 bytes, marker matched 3×</td><td><code>/backend/opt/store</code></td><td><strong>Uploads</strong></td></tr>
+        <tr><td>iLoveIMG</td><td>The whole file — 341,729 bytes, marker matched 1×</td><td><code>https://api10.iloveimg.com/v1/upload</code></td><td><strong>Uploads</strong></td></tr>
+        <tr><td>Squoosh</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>CompressJPEG</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>ImageCompressor</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>JPEG Optimizer</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>Private Image Compressor</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>LocalPhotoTool (this site)</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>FreeConvert</td><td>Nothing the size of a photo</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The two that upload</h3>
+      <p><strong>TinyPNG</strong> sent the complete file — all 341,529 bytes — and our marker was found in the request body three times. <strong>iLoveIMG</strong> sent the file to an upload endpoint as well, and the marker was found there too.</p>
+      <p>Neither is doing anything wrong. Both are server-side compressors by design: that is how the product works, and both are upfront about it. What it changes is where your photo physically goes. If the photo still carries GPS coordinates, those go with it.</p>
+
+      <h3>The six that do not</h3>
+      <p>Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor and this site each showed our file's size in their own interface and produced a smaller version, while sending nothing large enough to have contained it. For those tools the claim checks out.</p>
+      <p>One tool, FreeConvert, we could not get to run under automation — it never displayed our file, so we recorded no verdict rather than invent one. Absence of evidence is not evidence of privacy.</p>
+
+      <h2>What this test cannot tell you</h2>
+      <ul>
+        <li><strong>It is one run.</strong> One file, one browser, one day. Any of these tools can change their behaviour without saying so.</li>
+        <li><strong>It only sees what the page sends.</strong> What a server does with a file after receiving it — how long it keeps it, who can read it — is outside what this method can observe.</li>
+        <li><strong>Server-side is not the same as unsafe.</strong> Plenty of people are fine with uploading a holiday photo. This matters for contracts, medical images, ID documents and anything you would not post publicly.</li>
+        <li><strong>A "stays local" result is for that page on that day.</strong> Re-run it yourself before trusting it with something that matters.</li>
+      </ul>
+
+      <h2>Checking a compressor yourself</h2>
+      <p>This takes about ten seconds and needs no tools beyond the browser you already have.</p>
+      <ol>
+        <li>Open the compressor, then open developer tools (F12, or Ctrl+Shift+I) and switch to the <strong>Network</strong> tab.</li>
+        <li>Reload the page so the list starts clean, then add your photo and start the compression.</li>
+        <li>Watch the <strong>Size</strong> column. If the biggest request is a few kilobytes, your photo was processed on your machine. If one request is about the size of your photo, it was uploaded.</li>
+        <li>Click that large request and open <strong>Request</strong> or <strong>Payload</strong>. If you can see your image in there, it left the browser.</li>
+      </ol>
+      <p>The full walkthrough, including what to do about it, is on our <a href="../compress-without-uploading/">compress without uploading</a> page.</p>
+
+      <h2>Re-running the measurement</h2>
+      <p>The probe generator and the measurement script are in the project repository, along with the raw per-site JSON this page was built from. Publish a correction if you find one — the point of writing the method down is that it can be checked.</p>
+
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>Does TinyPNG upload my photos?</summary>
+          <div class="faq__body"><p>Yes. In our test the full file — all 341,529 bytes — was sent to TinyPNG's own backend, and our marker was found in the request body three times. That is not a defect: TinyPNG is a server-side compressor by design, and it says so. It does mean your photo, including any GPS coordinates still in it, travels to their servers and is briefly stored there while it is processed.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does iLoveIMG upload my photos?</summary>
+          <div class="faq__body"><p>Yes. Our file was posted to an iLoveIMG upload endpoint and the marker was found in the request body. iLoveIMG is also server-side by design, and the compression happens on their infrastructure.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Which compressors actually keep the file on my device?</summary>
+          <div class="faq__body"><p>In this test: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor and LocalPhotoTool. For each of these the tool displayed a before-and-after size for our file while sending nothing that could have contained it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How can I check a compressor myself?</summary>
+          <div class="faq__body"><p>Open your browser's developer tools, go to the Network tab, then compress a photo. Look for a request roughly as large as your file. If the largest request is a few kilobytes, the image was processed locally; if one is about the size of your photo, it went to a server. We wrote up the exact steps at <a href="../compress-without-uploading/">compress images without uploading</a>.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does "uploads" mean the tool is unsafe?</summary>
+          <div class="faq__body"><p>No. Uploading is a legitimate architecture, and it is how most of these services work. What it changes is where your photo physically goes and who could technically see it. If you are compressing anything sensitive, that difference is the whole point.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How reliable is this test?</summary>
+          <div class="faq__body"><p>It is one run, one file, one browser, on one date. Tools change their code without announcing it, and a result here says nothing about what a server does with a file after receiving it. We publish the method and the raw per-site data so you can re-run it rather than take our word.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Site</h2>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="./">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pwa.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+</body>
+</html>
