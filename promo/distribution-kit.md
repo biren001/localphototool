@@ -45,12 +45,19 @@ is what makes a tool feel real to both readers and search engines.
 > browser — there is no upload endpoint, so your photos cannot leave your
 > device even by accident.**
 
-Two supporting facts, measured by our own scripts (`_dev/measured/`):
+Three supporting facts, measured by our own scripts (`_dev/measured/`). The
+third is the one no competitor can repeat, because it is a measurement of
+*them*, not of us:
 
 - A straight-from-camera JPEG shrinks **24–54%** in Auto mode as WebP,
   **41–68%** as AVIF, while staying above a ~40 dB fidelity floor.
 - At equal measured fidelity (40 dB), **AVIF needs ~26% fewer bytes than
   MozJPEG**; WebP lands about level with it.
+- In a network-traffic test of nine online compressors, **two sent the entire
+  file to a server** (TinyPNG and iLoveIMG) and **six kept it on the device**.
+  Measured by embedding a marker string in the JPEG's EXIF and reading every
+  outbound request body — not by reading privacy policies. Method, scripts and
+  the raw per-site JSON: `/image-compressor-upload-test/`.
 
 ## 2. Claims we do **not** make
 
@@ -168,6 +175,73 @@ On the personal-data side, since this is r/privacy:
 - EXIF and GPS are stripped from the output, and camera orientation is applied to the pixels first so portrait photos stay upright. Removing metadata without applying the orientation flag gives you sideways photos.
 - The site sets no cookies and loads no third-party analytics or fonts. The only server component is an aggregate daily-unique visit counter that stores a salted hash and nothing else — no IP, no user agent, no per-file data.
 - The one thing it does not do: it cannot verify you are not running it on a compromised machine. Nothing client-side can.
+```
+
+### The measurement post — Hacker News and Reddit
+
+**This is a different post from the ones above, and it is the only one with a
+chance of being cited.** Everything before it argues "our tool does not
+upload" — a claim thousands of tools make in the same words, and the reason a
+launch post reads as an advert. This one leads with data nobody else has
+collected: the actual outbound network traffic of nine named compressors,
+measured with a marker string rather than read off a privacy policy. The
+competitors writing "we do not upload" content (gowin.tools, metastrip.app,
+exifviewer.com, aiinforemover.com) all reason from policy pages. This does not.
+
+Two rules for publishing it, both learned from how these posts get removed:
+
+- **Do not open with the product.** Lead with the finding. The tool is the
+  reason the measurement exists, not the subject of the post.
+- **Disclose that LocalPhotoTool is ours, in the post itself.** Undisclosed
+  self-promotion is what gets an account banned, and the disclosure costs
+  nothing — the tool is one of the six that passed, not the headline.
+
+```copy name=measure-hn-title limit=80
+I measured what 9 online image compressors send over the network
+```
+
+```copy name=measure-hn-body limit=1200
+Instead of reading privacy policies, I measured the network traffic: which image compressors actually send your file somewhere?
+
+Method: a 341,529-byte JPEG with a unique marker in its EXIF, loaded into each page with fetch, XMLHttpRequest and sendBeacon patched from inside, so every outbound request body could be checked for the marker. If it appears, the file left the browser.
+
+Nine compressors. Two sent the whole file:
+
+- TinyPNG posted all 341,529 bytes to its own backend; the marker appeared three times.
+- iLoveIMG posted the file to an upload endpoint too.
+
+Six showed the file's size in their own UI and returned a smaller image while sending nothing big enough to hold it: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor, and the local-first tool I built myself (disclosure). FreeConvert would not render our file under automation, so it gets no verdict.
+
+Neither uploader is doing anything wrong — server-side is their design and both say so. It only changes where the photo goes, GPS included.
+
+Method, scripts and raw JSON: https://localphototool.com/image-compressor-upload-test/
+
+One file, one browser, one day; it only sees what the page sends.
+```
+
+```copy name=measure-reddit-title limit=300
+I watched the network traffic of 9 online image compressors. Two sent the entire file to a server.
+```
+
+```copy name=measure-reddit-body limit=2000
+I kept reading "your files are deleted after an hour" and realised I had no way to check it. Policies are hard to verify; network traffic is not.
+
+So I measured. I generated a 341,529-byte JPEG with a unique marker string in its EXIF, loaded it into each compressor, and patched that page's fetch, XMLHttpRequest and sendBeacon from the inside, to read every outbound request body and look for the marker. If the marker is in a request, the file left the browser. Nothing here is inferred from what the interface claims.
+
+Nine compressors. Two sent the complete file:
+
+- TinyPNG posted all 341,529 bytes to its own backend; the marker appeared in the request body three times.
+- iLoveIMG posted the file to an upload endpoint as well, marker included.
+
+Six showed the file's size in their own interface and gave back a smaller image while sending nothing large enough to contain it: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor, and the local-first tool I wrote myself. One tool, FreeConvert, never rendered our file under automation, so I recorded no verdict rather than inventing one.
+
+Neither of the two that upload is doing anything wrong. Server-side compression is their design and both are upfront about it. What it changes is where your photo physically goes — and if it still carries GPS coordinates, those go with it.
+
+You can run the same check in ten seconds: open the compressor, press F12, Network tab, reload, compress your photo and watch the Size column. If the largest request is a few kilobytes, it was processed on your machine. If one request is about the size of your photo, it went to a server.
+
+Method, scripts and raw JSON, MIT licensed: https://localphototool.com/image-compressor-upload-test/
+
+Caveats I would rather state than have pointed out: one run, one file, one browser, one day; it only observes what the page sends, not what a server does afterwards; and any of these tools can change without announcing it.
 ```
 
 ### dev.to article — 4000 character limit
@@ -354,6 +428,8 @@ anymore. Re-run that script before trusting any cell marked "likely".
 | **Google Search Console** | Google account — the DNS TXT was already in Cloudflare, so no verification step was needed | **Done 2026-09-23, and reporting 2026-09-24.** Sitemap read: 13 URLs discovered. Request Indexing submitted for the 8 priority URLs. This is the only channel that pushes to Google at all, and the only one where you can *ask* for a crawl instead of waiting to be found. **First index count arrived the next day: 8 indexed, 5 not** — so the old note that this takes 1–2 weeks was wrong for a domain this small, and there is nothing left to fix on the pages themselves. See the reading guide below before treating any of the remaining 5 as a problem. | ✅ done |
 | **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ reachable (re-measured 2026-09-23; was ❌ before) |
 | **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ✅ reachable (403 to a script, fine in a browser) |
+| **The measurement post** (`measure-hn-*`, `measure-reddit-*`) | the same accounts — **this does not bypass the aging problem** | The one post here that is a contribution rather than an advert: it leads with the nine-compressor traffic test instead of the product. Publish it *after* the account has history, as a separate submission from the launch post — reusing the same text twice gets both removed. | ✅ reachable |
+| **Writers who already reviewed an image compressor** | none — an email, and the measurement | **The only channel on this list that can produce a followed link**, which is the only thing that moves `AnchorCount: 0`. Not yet tested, so treat it as a hypothesis with a cheap experiment attached: find the people who have already published a "best image compressor" or "is TinyPNG safe" piece, and send them the finding plus the raw data. They are missing exactly one thing — evidence of what actually leaves the browser — and we have it. No account, no karma, no fee. | ✅ reachable |
 
 **Measured 2026-09-23: dev.to withholds `noindex, nofollow` until a post has
 traction.** Every article we sampled from `dev.to/api/articles/latest` carried
@@ -694,6 +770,8 @@ you will double-submit.
 | Google Search Console — Request Indexing | 2026-09-23 | done — 8 priority URLs, rest left to natural crawl | |
 | Google Search Console — **first index report** | 2026-09-24 | **8 indexed / 5 not.** Not-indexed = redirect variants ×2 (canonicalisation working, no action) + crawled-not-indexed ×3 (`/compress-photos-for-email/`, `/png-to-jpg/`, `/share/` — authority, not page quality; see §4) | |
 | Show HN | | | |
+| **The measurement post** (HN + Reddit, `measure-*`) | not yet | **copy written 2026-09-25, deliberately unposted.** It is the one post here that is a contribution rather than an advert, and it needs an account with history first — see the two publishing rules in §3. Submit it separately from the launch post; the same text twice gets both removed | |
+| **Writer outreach** (the only channel that can produce a followed link) | not yet | **hypothesis with a cheap experiment attached, not a measured channel.** Send the nine-compressor finding plus the raw JSON to people who have already published a "best image compressor" or "is TinyPNG safe" piece. They lack exactly the evidence we have. No account, no karma, no fee — and it is the only item on this page that can move `AnchorCount: 0` | |
 | r/SideProject | | | |
 | r/InternetIsBeautiful | | | |
 | AlternativeTo | | | |
