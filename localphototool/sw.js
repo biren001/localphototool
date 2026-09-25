@@ -70,7 +70,7 @@ var OFFLINE = ROOT + 'offline.html';
    also had to enter the sitemap before it entered the shell — a page inside the
    shell but outside the sitemap is a page the offline copy serves to visitors
    while no crawler is ever told it exists. */
-var VERSION = 'v31';
+var VERSION = 'v32';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
@@ -177,10 +177,14 @@ function store(cache, request, res) {
   }).catch(function () { return null; });
 }
 
-/* Serve from cache, then refresh in the background (stale-while-revalidate). */
+/* Serve from cache, then refresh in the background (stale-while-revalidate).
+   The match MUST include the query string: transfer/app.js is referenced as
+   "app.js?v=N" precisely so a changed URL misses this cache. With
+   ignoreSearch the version parameter is invisible and every cache-bust is
+   silently defeated — the old SW keeps serving the old script forever. */
 function cacheFirst(request, cacheName) {
   return caches.open(cacheName).then(function (cache) {
-    return cache.match(request, { ignoreSearch: true }).then(function (hit) {
+    return cache.match(request).then(function (hit) {
       var network = fetch(request).then(function (res) {
         store(cache, request, res.clone());
         return res;

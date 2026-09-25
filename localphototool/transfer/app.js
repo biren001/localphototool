@@ -10,6 +10,11 @@
  */
 'use strict';
 
+/* Asset version — the HTML's version guard checks this. When changing this
+   file, bump ALL of: __BEAM_VER__ here, the "?v=" in index.html, the guard's
+   expected number in index.html, and VERSION in ../sw.js. */
+window.__BEAM_VER__ = 32;
+
 (function () {
   // ---------- helpers ----------
   var $ = function (id) { return document.getElementById(id); };

@@ -615,7 +615,24 @@ html[data-theme="dark"] #beamApp {
      cache-first, so a bare "app.js" needs TWO reloads to pick up an update
      (one to install the new SW, one to fetch past its old cache). A changed
      URL bypasses the stale entry on the very first load. -->
-<script src="./app.js?v=30"></script>
+<script src="./app.js?v=32"></script>
+<!-- Version guard: until the NEW service worker has taken control, an OLD
+     service worker may still answer this request with a stale app.js it
+     cached earlier. If the loaded script does not declare the version this
+     page expects, reload ONCE — the waiting SW (skipWaiting) has usually
+     taken control by then and the reload lands on fresh code. sessionStorage
+     keeps this from ever looping; the manual second reload remains the
+     fallback. -->
+<script>
+(function () {
+  if (window.__BEAM_VER__ === 32) return;
+  try {
+    if (sessionStorage.getItem('beamReloadOnce')) return;
+    sessionStorage.setItem('beamReloadOnce', '1');
+  } catch (e) { return; }
+  location.reload();
+})();
+</script>
 <script src="../assets/js/site.js"></script>
 <script src="../assets/js/pwa.js" defer></script>
 <script src="../assets/js/stats.js" defer></script>
