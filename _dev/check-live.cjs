@@ -202,10 +202,28 @@ function finish() {
   const smUrls = [...smDoc.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   check('sitemap.xml is readable', smDoc.status === 200 && smUrls.length > 0,
     smDoc.error || smUrls.length + ' urls');
+  /* 9a-2. No advertised page may carry a noindex signal.
+     A page can fall out of the index with nothing visible changing: one
+     <meta name="robots" content="noindex"> reaching the shared head, or one
+     X-Robots-Tag header, is enough, and the page renders the same to a visitor.
+     Nothing else in this file inspects the public pages for that, so a single
+     shared-head edit could de-index the whole site while every other check here
+     stayed green. Both places the signal can hide are read, off the request the
+     reachability check below already makes. */
+  const noindexOn = [];
   for (const u of smUrls) {
     const r = await get(u);
     check('sitemap url resolves ' + u.replace('https://' + HOST, ''), r.status === 200, 'status ' + r.status);
+    if (r.status === 200 && r.body) {
+      const html = await r.body.text();
+      const header = r.headers.get('x-robots-tag') || '';
+      const meta = (html.match(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']*)/i) || [])[1] || '';
+      if (/noindex/i.test(header) || /noindex/i.test(meta)) noindexOn.push(u.replace(/^https:\/\/[^/]+/, '') || '/');
+    }
   }
+  check('no page in the sitemap carries a noindex signal', noindexOn.length === 0,
+    noindexOn.length ? 'noindex on: ' + noindexOn.join(' ')
+      : smUrls.length + ' pages checked — x-robots-tag and meta robots both clean');
 
   /* 9b. GEO: the AI-facing entry point must be live and must not contradict
      the privacy claim that the whole site is built on. */
