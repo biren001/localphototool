@@ -255,7 +255,13 @@ function finalize(request, response) {
     var isHtml = (out.headers.get('content-type') || '').indexOf('text/html') !== -1;
     var isStats = path.indexOf('/stats') === 0;                 // owner-only page
     var cache = isHtml ? (isStats ? 'no-store, must-revalidate' : null) : cacheHeaderFor(path);
-    var patchSecurity = isHtml && !out.headers.has('content-security-policy');
+    /* Always overwrite, never "fill if missing": asset responses come back
+       carrying the CSP from the _headers file, so a fill-if-missing patch
+       would leave a stale policy in place after the worker's CSP changes
+       (measured 2026-09-25: the transfer page shipped with the old policy
+       because of exactly that). The two files must stay in sync, but this
+       one wins. */
+    var patchSecurity = isHtml;
     var patchCache = !!cache;
     /* A module served with the wrong Content-Type cannot be imported at all —
        the browser refuses a module whose MIME type is not a JavaScript one, and
@@ -268,7 +274,7 @@ function finalize(request, response) {
     out = new Response(out.body, out);
     if (patchSecurity) {
       Object.keys(SECURITY_HEADERS).forEach(function (k) {
-        if (!out.headers.has(k)) out.headers.set(k, SECURITY_HEADERS[k]);
+        out.headers.set(k, SECURITY_HEADERS[k]);
       });
     }
     if (patchCache) out.headers.set('cache-control', cache);

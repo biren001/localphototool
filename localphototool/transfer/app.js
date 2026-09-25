@@ -492,10 +492,21 @@
 
   // ---------- signaling backend B: PeerJS public cloud (static-only hosting) ----------
   var peer = null;
+  var backendCloud = false;
   function cloudHost(onCode, onStatus, onError, onWire) {
+    backendCloud = true;
     var code = randCode(6);
+    // The code is generated locally, so the invite goes on screen before the
+    // signaling connection opens. If the network blocks the pairing service,
+    // the user sees a QR code plus an honest error after the timeout — not a
+    // spinner that never resolves.
+    onCode(code);
+    var open = false;
+    var timer = setTimeout(function () {
+      if (!open) onError('Could not reach the pairing service. This network appears to block it — try a different network, for example a mobile hotspot.');
+    }, 12000);
     peer = new Peer('beam-' + code, { config: ICE });
-    peer.on('open', function () { onCode(code); });
+    peer.on('open', function () { open = true; clearTimeout(timer); });
     peer.on('connection', function (conn) {
       var wire = makePeerWire(conn, {
         open: function () { registerWire(wire); onStatus('Connected', 'ok'); },
@@ -505,13 +516,19 @@
       if (onWire) onWire(wire);
     });
     peer.on('error', function (err) {
+      clearTimeout(timer);
       var t = (err && err.type) || 'unknown';
       if (t === 'unavailable-id') { if (peer) peer.destroy(); cloudHost(onCode, onStatus, onError, onWire); return; }
-      onError('Could not reach the public signaling service (' + t + '). This network appears to block it — switching to a different network, for example a mobile hotspot, usually fixes it.');
+      if (!open) onError('Could not reach the pairing service (' + t + '). This network appears to block it — try a different network, for example a mobile hotspot.');
     });
   }
   function cloudGuest(code, onStatus, onError, onWire) {
+    backendCloud = true;
     peer = new Peer({ config: ICE });
+    var open = false;
+    var timer = setTimeout(function () {
+      if (!open) onError('Could not reach the pairing service. This network appears to block it — try a different network, for example a mobile hotspot.');
+    }, 12000);
     function attempt(n) {
       var conn = peer.connect('beam-' + code, { reliable: true });
       var wire = makePeerWire(conn, {
@@ -525,9 +542,10 @@
         else onError('Could not reach that session. Check the code and try again.');
       });
     }
-    peer.on('open', function () { onStatus('Connecting…'); attempt(0); });
+    peer.on('open', function () { open = true; clearTimeout(timer); onStatus('Connecting…'); attempt(0); });
     peer.on('error', function (err) {
-      onError('Connection problem (' + ((err && err.type) || 'unknown') + '). This network appears to block the public signaling service.');
+      clearTimeout(timer);
+      if (!open) onError('Connection problem (' + ((err && err.type) || 'unknown') + '). This network appears to block the pairing service.');
     });
   }
 
@@ -569,8 +587,9 @@
       renderInvite(code);
       setStatus(hostStatus, 'Waiting for the other device to scan or enter the code…');
       // Heartbeat: keeps the room on the server even if the process recycles,
-      // so a code already shown / scanned never silently dies.
-      if (!forcedCloud()) {
+      // so a code already shown / scanned never silently dies. Cloud signaling
+      // has no server-side room to keep alive — skip the pointless POSTs.
+      if (!forcedCloud() && !backendCloud) {
         if (hostKeepalive) clearInterval(hostKeepalive);
         hostKeepalive = setInterval(function () { announceHost(code); }, 8000);
       }
