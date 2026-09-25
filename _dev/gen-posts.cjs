@@ -15,6 +15,11 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const KIT = path.join(ROOT, 'promo', 'distribution-kit.md');
 const OUT = path.join(ROOT, 'promo', 'ready-to-post.md');
+// Body only, as plain text. The markdown file above is meant to be read, so it
+// carries instructions and fenced blocks around the copy; select-all there and
+// you paste the instructions too. This file exists so that Ctrl+A / Ctrl+C
+// gives exactly the body and nothing else.
+const OUT_BODY = path.join(ROOT, 'promo', 'devto-post-body.txt');
 
 function blocks(src) {
   const out = new Map();
@@ -98,7 +103,16 @@ node _dev/check-listing-copy.cjs
 \`\`\`
 `;
 
+const devto = b.get('devto-post');
+const devtoLines = devto.split('\n');
+if (devtoLines[1] !== '') {
+  console.error('gen-posts: devto-post must be "title, blank line, body" — refusing to guess');
+  process.exit(1);
+}
+fs.writeFileSync(OUT_BODY, devtoLines.slice(2).join('\n').replace(/\n+$/, '') + '\n', { encoding: 'utf8' });
+
 fs.writeFileSync(OUT, md, { encoding: 'utf8' });
 console.log(`gen-posts: wrote ${path.relative(ROOT, OUT)}`);
 console.log(`  devto-post ${b.get('devto-post').length} chars`);
 console.log(`  ih-post    ${b.get('ih-post').length} chars`);
+console.log(`gen-posts: wrote ${path.relative(ROOT, OUT_BODY)} (body only, ${devtoLines.slice(2).join('\n').length} chars)`);

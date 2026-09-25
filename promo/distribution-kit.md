@@ -381,9 +381,15 @@ node _dev/shot-promo.cjs
 node _dev/gen-devto-cover.cjs    # promo/devto-cover.jpg, 1000x420 @2x
 ```
 
-Note that dev.to's cover field takes a **URL, not an upload** — paste
+The cover is fed one of two ways depending on which editor you picked in
+Settings → UX. The **rich + markdown** editor has an "Add cover image" button
+that accepts a local file and re-hosts it on `dev-to-uploads.s3.amazonaws.com`
+— prefer that route, it has no third-party dependency at all. The **basic
+markdown** editor has no cover button and only accepts a URL in frontmatter
+(`cover_image:`), so there the image has to already be online: paste
 `https://raw.githubusercontent.com/biren001/localphototool/main/promo/devto-cover.jpg`.
-That is the only reason these assets live in a public repo at all.
+Supporting that second route is the only reason these assets live in a public
+repo at all.
 
 ---
 

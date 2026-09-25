@@ -1,0 +1,33 @@
+Every image compressor I tried makes the same promise: "your files are deleted after an hour." That is a policy, not a property. I could not verify it, and I was compressing photos I would rather not have on someone else's server.
+
+So I built one where the upload step does not exist. There is no server-side image code at all — decoding, resizing and re-encoding run in the browser through WebAssembly builds of MozJPEG, libheif for iPhone HEIC, and an AVIF encoder. If you block every network request after the page loads, it still works.
+
+"Your files are deleted after an hour" is a promise. This is a property: there is no endpoint in the codebase to delete files from.
+
+## Two bugs I shipped before I measured anything
+
+1. Auto mode used to probe quality through the browser's native canvas. No browser encodes AVIF natively, so the canvas silently substituted another format, my probe reported a lossless pass, and the binary search settled on a quality that produced a 33 dB file while the page promised about 40 dB. The fix is not subtle: the probe has to use the same encoder as the final write.
+
+2. I published "WebP is 25-50% smaller than JPEG" for a while. When I measured it at equal PSNR against MozJPEG, WebP came out about 24% *larger*. That figure is not invented — it compares against baseline JPEG encoders, not an optimised one. I rewrote the page rather than keep the nicer-sounding number.
+
+## What it actually does, measured
+
+Rather than copy figures from a comparison table, I built a small corpus of camera photos and measured each case:
+
+- Camera JPEG to WebP, Auto mode: 24-54% smaller
+- Camera JPEG to AVIF, Auto mode: 41-68% smaller
+- An already-optimised photo: returned unchanged rather than re-compressed larger
+
+Auto mode aims at a 40 dB PSNR floor. That floor is the reason an already-optimised photo comes back unchanged: there is no quality left to give without dropping below it, and re-encoding to hit a number would make the file worse.
+
+EXIF and GPS are stripped, with camera orientation applied to the pixels first — removing metadata without applying the orientation flag hands you sideways photos. Batch processing, ZIP export on desktop (deliberately withheld on iOS, because the Files app will not unpack an archive into the photo library), and installable as a PWA.
+
+## The honest limits
+
+- Not "unlimited file size". The real ceiling is device memory, roughly 80 megapixels.
+- Not "every HEIC". libheif handles standard HEIF; exotic variants can fail.
+- Default Auto mode is lossy. PNG output is lossless.
+
+Free, no account, no watermark, no file-count limit. If you want to argue with my numbers, the measurement scripts are in the repo.
+
+Live: https://localphototool.com
