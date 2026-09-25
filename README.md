@@ -35,6 +35,8 @@ The figures on the site are reproducible from the measurement scripts, not copie
 
 Auto mode aims at ~40 dB PSNR. That floor is why an already-optimised photo comes back unchanged: there is no quality left to give without dropping below it.
 
+The corpus behind those numbers is not in this repository — seven camera photos, 7.6 MB, and not mine to redistribute. Put your own photos in `_dev/corpus/` and the same scripts will measure them the same way.
+
 ## Privacy
 
 - No upload endpoint, no cookies, no third-party analytics or fonts
