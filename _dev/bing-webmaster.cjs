@@ -22,6 +22,8 @@
      stats                  rank & traffic (this is where "is it indexed" shows up)
      crawl                  crawl stats and crawl issues
      query-stats            query-level impressions, if any have accumulated
+     urlinfo [url ...]      per-URL index status — works before crawl stats exist
+     raw <Method> [k=v]     call any documented method and dump the JSON
 
    The site URL must match Bing's registration exactly, trailing slash
    included, which is why SITE below is a constant rather than derived:
@@ -56,7 +58,22 @@ function loadKey() {
   return null;
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/* Bing throttles per host, not per key: past roughly nine calls in quick
+   succession it answers HTTP 400 with {"ErrorCode":5,"Message":"ThrottleHost"}
+   — which looks exactly like a malformed request unless you read the body.
+   Measured 2026-09-24 on this site: request 10 onward of a 13-URL loop all
+   failed that way, so a loop over the sitemap cannot work without backing off.
+   Transport failures are retried too; "fetch failed" was observed at roughly
+   1 in 4 on the first attempt of the day and then never again. */
+const MIN_GAP_MS = 900;
+let lastCallAt = 0;
+
 async function api(method, { query = {}, body = null, key } = {}) {
+  const gap = Date.now() - lastCallAt;
+  if (gap < MIN_GAP_MS) await sleep(MIN_GAP_MS - gap);
+
   const url = new URL(API + method);
   url.searchParams.set('apikey', key);
   for (const [k, v] of Object.entries(query)) url.searchParams.set(k, v);
@@ -68,25 +85,86 @@ async function api(method, { query = {}, body = null, key } = {}) {
         body: JSON.stringify(body),
       }
     : {};
-  const res = await fetch(url, init);
-  const text = await res.text();
-  if (!res.ok) {
-    const e = new Error(`HTTP ${res.status}: ${text.slice(0, 400)}`);
-    e.status = res.status;
-    throw e;
+
+  const MAX_ATTEMPTS = 4;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    let res;
+    try {
+      lastCallAt = Date.now();
+      res = await fetch(url, init);
+    } catch (err) {
+      // undici collapses DNS, TCP, TLS and reset failures into "fetch failed"
+      // and hides the reason in .cause — print it, or the next reader learns
+      // nothing from the error.
+      const cause = err.cause ? err.cause.code || err.cause.message : 'no cause reported';
+      if (attempt < MAX_ATTEMPTS) {
+        await sleep(600 * attempt);
+        continue;
+      }
+      throw new Error(`transport failure after ${attempt} attempts: ${cause} (host ${url.host}, ${method})`);
+    }
+
+    const text = await res.text();
+
+    if (res.status === 400 && /ThrottleHost/i.test(text) && attempt < MAX_ATTEMPTS) {
+      await sleep(1200 * attempt);
+      continue;
+    }
+
+    if (!res.ok) {
+      const e = new Error(`HTTP ${res.status}: ${text.slice(0, 400)}`);
+      e.status = res.status;
+      throw e;
+    }
+
+    let json = null;
+    try {
+      json = text ? JSON.parse(text) : null;
+    } catch {
+      /* some methods return an empty 200 body */
+    }
+    return json && Object.prototype.hasOwnProperty.call(json, 'd') ? json.d : json;
   }
-  let json = null;
-  try {
-    json = text ? JSON.parse(text) : null;
-  } catch {
-    /* some methods return an empty 200 body */
-  }
-  return json && Object.prototype.hasOwnProperty.call(json, 'd') ? json.d : json;
 }
 
 function localSitemapUrls() {
   const xml = fs.readFileSync(LOCAL_SITEMAP, 'utf8');
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
+}
+
+/* GetUrlInfo is served by an ASP.NET stack, so dates arrive as .NET's
+   "/Date(1789785741000)/" wrapper rather than ISO, and unavailable numbers
+   arrive as 0 rather than null. Both would read as real values if printed
+   raw — a HttpStatus of 0 is not "HTTP 0", it is "we have no status", and
+   that distinction is the whole point of asking. */
+function netDate(value) {
+  const m = typeof value === 'string' && value.match(/\/Date\((\d+)\)\//);
+  return m ? new Date(Number(m[1])).toISOString().slice(0, 10) : null;
+}
+
+function formatUrlInfo(short, info) {
+  if (!info || typeof info !== 'object') return `${short.padEnd(34)} no data`;
+  const status = Number(info.HttpStatus);
+  const discovered = netDate(info.DiscoveryDate);
+  const crawled = netDate(info.LastCrawledDate);
+
+  // A page Bing has never recorded answers with every field zeroed. Saying
+  // "never fetched" whenever HttpStatus is 0 was wrong: /compress/ had a real
+  // crawl date alongside a 0 status, so 0 means "not recorded", not "not
+  // fetched". Print nothing rather than something false.
+  if (!discovered && !crawled && !status) return `${short.padEnd(34)} no record at all`;
+
+  const bits = [];
+  if (status > 0) bits.push(`http ${status}`);
+  if (discovered) bits.push('found ' + discovered);
+  if (crawled) bits.push('crawled ' + crawled);
+  if (Number(info.DocumentSize) > 0) bits.push(`${Math.round(Number(info.DocumentSize) / 1024)}KB`);
+  // AnchorCount is inbound links Bing has seen. Zero on every page is the
+  // measured version of "the site has no authority yet" — worth printing,
+  // because it is the number this whole distribution effort is meant to move.
+  bits.push(`${Number(info.AnchorCount) || 0} inbound anchor(s)`);
+  if (info.IsBlocked) bits.push('BLOCKED');
+  return `${short.padEnd(34)} ${bits.join('  ')}`;
 }
 
 const COMMANDS = {
@@ -189,6 +267,55 @@ const COMMANDS = {
     for (const r of rows.slice(0, 25)) {
       console.log(`${String(r.Impressions).padStart(6)}  pos ${String(r.AvgImpressionPosition).padStart(5)}  ${r.Query}`);
     }
+  },
+
+  /* Ask Bing about each page individually. GetCrawlStats is aggregate and
+     stays empty for days on a new property, but GetUrlInfo answers per URL,
+     which is the question that actually matters: is this page in the index?
+     Field names differ between API revisions, so the first thing printed is
+     the raw object for the first URL, then a compact table. */
+  async urlinfo({ key }) {
+    const only = argv.filter((a) => a.startsWith('http'));
+    const urls = only.length ? only : localSitemapUrls();
+    console.log(`${urls.length} URL(s)\n`);
+
+    let printedShape = false;
+    for (const url of urls) {
+      try {
+        const info = await api('GetUrlInfo', { key, query: { siteUrl: SITE, url } });
+        if (!printedShape && info) {
+          console.log('raw shape for the first URL:');
+          console.log(JSON.stringify(info, null, 2).split('\n').map((l) => '  ' + l).join('\n'));
+          console.log('');
+          printedShape = true;
+        }
+        const short = url.replace(/^https:\/\/localphototool\.com/, '') || '/';
+        console.log(formatUrlInfo(short, info));
+      } catch (err) {
+        console.log(`${url.padEnd(34)} FAILED: ${err.message}`);
+      }
+    }
+  },
+
+  /* Escape hatch: call any documented method with ad-hoc query parameters.
+       node _dev/bing-webmaster.cjs raw GetUrlTrafficInfo siteUrl=... url=...
+     Keeps this script from needing an edit every time one more method is
+     wanted, and prints the raw JSON so field names can be read rather than
+     guessed at. */
+  async raw({ key }) {
+    const rest = argv.filter((a) => a !== 'raw' && !a.startsWith('--key-file'));
+    const method = rest.find((a) => !a.includes('='));
+    if (!method) {
+      console.error('usage: raw <MethodName> [key=value ...]');
+      process.exit(2);
+    }
+    const query = {};
+    for (const pair of rest) {
+      const i = pair.indexOf('=');
+      if (i > 0) query[pair.slice(0, i)] = pair.slice(i + 1);
+    }
+    const data = await api(method, { key, query });
+    console.log(JSON.stringify(data, null, 2));
   },
 };
 
