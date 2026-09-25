@@ -173,6 +173,27 @@ html[data-theme="dark"] #beamApp {
   max-height: 300px;
   border-radius: 8px;
   display: block;
+  cursor: zoom-in;
+}
+#beamLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  cursor: zoom-out;
+}
+#beamLightbox[hidden] { display: none; }
+#beamLightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
 }
 #beamApp .bubble .fname { font-weight: 650; }
 #beamApp .bubble a { color: inherit; font-weight: 650; }
@@ -458,6 +479,11 @@ html[data-theme="dark"] #beamApp {
       </div>
     </div>
   </section>
+
+  <!-- Full-screen image viewer: tap any photo preview to zoom it -->
+  <div id="beamLightbox" hidden role="dialog" aria-label="Image preview" aria-modal="true">
+    <img alt="Received image, enlarged">
+  </div>
 
   <!-- SEO content -->
   <section class="section section--subtle">

@@ -245,6 +245,12 @@
       var url = URL.createObjectURL(blob);
       var bubble = st.msg.querySelector('.bubble');
       var isImg = /^image\//.test(st.meta.mime);
+      if (blob.size !== st.meta.size) {
+        var warn = document.createElement('div');
+        warn.className = 'meta';
+        warn.textContent = 'Received ' + fmtBytes(blob.size) + ' of ' + fmtBytes(st.meta.size) + ' — the transfer was interrupted, please send this file again.';
+        bubble.appendChild(warn);
+      }
       if (isImg) {
         var img = document.createElement('img');
         img.src = url; img.alt = st.meta.name;
@@ -271,9 +277,9 @@
     textInput.value = '';
     textInput.focus();
   }
-  function sendFile(file) {
+  function sendFile(file, done) {
     var wire = wires.filter(function (w) { return w.open; })[0];
-    if (!wire) { notConnectedFeedback(); return; }
+    if (!wire) { notConnectedFeedback(); if (done) done(); return; }
     var id = 'f' + (++fileSeq);
     var bar = null, fill = null, sizeEl = null;
     addBubble(true, function (bubble) {
@@ -299,10 +305,11 @@
 
     var offset = 0;
     (function pump() {
-      if (!wire.open) { sizeEl.textContent = fmtBytes(file.size) + ' · failed'; return; }
+      if (!wire.open) { sizeEl.textContent = fmtBytes(file.size) + ' · failed'; if (done) done(); return; }
       if (offset >= file.size) {
         wire.send(JSON.stringify({ t: 'file-end', id: id }));
         sizeEl.textContent = fmtBytes(file.size) + ' · sent ✓';
+        if (done) done();
         return;
       }
       if (wire.buffered() > 4 * CHUNK) { setTimeout(pump, 40); return; }
@@ -312,8 +319,18 @@
         offset = end;
         fill.style.width = Math.round((offset / file.size) * 100) + '%';
         pump();
-      }).catch(function () { sizeEl.textContent = fmtBytes(file.size) + ' · failed'; });
+      }).catch(function () { sizeEl.textContent = fmtBytes(file.size) + ' · failed'; if (done) done(); });
     })();
+  }
+
+  // Files must travel one at a time: the receiver tracks a single "currently
+  // receiving" entry, so concurrent pumps would interleave chunks of two
+  // files and corrupt both. Chain every send behind the previous one.
+  var sendChain = Promise.resolve();
+  function enqueueFile(file) {
+    sendChain = sendChain.then(function () {
+      return new Promise(function (finished) { sendFile(file, finished); });
+    }).catch(function () {});
   }
 
   // ---------- signaling backend A: same-origin long polling ----------
@@ -685,8 +702,27 @@
   textInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') sendText(); });
   attachBtn.onclick = function () { fileInput.click(); };
   fileInput.addEventListener('change', function () {
-    Array.prototype.forEach.call(fileInput.files, sendFile);
+    Array.prototype.forEach.call(fileInput.files, enqueueFile);
     fileInput.value = '';
+  });
+
+  // ---------- lightbox: tap a photo preview to view it full-screen ----------
+  var lightbox = $('beamLightbox');
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightbox.querySelector('img').src = '';
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t && t.tagName === 'IMG' && t.closest && t.closest('#beamApp')) {
+      lightbox.querySelector('img').src = t.src;
+      lightbox.hidden = false;
+    } else if (t && t.id === 'beamLightbox') {
+      closeLightbox();
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
   });
 
   window.addEventListener('hashchange', function () { location.reload(); });
