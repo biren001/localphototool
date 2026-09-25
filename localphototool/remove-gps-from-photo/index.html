@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-compressor-defaults='{"mode":"target","targetKB":50}'>
+<html lang="en" data-theme="light" data-compressor-defaults='{"mode":"quality","quality":0.9}'>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compress an Image to Under 50 KB — Free, No Upload</title>
-<meta name="description" content="Shrink a photo, scan or signature to under 50 KB in your browser. The engine finds the highest quality that fits the budget. No uploads, no account, no watermark.">
-<link rel="canonical" href="https://localphototool.com/compress-to-50kb/">
+<title>Remove GPS Location From a Photo — Free, No Upload</title>
+<meta name="description" content="Strip GPS coordinates, camera data and timestamps from a photo in your browser. The file is rebuilt from pixels, so the metadata cannot survive — no uploads.">
+<link rel="canonical" href="https://localphototool.com/remove-gps-from-photo/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
-<meta property="og:title" content="Compress an Image to Under 50 KB — Free, No Upload">
-<meta property="og:description" content="Shrink a photo, scan or signature to under 50 KB in your browser. The engine finds the highest quality that fits the budget. No uploads, no account, no watermark.">
-<meta property="og:url" content="https://localphototool.com/compress-to-50kb/">
+<meta property="og:title" content="Remove GPS Location From a Photo — Free, No Upload">
+<meta property="og:description" content="Strip GPS coordinates, camera data and timestamps from a photo in your browser. The file is rebuilt from pixels, so the metadata cannot survive — no uploads.">
+<meta property="og:url" content="https://localphototool.com/remove-gps-from-photo/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Compress an Image to Under 50 KB — Free, No Upload">
-<meta name="twitter:description" content="Shrink a photo, scan or signature to under 50 KB in your browser. The engine finds the highest quality that fits the budget. No uploads, no account, no watermark.">
+<meta name="twitter:title" content="Remove GPS Location From a Photo — Free, No Upload">
+<meta name="twitter:description" content="Strip GPS coordinates, camera data and timestamps from a photo in your browser. The file is rebuilt from pixels, so the metadata cannot survive — no uploads.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -55,10 +55,10 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://localphototool.com/compress-to-50kb/#page",
-      "url": "https://localphototool.com/compress-to-50kb/",
-      "name": "Compress an Image to Under 50 KB — Free, No Upload",
-      "description": "Shrink a photo, scan or signature to under 50 KB in your browser. The engine finds the highest quality that fits the budget. No uploads, no account, no watermark.",
+      "@id": "https://localphototool.com/remove-gps-from-photo/#page",
+      "url": "https://localphototool.com/remove-gps-from-photo/",
+      "name": "Remove GPS Location From a Photo — Free, No Upload",
+      "description": "Strip GPS coordinates, camera data and timestamps from a photo in your browser. The file is rebuilt from pixels, so the metadata cannot survive — no uploads.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://localphototool.com/#website"
@@ -67,12 +67,12 @@
         "@id": "https://localphototool.com/#org"
       },
       "breadcrumb": {
-        "@id": "https://localphototool.com/compress-to-50kb/#breadcrumb"
+        "@id": "https://localphototool.com/remove-gps-from-photo/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://localphototool.com/compress-to-50kb/#breadcrumb",
+      "@id": "https://localphototool.com/remove-gps-from-photo/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -83,67 +83,61 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Compress",
-          "item": "https://localphototool.com/compress/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Compress an Image to Under 50 KB — Free, No Upload",
-          "item": "https://localphototool.com/compress-to-50kb/"
+          "name": "Remove GPS from a photo",
+          "item": "https://localphototool.com/remove-gps-from-photo/"
         }
       ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://localphototool.com/compress-to-50kb/#faq",
+      "@id": "https://localphototool.com/remove-gps-from-photo/#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I compress an image to exactly 50 KB?",
+          "name": "Does re-encoding a photo really remove GPS data?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes — pick Target size and enter 50. The engine binary-searches encoder quality until the output fits under 50 KB, and shows the real byte count of the finished file rather than an estimate."
+            "text": "Yes. GPS coordinates live in the EXIF metadata block of the file, not in the pixels. This tool decodes the photo to raw pixels and builds a brand-new file around them, so there is no metadata block left to carry anything — GPS, camera model, serial number and timestamps are all gone at once."
           }
         },
         {
           "@type": "Question",
-          "name": "50 KB is very small — what happens to my photo?",
+          "name": "Is the removal lossless?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The engine tries quality adjustments first and only reduces the pixel dimensions when no quality setting can reach the budget. A 12-megapixel camera photo will usually be scaled down in steps to roughly a web-size frame; a cropped ID photo at 300 × 400 pixels normally fits at 50 KB with good quality."
+            "text": "No, and we would rather say so plainly. The pixels are re-encoded at about 90% encoder quality — visually indistinguishable from the original in normal viewing, but not bit-identical. If you need a bit-identical file with only the metadata removed, use your operating system instead: Windows File Explorer's Remove properties, or macOS Preview's export options."
           }
         },
         {
           "@type": "Question",
-          "name": "Which format works best at 50 KB?",
+          "name": "Which social platforms strip location data anyway?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For photographs, JPG or WebP — WebP typically needs about 30 percent fewer bytes for the same look, which leaves more quality inside the budget. For scans of documents, signatures and forms, PNG with palette quantization often wins because text survives compression better than photographic detail."
+            "text": "Most large platforms — Facebook, Instagram, X, WhatsApp — strip EXIF on upload, so the risk there is small. But marketplaces, forums, email, cloud links shared as files, and any site that lets people download the original usually do not. If you do not know which camp a destination is in, strip the data before it leaves your device."
           }
         },
         {
           "@type": "Question",
-          "name": "Is 50 KB enough for a passport or ID photo?",
+          "name": "Can I remove only the GPS and keep the rest of the EXIF?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually yes. Most passport and visa portals ask for a fixed frame between 240 × 320 and 600 × 600 pixels with a size cap between 20 and 100 KB. Crop the photo to the required dimensions first, then compress to 50 KB — a properly cropped ID photo is small enough that the quality stays clean."
+            "text": "Not here — this tool removes all metadata in one pass, which is the honest trade for doing it entirely in your browser. Selective EXIF editing needs a metadata editor such as ExifTool or your operating system's built-in property remover."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I do this on my phone?",
+          "name": "Does taking a screenshot of the photo remove the location?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The page is touch-first and the compressor runs on any modern mobile browser, so you can shrink a photo or scan to 50 KB straight from an iPhone or Android device without installing anything."
+            "text": "Yes — a screenshot has no EXIF of the original photo. But it also throws away image quality, and it does nothing about what is visible in the frame itself: a house number, a street sign or a school name identifies a location just as precisely as a coordinate."
           }
         },
         {
           "@type": "Question",
-          "name": "Are my images uploaded to a server?",
+          "name": "Are my photos uploaded to a server?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. This is a static site with no upload endpoint. Your images are decoded, resampled and re-encoded inside your own browser, so they cannot leave your device even by accident."
+            "text": "No. This is a static site with no upload endpoint. Your photos are decoded and re-encoded inside your own browser, so they cannot leave your device even by accident — which is the whole point when the file is sensitive enough to need scrubbing."
           }
         }
       ]
@@ -171,7 +165,7 @@
 </script>
 </head>
 <body>
-<a class="skip-link" href="#tool">Skip to the compressor</a>
+<a class="skip-link" href="#tool">Skip to the tool</a>
 
 <header class="site-header">
   <div class="container">
@@ -211,17 +205,17 @@
   <section class="hero hero--compact">
     <div class="container">
       <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
-        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> Compress to 50 KB</span>
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> Remove GPS from a photo</span>
       </nav>
-      <h1>Compress an image to under 50 KB</h1>
-      <p class="hero__lead" style="max-width:660px">Government portals, ID scanners and signature uploads draw the line lower than most tools can reach honestly. 50 KB is a genuinely tight budget — this page opens the compressor with it already set, and the engine spends every byte deliberately: quality first, resolution only as a last resort.</p>
+      <h1>Remove GPS location from a photo</h1>
+      <p class="hero__lead" style="max-width:660px">Every phone photo carries a hidden tag with the coordinates where you stood — your home, your child's school, the hotel you are staying at right now. Drop a photo here and the tool rebuilds the file from its pixels alone: no GPS, no camera serial, no timestamp survives, and nothing ever leaves your device.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
           Nothing is uploaded
         </li>
-        <li class="badge">Budget: 50 KB</li>
-        <li class="badge">JPEG · WebP · AVIF · PNG</li>
+        <li class="badge">Metadata: removed</li>
+        <li class="badge">Original dimensions kept</li>
         <li class="badge">Unlimited &amp; free</li>
       </ul>
       <p class="hero__share" style="max-width:660px">
@@ -238,12 +232,12 @@
         <div class="dropzone__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
         </div>
-        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your images here</h2>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your photos here</h2>
         <p class="dropzone__hint">or paste from the clipboard · <span id="pasteHint" hidden>⌘V / Ctrl+V works too</span></p>
         <div class="dropzone__actions">
           <button class="btn btn--grad btn--lg" id="pickBtn" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
-            Choose images
+            Choose photos
           </button>
         </div>
         <p class="dropzone__formats">JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit</p>
@@ -253,11 +247,17 @@
       <!-- Settings -->
       <div class="settings">
         <div class="settings__head">
-          <h2 class="settings__title">Compression settings</h2>
-          <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
+          <h2 class="settings__title">Output settings</h2>
+          <span class="badge badge--brand" id="settingsBadge">Applied to every photo</span>
         </div>
 
         <div class="settings__body">
+          <div class="field" id="autoNote">
+            <p class="muted mb-0" style="font-size:0.82rem">
+              This page re-encodes each photo at high quality (about 90%). The file is rebuilt from raw pixels, which is what strips the metadata — GPS, camera data and timestamps cannot survive the rebuild. Dimensions are preserved.
+            </p>
+          </div>
+
           <div class="field">
             <span class="field__label">Strategy</span>
             <div class="segmented" role="radiogroup" aria-label="Compression strategy">
@@ -270,20 +270,14 @@
             </div>
           </div>
 
-          <div class="field" id="autoNote">
-            <p class="muted mb-0" style="font-size:0.82rem">
-              Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor.
-            </p>
-          </div>
-
           <div class="field hidden" id="qualityField">
             <div class="field__label">
               <label for="quality">Encoder quality</label>
               <span class="hint">higher keeps more detail</span>
             </div>
             <div class="field__row">
-              <input type="range" id="quality" min="10" max="100" step="1" value="80">
-              <span class="field__value" id="qualityValue">80%</span>
+              <input type="range" id="quality" min="10" max="100" step="1" value="90">
+              <span class="field__value" id="qualityValue">90%</span>
             </div>
           </div>
 
@@ -293,7 +287,7 @@
               <span class="hint">downscales automatically if needed</span>
             </div>
             <div class="input-group">
-              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="50" inputmode="numeric">
+              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="200" inputmode="numeric">
               <span class="input-group__suffix">KB</span>
             </div>
           </div>
@@ -434,62 +428,67 @@
   <!-- SEO content -->
   <section class="section section--subtle">
     <div class="container prose">
-      <h2>Where the 50 KB limit comes from</h2>
-      <p>Fifty kilobytes is not a design choice — it is what happens when a form is built around documents rather than photographs. The systems that actually enforce it:</p>
+      <h2>What is actually hiding inside your photo</h2>
+      <p>A photo from any phone or camera is two things in one file: the image you see, and a metadata block called EXIF that you do not. The EXIF block is written the instant the shutter fires, and what phones record by default is more than most people expect:</p>
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Where</th><th>Typical limit</th><th>Notes</th></tr>
+            <tr><th>Data</th><th>What it says about you</th><th>After this tool</th></tr>
           </thead>
           <tbody>
-            <tr><td>Passport and ID photo uploads</td><td>20 KB – 100 KB</td><td>Usually paired with fixed pixel dimensions</td></tr>
-            <tr><td>Visa and immigration portals</td><td>30 KB – 100 KB</td><td>JPG, face must fill a set fraction of the frame</td></tr>
-            <tr><td>Online signature and stamp uploads</td><td>20 KB – 50 KB</td><td>Almost always a fixed-height scan</td></tr>
-            <tr><td>Government tender and exam forms</td><td>20 KB – 100 KB</td><td>Photo plus signature as separate files</td></tr>
-            <tr><td>Forum avatars and classic CMS thumbnails</td><td>30 KB – 60 KB</td><td>PNG or JPG</td></tr>
+            <tr><td>GPS coordinates</td><td>Where you stood, to within a few metres — home, work, school</td><td>Removed</td></tr>
+            <tr><td>Date and exact time</td><td>Your routines and movements over time</td><td>Removed</td></tr>
+            <tr><td>Device make, model and serial</td><td>Which phone you own; can tie photos to one device</td><td>Removed</td></tr>
+            <tr><td>Camera settings, software, thumbnails</td><td>Fingerprinting material; embedded originals can survive edits</td><td>Removed</td></tr>
+            <tr><td>Orientation flag</td><td>Which way up the photo is</td><td>Applied to the pixels, so the photo stays upright</td></tr>
+            <tr><td>The image itself</td><td>—</td><td>Kept, re-encoded at ~90% quality</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h2>How to make 50 KB look good</h2>
-      <p>At this budget the encoder cannot save you on its own — the input has to cooperate. Four things matter more than any setting:</p>
+      <h2>Why the metadata cannot survive this tool</h2>
+      <p>Some privacy tools promise to &ldquo;delete&rdquo; the EXIF block. This one works differently, and the difference is what makes it trustworthy: the photo is decoded to raw pixels — at that moment every metadata block in the file is discarded by the decoder, because pixels are all a decoder reads — and a brand-new file is built around those pixels. The output file was never near your phone's GPS; there is simply no mechanism for a coordinate to get into it. You do not have to trust a promise, you can verify it: after saving, open the file's properties on any operating system, or run it through any EXIF viewer. The metadata panel will be empty.</p>
+
+      <h2>The honest trade-off: it is a re-encode</h2>
+      <p>Stripping metadata by rebuilding the file means the pixels are re-encoded, and that is a lossy operation: the saved photo is visually indistinguishable from the original in normal viewing, but it is not bit-identical, and repeated passes compound the loss. This page is set to about 90% quality by default — high enough that nobody can tell, low enough to keep the file reasonable. If you need the pixels untouched, use your operating system instead: <strong>Windows</strong> — right-click the file, Properties, Details, Remove Personal Information; <strong>macOS</strong> — Preview's Tools inspector, or export without metadata. Those are lossless but per-file and fiddly; this tool is batch and instant but re-encodes. Pick the right one for the job.</p>
+
+      <h2>When you actually need this</h2>
       <ul>
-        <li><strong>Crop to the required frame first.</strong> A 600 × 600 passport crop compresses cleanly at 50 KB; the same face floating in a 4000 × 3000 living-room shot cannot. Cropping away everything the form does not need is the single biggest quality win.</li>
-        <li><strong>Match the pixel dimensions the portal names.</strong> If it says 300 × 400, resize to exactly that (Advanced options → Resize — maximum edge, or your photo app) before compressing. Compressing a huge image and then shrinking the file twice always looks worse.</li>
-        <li><strong>Never send a photograph as PNG.</strong> A photo stored as PNG carries five to ten times the bytes of the same picture as JPG — at 50 KB that difference is the whole budget.</li>
-        <li><strong>Prefer WebP when the portal accepts it.</strong> WebP reaches the same look in roughly 70 percent of the bytes, which at this budget buys back visibly more detail.</li>
+        <li><strong>Selling things on marketplaces.</strong> A photo of a bicycle in your driveway, posted with GPS intact, is an address. Buyers do not need it.</li>
+        <li><strong>Photos of children.</strong> School runs, sports days, birthdays — a coordinate plus a timestamp is information a stranger should not get from a shared photo.</li>
+        <li><strong>Travel photos posted while away.</strong> Coordinates that say &ldquo;not home&rdquo; add a physical dimension to a burglar's map. Post them after you are back, scrubbed.</li>
+        <li><strong>Documents and screenshots of your screen.</strong> A photo of a letter, an ID card or a screen also carries GPS. The visible content may be what you meant to share; the location is not.</li>
+        <li><strong>Anywhere the original file can be downloaded.</strong> Big social platforms usually strip EXIF on upload — but marketplaces, forums, classified sites, email attachments and shared cloud links frequently do not. If you do not know, scrub first.</li>
       </ul>
 
-      <h2>How the engine spends such a small budget</h2>
-      <p>The target-size search on this page works the same way as on the other budget pages: it binary-searches encoder quality up to seven passes, and touches the pixel dimensions only when no quality setting can reach 50 KB. Two details matter specifically at this size. First, the number shown in the results panel is the real byte count of the finished file, not an estimate — a file reported as 49 KB will not suddenly arrive at the portal as 52 KB. Second, if the honest answer is that this image cannot fit at acceptable quality, the tool still gives you the best 50 KB version it can and shows you exactly what it did, rather than quietly wrecking the image.</p>
+      <h2>One more thing a scrub cannot fix</h2>
+      <p>Metadata removal only clears the hidden layer. What is <em>visible</em> in the frame still speaks: a house number, a street sign, a school badge on a uniform, a reflected face in a window. The strongest habit is framing with privacy in mind, and a light crop when the background gives away more than it should — <a href="../compress-to-500kb/">this site's size pages</a> cover how the engine handles dimensions, and a quick <a href="../compress/">compress</a> after scrubbing costs nothing extra since both happen in the same pass.</p>
 
-      <h2>Other budgets in one place</h2>
-      <p>If the form you are fighting asks for a different number: <a href="../compress-to-100kb/">compress an image to 100 KB</a> is the most common general-purpose limit, <a href="../compress-to-200kb/">compress an image to 200 KB</a> covers university and marketplace uploads, <a href="../compress-to-500kb/">compress an image to 500 KB</a> covers job portals and CMS libraries, and <a href="../compress-photos-for-email/">compressing photos for email</a> handles whole batches at once. The <a href="../compress/">main compressor</a> accepts any target you type.</p>
       <h2>Frequently asked questions</h2>
       <div class="faq mt-4">
         <details class="faq__item" open>
-          <summary>Can I compress an image to exactly 50 KB?</summary>
-          <div class="faq__body"><p>Yes — pick Target size and enter <code>50</code>. The engine binary-searches encoder quality until the output fits under 50 KB, and shows the real byte count of the finished file rather than an estimate.</p></div>
+          <summary>Does re-encoding a photo really remove GPS data?</summary>
+          <div class="faq__body"><p>Yes. GPS coordinates live in the EXIF metadata block of the file, not in the pixels. This tool decodes the photo to raw pixels and builds a brand-new file around them, so there is no metadata block left to carry anything — GPS, camera model, serial number and timestamps are all gone at once.</p></div>
         </details>
         <details class="faq__item">
-          <summary>50 KB is very small — what happens to my photo?</summary>
-          <div class="faq__body"><p>The engine tries quality adjustments first and only reduces the pixel dimensions when no quality setting can reach the budget. A 12-megapixel camera photo will usually be scaled down in steps to roughly a web-size frame; a cropped ID photo at 300 × 400 pixels normally fits at 50 KB with good quality.</p></div>
+          <summary>Is the removal lossless?</summary>
+          <div class="faq__body"><p>No, and we would rather say so plainly. The pixels are re-encoded at about 90% encoder quality — visually indistinguishable from the original in normal viewing, but not bit-identical. If you need a bit-identical file with only the metadata removed, use your operating system instead: Windows File Explorer's Remove properties, or macOS Preview's export options.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Which format works best at 50 KB?</summary>
-          <div class="faq__body"><p>For photographs, JPG or WebP — WebP typically needs about 30 percent fewer bytes for the same look, which leaves more quality inside the budget. For scans of documents, signatures and forms, PNG with palette quantization often wins because text survives compression better than photographic detail.</p></div>
+          <summary>Which social platforms strip location data anyway?</summary>
+          <div class="faq__body"><p>Most large platforms — Facebook, Instagram, X, WhatsApp — strip EXIF on upload, so the risk there is small. But marketplaces, forums, email, cloud links shared as files, and any site that lets people download the original usually do not. If you do not know which camp a destination is in, strip the data before it leaves your device.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Is 50 KB enough for a passport or ID photo?</summary>
-          <div class="faq__body"><p>Usually yes. Most passport and visa portals ask for a fixed frame between 240 × 320 and 600 × 600 pixels with a size cap between 20 and 100 KB. Crop the photo to the required dimensions first, then compress to 50 KB — a properly cropped ID photo is small enough that the quality stays clean.</p></div>
+          <summary>Can I remove only the GPS and keep the rest of the EXIF?</summary>
+          <div class="faq__body"><p>Not here — this tool removes all metadata in one pass, which is the honest trade for doing it entirely in your browser. Selective EXIF editing needs a metadata editor such as ExifTool or your operating system's built-in property remover.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Can I do this on my phone?</summary>
-          <div class="faq__body"><p>Yes. The page is touch-first and the compressor runs on any modern mobile browser, so you can shrink a photo or scan to 50 KB straight from an iPhone or Android device without installing anything.</p></div>
+          <summary>Does taking a screenshot of the photo remove the location?</summary>
+          <div class="faq__body"><p>Yes — a screenshot has no EXIF of the original photo. But it also throws away image quality, and it does nothing about what is visible in the frame itself: a house number, a street sign or a school name identifies a location just as precisely as a coordinate.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Are my images uploaded to a server?</summary>
-          <div class="faq__body"><p>No. This is a static site with no upload endpoint. Your images are decoded, resampled and re-encoded inside your own browser, so they cannot leave your device even by accident.</p></div>
+          <summary>Are my photos uploaded to a server?</summary>
+          <div class="faq__body"><p>No. This is a static site with no upload endpoint. Your photos are decoded and re-encoded inside your own browser, so they cannot leave your device even by accident — which is the whole point when the file is sensitive enough to need scrubbing.</p></div>
         </details>
       </div>
     </div>

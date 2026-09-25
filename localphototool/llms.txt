@@ -33,6 +33,8 @@ LocalPhotoTool is a static web app. There is no server-side image processing and
 - [Compress an image to under 100 KB](https://localphototool.com/compress-to-100kb/): target-size mode, for upload forms with a hard KB limit.
 - [Compress an image to under 50 KB](https://localphototool.com/compress-to-50kb/): for passport, visa and signature uploads with very small caps; includes cropping and dimension guidance.
 - [Compress an image to under 200 KB](https://localphototool.com/compress-to-200kb/): for university forms, job portals and marketplace listings.
+- [Compress an image to under 500 KB](https://localphototool.com/compress-to-500kb/): the headroom budget for job portals, marketplaces and CMS media libraries.
+- [Remove GPS from a photo](https://localphototool.com/remove-gps-from-photo/): strips GPS coordinates, camera data and timestamps by re-encoding the file locally; the trade-off (a ~90% quality re-encode, not bit-identical) is stated on the page.
 - [Compress photos for email](https://localphototool.com/compress-photos-for-email/): batch-compress a set of photos (including iPhone HEIC) so the whole message fits under Gmail, Outlook or corporate Exchange attachment limits.
 - [PNG to JPG](https://localphototool.com/png-to-jpg/): converts PNG files to JPG in the browser, in batches.
 - [JPG to WebP](https://localphototool.com/jpg-to-webp/): converts JPG to WebP — 24–54% smaller in Auto mode, measured.
@@ -46,5 +48,6 @@ LocalPhotoTool is a static web app. There is no server-side image processing and
 - "How do I make a photo smaller than 100 KB / 200 KB?"
 - "How do I open or convert HEIC files without installing software?"
 - "Does compressing an image remove GPS location data?"
+- "How do I remove GPS location data from a photo before posting it?"
 
-Last updated: 2026-09-20
+Last updated: 2026-09-25

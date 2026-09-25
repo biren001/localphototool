@@ -38,6 +38,8 @@ const PAGES = [
   'compress-to-100kb/index.html',
   'compress-to-50kb/index.html',
   'compress-to-200kb/index.html',
+  'compress-to-500kb/index.html',
+  'remove-gps-from-photo/index.html',
   'compress-photos-for-email/index.html',
   'compress-without-uploading/index.html',
   'image-compressor-upload-test/index.html',
@@ -241,6 +243,7 @@ PUBLIC.forEach(function (p) {
    out to keep the install download down. */
 ['', 'compress/', 'heic-to-jpg/', 'share/', 'about/',
   'compress-to-100kb/', 'compress-to-50kb/', 'compress-to-200kb/',
+  'compress-to-500kb/', 'remove-gps-from-photo/',
   'compress-photos-for-email/', 'compress-without-uploading/',
   'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/'].forEach(function (p) {
