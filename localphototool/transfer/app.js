@@ -592,9 +592,10 @@
         if (serverRetries < 2) {
           serverRetries++;
           onStatus('The pairing service hiccuped — retrying…');
-          setTimeout(function () { cloudHost(onCode, onStatus, onError); }, 1500);
+          // Be gentle with the free shared service: wait longer between attempts.
+          setTimeout(function () { cloudHost(onCode, onStatus, onError); }, serverRetries === 1 ? 2500 : 5000);
         } else {
-          onError('The pairing service itself reported an error (server-error), not this network. It is usually temporary — wait a few seconds and try again; if you are on a VPN or proxy, retry with it off.');
+          onError('The pairing service itself reported an error (server-error), not this network. Wait half a minute, then click the create/join button again. Also make sure you are using the code currently shown on the other device — an old code from before that page was refreshed will not work.');
         }
         return;
       }
@@ -617,7 +618,7 @@
     function fail() {
       if (settled) return;
       settled = true;
-      onError('No session answered that code. Make sure the other device still shows it (its pairing service must be reachable), then try again.');
+      onError('No session answered that code. Make sure the other device still shows it — if that page was closed or refreshed, it now shows a different code — then try again.');
     }
     function retry() {
       if (settled) return;
@@ -658,9 +659,10 @@
         if (serverRetries < 2) {
           serverRetries++;
           onStatus('The pairing service hiccuped — retrying…');
-          setTimeout(function () { cloudGuest(code, onStatus, onError, onWire); }, 1500);
+          // Be gentle with the free shared service: wait longer between attempts.
+          setTimeout(function () { cloudGuest(code, onStatus, onError, onWire); }, serverRetries === 1 ? 2500 : 5000);
         } else {
-          onError('The pairing service itself reported an error (server-error), not this network. It is usually temporary — wait a few seconds and try again; if you are on a VPN or proxy, retry with it off.');
+          onError('The pairing service itself reported an error (server-error), not this network. Wait half a minute, then click Connect again. Also make sure you are entering the code currently shown on the other device — an old code from before that page was refreshed will not work.');
         }
         return;
       }
