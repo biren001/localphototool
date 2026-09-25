@@ -31,7 +31,8 @@ function blocks(src) {
 const kit = fs.readFileSync(KIT, 'utf8');
 const b = blocks(kit);
 
-const WANTED = ['tagline', 'short', 'medium', 'long', 'pr-body'];
+const WANTED = ['tagline', 'short', 'medium', 'long', 'pr-body', 'awesome-privacy-entry',
+  'ts-tagline', 'ts-feature-1', 'ts-feature-2', 'ts-feature-3', 'ts-long'];
 for (const name of WANTED) {
   if (!b.has(name)) {
     console.error(`gen-directory-pack: block "${name}" is missing from the kit`);
@@ -63,13 +64,14 @@ const SITES = [
   {
     name: 'Tiny Startups',
     url: 'https://www.tinystartups.com/submit',
-    account: 'Log in / Sign up (Google or GitHub)',
+    account: '<b>No account needed</b> — the email you type in step 2 creates one',
     rel: 'dofollow on the listing\'s domain links; the "Visit Website" button is nofollow',
-    note: 'Their own pitch is a "DR 71 do-follow backlink". Measured: the domain-name links on a listing carry rel="noopener" only, so they do pass. The big Visit Website button does not. Either way it is one of the few listings here that passes anything at all, which is why it is first.',
+    note: 'Their own pitch is a "DR 71 do-follow backlink". Measured: the domain-name links on a listing carry rel="noopener" only, so they do pass. The big Visit Website button does not. Either way it is one of the few listings here that passes anything at all, which is why it is first. <b>It is a five-step wizard, not a form</b>, and it reads your site for you — walked with a real browser on 2026-09-24. The wizard fields are in their own table below. <b>Every listing is hand-approved</b>, so this is a submission and a wait.',
     steps: [
-      'Open the URL, click <b>Launch now</b>.',
-      'Sign up — Google or GitHub, both one click.',
-      'Domain: <code>localphototool.com</code>, then fill name and description from the table above.',
+      'Open the URL, click <b>Launch now</b>. No signup — that button only reveals the email field later.',
+      'Step 1: type <code>localphototool.com</code>. It fetches the site and pre-fills the next step: name, tagline, cover.',
+      'Step 2: <b>replace the auto-filled tagline</b> with the one below — the auto text is read from our homepage meta description, which still carries a claim this pack has retired. Then add the three features, the long description, your email, and upload the logo from <code>localphototool/icon-512.png</code>.',
+      'Steps 3–5: revenue, about you, upgrades. Upgrades are paid extras and are skippable.',
     ],
   },
   {
@@ -125,6 +127,29 @@ const fieldRows = FIELDS.map(
         <th>${esc(label)}</th>
         <td><code>${esc(value)}</code></td>
         <td><button data-copy="${esc(value)}">copy</button></td>
+      </tr>`
+).join('\n');
+
+/* The Tiny Startups wizard asks for different things than the generic table
+   above, and three of them are the only place that copy is ever pasted. Values
+   come from the kit, so check-listing-copy.cjs covers them. */
+const WIZARD_FIELDS = [
+  ['Name', 'LocalPhotoTool', null],
+  ['Tagline (200)', b.get('ts-tagline'), b.get('ts-tagline')],
+  ['Feature 1', b.get('ts-feature-1'), b.get('ts-feature-1')],
+  ['Feature 2', b.get('ts-feature-2'), b.get('ts-feature-2')],
+  ['Feature 3', b.get('ts-feature-3'), b.get('ts-feature-3')],
+  ['Long description (500)', b.get('ts-long'), b.get('ts-long')],
+  ['Your email', 'your own address — typing it is what creates the account', null],
+  ['Logo', 'localphototool/icon-512.png (512×512, in the site source)', 'localphototool/icon-512.png'],
+  ['Cover', 'already auto-filled from og-cover.jpg (1200×630) — leave it', null],
+];
+
+const wizardRows = WIZARD_FIELDS.map(
+  ([label, value, copy]) => `      <tr>
+        <th>${esc(label)}</th>
+        <td><code>${esc(value)}</code></td>
+        <td>${copy ? `<button data-copy="${esc(copy)}">copy</button>` : ''}</td>
       </tr>`
 ).join('\n');
 
@@ -218,6 +243,23 @@ const html = `<!doctype html>
 ${fieldRows}
   </tbody>
 </table>
+
+<h2 style="margin-bottom:12px">Tiny Startups — the five-step wizard</h2>
+<div class="card">
+  <p class="note">Not a form. Step 1 takes the domain, then reads your site and fills in the name,
+  tagline and cover by itself. Two of those need attention: <b>replace the tagline</b> and add the
+  three features. The wizard will not advance past step 2 until the three features and an email
+  are filled — pressing Continue early just says so.</p>
+  <table>
+    <tbody>
+${wizardRows}
+    </tbody>
+  </table>
+  <p class="note" style="margin-bottom:0">The auto-filled tagline is read from our homepage
+  <code>&lt;meta name="description"&gt;</code>, which still says "up to 90%" — a figure retired from
+  this pack because it holds for PNG screenshots and not for photographs. Paste the tagline above
+  over it. <b>Every listing there is hand-approved</b>, so expect a wait rather than an instant link.</p>
+</div>
 
 <h2 style="margin-bottom:12px">Sites, in the order worth doing</h2>
 ${siteCards}

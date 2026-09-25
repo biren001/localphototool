@@ -416,7 +416,7 @@ with a copy button, so an account plus a few pastes is all that is left.
 
 | Directory | Submit at | Notes |
 | --- | --- | --- |
-| **Tiny Startups** | <https://www.tinystartups.com/submit> — live form, **needs login** | Do this one first. Its own pitch is a "DR 71 do-follow backlink", and that holds up: on a sampled listing the domain-name links carry `rel="noopener"` only, so they do pass. The big *Visit Website* button is `nofollow` — the dofollow link is the listing itself, not the button. |
+| **Tiny Startups** | <https://www.tinystartups.com/submit> — a five-step wizard, and **no account is needed**: the email typed in step 2 creates one. Every field, with paste-ready copy, is in the section below. | Do this one first. Its own pitch is a "DR 71 do-follow backlink", and that holds up: on a sampled listing the domain-name links carry `rel="noopener"` only, so they do pass. The big *Visit Website* button is `nofollow` — the dofollow link is the listing itself, not the button. |
 | **SaaSHub** | <https://www.saashub.com/submit> — **a pitch page, not a form**; register, then *Submit Product* in the nav | Link quality is genuinely mixed: 11 of 26 outbound links on a sampled category page were dofollow, but the product placements on that same page were `nofollow sponsored`. Free and syndicates onward, so worth the five minutes, but not a ranking win. |
 | **DevHunt** | <https://devhunt.org/login> — **`/submit` is a 404 page answering 200**; the nav's *Submit your Dev Tool* points at `/login` | Dev-tool audience, which fits. Sign in with GitHub, then the form. |
 | **OpenAlternative** | <https://openalternative.co/submit> — **redirects to sign-in** | Log in first, then the form appears. |
@@ -449,6 +449,67 @@ None of the three inspects who submitted the request, and the repository has no
 `CONTRIBUTING.md` at all. That is the whole reason it is the one list of these
 three that a tool may submit to — and it is why the other two rows above are
 struck through instead of attempted.
+
+### Tiny Startups — what the wizard actually asks (measured 2026-09-24)
+
+`/submit` is a five-step wizard, not a form, and it reads your site for you.
+Walked with a real browser; these are the fields it renders, in order.
+
+| Step | Asks for | What happens |
+| --- | --- | --- |
+| 1 of 5 | Your startup's URL | Type `localphototool.com`. It then fetches the site and pre-fills the next step — nothing to upload. |
+| 2 of 5 | Name, Tagline, **Feature 1–3**, a longer description (optional), **your email**, logo, cover | Will not advance until the three features and an email are filled. Trying gets you "Three things, so the listing can say what makes it different." |
+| 3 of 5 | Revenue | |
+| 4 of 5 | About you | |
+| 5 of 5 | Upgrades | Paid extras. |
+
+Three things that change how this one is done:
+
+- **There is no signup.** The email field reads "No signup needed — we make your
+  account with this so your launch has a home." So there is no Google or GitHub
+  login step, and this is the only entry on this list where the account is made
+  for you rather than by you. An earlier revision of the row above said "sign up
+  — Google or GitHub, both one click", which was wrong.
+- **Every listing is hand-approved** — their own footer says so. This is a
+  submission and a wait, not an instant backlink.
+- **The auto-filled tagline carries a retired claim.** It is read from our
+  homepage `<meta name="description">`, which still says "up to 90%" — the
+  figure this file's own guard bans, because it holds for PNG screenshots and
+  not for photographs. Paste the tagline below instead of accepting what
+  arrives. (The homepage description itself is a separate, one-line fix; see
+  the note at the end of this section.)
+
+Auto-filled and already correct: **Name** `LocalPhotoTool`, and the **cover**,
+pulled from `og-cover.jpg` (1200×630). The **logo** slot comes up empty — upload
+`localphototool/icon-512.png` from the site source, which is 512×512.
+
+```copy name=ts-tagline limit=200
+A browser image compressor that never uploads your files. Shrink JPG, PNG, WebP, HEIC and AVIF, hit an exact KB target, and get EXIF and GPS stripped on the way out. Free, no account.
+```
+
+```copy name=ts-feature-1 limit=40
+Nothing ever leaves your device
+```
+
+```copy name=ts-feature-2 limit=40
+Compress to an exact KB target
+```
+
+```copy name=ts-feature-3 limit=40
+HEIC and AVIF in-browser
+```
+
+```copy name=ts-long limit=500
+For anyone who needs a smaller image without handing it to a stranger's server: portfolios, marketplace limits, metered data. Replaces TinyPNG, iLoveIMG and Squoosh. Decoding and re-encoding run in WebAssembly builds of MozJPEG, libheif and an AVIF encoder in the page — the codebase has no upload endpoint, so there is no server to send them to. Set a target size and it finds the quality that fits. EXIF and GPS are stripped. I built it because every "free" compressor asked for the photo first.
+```
+
+The homepage `<meta name="description">` still carries "up to 90%" and is the
+only place on the site that does — `grep -rn "up to 90%" localphototool` returns
+that single line. It is not visible body copy, but it is what search results and
+every auto-filling directory will show. Fixing it means editing a precached file,
+so it needs a `sw.js` version bump and a repack; the honest replacement is the
+same sentence minus the range, which the FAQ two screens down already states
+properly ("screenshots saved as PNG typically shrink 70–90%").
 
 ### Tier 3 — answer distribution (slow, durable)
 
