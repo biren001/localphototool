@@ -75,7 +75,8 @@ for (const f of files) {
   const h1s = [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)].map((m) =>
     m[1].replace(/<[^>]+>/g, '').trim()
   );
-  const words = textOf(html).split(/\s+/).filter(Boolean).length;
+  const text = textOf(html);
+  const words = text.split(/\s+/).filter(Boolean).length;
   const canonical = (html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)["']/i) || [
     ,
     '',
@@ -96,6 +97,15 @@ for (const f of files) {
   const types = jsonLdTypes(html);
   const h2 = [...html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].length;
   const lang = (html.match(/<html[^>]*\slang=["']([^"']*)["']/i) || [, ''])[1];
+  // A page can tell the reader that code, data or a repository is published.
+  // If it links no code host, the reader has nowhere to go: the claim is
+  // unverifiable, which is the one thing these pages cannot afford to be.
+  const codeHosts = [
+    ...html.matchAll(
+      /href=["']https?:\/\/(?:www\.)?(?:github|gitlab|codeberg)\.(?:com|org)[^"']*["']/gi
+    ),
+  ];
+  const claimsPublished = /\b(repository|source code|open[- ]sourced?)\b/i.test(text);
 
   rows.push({
     rel,
@@ -113,6 +123,8 @@ for (const f of files) {
     ogUrlTags,
     ogTitleCount,
     selfPrivacyLink,
+    claimsPublished,
+    codeHosts: codeHosts.length,
     imgTotal: imgs.length,
     imgNoAlt: imgsMissingAlt,
     lang,
@@ -150,6 +162,12 @@ for (const r of rows) {
   if (r.imgNoAlt > 0) gaps.push(`${r.rel}: ${r.imgNoAlt}/${r.imgTotal} images without alt`);
   if (!r.lang) gaps.push(`${r.rel}: no lang attribute on <html>`);
   if (!r.canonical) gaps.push(`${r.rel}: no canonical`);
+  if (r.claimsPublished && r.codeHosts === 0) {
+    gaps.push(
+      `${r.rel}: body mentions a repository / source code but links no code host ` +
+        `(a claim the reader cannot follow)`
+    );
+  }
   if (r.canonical) {
     // og:url must be unique and agree with canonical — a duplicated head block
     // (typical when a page is cloned from a template) silently sends social
