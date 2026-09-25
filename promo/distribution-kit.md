@@ -316,7 +316,7 @@ anymore. Re-run that script before trusting any cell marked "likely".
 
 | Channel | What it needs | Why it is first | From mainland China |
 | --- | --- | --- | --- |
-| **GitHub** | A public repo + README with the live URL | **Already done** (2026-09-22). Google discovers a brand-new host by following a link from a page it already crawls, and github.com is re-crawled continuously; dev.to and Indie Hackers work the same way. Search Console is what tells Google to come look — this is the other half, the link it follows once it does. | ✅ reachable |
+| **GitHub** | A public repo + README with the live URL | **Already done** (2026-09-22). Google discovers a brand-new host by following a link from a page it already crawls, and github.com is re-crawled continuously; dev.to and Indie Hackers work the same way. Search Console is what tells Google to come look — this is the other half, the link it follows once it does. **Measured 2026-09-23: GitHub puts `rel="nofollow"` on both the README link and the About website link, so this is discovery only — it passes no ranking signal. Every awesome-list PR is a GitHub link and so is worth exactly the same: discovery, not authority.** | ✅ reachable |
 | **IndexNow** | The key file at the site root (already generated) | One unauthenticated POST pushes all 13 URLs into Bing, Yandex, Seznam and Naver at once — no account, no dashboard. `node _dev/indexnow-submit.cjs` does it. This is the only *submission* channel available without a VPN, because Google's equivalent (the sitemap ping endpoint) was retired in June 2023 and now 404s. | ✅ reachable |
 | **Bing Webmaster Tools** | Microsoft account — **no DNS record needed** | 5 minutes, and Bing's index is what feeds Copilot, ChatGPT search and Yahoo — which is most of the "AI recommends a tool" surface. Choose **Import from Google Search Console**: our GSC domain verification already sits in DNS as a `google-site-verification` TXT, so Bing can take the property from Google rather than asking for a second record. Import, then submit `sitemap.xml`. | ✅ reachable |
 | **dev.to** and **Indie Hackers** | An account | Both give a followed link on a domain Google re-crawls daily, plus an English dev audience that actually needs this tool. dev.to post: the build story + the two measurement corrections in §2. | ✅ reachable |
@@ -344,14 +344,24 @@ Each of these is a one-time 5-minute form. They are weak individually and
 compound in aggregate, because tools directories are themselves well indexed.
 **Verify the URL is still alive before submitting** — this category churns.
 
-| Directory | Notes |
-| --- | --- |
-| **AlternativeTo** | List as an alternative to TinyPNG, iLoveIMG, Squoosh, Compressor.io. Register the app, then add it to each. |
-| **Product Hunt** | Optionally a full launch — needs a gallery (see §5) and a 12:01am PT start. A listing alone still earns a lasting backlink. |
-| **free-for.dev** | A GitHub PR, not a form. Use `pr-body`. |
-| **awesome-privacy** / **awesome-web-tools** | GitHub PRs. Read the contribution rules first; some require alphabetical order and a specific line format. |
-| **Uneed**, **MicroLaunch**, **DevHunt**, **Tiny Startups**, **Launching Next**, **SaaSHub**, **OpenAlternative**, **Peerlist Launchpad** | Free tiers exist on all of these. The `short` / `medium` blocks are written for their forms. |
-| **Slant**, **LibHunt** | Add to the relevant "best image compressor" question. |
+URLs checked 2026-09-23. A 403 here is Cloudflare refusing a script, which
+says nothing about a browser — those are marked "403 to a script". A 404 means
+the guessed path is simply wrong, and those need finding by hand.
+
+| Directory | Submit at | Notes |
+| --- | --- | --- |
+| **SaaSHub** | <https://www.saashub.com/submit> — 200 | Confirmed live form. Do this one first. |
+| **Tiny Startups** | <https://www.tinystartups.com/submit> — 200 | Title says "Launch your startup — free". |
+| **DevHunt** | <https://devhunt.org/submit> — 200 | Dev-tool audience, which fits. |
+| **OpenAlternative** | <https://openalternative.co/submit> — 200, but **redirects to sign-in** | Log in first, then the form appears. |
+| **Uneed** | <https://www.uneed.best/> — 200 | `/submit` is a 404; the entry point is a button on the home page. |
+| **MicroLaunch** | <https://microlaunch.net/> — 200 | `/submit` now redirects to `/premium` — check whether a free tier still exists before spending time. |
+| **Product Hunt** | <https://www.producthunt.com/posts/new> — 403 to a script | Optionally a full launch — needs a gallery (see §5) and a 12:01am PT start. A listing alone still earns a lasting link. |
+| **AlternativeTo** | 403 to a script (path not confirmed) | List as an alternative to TinyPNG, iLoveIMG, Squoosh, Compressor.io: register the app, then add it to each. |
+| **Launching Next**, **Peerlist Launchpad**, **LibHunt**, **Slant** | 403 to a script | Reach each from its own home page. Slant and LibHunt want an answer on their "best image compressor" question, not a listing. |
+| **free-for.dev** | <https://github.com/ripienaar/free-for-dev> — 200 | A GitHub PR, not a form. Use `pr-body`. **nofollow** — discovery only. |
+| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — 200 | GitHub PR. Read the contribution rules: many awesome lists want alphabetical order and an exact line format. **nofollow.** |
+| **awesome-selfhosted** | <https://github.com/awesome-selfhosted/awesome-selfhosted> — 200 | Same. Our fit is weaker here — this one is about hosting, and we have no server. |
 
 ### Tier 3 — answer distribution (slow, durable)
 
