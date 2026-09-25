@@ -234,29 +234,39 @@ Free, no account, no file limit. Traffic is still tiny — distribution is the h
 
 ### Pull request description — awesome-privacy
 
-Written for awesome-privacy's `Images` section, which is the only list left that
-is open to us. Keep the disclosure line: it is the difference between a listing
-and undisclosed self-promotion.
+Written for awesome-privacy, the only list left that is open to us. Keep the
+disclosure line: it is the difference between a listing and undisclosed
+self-promotion.
+
+The target is `## Photo Editing and Management` → `#### Web`, **not** the
+`### Images` heading sitting under `## Cloaking`. That one is cloaking tools —
+Fawkes, ImageScrubber — and a compressor does not belong in it; an earlier
+revision of this file said it did, from matching the heading name alone. `#### Web`
+holds one entry today, miniPaint, and its description makes the same promise ours
+does. The same section's Android list already carries a compressor (ImagePipe:
+"reduces image size and removes exif-tags"), so the fit is established, not
+argued.
 
 ```copy name=pr-body limit=1000
-Adds LocalPhotoTool to the Images section.
+Adds LocalPhotoTool to the Web subsection of Photo Editing and Management.
 
-Why it belongs here: it compresses and converts JPEG, PNG, WebP, HEIC and AVIF in the browser without uploading anything. Decoding and re-encoding run locally through WebAssembly builds of MozJPEG, libheif and an AVIF encoder, so there is no upload endpoint in the codebase at all — not a policy of deleting files after an interval, but no server to send them to. It replaces the hosted compressors people reach for by default (TinyPNG, iLoveIMG, Squoosh) and handles HEIC input, which most browser-only tools do not.
+Why it belongs here: it compresses and converts JPEG, PNG, WebP, HEIC and AVIF in the browser without uploading anything. Decoding and re-encoding run locally through WebAssembly builds of MozJPEG, libheif and an AVIF encoder, so there is no upload endpoint in the codebase at all — not a policy of deleting files after an interval, but no server to send them to. It replaces the hosted compressors people reach for by default (TinyPNG, iLoveIMG, Squoosh), handles HEIC input, which most browser-only tools do not, and strips EXIF and GPS data from the result.
 
 It meets the three listing requirements: it has a privacy policy, the site sets no cookies and loads no third-party scripts, and the source is public under MIT. It is a static site, so it is self-hostable.
 
 Full disclosure: I maintain it. Happy to change the wording or move it to another section.
 ```
 
-### The line to add — awesome-privacy, `Images` section
+### The line to add — awesome-privacy, `#### Web` under `## Photo Editing and Management`
 
-One line, matching the format of the entries already there. Insert it in the
-`### Images` section of `README.md`, after `ImageScrubber`. The list's own rule
-is one sentence that says what the tool does and what it replaces, with the
-licence and whether it is self-hostable.
+One line, on the line immediately after `miniPaint`. The list's own rule is one
+sentence saying what the tool does and what it replaces, with the licence and
+whether it is self-hostable. `pr-lint` needs a ` - ` before the description, and
+its lychee link check hard-fails on 404/410 and on dead domains, so both URLs
+have to answer — `localphototool.com` and the repository do.
 
 ```copy name=awesome-privacy-entry limit=400
-- [LocalPhotoTool](https://localphototool.com) - Browser-based compressor and converter for JPEG, PNG, WebP, HEIC and AVIF that runs entirely on your device, so nothing is uploaded ([source](https://github.com/biren001/localphototool), MIT, self-hostable).
+- [LocalPhotoTool](https://localphototool.com) - Compresses and converts JPEG, PNG, WebP, HEIC and AVIF in your browser with nothing uploaded, stripping EXIF and GPS from the result ([source](https://github.com/biren001/localphototool), MIT, self-hostable).
 ```
 
 ### GitHub repository README
