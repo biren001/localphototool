@@ -13,7 +13,7 @@
 /* Asset version — the HTML's version guard checks this. When changing this
    file, bump ALL of: __BEAM_VER__ here, the "?v=" in index.html, the guard's
    expected number in index.html, and VERSION in ../sw.js. */
-window.__BEAM_VER__ = 32;
+window.__BEAM_VER__ = 33;
 
 (function () {
   // ---------- helpers ----------
@@ -37,6 +37,15 @@ window.__BEAM_VER__ = 32;
     return (n / 1073741824).toFixed(2) + ' GB';
   }
   function now() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+
+  // Diagnostics line (see #beamDiag in the HTML): renders before anything can
+  // fail, so even a broken-pairing screenshot carries the three facts that
+  // decide whether pairing can work at all.
+  try {
+    $('beamDiag').textContent = 'beam v' + window.__BEAM_VER__ +
+      ' · WebRTC ' + (typeof RTCPeerConnection !== 'undefined' ? 'ok' : 'MISSING') +
+      (navigator.serviceWorker && navigator.serviceWorker.controller ? ' · SW-managed' : ' · SW bypassed');
+  } catch (e) {}
 
   // ICE servers: Google STUN first (most of this site's audience is outside
   // CN); the CN-reachable ones stay as fallbacks for visitors behind the GFW.

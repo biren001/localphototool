@@ -90,6 +90,7 @@ html[data-theme="dark"] #beamApp {
 #beamApp .status.err { color: var(--b-err); }
 #beamApp .status.ok { color: var(--b-ok); }
 #beamApp .b-code.pending { opacity: 0.45; }
+#beamApp .b-diag { margin: 20px 0 0; color: var(--b-muted); font-size: 11px; opacity: 0.8; text-align: center; }
 
 #beamApp button, #beamApp input[type="text"] { font: inherit; color: inherit; }
 #beamApp button {
@@ -479,6 +480,13 @@ html[data-theme="dark"] #beamApp {
           </div>
           <p class="hint">Everything on this page lives only in this browser tab. Refresh or close and it's gone.</p>
         </section>
+
+        <!-- One-line diagnostics: any screenshot of this page then tells us
+             which code version it runs, whether this browser can do WebRTC
+             at all, and whether a service worker is controlling its loads —
+             the three usual suspects when a camera-scanned browser cannot
+             pair while WeChat's built-in one can. -->
+        <p class="b-diag" id="beamDiag"></p>
       </div>
     </div>
   </section>
@@ -615,7 +623,7 @@ html[data-theme="dark"] #beamApp {
      cache-first, so a bare "app.js" needs TWO reloads to pick up an update
      (one to install the new SW, one to fetch past its old cache). A changed
      URL bypasses the stale entry on the very first load. -->
-<script src="./app.js?v=32"></script>
+<script src="./app.js?v=33"></script>
 <!-- Version guard: until the NEW service worker has taken control, an OLD
      service worker may still answer this request with a stale app.js it
      cached earlier. If the loaded script does not declare the version this
@@ -625,7 +633,7 @@ html[data-theme="dark"] #beamApp {
      fallback. -->
 <script>
 (function () {
-  if (window.__BEAM_VER__ === 32) return;
+  if (window.__BEAM_VER__ === 33) return;
   try {
     if (sessionStorage.getItem('beamReloadOnce')) return;
     sessionStorage.setItem('beamReloadOnce', '1');
