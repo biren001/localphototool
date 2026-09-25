@@ -1,10 +1,17 @@
 # LocalPhotoTool — distribution kit
 
-The site is live and shareable, but **not indexed anywhere yet** — no search
-engine has been told about it and nothing links to it. This file is the
-execution plan for fixing that. §4 is ordered for a **mainland-China
-connection**, where Google, Hacker News and Reddit have no route at all; the
-reachability column there is measured, not assumed.
+The site is live and shareable. As of 2026-09-23 the Google Search Console
+property is verified and the sitemap has been read — status 成功, 13 URLs
+discovered, which is exactly the sitemap count. **Discovery is handled. What
+remains is authority, and authority means links.** That is what this file is
+for now.
+
+§4 is ordered for a **mainland-China connection**, and the reachability column
+is measured, not assumed. Re-measured 2026-09-23: **all 16 channels answer**,
+including Hacker News, Reddit, Product Hunt, AlternativeTo and Medium, which
+had no route when this table was first written. A 403 means reachable but
+bot-protected — that blocks a script, not a person in a browser. Re-run
+`node _dev/check-reachability.cjs` before trusting any cell here.
 
 Everything in a `copy` block below is **machine-checked** against its
 platform's character limit:
@@ -159,6 +166,72 @@ On the personal-data side, since this is r/privacy:
 - The one thing it does not do: it cannot verify you are not running it on a compromised machine. Nothing client-side can.
 ```
 
+### dev.to article — 4000 character limit
+
+The dev audience wants the build story and the two measurement corrections,
+not a launch announcement. This is the one block that is long enough to carry
+the numbers table, so it is also the most quotable source for anyone writing
+about the tool later.
+
+```copy name=devto-post limit=4000 refutes
+I built an image compressor that cannot upload your photos
+
+Every image compressor I tried makes the same promise: "your files are deleted after an hour." That is a policy, not a property. I could not verify it, and I was compressing photos I would rather not have on someone else's server.
+
+So I built one where the upload step does not exist. There is no server-side image code at all — decoding, resizing and re-encoding run in the browser through WebAssembly builds of MozJPEG, libheif for iPhone HEIC, and an AVIF encoder. If you block every network request after the page loads, it still works.
+
+"Your files are deleted after an hour" is a promise. This is a property: there is no endpoint in the codebase to delete files from.
+
+## Two bugs I shipped before I measured anything
+
+1. Auto mode used to probe quality through the browser's native canvas. No browser encodes AVIF natively, so the canvas silently substituted another format, my probe reported a lossless pass, and the binary search settled on a quality that produced a 33 dB file while the page promised about 40 dB. The fix is not subtle: the probe has to use the same encoder as the final write.
+
+2. I published "WebP is 25-50% smaller than JPEG" for a while. When I measured it at equal PSNR against MozJPEG, WebP came out about 24% *larger*. That figure is not invented — it compares against baseline JPEG encoders, not an optimised one. I rewrote the page rather than keep the nicer-sounding number.
+
+## What it actually does, measured
+
+Rather than copy figures from a comparison table, I built a small corpus of camera photos and measured each case:
+
+- Camera JPEG to WebP, Auto mode: 24-54% smaller
+- Camera JPEG to AVIF, Auto mode: 41-68% smaller
+- An already-optimised photo: returned unchanged rather than re-compressed larger
+
+Auto mode aims at a 40 dB PSNR floor. That floor is the reason an already-optimised photo comes back unchanged: there is no quality left to give without dropping below it, and re-encoding to hit a number would make the file worse.
+
+EXIF and GPS are stripped, with camera orientation applied to the pixels first — removing metadata without applying the orientation flag hands you sideways photos. Batch processing, ZIP export on desktop (deliberately withheld on iOS, because the Files app will not unpack an archive into the photo library), and installable as a PWA.
+
+## The honest limits
+
+- Not "unlimited file size". The real ceiling is device memory, roughly 80 megapixels.
+- Not "every HEIC". libheif handles standard HEIF; exotic variants can fail.
+- Default Auto mode is lossy. PNG output is lossless.
+
+Free, no account, no watermark, no file-count limit. If you want to argue with my numbers, the measurement scripts are in the repo.
+
+Live: https://localphototool.com
+```
+
+### Indie Hackers post — 1200 character limit
+
+Shorter and blunter than the dev.to piece. Indie Hackers rewards admitting
+what is going badly, so the last line names distribution as the unsolved part
+rather than pretending launch went well.
+
+```copy name=ih-post limit=1200 refutes
+I kept using online image compressors and kept not knowing what happened to my photos afterwards. "Deleted after an hour" is a policy I cannot verify.
+
+So I built LocalPhotoTool: there is no upload endpoint. Decoding and re-encoding run in the browser via WebAssembly (MozJPEG, libheif for iPhone HEIC, AVIF). Block all network requests after page load and it still works.
+
+Two things I got wrong by not measuring:
+
+- Auto mode probed quality through the browser canvas. No browser encodes AVIF natively, the canvas silently swapped format, the probe passed, and output came out at 33 dB while the page promised 40. The probe now uses the same encoder as the final write.
+- I published "WebP is 25-50% smaller than JPEG". At equal PSNR against MozJPEG it measured 24% larger. That figure is against baseline encoders.
+
+Measured on my own corpus: a camera JPEG shrinks 24-54% as WebP and 41-68% as AVIF, and an already-optimised photo is returned unchanged instead of being re-compressed larger.
+
+Free, no account, no file limit. Traffic is still tiny — distribution is the hard part here, not the build.
+```
+
 ### GitHub / awesome-list PR description
 
 ```copy name=pr-body limit=1000
@@ -247,9 +320,9 @@ anymore. Re-run that script before trusting any cell marked "likely".
 | **IndexNow** | The key file at the site root (already generated) | One unauthenticated POST pushes all 13 URLs into Bing, Yandex, Seznam and Naver at once — no account, no dashboard. `node _dev/indexnow-submit.cjs` does it. This is the only *submission* channel available without a VPN, because Google's equivalent (the sitemap ping endpoint) was retired in June 2023 and now 404s. | ✅ reachable |
 | **Bing Webmaster Tools** | Microsoft account, DNS TXT record in Cloudflare | 5 minutes, and Bing's index is what feeds Copilot, ChatGPT search and Yahoo — which is most of the "AI recommends a tool" surface. Verify the domain, then submit `sitemap.xml`. | ✅ reachable |
 | **dev.to** and **Indie Hackers** | An account | Both give a followed link on a domain Google re-crawls daily, plus an English dev audience that actually needs this tool. dev.to post: the build story + the two measurement corrections in §2. | ✅ reachable |
-| **Google Search Console** | Google account, DNS TXT in Cloudflare (or the HTML-file method) | **Do this one first.** It is the only channel that pushes to Google at all, and it is the only one where you can *ask* for a crawl instead of waiting to be found: URL Inspection → Request Indexing works per URL, immediately, and is repeatable. Verification is one-time — after it, the property keeps working without you. | ✅ reachable (was ❌ until 2026-09-23) |
-| **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ likely reachable now — was ❌ when Google was; re-measure with `node _dev/check-reachability.cjs` before trusting this |
-| **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ✅ likely reachable now — same caveat as HN |
+| **Google Search Console** | Google account — the DNS TXT was already in Cloudflare, so no verification step was needed | **Done 2026-09-23.** Sitemap read: 13 URLs discovered. Request Indexing submitted for the 8 priority URLs. This is the only channel that pushes to Google at all, and the only one where you can *ask* for a crawl instead of waiting to be found. Note that "discovered" is not "indexed" — the indexed count appears in the Page indexing report 1–2 weeks after a brand-new property is added, not in days. | ✅ done |
+| **Show HN** | HN account (aged is better), `hn-title` + `hn-body` | One front-page hit beats 50 directory listings. Post Tue–Thu, 8–10am ET. | ✅ reachable (re-measured 2026-09-23; was ❌ before) |
+| **r/SideProject**, **r/InternetIsBeautiful**, **r/privacy** | Reddit account with some history | The copy above is calibrated for it: build story + what went wrong. | ✅ reachable (403 to a script, fine in a browser) |
 
 ### Tier 2 — directory listings
 
@@ -276,7 +349,8 @@ compress an image without uploading it" traffic now starts.
 - Reddit, in existing threads: r/photography, r/webdev, r/apple on HEIC pain.
   **Answer the question first.** Link only if it genuinely helps, and disclose
   that you built it. Undisclosed self-promotion gets removed and burns the account.
-  ❌ Reddit is blocked from here — this half of Tier 3 waits for a VPN.
+  Reddit answers from here now — 403 to a script, fine in a browser, re-measured
+  2026-09-23. This half of Tier 3 no longer waits on a VPN.
 - YouTube/X comments on HEIC and privacy-related videos. Same rule.
 
 ### Do not do
@@ -320,10 +394,11 @@ you will double-submit.
 | Yandex Webmaster | | | |
 | dev.to post | | | |
 | Indie Hackers post | | | |
-| Google Search Console — sitemap submitted | | needs VPN | |
-| Show HN | | needs VPN | |
-| r/SideProject | | needs VPN | |
-| r/InternetIsBeautiful | | needs VPN | |
+| Google Search Console — sitemap submitted | 2026-09-23 | done — status 成功, 13 URLs discovered (= sitemap count) | |
+| Google Search Console — Request Indexing | 2026-09-23 | done — 8 priority URLs, rest left to natural crawl | |
+| Show HN | | | |
+| r/SideProject | | | |
+| r/InternetIsBeautiful | | | |
 | AlternativeTo | | | |
 | Product Hunt | | | |
 | free-for.dev PR | | | |
