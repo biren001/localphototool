@@ -373,6 +373,19 @@ with a copy button, so an account plus a few pastes is all that is left.
 | **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — 200 | GitHub PR. Read the contribution rules: many awesome lists want alphabetical order and an exact line format. **nofollow.** |
 | **awesome-selfhosted** | <https://github.com/awesome-selfhosted/awesome-selfhosted> — 200 | Same. Our fit is weaker here — this one is about hosting, and we have no server. |
 
+The three GitHub rows need a token before a script can do them, and the token
+type is not a preference. Opening a PR against a repository we do not own means
+writing to somebody else's repo, and a **fine-grained** token cannot be granted
+that: GitHub scopes those to resources owned by the selected resource owner and
+gives read-only on other people's public repos. A **classic** token with the
+single `public_repo` scope can, and `public_repo` does not reach private repos.
+So: classic, `public_repo`, 7-day expiry, revoked once the PRs are open.
+
+`node _dev/check-github-token.cjs` verifies the type and scope before any of
+this runs, reading the token from `_dev/.tmp/github-token.txt` (inside the
+gitignored `.tmp`) or `GITHUB_TOKEN`. Worth running first: a scope mismatch
+otherwise surfaces as a 403 with the branch already pushed.
+
 ### Tier 3 — answer distribution (slow, durable)
 
 Find the questions people already ask and answer them properly. This ranks in
