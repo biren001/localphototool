@@ -70,7 +70,7 @@ const SITES = [
     steps: [
       'Open the URL, click <b>Launch now</b>. No signup — that button only reveals the email field later.',
       'Step 1: type <code>localphototool.com</code>. It fetches the site and pre-fills the next step: name, tagline, cover.',
-      'Step 2: <b>replace the auto-filled tagline</b> with the one below — the auto text is read from our homepage meta description, which still carries a claim this pack has retired. Then add the three features, the long description, your email, and upload the logo from <code>localphototool/icon-512.png</code>.',
+      'Step 2: <b>replace the auto-filled tagline</b> with the one below. The auto text is read from our homepage meta description, which used to carry a retired claim (fixed in source on 2026-09-24, <code>sw.js</code> v16 — but if the deploy has not propagated, the wizard will still pre-fill the old wording). Then add the three features, the long description, your email, and upload the logo from <code>localphototool/icon-512.png</code>.',
       'Steps 3–5: revenue, about you, upgrades. Upgrades are paid extras — <b>skip all of them</b>.',
       '<b>Then the verification screen.</b> The listing is saved but will not go live by itself. It asks for a public post on X naming <code>@ratheejaisal</code>, containing <code>https://www.tinystartups.com/startup/localphototool?c=ndqy</code> — <b>keep the <code>?c=ndqy</code> tracking code or verification fails</b> — visible for 24 hours, then paste the post URL back and press 核实. There is no free path that skips this.',
     ],

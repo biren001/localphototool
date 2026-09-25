@@ -529,12 +529,15 @@ Three things that change how this one is done:
   pasted back. $69 skips the post; see the section above for why it is not worth
   paying. There is no third option, so the real question is whether an X account
   is already lying around, not whether the listing is free.
-- **The auto-filled tagline carries a retired claim.** It is read from our
-  homepage `<meta name="description">`, which still says "up to 90%" — the
-  figure this file's own guard bans, because it holds for PNG screenshots and
-  not for photographs. Paste the tagline below instead of accepting what
-  arrives. (The homepage description itself is a separate, one-line fix; see
-  the note at the end of this section.)
+- **The auto-filled tagline used to carry a retired claim, and that is why it was
+  worth fixing.** It is read from our homepage `<meta name="description">`, which
+  said "up to 90%" — the figure this file's own guard bans, because it holds for
+  PNG screenshots and not for photographs. That was not a theory: the wizard
+  filled its tagline field from that tag and handed the retired sentence back to
+  be published, which is the one place a claim cannot be corrected afterwards.
+  **Fixed 2026-09-24** (site `sw.js` v16), and the guard now scans the site files
+  as well as this kit, so it cannot come back. If a wizard still pre-fills the old
+  wording, the deploy has not propagated yet — paste the tagline below.
 
 Auto-filled and already correct: **Name** `LocalPhotoTool`, and the **cover**,
 pulled from `og-cover.jpg` (1200×630). The **logo** slot comes up empty — upload
@@ -560,13 +563,23 @@ HEIC and AVIF in-browser
 For anyone who needs a smaller image without handing it to a stranger's server: portfolios, marketplace limits, metered data. Replaces TinyPNG, iLoveIMG and Squoosh. Decoding and re-encoding run in WebAssembly builds of MozJPEG, libheif and an AVIF encoder in the page — the codebase has no upload endpoint, so there is no server to send them to. Set a target size and it finds the quality that fits. EXIF and GPS are stripped. I built it because every "free" compressor asked for the photo first.
 ```
 
-The homepage `<meta name="description">` still carries "up to 90%" and is the
-only place on the site that does — `grep -rn "up to 90%" localphototool` returns
-that single line. It is not visible body copy, but it is what search results and
-every auto-filling directory will show. Fixing it means editing a precached file,
-so it needs a `sw.js` version bump and a repack; the honest replacement is the
-same sentence minus the range, which the FAQ two screens down already states
-properly ("screenshots saved as PNG typically shrink 70–90%").
+The homepage `<meta name="description">` carried "up to 90%" and was the only
+place on the site that did — `grep -rn "up to 90%" localphototool` returned that
+single line. It was never visible body copy, which is why it survived so long,
+but it is what search results and every auto-filling directory show. **Replaced
+2026-09-24** with the same facts said correctly, and at the same length (151
+characters), so nothing about the snippet's behaviour changes:
+
+> Free image compressor that runs entirely in your browser. Shrink JPG, PNG,
+> WebP, HEIC and AVIF, hit an exact KB target, strip EXIF and GPS. No uploads.
+
+Every claim in it is already made and guarded elsewhere on the site. The reason
+this is worth a deploy rather than a note: **the kit was guarded and the site was
+not**, so the ban on the retired figure covered the copy we write and missed the
+copy that machines read. `check-listing-copy.cjs` now scans
+`localphototool/**/*.{html,txt}` for the same banned claims, judging a refutation
+on the sentence around the match rather than the whole file, and it self-tests
+against a planted claim so a silent no-op cannot pass as a check.
 
 ### Tier 3 — answer distribution (slow, durable)
 
@@ -651,6 +664,7 @@ you will double-submit.
 | Tiny Startups — wizard submitted (free tier) | 2026-09-24 | **saved, not live.** Steps 1–5 completed; the email in step 2 created the account, so no signup was needed. It now sits on the X verification screen: a public post naming `@ratheejaisal`, carrying `tinystartups.com/startup/localphototool?c=ndqy`, held up 24 hours, then the post URL pasted back | |
 | Tiny Startups — link `rel` measured | 2026-09-24 | **28 of 30 listings carry `rel="nofollow noopener"`** on the outbound link to the startup's own site; the 2 clean ones are the $69 tier. The free listing therefore passes no weight, and the "$69 instant listing … switches your backlink to do-follow" line confirms the link *is* the product. Do not buy it (see §4) | |
 | Tiny Startups — $69 upgrade | — | **declined on policy**, not on price: a dofollow link purchased specifically to pass PageRank is link spam under Google's spam policies, and this is that case in plain text | |
+| Homepage meta description — retired claim removed | 2026-09-24 | **done in source, not yet live.** `localphototool/index.html`, `sw.js` v16. Waits on the next package upload. Guard widened the same day: `check-listing-copy.cjs` now scans `localphototool/**/*.{html,txt}` too (19 files), **37/37**, and the new check was reverse-verified by planting the claim back in and requiring a failure that named the file | |
 | | | | |
 
 Read the visitor counter at `https://localphototool.com/stats/`. It reports

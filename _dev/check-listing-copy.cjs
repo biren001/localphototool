@@ -126,6 +126,66 @@ for (const { re, why } of BANNED) {
     : no(`banned claim ${re} is not asserted`, `found in: ${offenders.join(', ')} — ${why}`);
 }
 
+// --- the same ban, applied to the site itself --------------------------------
+/* The kit was guarded and the site was not, and that asymmetry is exactly how a
+   retired claim survived: the homepage <meta name="description"> went on saying
+   "up to 90%" long after §2 retired it, because every check looked at the kit
+   and no check looked at the site. It was still there when the Tiny Startups
+   wizard scraped the page, filled its tagline field from that tag, and handed
+   the retired sentence back to be published — a listing is the one place a claim
+   cannot be corrected afterwards, and it is reached by reading the meta
+   description. So the meta description is what has to be checked.
+   Body copy is scanned too: the same sentence in a paragraph travels the same
+   way, and the scan is cheap.
+   Refutations are still allowed, but judged on the sentence around each match
+   rather than on the whole file, so one legitimate refutation cannot license a
+   violation further down the same page. */
+const SITE_DIR = path.join(__dirname, '..', 'localphototool');
+
+function siteFiles(dir) {
+  const out = [];
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) out.push(...siteFiles(p));
+    else if (/\.(html|txt)$/.test(e.name)) out.push(p);
+  }
+  return out;
+}
+
+const ROOT = path.join(__dirname, '..');
+const scanned = siteFiles(SITE_DIR);
+const siteOffenders = [];
+for (const file of scanned) {
+  const text = fs.readFileSync(file, 'utf8');
+  const rel = path.relative(ROOT, file);
+  for (const { re, why } of BANNED) {
+    const rx = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g');
+    for (const m of text.matchAll(rx)) {
+      const around = text.slice(Math.max(0, m.index - 400), m.index + 400);
+      if (REFUTATION.test(around)) continue;
+      const line = text.slice(0, m.index).split('\n').length;
+      siteOffenders.push(`${rel}:${line} "${m[0]}" — ${why}`);
+    }
+  }
+}
+siteOffenders.length === 0
+  ? ok('no retired claim appears under localphototool/', `${scanned.length} files scanned`)
+  : no('no retired claim appears under localphototool/', siteOffenders.join(' | '));
+
+// Reverse-check the scanner: it must fail on a planted claim, or it is only
+// "looking like it checks". Written against a string rather than a file so the
+// site tree is never touched.
+{
+  const planted = '<meta name="description" content="Shrink your photos up to 90% for free.">';
+  const caught = BANNED.some(({ re }) => new RegExp(re.source, re.flags).test(planted));
+  const refutationHolds = REFUTATION.test(
+    'The widely quoted "up to 90%" is false for photographs; the measured range is 24–54%.',
+  );
+  caught && refutationHolds
+    ? ok('the site scanner catches a planted claim and spares a refutation')
+    : no('the site scanner catches a planted claim and spares a refutation', `caught=${caught} refutation=${refutationHolds}`);
+}
+
 // A block tagged `refutes` must actually refute something.
 const refuters = [...found.entries()].filter(([, v]) => v.refutes);
 for (const [name, v] of refuters) {

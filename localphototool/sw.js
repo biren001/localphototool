@@ -54,8 +54,17 @@ var OFFLINE = ROOT + 'offline.html';
    v15 — two titles that still ran past the ~60 characters Google shows before
    truncating: /compress/ (61) and /compress-photos-for-email/ (63). The words
    that got cut were the ones that make the result worth clicking ("No Upload"),
-   so both now fit with the differentiator intact. */
-var VERSION = 'v15';
+   so both now fit with the differentiator intact.
+   v16 — the homepage meta description stopped claiming "up to 90%". That figure
+   was retired once it was measured false for photographs (it holds for PNG
+   screenshots), but the ban only ever covered the distribution kit, so the last
+   copy of it on the site sat in the tag every scraper reads. Confirmed to matter
+   rather than suspected: the Tiny Startups wizard filled its tagline field by
+   reading this tag and handed the retired sentence back to be published.
+   check-listing-copy.cjs now scans the site files, not only the kit. The
+   replacement is the same length (151), so nothing else about the snippet
+   changes. */
+var VERSION = 'v16';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
