@@ -228,13 +228,18 @@ ${siteCards}
   tracking on the project site, and open source — all three of which we meet — and it says nothing about
   who may open the pull request. The line format is one sentence saying what the tool does and what it
   replaces, with the licence and whether it is self-hostable.</p>
-  <p class="entry">Go to <a href="https://github.com/pluja/awesome-privacy/blob/master/README.md" target="_blank" rel="noreferrer"><code>README.md</code></a>
-    → section <code>### Images</code> → add the line after <code>ImageScrubber</code>.</p>
+  <p class="entry">Go to <a href="https://github.com/pluja/awesome-privacy/blob/main/README.md" target="_blank" rel="noreferrer"><code>README.md</code></a>
+    → section <code>Photo Editing and Management</code> → subsection <code>#### Web</code> → add the line after <code>miniPaint</code>.</p>
+  <p class="note">That is <b>not</b> the <code>### Images</code> heading. That one sits under <code>Cloaking</code>, next to Fawkes
+  and ImageScrubber — tools for defeating facial recognition and anonymising protest photographs. A compressor is
+  not a cloaking tool, and an entry filed there reads as off-topic self-promotion. <code>#### Web</code> currently
+  holds one entry, miniPaint, whose description is our claim; the same section's Android list already carries a
+  compressor (ImagePipe: reduces size, removes exif tags).</p>
   <p class="entry"><code>${esc(b.get('awesome-privacy-entry'))}</code>
     <button data-copy="${esc(b.get('awesome-privacy-entry'))}">copy the line</button></p>
   <ol>
     <li>Open the README, click the <b>pencil</b> icon (Edit this file). GitHub forks it for you.</li>
-    <li>Paste the line above in the <code>Images</code> section, after <code>ImageScrubber</code>.</li>
+    <li>Paste the line above into <code>Photo Editing and Management</code> → <code>#### Web</code>, after <code>miniPaint</code>.</li>
     <li>Commit, then <b>Create pull request</b>. Use the description in
       <code>promo/distribution-kit.md</code> under <code>pr-body</code>.</li>
   </ol>
