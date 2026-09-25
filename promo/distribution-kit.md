@@ -232,16 +232,31 @@ Measured on my own corpus: a camera JPEG shrinks 24-54% as WebP and 41-68% as AV
 Free, no account, no file limit. Traffic is still tiny — distribution is the hard part here, not the build.
 ```
 
-### GitHub / awesome-list PR description
+### Pull request description — awesome-privacy
+
+Written for awesome-privacy's `Images` section, which is the only list left that
+is open to us. Keep the disclosure line: it is the difference between a listing
+and undisclosed self-promotion.
 
 ```copy name=pr-body limit=1000
-Adds LocalPhotoTool under the image compression tools section.
+Adds LocalPhotoTool to the Images section.
 
-Why it belongs here: every other entry in that section is a hosted service that receives your files over the network, and several of the entries' own descriptions lead with the fact that uploads are deleted after some interval. This one has no upload endpoint — it is a static site whose decoding and encoding run in the browser through WebAssembly builds of MozJPEG, libheif and an AVIF encoder, so the files never cross the network boundary.
+Why it belongs here: it compresses and converts JPEG, PNG, WebP, HEIC and AVIF in the browser without uploading anything. Decoding and re-encoding run locally through WebAssembly builds of MozJPEG, libheif and an AVIF encoder, so there is no upload endpoint in the codebase at all — not a policy of deleting files after an interval, but no server to send them to. It replaces the hosted compressors people reach for by default (TinyPNG, iLoveIMG, Squoosh) and handles HEIC input, which most browser-only tools do not.
 
-It is free with no account, no watermark and no file-count limit, works offline once installed as a PWA, and supports HEIC input, which most browser-only tools do not.
+It meets the three listing requirements: it has a privacy policy, the site sets no cookies and loads no third-party scripts, and the source is public under MIT. It is a static site, so it is self-hostable.
 
-Full disclosure: I maintain it. Happy to adjust the wording or the section if you would rather it sat elsewhere.
+Full disclosure: I maintain it. Happy to change the wording or move it to another section.
+```
+
+### The line to add — awesome-privacy, `Images` section
+
+One line, matching the format of the entries already there. Insert it in the
+`### Images` section of `README.md`, after `ImageScrubber`. The list's own rule
+is one sentence that says what the tool does and what it replaces, with the
+licence and whether it is self-hostable.
+
+```copy name=awesome-privacy-entry limit=400
+- [LocalPhotoTool](https://localphototool.com) - Browser-based compressor and converter for JPEG, PNG, WebP, HEIC and AVIF that runs entirely on your device, so nothing is uploaded ([source](https://github.com/biren001/localphototool), MIT, self-hostable).
 ```
 
 ### GitHub repository README
@@ -369,22 +384,15 @@ with a copy button, so an account plus a few pastes is all that is left.
 | **Product Hunt** | <https://www.producthunt.com/posts/new> — 403 to a script | Optionally a full launch — needs a gallery (see §5) and a 12:01am PT start. A listing alone still earns a lasting link. |
 | **AlternativeTo** | 403 to a script (path not confirmed) | List as an alternative to TinyPNG, iLoveIMG, Squoosh, Compressor.io: register the app, then add it to each. |
 | **Launching Next**, **Peerlist Launchpad**, **LibHunt**, **Slant** | 403 to a script | Reach each from its own home page. Slant and LibHunt want an answer on their "best image compressor" question, not a listing. |
-| **free-for.dev** | <https://github.com/ripienaar/free-for-dev> — 200 | A GitHub PR, not a form. Use `pr-body`. **nofollow** — discovery only. |
-| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — 200 | GitHub PR. Read the contribution rules: many awesome lists want alphabetical order and an exact line format. **nofollow.** |
-| **awesome-selfhosted** | <https://github.com/awesome-selfhosted/awesome-selfhosted> — 200 | Same. Our fit is weaker here — this one is about hosting, and we have no server. |
+| **awesome-privacy** | <https://github.com/pluja/awesome-privacy> — PR touching `README.md`, section `Images` | **The only one of the three that is open to us.** Its stated requirements are a privacy policy, no tracking on the project site, and open source — all three of which we meet — and it says nothing about who may open the PR. One line: `- [Name](url) - one sentence`, saying what it does and what it replaces, with the licence and whether it is self-hostable. Shipped as `awesome-privacy-entry`. **nofollow** — discovery only, and PRs are reviewed in monthly batches. |
+| ~~free-for-dev~~ | — | **Do not submit.** Two independent blocks. The list excludes "generic developer 'toolbox' sites - format converters, calculators etc" by name, which is exactly what `png-to-jpg` and `jpg-to-webp` are. And its template requires ticking "Large Language Models and other AI tick this box" alongside "This is not a generic browser based developer toolbox, **I agree to be banned from this list if it is**" — one box describes us and the other would not be true. |
+| ~~awesome-selfhosted~~ | — | **Do not submit, and do not let a tool submit it either.** `awesome-selfhosted-data/CONTRIBUTING.md` carries a block addressed to AI agents forbidding exactly this: do not open a PR on behalf of a user, do not write an entry a person will then submit as their own, and do not tick the "The submission was done by a human, not a machine/LLM" box, because "an agent cannot make it truthfully". It does permit explaining the rules to the person, which is what this row is. |
 
-The three GitHub rows need a token before a script can do them, and the token
-type is not a preference. Opening a PR against a repository we do not own means
-writing to somebody else's repo, and a **fine-grained** token cannot be granted
-that: GitHub scopes those to resources owned by the selected resource owner and
-gives read-only on other people's public repos. A **classic** token with the
-single `public_repo` scope can, and `public_repo` does not reach private repos.
-So: classic, `public_repo`, 7-day expiry, revoked once the PRs are open.
-
-`node _dev/check-github-token.cjs` verifies the type and scope before any of
-this runs, reading the token from `_dev/.tmp/github-token.txt` (inside the
-gitignored `.tmp`) or `GITHUB_TOKEN`. Worth running first: a scope mismatch
-otherwise surfaces as a 403 with the branch already pushed.
+That leaves one PR worth opening, and one PR does not justify handing over a
+credential. The token route was explored and is closed deliberately:
+`_dev/check-github-token.cjs` still verifies a token if one is ever wanted, but
+against this list it would buy a single nofollow line reviewed in monthly
+batches. The same five minutes are worth more on Tiny Startups or Bing.
 
 ### Tier 3 — answer distribution (slow, durable)
 

@@ -222,6 +222,40 @@ ${fieldRows}
 <h2 style="margin-bottom:12px">Sites, in the order worth doing</h2>
 ${siteCards}
 
+<h2 style="margin-bottom:12px">GitHub PR — exactly one list is open to us</h2>
+<div class="card">
+  <p class="note"><b>awesome-privacy</b> accepts this. Its stated requirements are a privacy policy, no user
+  tracking on the project site, and open source — all three of which we meet — and it says nothing about
+  who may open the pull request. The line format is one sentence saying what the tool does and what it
+  replaces, with the licence and whether it is self-hostable.</p>
+  <p class="entry">Go to <a href="https://github.com/pluja/awesome-privacy/blob/master/README.md" target="_blank" rel="noreferrer"><code>README.md</code></a>
+    → section <code>### Images</code> → add the line after <code>ImageScrubber</code>.</p>
+  <p class="entry"><code>${esc(b.get('awesome-privacy-entry'))}</code>
+    <button data-copy="${esc(b.get('awesome-privacy-entry'))}">copy the line</button></p>
+  <ol>
+    <li>Open the README, click the <b>pencil</b> icon (Edit this file). GitHub forks it for you.</li>
+    <li>Paste the line above in the <code>Images</code> section, after <code>ImageScrubber</code>.</li>
+    <li>Commit, then <b>Create pull request</b>. Use the description in
+      <code>promo/distribution-kit.md</code> under <code>pr-body</code>.</li>
+  </ol>
+  <p class="note" style="margin-bottom:0">Pull requests there are reviewed in monthly batches, so a slow
+  response is not a rejection. <b>nofollow</b> — this buys discovery, not ranking.</p>
+</div>
+
+<h2 style="margin-bottom:12px">Two lists that are deliberately skipped</h2>
+<div class="card">
+  <p class="note"><b>free-for-dev</b> — excluded twice over. The list does not accept "generic developer
+  'toolbox' sites - format converters, calculators etc", which is what <code>png-to-jpg</code> and
+  <code>jpg-to-webp</code> are; and its template requires ticking "Large Language Models and other AI tick
+  this box" next to "This is not a generic browser based developer toolbox, <b>I agree to be banned from
+  this list if it is</b>". One box describes us and the other would not be true.</p>
+  <p class="note" style="margin-bottom:0"><b>awesome-selfhosted</b> — its contribution file carries a block
+  addressed to AI agents that forbids this outright: do not open a PR on behalf of a user, do not write an
+  entry a person will then submit as their own, and do not tick the "submission was done by a human, not a
+  machine/LLM" box, "because an agent cannot make it truthfully". Submitting there would require a human to
+  sign something untrue, so it is off the list.</p>
+</div>
+
 <h2 style="margin-bottom:12px">Also waiting on an account</h2>
 <div class="card">
   <p class="note" style="margin-bottom:8px">Not measured, so no promises about link quality — listed because each is a
