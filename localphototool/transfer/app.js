@@ -13,7 +13,7 @@
 /* Asset version — the HTML's version guard checks this. When changing this
    file, bump ALL of: __BEAM_VER__ here, the "?v=" in index.html, the guard's
    expected number in index.html, and VERSION in ../sw.js. */
-window.__BEAM_VER__ = 34;
+window.__BEAM_VER__ = 35;
 
 (function () {
   // ---------- helpers ----------
@@ -101,7 +101,21 @@ window.__BEAM_VER__ = 34;
     connState.className = 'dot';
     connText.textContent = 'Connected over ' + backendName + ' — you can close this page any time; nothing is kept.';
     refreshCompose();
+    focusChat();
     textInput.focus();
+  }
+  // QR guests land at the top of a long page: the session UI swaps in
+  // mid-page, entirely below the fold on a phone. Without scrolling to it the
+  // screen still shows the hero text and the page looks like nothing happened.
+  // Scroll the live session into view (status bar + composer) and pulse a
+  // highlight on it so the change is unmistakable. Runs a frame later because
+  // the newly shown section has no height until layout.
+  function focusChat() {
+    requestAnimationFrame(function () {
+      chat.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    chat.classList.add('b-arrive');
+    setTimeout(function () { chat.classList.remove('b-arrive'); }, 2200);
   }
   function markDisconnected() {
     connState.className = 'dot bad';
@@ -843,6 +857,7 @@ window.__BEAM_VER__ = 34;
     home.hidden = true;
     chat.hidden = false;
     connStatus('Joining session ' + hashMatch[1].toUpperCase() + '…', 'wait');
+    focusChat();
     startGuest(hashMatch[1]);
   } else {
     startHost();

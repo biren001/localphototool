@@ -91,6 +91,13 @@ html[data-theme="dark"] #beamApp {
 #beamApp .status.ok { color: var(--b-ok); }
 #beamApp .b-code.pending { opacity: 0.45; }
 #beamApp .b-diag { margin: 20px 0 0; color: var(--b-muted); font-size: 11px; opacity: 0.8; text-align: center; }
+/* Arrival pulse: a QR guest is scrolled here from the top of the page — the
+   flash is the "this is the live session" cue on a small screen. */
+#beamApp #chat.b-arrive { animation: beam-arrive 2.1s ease-out; }
+@keyframes beam-arrive {
+  0% { box-shadow: 0 0 0 3px var(--b-ok, #16a34a); }
+  100% { box-shadow: 0 0 0 3px transparent; }
+}
 
 #beamApp button, #beamApp input[type="text"] { font: inherit; color: inherit; }
 #beamApp button {
@@ -636,7 +643,7 @@ html[data-theme="dark"] #beamApp {
      cache-first, so a bare "app.js" needs TWO reloads to pick up an update
      (one to install the new SW, one to fetch past its old cache). A changed
      URL bypasses the stale entry on the very first load. -->
-<script src="./app.js?v=34"></script>
+<script src="./app.js?v=35"></script>
 <!-- Version guard: until the NEW service worker has taken control, an OLD
      service worker may still answer this request with a stale app.js it
      cached earlier. If the loaded script does not declare the version this
@@ -646,7 +653,7 @@ html[data-theme="dark"] #beamApp {
      fallback. -->
 <script>
 (function () {
-  if (window.__BEAM_VER__ === 34) return;
+  if (window.__BEAM_VER__ === 35) return;
   try {
     if (sessionStorage.getItem('beamReloadOnce')) return;
     sessionStorage.setItem('beamReloadOnce', '1');
