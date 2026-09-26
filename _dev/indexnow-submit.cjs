@@ -10,6 +10,13 @@
    Usage:
      node _dev/indexnow-submit.cjs            submit
      node _dev/indexnow-submit.cjs --dry      print the payload, send nothing
+     node _dev/indexnow-submit.cjs --only=/transfer/
+                                              submit only the sitemap URLs whose
+                                              path matches --only, for when one
+                                              page changed and the other 17 did
+                                              not. Re-announcing unchanged URLs
+                                              on every deploy is noise the
+                                              engines can learn to discount.
 
    Requires the key file to already be LIVE on the site (it is how the engines
    verify you own the host). The script refuses to submit otherwise: a
@@ -64,12 +71,34 @@ async function fetchWithRetry(url, opts, tries) {
 async function main() {
   const { key, file } = findKey();
   const keyLocation = 'https://' + HOST + '/' + file;
-  const urlList = sitemapUrls();
+  const all = sitemapUrls();
+
+  /* --only=/x/ narrows the list to the pages that actually changed. The filter
+     is applied to the sitemap output, never used instead of it, so a typo here
+     can only submit fewer URLs — it can never invent one. */
+  const only = process.argv.slice(2).filter((a) => a.indexOf('--only=') === 0)
+    .map((a) => a.slice('--only='.length));
+  let urlList = all;
+  if (only.length) {
+    urlList = all.filter((u) => {
+      const p = new URL(u).pathname;
+      /* '/' is a prefix of everything, so it has to be exact or --only=/ would
+         silently mean "all 18" — the opposite of the point of the flag. */
+      return only.some((o) => (o === '/' ? p === '/' : p.indexOf(o) === 0));
+    });
+    if (!urlList.length) {
+      console.log('--only matched none of the ' + all.length + ' sitemap URLs: ' + only.join(', '));
+      console.log('Nothing was submitted. Paths look like /, /transfer/, /privacy/.');
+      return 2;
+    }
+  }
+
   const payload = { host: HOST, key: key, keyLocation: keyLocation, urlList: urlList };
 
   console.log('key file      ' + file);
   console.log('keyLocation   ' + keyLocation);
-  console.log('urls          ' + urlList.length + ' (derived from sitemap.xml)');
+  console.log('urls          ' + urlList.length + ' of ' + all.length
+    + (only.length ? ' (--only: ' + only.join(', ') + ')' : '') + ' from sitemap.xml');
   urlList.forEach(function (u) { console.log('                ' + u); });
 
   if (process.argv.indexOf('--dry') !== -1) {
