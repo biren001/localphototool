@@ -9,6 +9,24 @@
 
 ## 0. Three findings that changed the plan
 
+### ⛔ CORRECTION 2026-09-26 — A1 below is WRONG: orthogonal.info is a competitor
+The original Tier A1 ranked orthogonal.info first. **That ranking is void.** Re-checking their
+site (not just their About page) found they **ship the competing product**:
+
+- **QuickShrink** — `quickshrink.orthogonal.info`, their own browser-only image compressor
+  ("So I built QuickShrink — your images never touch a server"), plus a **QuickShrink CLI 1.0.0**
+- **PixelStrip** — their own EXIF remover ("which I built specifically for EXIF removal")
+- Their *"5 Image Compressors benchmark"*, *"Batch Compress Online"*, *"Compress Without
+  Uploading"* articles all rank **QuickShrink first** — they are funnel pages for their own tool
+
+**Lesson bound into this file: before ranking any target, check whether they Ship A Competing
+Product — not only whether their outbound links are followed.** The ① finding below ("the
+writer pool is tool vendors") already warned about exactly this class of mistake, and it was
+still made, because the earlier check only inspected link attributes and About-page language.
+
+Revised consequence: pitching our benchmark methodology to them hands a rival our auditable
+method for free. Expected followed link: **~0**. Do not contact. See `outreach-send-kit.md`.
+
 ### ① The topical writer pool is almost entirely tool vendors
 Searching the obvious queries returns the *same* article written over and over by
 *companies that sell a compressor*: `compressimg.app`, `sammapix.com`, `imgmin.pro`,
@@ -63,9 +81,42 @@ separates editorial from paid — which is precisely the kind of site that can p
 
 ---
 
+## ★ NEW A0 (2026-09-26) — Privacy Guides `privacyguides.org` — best real target
+
+Replaces orthogonal.info at the top. Checked for the thing we forgot to check last time:
+**they sell nothing that competes with us**, they take **no affiliate links**, and they state
+that open source is preferred (our repo is public MIT).
+
+- **Measured link behaviour** (fetched `/en/tools/`, tallied every `rel`): recommended-tool
+  links use `rel="noopener"` — **zero `nofollow` on the page** → **FOLLOWED** ✅
+- **Categories that fit**: **Photo Management**, **Data and Metadata Redaction**
+- **Route**: developer **self-submission process** on their community forum
+  <https://discuss.privacyguides.net/> — they require disclosed affiliation, an explicit
+  threat model, limits stated plainly, and why-us-over-the-alternatives (see `/about/criteria/`)
+- **Their bar is high** (security practices, cross-platform, active development, docs) — the
+  pitch has to be self-critical, not promotional
+
+**Exact route, verified through the forum's own JSON API 2026-09-26** (not read off a rendered
+page):
+- one **topic per tool**, not a long thread → category **Site Development** (id 7),
+  <https://discuss.privacyguides.net/c/site-development/7>; its pinned "About" post states no
+  template, and every tool suggestion in the category is a standalone topic
+- existing titles follow `Tool Name (Short Qualifier)` — *Proton Authenticator*,
+  *Immich Photo Manager (Self-Hosted)*, *Halocard (Virtual Credit Cards)*,
+  *Delta Chat (Email Client)* → ours: `LocalPhotoTool (Browser-Only Image Tools)`
+- **no signup friction**: `/site.json` lists auth providers
+  `["discourse_id","github","linkedin_oidc","apple","oidc"]` → **GitHub login works**, so the
+  operator's existing GitHub account is enough (no new password, no email verification loop)
+- **no new-account posting gate**: user `defiling9046` registered **2026-09-02** and posted the
+  *FUTO Notes* suggestion **the same day** (trust level 1)
+
+Verdict: slow, demanding, but the one place where a yes actually moves `AnchorCount`.
+
+---
+
 ## 1. Tier A — worth actually doing
 
-### A1. Orthogonal (orthogonal.info) — **the single best fit**
+### A1. Orthogonal (orthogonal.info) — **VOID, see correction at §0**
 Independent-leaning tech blog (software / AI / security / privacy) with its own small tool
 projects; byline is a shared "Orthogonal Editorial Team".
 
@@ -83,14 +134,30 @@ stated route for corrections. Frame it as **extending/correcting their benchmark
 **What we hand them**: their piece states endpoints; ours adds byte-level proof plus
 reproducible artifacts, extended to 9 tools, plus a 30-second recipe their readers can run.
 
-### A2. Web Tools Weekly — Louis Lazaris
-Front-end tool newsletter, ~13k subscribers, curated weekly by Louis Lazaris (Toronto), who
-also authored **"Powerful Image Optimization Tools"** on Smashing Magazine (2022-07-20).
-**Channel** — stated in the newsletter's own archives, twice:
-*"Send links via Direct Message on Twitter @WebToolsWeekly"* (also `@LouisLazaris`).
-**Their rule: tools only — "No tutorials or articles, please."** Submit the *tool*, and point
-at the measurement page as what makes the claims checkable.
-**Link expectation**: **unmeasured** (I did not fetch an issue page and tally it — do that first).
+### A2. Web Tools Weekly — Louis Lazaris — **channel CORRECTED 2026-09-26**
+Front-end tool newsletter, **15,545 subscribers** (counted on his home page; supersedes the
+earlier "~13k"), curated weekly by Louis Lazaris (Toronto), who also authored **"Powerful Image
+Optimization Tools"** on Smashing Magazine (2022-07-20).
+
+**⛔ The previous channel note ("reply to the newsletter email") is not his published route.**
+Fetched `webtoolsweekly.com/submit` verbatim on 2026-09-26 — the page carries **no form and no
+mailto**, and names exactly two channels:
+
+> *"submit it via X or Bluesky: DMs are open: @LouisLazaris on X / Chats are open:
+> @LouisLazaris.com on Bluesky"*
+
+| channel | mainland-China reachable | verdict |
+|---|---|---|
+| X DM `@LouisLazaris` | no | ❌ |
+| **Bluesky chat `@louislazaris.com`** | **yes — 4/4 HTTP 200 measured** | ✅ **primary** |
+| reply to a newsletter issue email | needs subscription; that form sits behind **Google reCAPTCHA** (VPN required) | backup only |
+
+**Competing product check**: none — his business is newsletters and books (Lazarpress); his
+Bluesky bio reads *"Front-end developer and newsletter curator"* with no tool of his own. Linking
+to a tool costs him nothing, which makes him a genuinely neutral curator.
+**His rule**: **tools only — "No tutorials or articles, please."** Submit the *tool*, and point at
+the measurement page only as what makes the claim checkable.
+**Link expectation**: still **unmeasured** (no issue page tallied yet).
 
 ### A3. nouploadtools.com — a listing, and only a listing
 Directory whose *"Privacy-First Image Tools"* category holds **12 listings** (Squoosh,
@@ -150,13 +217,30 @@ Re-run: `node _dev/.tmp/editorial-recon4.cjs <orthogonal|smashing|wired>`
 
 ---
 
-## 5. Order of operations
+## 5. Order of operations — **revised 2026-09-26** (A1 void, A0 promoted)
 
-1. **Orthogonal (A1)** — highest fit, their own rules invite it, and it is the one target I have
-   *measured* to pass followed links.
-2. **Vet the next candidate before writing to them** — reuse `editorial-recon4.cjs`; if the
-   article's tool links come back `nofollow`, the outreach is worth discovery only. Cheap, and it
-   stops us spending a day on a publisher that discards the value.
-3. **Web Tools Weekly (A2)** — one DM, tool-shaped, matches their stated rules exactly.
-4. **nouploadtools `/submit` (A3)** — 2 minutes, free. Expect discovery only.
+1. **Privacy Guides (A0)** — do first. Only target measured to pass followed links *and* verified
+   to sell nothing competing. Entry is a single forum topic; GitHub login means no new account.
+2. **Web Tools Weekly (A2)** — one **Bluesky** chat message, tool-shaped, matches his published
+   submission route exactly.
+3. **nouploadtools `/submit` (A3)** — 2 minutes, free. Expect discovery only, never pay.
+4. ~~Orthogonal (A1)~~ — **removed**: competitor, see §0.
 5. Communities (§3) last, once an account exists.
+6. **Before adding any new target: reuse `editorial-recon4.cjs` to tally its outbound `rel`,
+   then check whether it ships a competing product.** Link attributes alone already failed us
+   once — both checks are mandatory.
+
+### Reachability, measured from the operator's machine (mainland China, 2026-09-26)
+
+| host | result | reading |
+|---|---|---|
+| `discuss.privacyguides.net` | `ECONNRESET` ×4, then 200, 200, 000, 200 | **intermittent — retry, never call it blocked** |
+| `www.privacyguides.org` | 000, 000, 200 | same |
+| `bsky.app` | **200 ×4/4** | reliable |
+| `public.api.bsky.app` | 200 (returned his profile) | reliable |
+| `webtoolsweekly.com` | 200 | reliable |
+| `nouploadtools.com/submit` | 403 (Cloudflare, curl UA), then 000 | fine in a real browser |
+
+A first probe returned `ECONNRESET` on **all four** hosts at once — including one that had answered
+minutes earlier. That pattern means the local/international path, **not** four dead sites: do not
+record a host as unreachable off a single probe.
