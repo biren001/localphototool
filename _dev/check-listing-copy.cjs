@@ -43,6 +43,7 @@ const REQUIRED = [
 // Claims retired after measurement contradicted them (kit §2).
 const BANNED = [
   { re: /\bup to 90%/i, why: 'only true for PNG screenshots, not photos' },
+  { re: /\b60\s*[-–—]\s*90%/i, why: 'the same retired figure as "up to 90%", in a range. The homepage stat strip carried it until 2026-09-26; measured on real camera photos the range is 24–68% (24–54% as WebP, 41–68% as AVIF)' },
   { re: /25\s*[-–—]\s*50%\s*smaller/i, why: 'measured false at equal PSNR — WebP was 24% larger than MozJPEG' },
   { re: /unlimited (file )?size/i, why: 'real limit is ~80 megapixels of device memory' },
   { re: /\blossless compress/i, why: 'Auto mode is lossy with a fidelity floor' },

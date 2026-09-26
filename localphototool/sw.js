@@ -69,8 +69,22 @@ var OFFLINE = ROOT + 'offline.html';
    otherwise render the new link from a cached nav that predates it. The page
    also had to enter the sitemap before it entered the shell — a page inside the
    shell but outside the sitemap is a page the offline copy serves to visitors
-   while no crawler is ever told it exists. */
-var VERSION = 'v36';
+   while no crawler is ever told it exists.
+   v18-v36 — the per-version notes stopped being written here; the record moved
+   to the project's daily logs and TRAPS.md. The number was still bumped on every
+   deploy that touched a shell file.
+   v37 — the homepage hero lead was rewritten to open with the visitor's actual
+   problem ("the page you were uploading to says your file is too big") and then
+   name the three steps, instead of listing the engine's features. The stat strip
+   below it lost both of its jargon figures: "40+ dB Fidelity floor in Auto mode"
+   now reads "Keeps working with no connection", and — the one that mattered —
+   "60–90% Typical size reduction" was the retired "up to 90%" figure wearing a
+   range. The guard in check-listing-copy.cjs never covered that spelling, so it
+   survived the sweep that removed it from the meta description in v16. It now
+   carries the measured range instead. Only index.html changed, but index.html is
+   in the shell, so the version has to move or returning visitors keep reading the
+   old hero from v36's cache. */
+var VERSION = 'v37';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;

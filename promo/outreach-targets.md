@@ -244,3 +244,179 @@ Re-run: `node _dev/.tmp/editorial-recon4.cjs <orthogonal|smashing|wired>`
 A first probe returned `ECONNRESET` on **all four** hosts at once — including one that had answered
 minutes earlier. That pattern means the local/international path, **not** four dead sites: do not
 record a host as unreachable off a single probe.
+
+
+## 6. Submission log — what was sent, and what is publicly visible
+
+**Operator submitted all three on 2026-09-26.** Verified from outside the same day, 16:30 (UTC+8):
+
+| # | channel | sent | publicly visible 2026-09-26 | next check |
+|---|---|---|---|---|
+| A0 | `discuss.privacyguides.net` — new topic in Site Development | 2026-09-26 | **NO topic found** — see below | 2026-09-27, then 2026-09-29 |
+| A2 | Bluesky DM → `@louislazaris.com` | 2026-09-26 | DMs are private; his newest post is 2026-09-24 (#688), nothing about us — expected | watch his feed; issues land roughly weekly |
+| A3 | `nouploadtools.com/submit` | 2026-09-26 | not listed yet (their directory is JS-rendered, unverifiable from outside) | 2026-09-30 |
+
+### A0 — why no public topic yet (and why that is probably fine)
+
+Checked four ways, with a control so that "not found" actually means something:
+
+1. forum-wide newest topics **by creation date** → newest is `2026-09-26 06:40 UTC`
+   ("Security for local AI and tools like Nono"); nothing from the operator
+2. `/c/site-development/7/l/latest.json?order=created` → newest is **2026-09-25**; no tool
+   submission today
+3. full-text search for `localphototool` → **0 topics, 0 posts** — *control: `Superbacked` and
+   `AgeKey`, both posted 2026-09-25, are both returned by the same endpoint, so search works*
+4. advanced search `after:2026-09-25 #site-development` → nothing from 09-26
+
+Two possible readings — and one rule:
+
+- **Most likely: it is in the moderation queue.** A brand-new account whose *first post* contains an
+  external link is exactly the shape Discourse holds for review on a privacy-focused instance.
+  **Held is not rejected**; it normally publishes once a moderator looks at it.
+- Or the post never went through (form error, lost session, wrong category).
+
+> **Do not re-post.** A duplicate submission is the thing that actually gets you flagged as spam.
+> Verify from the account first: log in → avatar → **Activity → Topics**, or look for an
+> "awaiting approval" banner on the topic. If it is queued, do nothing and wait.
+
+### A0 — RESOLVED 2026-09-26 16:50: the account was frozen pending review (NOT rejected)
+
+The operator posted the notice the forum sent. Reading it exactly:
+
+> **账户暂时冻结** — 隐私指南 官方机器人, 1 hour before the screenshot
+> "这是来自 Privacy Guides Community 的自动消息，通知您的**帐户已作为预防措施暂时冻结**。
+> 请继续浏览，但您暂时无法回复或创建话题，**直到工作人员审核您最近的帖子**。"
+
+Independently confirmed from outside:
+
+- `/t/account-temporarily-onhold/41027.json` → **404** — it is a **private message**, which is exactly
+  why it never appeared in any public list (my earlier check was right, not broken)
+- `/u/biren001.json` → 200 with `profile_hidden: true` (normal for a frozen/suspended account)
+- `localphototool` still returns **0** public results; Site Development newest is still 2026-09-25
+
+**Reading:** this is the standard anti-spam path, not an editorial judgement. **A brand-new account
+whose first post contains an external link is precisely the shape their automated hold catches.**
+The account is frozen while a human reviews the *content*.
+
+**Rules for the operator while it is frozen — all three are mandatory:**
+
+1. **Do not re-post, and do not open a second account.** Multi-account + same link = spam verdict,
+   and that is a real ban instead of a 1–3 day hold.
+2. **Do not chase the moderators** (no email, no PM to admins, no second submission). The queue is
+   human and small; chasing is what turns "pending" into "rejected".
+3. **Just wait.** Human review of a flagged first post normally takes **1–3 working days**; today is
+   Saturday, so realistically Monday–Wednesday. Check once on 2026-09-29, not daily.
+
+**What the reviewer will judge:** the *content*. Our post was written to their own bar — disclosed
+affiliation, stated limits, reproducible measurements instead of adjectives. That is the material a
+PG moderator actually wants. The hold is about *form* (new account + link); the review is about
+*substance*.
+
+**Honest probability, stated plainly:** approval is plausible but **not** the safe bet. If it is
+rejected, the likely reason is *"no track record yet"* — PG recommends tools that have been around
+and been used. A rejection costs the site nothing; it only means this channel is closed for now and
+must be retried later, after the site has some history elsewhere.
+### Honest expectations for each channel
+
+- **A0 — the only channel that can yield a *followed* link, and the hardest.** Privacy Guides
+  recommends tools with a track record; we have none (no external links, no community history).
+  A polite *"not established enough yet"* is a normal outcome here and is **not** a failure to fix —
+  it is a statement about where the site is, not about the pitch.
+- **A2 — no reply expected.** He does not answer most submissions; the tool either shows up in a
+  future issue or it does not. Do not chase.
+- **A3 — discovery only, zero link weight.** Their list URLs go through an internal `/go/` hop which
+  is robots-blocked, so crawlers never follow it. Fine because it is free; never pay for it.
+
+### The real lesson from this round
+
+Three submissions, zero observable feedback within hours **is the normal state of cold outreach** —
+and it is also the reason a three-target list is too thin to move `AnchorCount` off 0. The bottleneck
+is not the quality of any single pitch; it is the **number of neutral curators we have found**
+relative to the number that will say yes. Waiting is not a plan: keep the target list growing in
+parallel with the waiting.
+
+---
+
+## 7. Pool expansion, evening of 2026-09-26 — six measured rounds
+
+Same week, after the three submissions went out and the Privacy Guides account was put on hold.
+Purpose: grow the list while waiting, and re-check the two channels the roadmap had ruled out on an
+**assumption** rather than a measurement.
+
+Instruments: `_dev/.tmp/editorial-recon{6,7,8,9,10,11}.cjs` (raw output kept as the matching
+`-out.txt`). Round 6 = tally outbound `rel` on candidate pages; round 7 = dump each seed's internal
+link map to find the real sub-page after guessed URLs 404'd; rounds 8-11 = the follow-ups below.
+
+### ⚠️ Reading a rel tally correctly
+
+**Only `nofollow`, `sponsored` and `ugc` block link equity. `noopener` and `noreferrer` do not.**
+Earlier tables in this file list `noopener` as its own bucket, which invites the misreading that a
+`rel="noopener"` link is not followed. It is followed. Rounds 6-11 count equity-blocking links
+explicitly (`blocking: n / total`) so the number cannot be misread again.
+
+### ✅ NEW — Hacker News passes weight. The roadmap's "HN is nofollow" is WRONG.
+
+| what was measured | result |
+|---|---|
+| `news.ycombinator.com` front page, story links | **32 external anchors, 0 blocking** — every one `(no rel)` |
+| one **permanent** item page (`/item?id=49855315`, the page that does not scroll away) | **4/4 external, 0 blocking** — the submitted story link (`gultsch.de`) carries no `rel` |
+
+→ A submitted story's **item page keeps a followed link to the submitted URL**. `roadmap-2026-09-26.md`
+lists HN under "P3 — do not touch, nofollow"; **that line is refuted and has been corrected**. HN is
+authority without a `nofollow` tax — the highest-value target measured so far that does not require
+being *recommended* by anyone.
+
+Caveats that are not link attributes and still apply: it needs an account with some history, and the
+story has to be worth reading on its own. §0③ already says the genre that works is
+*"I measured what nine image compressors send over the network"*, **not** `Show HN: my tool`.
+
+### ✅ CLOSED — Web Tools Weekly issue pages are followed (this was the last unmeasured item)
+
+`outreach-targets.md` §4 listed *"`rel` tally for a Web Tools Weekly issue page (decides A2's value)"*
+as unmeasured. Measured on `webtoolsweekly.com/archives/issue-688/`:
+
+- **49 external anchors, 49 with no `rel`, 0 blocking**
+- the per-tool links are exactly the pattern we would appear in (`mini-lit`, `Vuzeno`, `Kibo UI`,
+  `Retune`, … — each one plain and followed)
+- every issue is in the permanent archive at `/archive` (50 issues listed), so a mention keeps
+  linking long after the issue is sent
+
+→ **A2 is confirmed as a real followed link if it lands.** He is a genuine curator: tools only,
+no competing product, no affiliate separation problem to worry about. Nothing to do but wait for
+the DM already sent.
+
+### ⚠️ CLOSED with a caveat — GitHub READMEs, and therefore every awesome-list PR, are nofollow
+
+| sample | external anchors | blocking |
+|---|---|---|
+| `Lissy93/awesome-privacy` rendered README (round 9) | 1354 | **947 nofollow** (the rest are `github.com` self-links, which GitHub exempts) |
+| `sindresorhus/awesome` (round 10) | 10 | **10 / 10 nofollow** |
+| `vinta/awesome-python` (round 10) | 55 | **55 / 55 nofollow** |
+
+→ Confirms what `distribution-kit.md` already documents for the repo's own README link: **GitHub
+links are discovery, not authority.** Consequence for us: the **open PR to `awesome-privacy` #1135
+cannot become the first backlink** — it is still worth having (it is free, and it is how a crawler
+gets pointed at the host), but do not count it in the `AnchorCount` budget. Budget that has to come
+from an independent site that writes about us.
+
+### ❌ Rejected after measurement — recorded so nobody re-treads them
+
+| target | measurement | verdict |
+|---|---|---|
+| `ssd.eff.org` — EFF Surveillance Self-Defense | `/module-categories/tool-guides` → 200, but **5 outbound anchors total and all of them go to `eff.org` / `supporters.eff.org`**. Their tool guides link inward, not out to tools. | **Not a link route.** Also out of scope editorially — they cover Signal/Tor/password managers, not image compression |
+| `techlore.tech` | The site has **no tool-resources page any more** (nav = about, contact, friends, podcasts, blog, videos). `/friends` is an **affiliate** page: 62 `noopener` + 5 `noreferrer`, 0 nofollow | Not a directory. Dropped |
+| `thenewoil.org` | Homepage returns **1 internal link only** (JS-rendered), and `/sitemap.xml` is **404** | **Unmeasurable from outside, and unfindable by a crawler** unless something links deeper. Drop |
+| `localfirstweb.dev` | Homepage *links to* `/directory`, but `/directory`, `/directory/`, `/apps` and the `www.` variant all return **404 to a plain fetch** (its nav is 49 external anchors, 22 with no `rel`) | **Unmeasured, not negative.** The local-first angle is genuinely aligned (no server, works offline) — worth one more try in a browser, where the route may be client-side |
+| `kinsta.com/blog/image-optimization/` | 200, but **0 anchors parsed** — returns a bot wall / JS shell to a plain fetch | Unmeasured; needs a browser |
+
+### What this round changes
+
+1. **HN moves up.** It is the only measured-followed channel that does not depend on a curator
+   saying yes. It does depend on having something worth reading, which §0③ says we already have.
+2. **The open awesome-privacy PR is not the first backlink.** Re-budget the expectation.
+3. **A2 is now known to be worth waiting for**, not a shot in the dark.
+4. **Two of the four new candidate classes were dead on arrival** (EFF, Techlore) and two are still
+   open only because they need a real browser (localfirstweb, Kinsta). The honest read: expanding
+   the pool by guessing at *privacy* sites is nearly exhausted — the remaining leverage is in
+   **adjacent audiences** (local-first, web performance) and in **HN**.
+
