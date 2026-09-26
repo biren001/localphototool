@@ -148,7 +148,7 @@
         <li><strong>No cookies.</strong> The ID lives in <code>localStorage</code> on your own device; it is never sent to an advertising network and is not combined with anything else.</li>
         <li><strong>No profiling.</strong> The page sends only that ID and the page path. No user agent, referrer, IP address or screen details are stored, and nothing is kept that could identify you.</li>
         <li><strong>De-duplicated.</strong> The ID is stored as a one-way hash (SHA-256) and counted once per day, so reloading, opening several tabs or coming back tomorrow does not inflate the number.</li>
-        <li><strong>First-party only.</strong> The counter runs on this domain. No Google Analytics, no third-party analytics script, no tracking pixel.</li>
+        <li><strong>First-party core.</strong> The counter runs on this domain. There is no advertising tracker, no cross-site tracking and no tracking pixel anywhere on the site.</li>
         <li><strong>Bots excluded.</strong> Crawlers, uptime monitors and link-preview fetchers are filtered out, because they are not people.</li>
       </ul>
       <p>If you would rather not be counted at all, blocking or clearing site data for this domain is enough — the site works exactly the same without it.</p>
@@ -156,6 +156,7 @@
       <h2>Third-party requests</h2>
       <p>The site loads its own styles and scripts from its own domain. Optionally, when a browser cannot encode a format natively, the page may fetch a WebAssembly codec module (for example MozJPEG or libwebp) from a public CDN such as <code>esm.sh</code> or <code>jsDelivr</code>. That request contains no image data, no identifiers and no personal information — it is the same kind of request as loading a library from a script tag.</p>
       <p>If those modules cannot be reached, the site falls back to the encoders built into your browser and every feature continues to work.</p>
+      <p>For page-view statistics the site uses <strong>Cloudflare Web Analytics</strong>, chosen because it does none of the things this policy rules out: it sets no cookies and writes nothing to <code>localStorage</code>, it does not fingerprint your device, it does not follow you to other websites, and it reports only aggregate figures — page, referring site, country and device class. No individual visitor profile is built, and nothing is passed to advertising networks.</p>
       <p>The one exception is the <a href="../transfer/">device-to-device transfer page</a>. To introduce your two devices to each other, that page exchanges connection details (network addresses and encryption keys) with a public signaling service — the same kind of handshake any video call makes. The signaling service relays nothing else: file and message contents travel directly between your two devices over an encrypted connection. When both networks are too strict for that direct link, the page routes the encrypted stream through a public TURN relay so the transfer can still complete — the relay forwards already-encrypted bytes, cannot read them and stores nothing. The page states this in a notice at the top of the tool.</p>
 
       <h2>What we do not do</h2>

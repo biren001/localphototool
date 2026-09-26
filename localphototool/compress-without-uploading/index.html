@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Compress Images Without Uploading — Verifiable in Browser</title>
-<meta name="description" content="Compress images without uploading them. Runs entirely in your browser — open the network panel and confirm nothing leaves your device. No account, no analytics.">
+<meta name="description" content="Compress images without uploading them. Runs entirely in your browser — open the network panel and confirm nothing leaves your device. No account, no cookies.">
 <link rel="canonical" href="https://localphototool.com/compress-without-uploading/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -12,14 +12,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
 <meta property="og:title" content="Private Image Compressor — No Upload, Runs in Your Browser">
-<meta property="og:description" content="Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no analytics, no limits.">
+<meta property="og:description" content="Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no cookies, no limits.">
 <meta property="og:url" content="https://localphototool.com/compress-without-uploading/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Private Image Compressor — No Upload, Runs in Your Browser">
-<meta name="twitter:description" content="Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no analytics, no limits.">
+<meta name="twitter:description" content="Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no cookies, no limits.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -58,7 +58,7 @@
       "@id": "https://localphototool.com/compress-without-uploading/#page",
       "url": "https://localphototool.com/compress-without-uploading/",
       "name": "Private Image Compressor — No Upload, Runs in Your Browser",
-      "description": "Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no analytics, no limits.",
+      "description": "Compress sensitive photos with nothing uploaded. Runs entirely in your browser, verifiable in DevTools. No account, no cookies, no limits.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://localphototool.com/#website"
@@ -119,7 +119,7 @@
           "name": "What does the visitor counter send?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no third-party analytics. The count is used only to decide whether to show a number in the footer."
+            "text": "A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no cookies. The count is used only to decide whether to show a number in the footer."
           }
         },
         {
@@ -221,7 +221,7 @@
           Nothing is uploaded
         </li>
         <li class="badge">Verifiable in DevTools</li>
-        <li class="badge">No analytics scripts</li>
+        <li class="badge">No cookies</li>
         <li class="badge">Unlimited &amp; free</li>
       </ul>
       <p class="hero__share" style="max-width:660px">
@@ -465,7 +465,7 @@
 
       <h2>What this site does collect</h2>
       <p>Being precise matters more than being flattering, so here is the whole of it. There is one self-hosted, anonymous counter: your browser keeps a random identifier, hashes it, and sends that hash to our own <code>/api/count</code> endpoint at most once a day. It carries no filename, no image content and no IP-derived profile, and it exists only so the footer can show that anyone is here at all.</p>
-      <p>There is no Google Analytics and no third-party analytics script of any kind — nothing that would let an advertising network learn that you visited. If you would rather not be counted either, disconnect from the internet after the page loads: the compressor keeps working, because it was already downloaded.</p>
+      <p>There is no advertising tracker, no analytics cookie and no cross-site tracking anywhere on the page. Visit counting is our own — a hashed random ID kept in your browser, sent to our own endpoint — plus Cloudflare Web Analytics, which sets no cookies and does not profile you. Nothing here lets an advertising network learn that you visited. If you would rather not be counted either, disconnect from the internet after the page loads: the compressor keeps working, because it was already downloaded.</p>
 
       <h2>If you need a specific target instead</h2>
       <p>Sometimes the requirement is not privacy but a hard number — a portal that rejects anything above 100 KB. The <a href="../compress-to-100kb/">compress to 100 KB</a> page does that with the same no-upload guarantee, and the <a href="../compress/">main compressor</a> switches between target size, fixed quality and full auto. iPhone photos in HEIC format go through <a href="../heic-to-jpg/">HEIC to JPG</a>.</p>
@@ -481,7 +481,7 @@
         </details>
         <details class="faq__item">
           <summary>What does the visitor counter send?</summary>
-          <div class="faq__body"><p>A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no third-party analytics. The count is used only to decide whether to show a number in the footer.</p></div>
+          <div class="faq__body"><p>A hash of a random identifier kept in your own browser, to our own endpoint, at most once per day. No filename, no image content, no cookies. The count is used only to decide whether to show a number in the footer.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is browser-based compression lower quality than server-based?</summary>
