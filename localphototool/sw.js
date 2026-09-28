@@ -83,8 +83,16 @@ var OFFLINE = ROOT + 'offline.html';
    survived the sweep that removed it from the meta description in v16. It now
    carries the measured range instead. Only index.html changed, but index.html is
    in the shell, so the version has to move or returning visitors keep reading the
-   old hero from v36's cache. */
-var VERSION = 'v37';
+   old hero from v36's cache.
+   v38 — the three format converters (png-to-jpg, jpg-to-webp, heic-to-jpg) gained
+   the same kind of cross-link paragraph the compress-to-* KB pages have had all
+   along. Measured reason: every page's <main> links out to the shared chrome and
+   to "/" via a breadcrumb, so a page can collect a dozen inbound mentions without
+   a single one of them being editorial. /png-to-jpg/ was the one substantive page
+   that no other page mentioned in its body at all — and it is one of the three
+   pages Search Console reports as crawled-but-not-indexed. The three pages are now
+   a mesh instead of three leaves. */
+var VERSION = 'v38';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
