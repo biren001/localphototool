@@ -100,7 +100,7 @@ var OFFLINE = ROOT + 'offline.html';
    package-zip.py calls it, so the two can no longer drift apart. Later numbers
    may move with no prose of their own: the stamp is the changelog entry from
    here on, and it names the commit that carries the reasoning. */
-var VERSION = 'v40';
+var VERSION = 'v41';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
