@@ -99,8 +99,12 @@ var OFFLINE = ROOT + 'offline.html';
    _dev/stamp_build.py rewrites the stamp and bumps this line together, and
    package-zip.py calls it, so the two can no longer drift apart. Later numbers
    may move with no prose of their own: the stamp is the changelog entry from
-   here on, and it names the commit that carries the reasoning. */
-var VERSION = 'v41';
+   here on, and it names the commit that carries the reasoning.
+   v43 — /resize-image/ joins the shell: a new tool page (exact pixels or
+   percentage, fit-inside or centre-crop, batch, ZIP) built on the shared
+   compressor app with a resize layer in engine.js. New page in the shell means
+   the version moves with it. */
+var VERSION = 'v42';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
@@ -109,6 +113,7 @@ var KEEP = [SHELL_CACHE, PAGE_CACHE, VENDOR_CACHE];
 var SHELL = [
   '',
   'compress/',
+  'resize-image/',
   'heic-to-jpg/',
   'compress-to-100kb/',
   'compress-to-50kb/',

@@ -643,6 +643,20 @@
     return canvas;
   }
 
+  /* Cover-crop resize: scale until the target box is completely filled, then
+     keep the centre. This is the "make it exactly W×H" path — the edges that
+     stick out are trimmed rather than distorted. */
+  function cropToCanvas(src, sw, sh, tw, th, opaque) {
+    var sc = Math.max(tw / sw, th / sh);
+    var cw = Math.max(1, Math.min(sw, Math.round(tw / sc)));
+    var ch = Math.max(1, Math.min(sh, Math.round(th / sc)));
+    var sx = Math.floor((sw - cw) / 2);
+    var sy = Math.floor((sh - ch) / 2);
+    var tile = createCanvas(cw, ch);
+    ctx2d(tile, true).drawImage(src, sx, sy, cw, ch, 0, 0, cw, ch);
+    return renderToCanvas(tile, cw, ch, tw, th, opaque);
+  }
+
   /* ---------------------------------------------------------------------
      Unsharp mask
      --------------------------------------------------------------------- */
@@ -1025,19 +1039,53 @@
 
       var format = resolveFormat(opts, info, caps, file.type || '');
 
-      // Dimensions
+      // Dimensions. An explicit resize request (opts.resize) wins over the
+      // "maximum edge" cap — the two answer different questions.
       var dw = size.w, dh = size.h;
+      var coverCrop = false;
+      var rz = opts.resize || null;
       var maxDim = opts.maxDimension || 0;
-      if (maxDim && Math.max(dw, dh) > maxDim) {
+      if (rz && rz.kind === 'dims' && rz.w > 0 && rz.h > 0) {
+        if (rz.fit === 'cover') {
+          coverCrop = true;
+          dw = Math.round(rz.w);
+          dh = Math.round(rz.h);
+        } else {
+          var rs = Math.min(rz.w / size.w, rz.h / size.h);
+          dw = Math.max(1, Math.round(size.w * rs));
+          dh = Math.max(1, Math.round(size.h * rs));
+        }
+      } else if (rz && rz.kind === 'percent' && rz.percent > 0 && rz.percent !== 100) {
+        var rp = rz.percent / 100;
+        dw = Math.max(1, Math.round(size.w * rp));
+        dh = Math.max(1, Math.round(size.h * rp));
+      } else if (maxDim && Math.max(dw, dh) > maxDim) {
         var s = maxDim / Math.max(dw, dh);
         dw = Math.max(1, Math.round(dw * s));
         dh = Math.max(1, Math.round(dh * s));
+      }
+      /* When a resize request was applied, the cap still plays — as an extra
+         ceiling on the longest edge, on top of the requested size. It can only
+         shrink the result, never grow it. */
+      if (rz && maxDim && Math.max(dw, dh) > maxDim) {
+        var s2 = maxDim / Math.max(dw, dh);
+        dw = Math.max(1, Math.round(dw * s2));
+        dh = Math.max(1, Math.round(dh * s2));
+      }
+      /* Upscaling is allowed, but never past the pixel budget — a runaway
+         percent value must not hand the encoder a canvas it cannot hold. */
+      if (dw * dh > MAX_PIXELS) {
+        var px = Math.sqrt(MAX_PIXELS / (dw * dh));
+        dw = Math.max(1, Math.floor(dw * px));
+        dh = Math.max(1, Math.floor(dh * px));
       }
       var downscaled = dw !== size.w || dh !== size.h;
       var scale = dw / size.w;
 
       report(0.25, 'Resampling');
-      var canvas = renderToCanvas(src, size.w, size.h, dw, dh, opaqueTreated && format !== 'png');
+      var canvas = coverCrop
+        ? cropToCanvas(src, size.w, size.h, dw, dh, opaqueTreated && format !== 'png')
+        : renderToCanvas(src, size.w, size.h, dw, dh, opaqueTreated && format !== 'png');
       if (typeof src.close === 'function') src.close();
 
       // Sharpening decision

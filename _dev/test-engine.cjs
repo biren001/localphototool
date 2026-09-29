@@ -209,6 +209,13 @@ function check(name, ok, extra) {
 
   console.log('\n=== HTML / asset wiring ===');
   const toolHtml = fs.readFileSync(path.join(ROOT, 'compress/index.html'), 'utf8');
+  /* app.js is shared by every tool page, so an id may legitimately live on a
+     page other than compress/ — the resize page owns the resizeW/H/fit/percent
+     controls, for instance. The wiring check accepts an id found on any page
+     that loads the app. */
+  const appPages = ['compress/index.html', 'resize-image/index.html'];
+  const toolHtmlAll = appPages
+    .map(p => fs.readFileSync(path.join(ROOT, p), 'utf8')).join('\n');
   const appSrc = fs.readFileSync(path.join(ROOT, 'assets/js/compressor/app.js'), 'utf8');
   const idsInApp = [...appSrc.matchAll(/\$\('#([A-Za-z0-9_-]+)'\)/g)].map(m => m[1]);
   // Ids the app creates at runtime via el({id}) are legitimate absentees.
@@ -217,7 +224,7 @@ function check(name, ok, extra) {
   );
   const missing = [...new Set(idsInApp)]
     .filter(id => !builtAtRuntime.has(id))
-    .filter(id => !new RegExp('id="' + id + '"').test(toolHtml));
+    .filter(id => !new RegExp('id="' + id + '"').test(toolHtmlAll));
   check('every element id referenced by app.js exists in the page', missing.length === 0,
     missing.length ? 'missing: ' + missing.join(', ') : 'checked ' + new Set(idsInApp).size + ' ids');
   check('engine.js is loaded before app.js',

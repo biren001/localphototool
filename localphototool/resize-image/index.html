@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-compressor-defaults='{"mode":"target","targetKB":500}'>
+<html lang="en" data-theme="light" data-compressor-defaults='{"mode":"auto","format":"original","resizeMode":"dims","resizeW":1920,"resizeH":1080,"resizeFit":"contain"}'>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compress Photos for Email — Fit Any Attachment Limit</title>
-<meta name="description" content="Shrink a whole batch of photos in your browser so they fit under Gmail, Outlook and work email limits. One ZIP, every photo under target. No uploads, no account.">
-<link rel="canonical" href="https://localphototool.com/compress-photos-for-email/">
+<title>Resize Images Online — Exact Size, Batch, No Upload</title>
+<meta name="description" content="Resize and crop images to exact pixel dimensions in your browser without uploading them. Batch resize, fit or center-crop, optional KB target, ZIP export. Free, no watermark.">
+<link rel="canonical" href="https://localphototool.com/resize-image/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
-<meta property="og:title" content="Compress Photos for Email — Fit Any Attachment Limit, No Upload">
-<meta property="og:description" content="Shrink a whole batch of photos in your browser so they fit under Gmail, Outlook and work email limits. One ZIP, every photo under target. No uploads, no account.">
-<meta property="og:url" content="https://localphototool.com/compress-photos-for-email/">
+<meta property="og:title" content="Resize Images Online — Free, Private, No Upload">
+<meta property="og:description" content="Exact pixel dimensions, fit or center-crop, true batch processing and ZIP export — all inside your browser. Your photos never leave your device.">
+<meta property="og:url" content="https://localphototool.com/resize-image/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Compress Photos for Email — Fit Any Attachment Limit, No Upload">
-<meta name="twitter:description" content="Shrink a whole batch of photos in your browser so they fit under Gmail, Outlook and work email limits. One ZIP, every photo under target. No uploads, no account.">
+<meta name="twitter:title" content="Resize Images Online — Free, Private, No Upload">
+<meta name="twitter:description" content="Exact pixel dimensions, fit or center-crop, true batch processing and ZIP export — all inside your browser.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -38,14 +38,12 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebApplication",
-      "@id": "https://localphototool.com/#app",
-      "name": "LocalPhotoTool",
-      "url": "https://localphototool.com/",
+      "@type": "SoftwareApplication",
+      "name": "LocalPhotoTool Image Resizer",
+      "url": "https://localphototool.com/resize-image/",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any modern web browser",
-      "browserRequirements": "Requires JavaScript",
-      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "description": "Browser-based batch image resizer with exact pixel dimensions, fit-inside or center-crop modes and ZIP export. Files are processed locally and never uploaded.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -54,25 +52,7 @@
       "isAccessibleForFree": true
     },
     {
-      "@type": "WebPage",
-      "@id": "https://localphototool.com/compress-photos-for-email/#page",
-      "url": "https://localphototool.com/compress-photos-for-email/",
-      "name": "Compress Photos for Email — Fit Any Attachment Limit, No Upload",
-      "description": "Shrink a whole batch of photos in your browser so they fit under Gmail, Outlook and work email limits. One ZIP, every photo under target. No uploads, no account.",
-      "inLanguage": "en",
-      "isPartOf": {
-        "@id": "https://localphototool.com/#website"
-      },
-      "about": {
-        "@id": "https://localphototool.com/#org"
-      },
-      "breadcrumb": {
-        "@id": "https://localphototool.com/compress-photos-for-email/#breadcrumb"
-      }
-    },
-    {
       "@type": "BreadcrumbList",
-      "@id": "https://localphototool.com/compress-photos-for-email/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -83,95 +63,99 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Compress",
-          "item": "https://localphototool.com/compress/"
+          "name": "Resize images",
+          "item": "https://localphototool.com/resize-image/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to resize images without uploading them",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Add your images",
+          "text": "Drag and drop files, paste from the clipboard, or browse from your photo library."
         },
         {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Compress Photos for Email — Fit Any Attachment Limit, No Upload",
-          "item": "https://localphototool.com/compress-photos-for-email/"
+          "@type": "HowToStep",
+          "name": "Set the target size",
+          "text": "Enter exact width and height and choose fit-inside or crop-to-fill, or resize by percentage."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Compare and save",
+          "text": "Check the output dimensions in the results panel, then download individual files or everything as one ZIP archive."
         }
       ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://localphototool.com/compress-photos-for-email/#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the email attachment size limit?",
+          "name": "How do I resize an image to exact dimensions?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Gmail allows 25 MB per message in total, Outlook.com and Microsoft 365 typically 20 MB, and many corporate Exchange servers cap far lower, often around 10 MB. Note that email systems also encode attachments during transport, adding roughly a third to the file size — so aiming for about three quarters of the official limit is the safe play."
+            "text": "Type the width and height you need into the dimension fields. In Fit inside the image keeps its aspect ratio and nothing is cropped — you get the largest image that fits your box. In Crop to fill you get exactly the size you typed: the image fills the box completely and the overflow is trimmed from the edges, centred."
           }
         },
         {
           "@type": "Question",
-          "name": "How many photos can I fit in one email?",
+          "name": "What is the difference between fit-inside and crop-to-fill?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Do the division against a safe budget, not the headline limit. With a conservative 15 MB budget and every photo compressed to 500 KB, twelve photos fit comfortably; compressed to 1 MB each, about ten still do. The tool shows the running total as each file finishes, so you can see exactly what the batch will weigh."
+            "text": "Fit-inside preserves every pixel of the scene and may deliver a different aspect ratio than you asked for. Crop-to-fill delivers the exact dimensions by trimming the edges that overflow — the framing changes, the pixels do not stretch. Use fit-inside when nothing may be lost; use crop-to-fill when the exact size matters more than the edges, such as square avatars or fixed-dimension form uploads."
           }
         },
         {
           "@type": "Question",
-          "name": "Does it work with iPhone HEIC photos?",
+          "name": "Can I resize a whole batch of images at once?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Drop HEIC files straight from the camera roll — they are decoded, compressed and handed back as JPG, WebP or AVIF that every email client and recipient can open, without the extra step of exporting them first."
+            "text": "Yes. Select any number of files, or drag a multi-selection onto the page. The same setting applies to every image, they process in parallel background workers, and Download all packages the finished files into a single ZIP. Percent mode scales each image by the same factor, so mixed sizes keep their relative proportions."
           }
         },
         {
           "@type": "Question",
-          "name": "Should I send the photos individually or as a ZIP?",
+          "name": "Does resizing reduce image quality?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Either works — the compressed files can be downloaded individually or as one tidy ZIP. A single ZIP is easier to attach and keeps some corporate filters that flag many attachments happier; individual files are friendlier for less technical recipients who just want to tap and view."
+            "text": "Downscaling permanently discards pixels — that is what making an image smaller means — but the resampler works in repeated halving steps with high-quality smoothing to avoid aliasing, and an unsharp mask runs automatically after a strong reduction so edges stay crisp. Upscaling stretches existing pixels; no tool can invent detail that was never captured, and this one doesn't pretend to."
           }
         },
         {
           "@type": "Question",
-          "name": "Will the photos still look good after compression?",
+          "name": "Can I resize and hit a KB limit at the same time?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, because the engine works from a measured fidelity floor rather than a fixed preset: it encodes test passes, scores each result against the original, and keeps the smallest file that stays above roughly 40 dB PSNR — the point where differences stop being visible on a phone or laptop screen. Email is exactly the use case this quality level was tuned for."
+            "text": "Yes. Set the dimensions, then switch Strategy to Target size and enter the budget — for example 1080×1080 under 200 KB. The engine resizes first, then searches encoder quality until the file fits, which is what marketplace and form uploads usually need."
           }
         },
         {
           "@type": "Question",
-          "name": "Are my photos uploaded to a server?",
+          "name": "Is my data safe?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. This is a static site with no upload endpoint. Your photos are decoded, resampled and re-encoded inside your own browser, so they cannot leave your device even by accident."
+            "text": "Your files are only ever read by your own browser. There is no server-side component that accepts image data. The only network requests the page makes are for the site's own assets and, optionally, the WASM codec modules from a public CDN — never your images."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Once the page has loaded, resizing runs entirely on your machine. Blocking the CDN only means the optional WASM codecs are unavailable; the built-in browser encoders take over automatically and everything else is identical."
           }
         }
       ]
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://localphototool.com/#org",
-      "name": "LocalPhotoTool",
-      "url": "https://localphototool.com/",
-      "logo": "https://localphototool.com/favicon.svg",
-      "email": "hello@localphototool.com"
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://localphototool.com/#website",
-      "url": "https://localphototool.com/",
-      "name": "LocalPhotoTool",
-      "inLanguage": "en",
-      "publisher": {
-        "@id": "https://localphototool.com/#org"
-      }
     }
   ]
 }
 </script>
 </head>
 <body>
-<a class="skip-link" href="#tool">Skip to the compressor</a>
+<a class="skip-link" href="#tool">Skip to the resizer</a>
 
 <header class="site-header">
   <div class="container">
@@ -211,26 +195,26 @@
   <section class="hero hero--compact">
     <div class="container">
       <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
-        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> Compress for email</span>
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Resize images</span>
       </nav>
-      <h1>Compress photos for email</h1>
-      <p class="hero__lead" style="max-width:660px">A phone shoots 4 MB photos and email caps messages at 10–25 MB — three pictures and the message bounces. Drop the whole batch here: every photo is compressed to your per-file budget in the browser, and the batch comes back as individual files or one ZIP that fits the limit with room to spare.</p>
+      <h1>Resize images without uploading them</h1>
+      <p class="hero__lead" style="max-width:660px">Type the size you need — exact pixels or a percentage — and the engine resizes one image or five hundred inside your browser. Fit inside keeps every pixel of the scene; crop to fill delivers the exact dimensions by trimming the edges. Nothing is uploaded either way.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
           Nothing is uploaded
         </li>
-        <li class="badge">Budget: 500 KB per photo</li>
-        <li class="badge">HEIC · JPG · PNG · WebP</li>
+        <li class="badge">JPEG · PNG · WebP · AVIF</li>
+        <li class="badge">HEIC from iPhone</li>
         <li class="badge">Unlimited &amp; free</li>
       </ul>
       <p class="hero__share" style="max-width:660px">
-        <a href="../share/">On a phone? Scan this QR code to open the tool there &rarr;</a>
+        <a href="../share/">Resizing on a phone? Scan this QR code to open the tool there →</a>
       </p>
     </div>
   </section>
 
-<section class="tool" id="tool">
+  <section class="tool" id="tool">
     <div class="container">
 
       <!-- Drop zone -->
@@ -238,12 +222,12 @@
         <div class="dropzone__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
         </div>
-        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your photos here</h2>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your images here</h2>
         <p class="dropzone__hint">or paste from the clipboard · <span id="pasteHint" hidden>⌘V / Ctrl+V works too</span></p>
         <div class="dropzone__actions">
           <button class="btn btn--grad btn--lg" id="pickBtn" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
-            Choose photos
+            Choose images
           </button>
         </div>
         <p class="dropzone__formats">JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit</p>
@@ -253,11 +237,51 @@
       <!-- Settings -->
       <div class="settings">
         <div class="settings__head">
-          <h2 class="settings__title">Compression settings</h2>
+          <h2 class="settings__title">Resize settings</h2>
           <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
         </div>
 
         <div class="settings__body">
+          <div class="field">
+            <span class="field__label">Target size</span>
+            <div class="segmented" role="radiogroup" aria-label="How the target size is expressed">
+              <input type="radio" name="resizeMode" id="resizeModeDims" value="dims" checked>
+              <label for="resizeModeDims">Exact pixels</label>
+              <input type="radio" name="resizeMode" id="resizeModePercent" value="percent">
+              <label for="resizeModePercent">Percentage</label>
+            </div>
+          </div>
+
+          <div class="field" id="resizeDimsField">
+            <div class="field__row" style="gap:0.75rem">
+              <div class="input-group" style="flex:1">
+                <input class="input" type="number" id="resizeW" min="1" max="20000" step="1" value="1920" inputmode="numeric" aria-label="Target width in pixels">
+                <span class="input-group__suffix">W</span>
+              </div>
+              <span class="muted" aria-hidden="true">×</span>
+              <div class="input-group" style="flex:1">
+                <input class="input" type="number" id="resizeH" min="1" max="20000" step="1" value="1080" inputmode="numeric" aria-label="Target height in pixels">
+                <span class="input-group__suffix">H</span>
+              </div>
+            </div>
+            <select class="select" id="resizeFit" aria-label="How the image fits the target size" style="margin-top:0.6rem">
+              <option value="contain" selected>Fit inside — keep aspect ratio, crop nothing</option>
+              <option value="cover">Crop to fill — exact size, trim the overflow (centred)</option>
+            </select>
+            <p class="muted mb-0" style="font-size:0.8rem">Fit inside may deliver a slightly different aspect ratio than you typed; crop to fill always delivers the exact size and changes the framing instead.</p>
+          </div>
+
+          <div class="field hidden" id="resizePercentField">
+            <div class="field__label">
+              <label for="resizePercent">Scale to</label>
+              <span class="hint">every image scales by the same factor</span>
+            </div>
+            <div class="input-group">
+              <input class="input" type="number" id="resizePercent" min="1" max="400" step="5" value="50" inputmode="numeric">
+              <span class="input-group__suffix">%</span>
+            </div>
+          </div>
+
           <div class="field">
             <span class="field__label">Strategy</span>
             <div class="segmented" role="radiogroup" aria-label="Compression strategy">
@@ -293,7 +317,7 @@
               <span class="hint">downscales automatically if needed</span>
             </div>
             <div class="input-group">
-              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="500" inputmode="numeric">
+              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="200" inputmode="numeric">
               <span class="input-group__suffix">KB</span>
             </div>
           </div>
@@ -333,7 +357,7 @@
                 <option value="2560">2560 px — web hero images</option>
                 <option value="2048">2048 px — retina screens</option>
                 <option value="1600">1600 px — blog &amp; article images</option>
-                <option value="1280" selected>1280 px — email &amp; social</option>
+                <option value="1280">1280 px — email &amp; social</option>
                 <option value="1024">1024 px — thumbnails</option>
                 <option value="800">800 px — very small</option>
               </select>
@@ -434,62 +458,103 @@
   <!-- SEO content -->
   <section class="section section--subtle">
     <div class="container prose">
-      <h2>The math that makes email photos bounce</h2>
-      <p>Attachment limits are about the whole message, not each file — and there is a hidden multiplier most people never see:</p>
+      <h2>What this resizer actually does</h2>
+      <p>Most online resizers want your file uploaded to their server before they touch it. This one doesn't have anywhere to upload to: the picture is decoded, resampled and re-encoded inside your own browser tab, and the result comes straight back as a download. The same engine powers the site's <a href="../compress/">image compressor</a> — the difference between the two pages is "make these pixels a different size" versus "make this file smaller".</p>
+      <p>Add one image or several hundred. The dimension setting you choose applies to every image in the batch, the files are processed in parallel background workers, and <strong>Download all</strong> hands you a single ZIP. Each result row shows the exact output dimensions, so a mixed batch of portrait and landscape photos stays checkable at a glance.</p>
+
+      <h3>Two ways to hit an exact size</h3>
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Mail system</th><th>Headline limit</th><th>Safe budget after encoding</th></tr>
+            <tr><th>Mode</th><th>What you get</th><th>Use it when</th></tr>
           </thead>
           <tbody>
-            <tr><td>Gmail</td><td>25 MB</td><td>≈ 18 MB of files</td></tr>
-            <tr><td>Outlook.com / Microsoft 365</td><td>20 MB</td><td>≈ 15 MB of files</td></tr>
-            <tr><td>Typical corporate Exchange</td><td>10 MB</td><td>≈ 7 MB of files</td></tr>
-            <tr><td>Strict legacy or hosted mail</td><td>5 MB</td><td>≈ 3.5 MB of files</td></tr>
+            <tr><td><strong>Fit inside</strong></td><td>The largest image that fits your box, aspect ratio preserved, nothing cropped</td><td>No part of the picture may be lost — web images, email attachments, general use</td></tr>
+            <tr><td><strong>Crop to fill</strong></td><td>Exactly the dimensions you typed; the image fills the box and the overflow is trimmed from the edges, centred</td><td>The size matters more than the edges — square avatars, fixed-size form uploads, platform covers</td></tr>
           </tbody>
         </table>
       </div>
-      <p>The gap exists because mail servers re-encode attachments as base64 text during transport, which inflates them by roughly 33%. That is why a "24 MB" batch can still be rejected by a "25 MB" Gmail account. The safe play is to plan against the third column.</p>
+      <p>Neither mode stretches the picture out of shape. Fit-inside changes the dimensions you asked for; crop-to-fill changes the framing. Those are the only two honest options — a resizer that claims to keep the aspect ratio <em>and</em> hit the exact size without cropping is distorting the image, and it won't warn you about it.</p>
 
-      <h2>Two dials, one batch</h2>
-      <p>For email there are only two decisions, and this page pre-sets both:</p>
+      <h3>Percentage mode</h3>
+      <p>Type a percentage instead of pixels and every image in the batch scales by the same factor — 50% of a 4000 px photo is 2000 px, and 50% of a 1200 px screenshot is 600 px. Mixed-size batches keep their relative proportions, which is what you want when preparing image sets at half resolution.</p>
+
+      <h3>Common targets</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Target</th><th>Dimensions</th><th>Note</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Full HD background</td><td>1920 × 1080</td><td>The default this page opens with</td></tr>
+            <tr><td>Square avatar</td><td>800 × 800, crop to fill</td><td>Any square size works the same way</td></tr>
+            <tr><td>Social sharing card</td><td>1200 × 630, crop to fill</td><td>The common Open Graph preview ratio</td></tr>
+            <tr><td>Blog content width</td><td>1600 px, fit inside</td><td>Also available under Advanced — maximum edge</td></tr>
+            <tr><td>Half-resolution set</td><td>50%, percent mode</td><td>Retina assets at 1×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">These are the widely published standard sizes, listed for convenience — not measured results. What the engine does with them (the resampling method, the sharpening, the metadata stripping) is described below, and it is the same code the compressor page documents.</p>
+
+      <h3>What happens to quality</h3>
       <ul>
-        <li><strong>Per-photo budget: 500 KB.</strong> Big enough that a photo stays crisp on any screen a recipient will use; small enough that a dozen photos fit inside even a 10 MB corporate limit. Raising it to 1 MB buys a little more zoom detail; dropping it to 250 KB squeezes in twice as many photos.</li>
-        <li><strong>Maximum edge: 1280 px.</strong> Email photos are viewed on screens, not printed. Capping the long edge at 1280 pixels is invisible in an email client and typically halves the bytes again. The Advanced options panel starts set to this value on this page; switch it back to "Keep original dimensions" if you need full resolution.</li>
+        <li><strong>Downscaling</strong> discards pixels permanently — that is the point. The resampler shrinks in repeated halving steps with high-quality smoothing at each stage, which avoids the aliasing a single-step resize produces, and a halo-free unsharp mask is applied automatically after a strong reduction so edges stay crisp. You can override that in Advanced.</li>
+        <li><strong>Upscaling</strong> stretches existing pixels. No resizer can invent detail that was never captured, and this one doesn't pretend to — no AI enhancement, no hallucinated texture. Upscale only when a form demands a minimum dimension.</li>
+        <li><strong>Metadata</strong> — EXIF, GPS coordinates, embedded thumbnails, maker notes — is stripped, and the camera orientation tag is applied to the pixels first so portrait photos stay upright. If you are resizing <em>because</em> of privacy, the dedicated <a href="../remove-gps-from-photo/">remove GPS from photo</a> page does metadata removal alone, without changing dimensions.</li>
+        <li><strong>Output format</strong> defaults to keeping whatever you put in. Switch to WebP, JPEG, AVIF or PNG in the format row if the destination needs a specific type.</li>
       </ul>
-      <p>Twelve photos at 500 KB each come to about 6 MB — inside every limit in the table above, including the strict ones. The results panel shows the running total as the batch processes, so there is no guessing before you attach.</p>
 
-      <h2>iPhone photos, without the export dance</h2>
-      <p>Modern iPhones save HEIC by default, and many recipients on older Windows machines or Android phones cannot open it. The usual advice — change a settings toggle, export each photo through the share sheet — is a five-step detour per batch. Here you drop the HEIC files in directly: they are decoded in the browser, compressed to the budget, and returned as JPG or WebP that everyone can open. One pass, no settings changes, and the originals on your phone are untouched.</p>
+      <p>Need the file smaller in kilobytes rather than in pixels? Set the dimensions and then pick <strong>Target size</strong> in Strategy — resize and compress in one pass, as the <a href="../compress-to-200kb/">compress to 200 KB</a> page describes. Coming from an iPhone? The <a href="../heic-to-jpg/">HEIC to JPG</a> converter accepts the same files. Everything on this site runs on your device; the <a href="../image-compressor-upload-test/">upload test</a> shows you how to verify that claim against any tool, including this one.</p>
 
-      <h2>Related pages</h2>
-      <p>Sending one photo with a hard size cap instead? Use <a href="../compress-to-200kb/">compress an image to 200 KB</a> or <a href="../compress-to-100kb/">compress an image to 100 KB</a>. Preparing photos for a website rather than an email? The <a href="../compress/">main compressor</a> measures each image and picks settings automatically.</p>
       <h2>Frequently asked questions</h2>
       <div class="faq mt-4">
         <details class="faq__item" open>
-          <summary>What is the email attachment size limit?</summary>
-          <div class="faq__body"><p>Gmail allows 25 MB per message in total, Outlook.com and Microsoft 365 typically 20 MB, and many corporate Exchange servers cap far lower, often around 10 MB. Note that email systems also encode attachments during transport, adding roughly a third to the file size — so aiming for about three quarters of the official limit is the safe play.</p></div>
+          <summary>How do I resize an image to exact dimensions?</summary>
+          <div class="faq__body"><p>Type the width and height you need into the dimension fields. In <strong>Fit inside</strong> the image keeps its aspect ratio and nothing is cropped — you get the largest image that fits your box. In <strong>Crop to fill</strong> you get exactly the size you typed: the image fills the box completely and the overflow is trimmed from the edges, centred.</p></div>
         </details>
         <details class="faq__item">
-          <summary>How many photos can I fit in one email?</summary>
-          <div class="faq__body"><p>Do the division against a safe budget, not the headline limit. With a conservative 15 MB budget and every photo compressed to 500 KB, twelve photos fit comfortably; compressed to 1 MB each, about ten still do. The tool shows the running total as each file finishes, so you can see exactly what the batch will weigh.</p></div>
+          <summary>What is the difference between fit-inside and crop-to-fill?</summary>
+          <div class="faq__body"><p>Fit-inside preserves every pixel of the scene and may deliver a different aspect ratio than you asked for. Crop-to-fill delivers the exact dimensions by trimming the edges that overflow — the framing changes, the pixels do not stretch. Use fit-inside when nothing may be lost; use crop-to-fill when the exact size matters more than the edges, such as square avatars or fixed-dimension form uploads.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Does it work with iPhone HEIC photos?</summary>
-          <div class="faq__body"><p>Yes. Drop HEIC files straight from the camera roll — they are decoded, compressed and handed back as JPG, WebP or AVIF that every email client and recipient can open, without the extra step of exporting them first.</p></div>
+          <summary>Can I resize a whole batch of images at once?</summary>
+          <div class="faq__body"><p>Yes. Select any number of files, or drag a multi-selection onto the page. The same setting applies to every image, they process in parallel background workers, and <strong>Download all</strong> packages the finished files into a single ZIP. Percent mode scales each image by the same factor, so mixed sizes keep their relative proportions.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Should I send the photos individually or as a ZIP?</summary>
-          <div class="faq__body"><p>Either works — the compressed files can be downloaded individually or as one tidy ZIP. A single ZIP is easier to attach and keeps some corporate filters that flag many attachments happier; individual files are friendlier for less technical recipients who just want to tap and view.</p></div>
+          <summary>Does resizing reduce image quality?</summary>
+          <div class="faq__body"><p>Downscaling permanently discards pixels — that is what making an image smaller means — but the resampler works in repeated halving steps with high-quality smoothing to avoid aliasing, and an unsharp mask runs automatically after a strong reduction so edges stay crisp. Upscaling stretches existing pixels; no tool can invent detail that was never captured, and this one doesn't pretend to.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Will the photos still look good after compression?</summary>
-          <div class="faq__body"><p>Yes, because the engine works from a measured fidelity floor rather than a fixed preset: it encodes test passes, scores each result against the original, and keeps the smallest file that stays above roughly 40 dB PSNR — the point where differences stop being visible on a phone or laptop screen. Email is exactly the use case this quality level was tuned for.</p></div>
+          <summary>Can I resize and hit a KB limit at the same time?</summary>
+          <div class="faq__body"><p>Yes. Set the dimensions, then switch Strategy to <strong>Target size</strong> and enter the budget — for example 1080×1080 under 200 KB. The engine resizes first, then searches encoder quality until the file fits, which is what marketplace and form uploads usually need.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Are my photos uploaded to a server?</summary>
-          <div class="faq__body"><p>No. This is a static site with no upload endpoint. Your photos are decoded, resampled and re-encoded inside your own browser, so they cannot leave your device even by accident.</p></div>
+          <summary>Is my data safe?</summary>
+          <div class="faq__body"><p>Your files are only ever read by your own browser. There is no server-side component that accepts image data. The only network requests the page makes are for the site's own assets and, optionally, the WASM codec modules from a public CDN — never your images.</p></div>
         </details>
+        <details class="faq__item">
+          <summary>Does it work offline?</summary>
+          <div class="faq__body"><p>Yes. Once the page has loaded, resizing runs entirely on your machine. Blocking the CDN only means the optional WASM codecs are unavailable; the built-in browser encoders take over automatically and everything else is identical.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="share-qr">
+        <a class="share-qr__panel" href="../share/" aria-label="Open the share page">
+          <img class="share-qr__img" src="../share/qr-code-1024.png" width="656" height="656" loading="lazy" alt="QR code linking to https://localphototool.com/">
+        </a>
+        <div class="share-qr__side">
+          <h2 class="share-qr__title">Take it to your phone</h2>
+          <p class="muted">Most photos live on a phone, so most of the work happens there too. Scan the code and this compressor opens in your mobile browser — nothing to install. In WeChat, long-press the code and choose <em>Extract QR code</em>.</p>
+          <div class="share-actions">
+            <a class="btn btn--primary" href="../share/">Posters &amp; share links</a>
+            <button class="btn btn--ghost" type="button" data-copy-link data-status-for="copySiteStatus">Copy link</button>
+          </div>
+          <p class="share-note" id="copySiteStatus" role="status" aria-live="polite"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -519,8 +584,8 @@
           <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
           <li><a href="../compress/">PNG optimizer</a></li>
           <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
-          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
           <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
           <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
           <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
           <li><a href="../compress-photos-for-email/">Compress for email</a></li>
@@ -570,7 +635,7 @@
       <div class="compare__layer compare__layer--base"><img id="compareBase" alt="Original image"></div>
       <div class="compare__layer compare__layer--over"><img id="compareOver" alt="Compressed image"></div>
       <span class="compare__label compare__label--l">Original</span>
-      <span class="compare__label compare__label--r">Compressed</span>
+      <span class="compare__label compare__label--r">Result</span>
       <div class="compare__handle" id="compareHandle" role="slider" tabindex="0"
            aria-label="Comparison position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
         <div class="compare__grip" aria-hidden="true">

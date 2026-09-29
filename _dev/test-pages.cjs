@@ -35,6 +35,7 @@ const PAGES = [
   'index.html',
   'compress/index.html',
   'heic-to-jpg/index.html',
+  'resize-image/index.html',
   'compress-to-100kb/index.html',
   'compress-to-50kb/index.html',
   'compress-to-200kb/index.html',

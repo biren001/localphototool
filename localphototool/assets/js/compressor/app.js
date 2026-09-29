@@ -26,6 +26,11 @@
     quality: 0.8,
     targetKB: 200,
     maxDimension: 0,
+    resizeMode: 'none',
+    resizeW: 1920,
+    resizeH: 1080,
+    resizeFit: 'contain',
+    resizePercent: 50,
     sharpen: 'auto',
     dither: true,
     pngColors: 'auto',
@@ -530,7 +535,12 @@
         item.inFlight = false;
         if (item.runToken !== token) { pump(); return; }
         item.result = result;
-        var worse = !converting && result.blob.size >= item.file.size;
+        /* "Keep the original when re-encoding made it bigger" is a compression
+           courtesy, not a universal rule: when the user asked for different
+           pixels — a resize or a format conversion — the new file IS the
+           deliverable, even if it happens to weigh more than the original. */
+        var resizing = !!options.resize;
+        var worse = !converting && !resizing && result.blob.size >= item.file.size;
         item.worse = worse;
         item.outputBlob = worse ? item.file : result.blob;
         item.outputName = worse
@@ -606,12 +616,26 @@
 
   function buildOptions() {
     var o = state.options;
+    var resize = null;
+    if (o.resizeMode === 'dims') {
+      resize = {
+        kind: 'dims',
+        w: Math.max(1, Math.round(Number(o.resizeW) || 0)),
+        h: Math.max(1, Math.round(Number(o.resizeH) || 0)),
+        fit: o.resizeFit === 'cover' ? 'cover' : 'contain'
+      };
+      if (!(resize.w > 0) || !(resize.h > 0)) resize = null;
+    } else if (o.resizeMode === 'percent') {
+      var p = Math.min(400, Math.max(1, Number(o.resizePercent) || 0));
+      if (p !== 100) resize = { kind: 'percent', percent: p };
+    }
     return {
       mode: o.mode,
       format: o.format,
       quality: Number(o.quality),
       targetKB: Number(o.targetKB),
       maxDimension: Number(o.maxDimension) || 0,
+      resize: resize,
       sharpen: o.sharpen,
       dither: !!o.dither,
       pngColors: o.pngColors === 'auto' ? 'auto'
@@ -698,7 +722,11 @@
         if (it.worse) {
           n.meta.appendChild(el('span', { class: 'result__grew', text: 'already optimal' }));
         } else {
-          n.meta.appendChild(el('span', { class: 'result__saved', text: '−' + savedPct(it.file.size, r.blob.size) + '%' }));
+          var pctSaved = savedPct(it.file.size, r.blob.size);
+          n.meta.appendChild(el('span', {
+            class: 'result__saved',
+            text: (pctSaved >= 0 ? '−' : '+') + Math.abs(pctSaved) + '%'
+          }));
         }
         n.meta.appendChild(el('span', { class: 'sep', text: '·' }));
         n.meta.appendChild(el('span', { text: r.originalWidth + '×' + r.originalHeight + (r.width !== r.originalWidth ? ' → ' + r.width + '×' + r.height : '') }));
@@ -788,8 +816,11 @@
         bar.hidden = true;
       } else {
         bar.hidden = false;
-        $('#actionSaved').textContent = pct > 0 ? '−' + pct + '% smaller' : 'No reduction';
-        $('#actionSub').textContent = formatBytes(totalIn) + ' → ' + formatBytes(totalOut) + ' saved ' + formatBytes(Math.max(0, totalIn - totalOut));
+        $('#actionSaved').textContent =
+          pct > 0 ? '−' + pct + '% smaller'
+          : pct < 0 ? '+' + Math.abs(pct) + '% larger'
+          : 'No reduction';
+        $('#actionSub').textContent = formatBytes(totalIn) + ' → ' + formatBytes(totalOut);
       }
     }
     var dl = $('#downloadAll');
@@ -1195,9 +1226,11 @@
     var modal = $('#compareModal');
     $('#compareTitle').textContent = item.name;
     var badge = $('#compareBadge');
+    var cmpPct = savedPct(item.file.size, item.result.blob.size);
     badge.textContent = item.worse
       ? 'No gain — original kept'
-      : '−' + savedPct(item.file.size, item.result.blob.size) + '% · ' + formatBytes(item.file.size) + ' → ' + formatBytes(item.result.blob.size);
+      : (cmpPct >= 0 ? '−' : '+') + Math.abs(cmpPct) + '% · '
+        + formatBytes(item.file.size) + ' → ' + formatBytes(item.result.blob.size);
 
     var origUrl = URL.createObjectURL(item.file);
     compareState.origUrl = origUrl;
@@ -1341,7 +1374,7 @@
     q.value = Math.round(state.options.quality * 100);
     qv.textContent = q.value + '%';
     t.value = state.options.targetKB;
-    md.value = String(state.options.maxDimension);
+    if (md) md.value = String(state.options.maxDimension);
     pc.value = String(state.options.pngColors);
     dt.checked = !!state.options.dither;
 
@@ -1354,6 +1387,24 @@
     $$('input[name="sharpen"]').forEach(function (r) {
       r.checked = r.value === state.options.sharpen;
     });
+    $$('input[name="resizeMode"]').forEach(function (r) {
+      r.checked = r.value === state.options.resizeMode;
+    });
+    var rw = $('#resizeW'), rh = $('#resizeH'), rfit = $('#resizeFit'), rp = $('#resizePercent');
+    if (rw) rw.value = String(state.options.resizeW);
+    if (rh) rh.value = String(state.options.resizeH);
+    if (rfit) rfit.value = String(state.options.resizeFit);
+    if (rp) rp.value = String(state.options.resizePercent);
+
+    function syncResizeMode() {
+      var dims = state.options.resizeMode === 'dims';
+      var pct = state.options.resizeMode === 'percent';
+      var dimsField = $('#resizeDimsField');
+      var pctField = $('#resizePercentField');
+      if (dimsField) dimsField.classList.toggle('hidden', !dims);
+      if (pctField) pctField.classList.toggle('hidden', !pct);
+    }
+    syncResizeMode();
 
     function syncMode() {
       var target = state.options.mode === 'target';
@@ -1410,6 +1461,29 @@
         state.options.sharpen = r.value;
         saveOptions(); recompressAll();
       });
+    });
+    $$('input[name="resizeMode"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        if (!r.checked) return;
+        state.options.resizeMode = r.value;
+        syncResizeMode(); saveOptions(); recompressAll();
+      });
+    });
+    if (rw) rw.addEventListener('input', function () {
+      state.options.resizeW = Math.max(1, Math.min(20000, Number(rw.value) || 0));
+      saveOptions(); recompressAll();
+    });
+    if (rh) rh.addEventListener('input', function () {
+      state.options.resizeH = Math.max(1, Math.min(20000, Number(rh.value) || 0));
+      saveOptions(); recompressAll();
+    });
+    if (rfit) rfit.addEventListener('change', function () {
+      state.options.resizeFit = rfit.value === 'cover' ? 'cover' : 'contain';
+      saveOptions(); recompressAll();
+    });
+    if (rp) rp.addEventListener('input', function () {
+      state.options.resizePercent = Math.max(1, Math.min(400, Number(rp.value) || 100));
+      saveOptions(); recompressAll();
     });
   }
 
