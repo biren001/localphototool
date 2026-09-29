@@ -211,6 +211,11 @@ function finish() {
      stayed green. Both places the signal can hide are read, off the request the
      reachability check below already makes. */
   const noindexOn = [];
+  /* The footer build stamp is the answer to "did my upload land?", asked from
+     the page itself. It only means anything if it is everywhere: one page
+     without it and a screenshot proves nothing about the page you are looking
+     at. Checked off the same requests the noindex sweep already makes. */
+  const noStampOn = [];
   for (const u of smUrls) {
     const r = await get(u);
     check('sitemap url resolves ' + u.replace('https://' + HOST, ''), r.status === 200, 'status ' + r.status);
@@ -219,11 +224,15 @@ function finish() {
       const header = r.headers.get('x-robots-tag') || '';
       const meta = (html.match(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']*)/i) || [])[1] || '';
       if (/noindex/i.test(header) || /noindex/i.test(meta)) noindexOn.push(u.replace(/^https:\/\/[^/]+/, '') || '/');
+      if (!/class="build-stamp"/.test(html)) noStampOn.push(u.replace(/^https:\/\/[^/]+/, '') || '/');
     }
   }
   check('no page in the sitemap carries a noindex signal', noindexOn.length === 0,
     noindexOn.length ? 'noindex on: ' + noindexOn.join(' ')
       : smUrls.length + ' pages checked — x-robots-tag and meta robots both clean');
+  check('every page carries the build stamp', noStampOn.length === 0,
+    noStampOn.length ? 'no stamp on: ' + noStampOn.join(' ')
+      : smUrls.length + ' pages checked — footer stamp present everywhere');
 
   /* 9b. GEO: the AI-facing entry point must be live and must not contradict
      the privacy claim that the whole site is built on. */
