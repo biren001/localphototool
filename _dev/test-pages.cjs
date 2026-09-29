@@ -36,6 +36,7 @@ const PAGES = [
   'compress/index.html',
   'heic-to-jpg/index.html',
   'resize-image/index.html',
+  'exif-viewer/index.html',
   'compress-to-100kb/index.html',
   'compress-to-50kb/index.html',
   'compress-to-200kb/index.html',
@@ -55,7 +56,7 @@ const PAGES = [
 ];
 /* Pages that are meant to be found by a human or a crawler. /stats/ is
    deliberately absent from both the sitemap and the shell cache. */
-const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'compress-to-100kb/', 'compress-to-50kb/',
+const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'compress-to-100kb/', 'compress-to-50kb/',
   'compress-to-200kb/', 'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
   'compress-photos-for-email/', 'compress-without-uploading/', 'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/', 'about/', 'privacy/', 'terms/', 'share/'];
@@ -244,7 +245,7 @@ PUBLIC.forEach(function (p) {
    so every page that carries the compressor belongs in the shell. The legal
    pages (privacy, terms) are reachable from the footer but deliberately left
    out to keep the install download down. */
-['', 'compress/', 'heic-to-jpg/', 'share/', 'about/',
+['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'share/', 'about/',
   'compress-to-100kb/', 'compress-to-50kb/', 'compress-to-200kb/',
   'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
   'compress-photos-for-email/', 'compress-without-uploading/',

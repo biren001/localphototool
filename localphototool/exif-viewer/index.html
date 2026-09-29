@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EXIF Viewer — See What Your Photos Reveal, Free, No Upload</title>
+<meta name="description" content="Read the EXIF metadata hidden in your photos: GPS coordinates, camera and lens, timestamps, editing software. Nothing is uploaded — the file is parsed in your browser.">
+<link rel="canonical" href="https://localphototool.com/exif-viewer/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="EXIF Viewer — See What Your Photos Reveal, Free, No Upload">
+<meta property="og:description" content="Read the EXIF metadata hidden in your photos: GPS coordinates, camera and lens, timestamps, editing software. Nothing is uploaded — the file is parsed in your browser.">
+<meta property="og:url" content="https://localphototool.com/exif-viewer/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EXIF Viewer — See What Your Photos Reveal, Free, No Upload">
+<meta name="twitter:description" content="Read the EXIF metadata hidden in your photos: GPS coordinates, camera and lens, timestamps, editing software. Nothing is uploaded — the file is parsed in your browser.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css" as="style">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/exif-viewer/#page",
+      "url": "https://localphototool.com/exif-viewer/",
+      "name": "EXIF Viewer — See What Your Photos Reveal, Free, No Upload",
+      "description": "Read the EXIF metadata hidden in your photos: GPS coordinates, camera and lens, timestamps, editing software. Nothing is uploaded — the file is parsed in your browser.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/exif-viewer/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/exif-viewer/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "EXIF Viewer — See What Your Photos Reveal, Free, No Upload",
+          "item": "https://localphototool.com/exif-viewer/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/exif-viewer/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What information does a photo's EXIF data contain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most phone and camera photos carry: the exact GPS coordinates where the picture was taken, the date and time, the camera and lens model, exposure settings, and often the software that last edited the file. The GPS record is the one that surprises people — a photo shared from home can broadcast your home coordinates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my photo uploaded when I inspect it here?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The file is read with the browser's own File API and parsed by JavaScript running on your device. This site has no upload endpoint at all — you can watch the network tab and confirm that nothing leaves the browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I remove GPS location from a photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the companion tool on this site: Remove GPS from photo strips location data — and all other metadata — by re-encoding the image, and it works without uploading the file either. Sharing through messaging apps usually strips metadata automatically; email attachments and cloud links usually do not."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do screenshots and images from the web have EXIF data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually not. Screenshots are freshly encoded by the operating system and carry no camera metadata, and social platforms strip most EXIF when you upload. A photograph straight from a camera or phone is the case to check — and downloaded files can carry text chunks or embedded colour profiles that are worth seeing before you redistribute them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the viewer not support HEIC files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HEIC wraps its metadata in a more complex container that this browser parser does not unpack. iPhone HEIC photos typically carry the same EXIF records as their JPG equivalents, GPS included — convert one with the HEIC to JPG tool and inspect the result, which shows what the original would reveal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does viewing the metadata change my file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The file is opened read-only; nothing is written back, and your photo is never modified. What you see is exactly what anyone who receives the original file would see."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "logo": "https://localphototool.com/favicon.svg",
+      "email": "hello@localphototool.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the viewer</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../compress-without-uploading/">No upload</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#compare">Why it is better</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero hero--compact">
+    <div class="container">
+      <p class="eyebrow">Free &middot; no account &middot; nothing leaves your device</p>
+      <h1>EXIF viewer — see what your photos reveal</h1>
+      <p class="hero__lead">Every photo carries a hidden caption: the coordinates where it was taken, when, on which camera, and what edited it last. Drop one in and read the caption before you share the photo.</p>
+    </div>
+  </section>
+
+  <section class="tool" id="tool">
+    <div class="container">
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop photos here to read their metadata</h2>
+        <p class="dropzone__hint">JPEG, PNG and WebP are inspected in full. The file is read in your browser — this page has no upload endpoint at all.</p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad" id="browseBtn" type="button">Choose photos</button>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        </div>
+      </div>
+
+      <div class="engine-status" id="engineStatus" aria-live="polite">
+        <span class="dot dot--on" aria-hidden="true"></span>
+        <span id="engineText">Ready — parsing runs locally, nothing is sent anywhere</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="results" id="results" hidden aria-live="polite">
+    <div class="container">
+      <div class="results__head">
+        <h2 class="results__title">Metadata report</h2>
+        <div class="results__actions">
+          <button class="btn btn--ghost btn--sm" id="clearBtn" type="button">Clear list</button>
+        </div>
+      </div>
+      <p class="results__summary" id="exifSummary"></p>
+      <div class="result-list" id="exifList"></div>
+      <div class="callout mt-4" id="gpsCta" hidden>
+        <strong>Some of these photos carry GPS coordinates.</strong>
+        <p class="mb-0" style="font-size:0.9rem">Coordinates survive sharing by email, cloud links and most chat apps that send the original file. Strip them in one pass — still without uploading:</p>
+        <a class="btn btn--primary btn--sm mt-2" href="../remove-gps-from-photo/">Remove GPS from a photo →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>What a photo hides, in one table</h2>
+      <p>A photograph straight from a phone or camera is two files in one: the picture you see, and a structured record of how it came to exist. The record is called EXIF, and these are the fields that matter:</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>What it says about you</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>GPS coordinates</td><td>Where you were, to within a few metres — your home, your child's school, your hotel</td></tr>
+            <tr><td>Date and time</td><td>When you were there, across every photo you have ever shared from the same camera</td></tr>
+            <tr><td>Camera and lens</td><td>Which device you own — enough to link photos that were shared from different accounts</td></tr>
+            <tr><td>Software</td><td>Whether and how the file was edited, cropped or re-saved before it reached you</td></tr>
+            <tr><td>Serial numbers</td><td>Some bodies record the camera's own serial, which identifies the physical device</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>The check worth doing before you share</h2>
+      <p>Marketplaces, classified ads, and "look at my new flat" photos are the classic case: a full-resolution photo attached to an email still carries the exact coordinates of the room it was taken in. Messaging apps usually strip metadata on delivery — email attachments and cloud download links usually do not. Dropping the photo here takes two seconds and answers the question with the file's own bytes rather than a general rule of thumb.</p>
+      <p>And if the report finds coordinates you would rather not publish, the same site has the fix: <a href="../remove-gps-from-photo/">Remove GPS from a photo</a> strips all metadata by re-encoding the image in your browser, so the shared copy carries nothing but pixels. For the wider claim — that "private" tools really do keep your file local — see the <a href="../image-compressor-upload-test/">measured upload test</a>, where nine popular compressors were watched at the network level and two were caught transmitting the whole file.</p>
+
+      <h2>Reading the report</h2>
+      <ul>
+        <li><strong>A red "GPS coordinates" row</strong> means the file contains a fix precise enough to place on a map. The altitude and the GPS timestamp are shown with it when present.</li>
+        <li><strong>"Embedded thumbnail"</strong> means the file carries a second, smaller copy of the image inside its metadata. Some editing tools have historically updated the full image but not the thumbnail — the thumbnail is what a forensically-minded recipient checks first.</li>
+        <li><strong>XMP / IPTC / ICC flags</strong> describe other metadata streams: editing history and captions (XMP, IPTC) and a colour profile (ICC). A colour profile is normal and harmless; editing-history records are the ones worth reading.</li>
+        <li><strong>An empty report</strong> is genuinely good news: the file carries nothing beyond pixels. Screenshots usually land here.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <p>Strip what you just found with <a href="../remove-gps-from-photo/">Remove GPS from a photo</a>; shrink a photo for sending with the <a href="../compress/">main compressor</a>; make it an exact size with the <a href="../resize-image/">batch resizer</a>; and convert the iPhone format with <a href="../heic-to-jpg/">HEIC to JPG</a>. Every one of them runs where this viewer runs — in your browser, with no upload.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>What information does a photo's EXIF data contain?</summary>
+          <div class="faq__body"><p>Most phone and camera photos carry: the exact GPS coordinates where the picture was taken, the date and time, the camera and lens model, exposure settings, and often the software that last edited the file. The GPS record is the one that surprises people — a photo shared from home can broadcast your home coordinates.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is my photo uploaded when I inspect it here?</summary>
+          <div class="faq__body"><p>No. The file is read with the browser's own File API and parsed by JavaScript running on your device. This site has no upload endpoint at all — you can watch the network tab and confirm that nothing leaves the browser.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I remove GPS location from a photo?</summary>
+          <div class="faq__body"><p>Use the companion tool on this site: <a href="../remove-gps-from-photo/">Remove GPS from photo</a> strips location data — and all other metadata — by re-encoding the image, and it works without uploading the file either. Sharing through messaging apps usually strips metadata automatically; email attachments and cloud links usually do not.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Do screenshots and images from the web have EXIF data?</summary>
+          <div class="faq__body"><p>Usually not. Screenshots are freshly encoded by the operating system and carry no camera metadata, and social platforms strip most EXIF when you upload. A photograph straight from a camera or phone is the case to check — and downloaded files can carry text chunks or embedded colour profiles that are worth seeing before you redistribute them.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why does the viewer not support HEIC files?</summary>
+          <div class="faq__body"><p>HEIC wraps its metadata in a more complex container that this browser parser does not unpack. iPhone HEIC photos typically carry the same EXIF records as their JPG equivalents, GPS included — convert one with the <a href="../heic-to-jpg/">HEIC to JPG</a> tool and inspect the result, which shows what the original would reveal.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does viewing the metadata change my file?</summary>
+          <div class="faq__body"><p>No. The file is opened read-only; nothing is written back, and your photo is never modified. What you see is exactly what anyone who receives the original file would see.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../resize-image/">Resize images</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+          <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../transfer/">Transfer phone to PC</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit 2f6b102">Updated <time datetime="2026-09-29">29 Sep 2026</time> &middot; build <code>2f6b102</code></span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/exif.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/pwa.js" defer></script>
+<script src="../assets/js/stats.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var dropzone = $('#dropzone'), input = $('#fileInput'), list = $('#exifList'),
+      results = $('#results'), summary = $('#exifSummary'), gpsCta = $('#gpsCta'),
+      engineText = $('#engineText');
+
+  var KIND_LABEL = { jpeg: 'JPEG', png: 'PNG', webp: 'WebP', heic: 'HEIC', gif: 'GIF', unknown: 'Unknown' };
+  var FLAG_DEFS = [
+    ['exif', 'EXIF'], ['xmp', 'XMP'], ['iptc', 'IPTC'],
+    ['icc', 'ICC profile'], ['thumbnail', 'Embedded thumbnail'], ['pngText', 'PNG text chunks']
+  ];
+  var GROUP_ORDER = ['gps', 'exif', 'ifd0', 'lens'];
+  var GROUP_TITLE = { gps: 'GPS location', exif: 'Taken & exposure', ifd0: 'Camera & file', lens: 'Lens & ownership' };
+
+  function toast(msg) {
+    var t = $('#toast');
+    t.textContent = msg;
+    t.classList.add('is-visible');
+    setTimeout(function () { t.classList.remove('is-visible'); }, 2600);
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function renderCard(file, report) {
+    var url = URL.createObjectURL(file);
+    var hasGps = !!report.gps;
+    var h = '<div class="result' + (hasGps ? ' ' : '') + '" style="display:flex;gap:1rem;align-items:flex-start">';
+    h += '<img class="result__thumb" src="' + url + '" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:10px;flex:none" ' +
+         'onerror="this.style.visibility=\'hidden\'">';
+    h += '<div class="result__main" style="flex:1;min-width:0">';
+    h += '<div class="result__name">' + esc(file.name) + '</div>';
+    h += '<div class="result__meta">' + KIND_LABEL[report.kind] + ' · ' + (file.size / 1024).toFixed(0) + ' KB</div>';
+
+    var chips = '';
+    chips += hasGps
+      ? '<span class="badge badge--warning">⚠ GPS coordinates found</span> '
+      : '<span class="badge badge--success">No GPS data</span> ';
+    FLAG_DEFS.forEach(function (f) {
+      if (report.flags[f[0]]) chips += '<span class="chip">' + f[1] + '</span> ';
+    });
+    h += '<div style="margin:0.5rem 0">' + chips + '</div>';
+
+    if (report.note) {
+      h += '<p class="muted" style="font-size:0.85rem;margin:0.4rem 0">' + esc(report.note) + '</p>';
+    }
+
+    if (report.tags.length) {
+      h += '<div class="table-scroll"><table style="width:100%;font-size:0.88rem">';
+      var lastGroup = null;
+      GROUP_ORDER.forEach(function (g) {
+        var rows = report.tags.filter(function (t) { return t.group === g; });
+        if (!rows.length) return;
+        h += '<tbody>';
+        rows.forEach(function (t, i) {
+          h += '<tr><td style="width:38%;opacity:0.65;padding:0.3rem 0.5rem 0.3rem 0">' +
+               (i === 0 ? '<strong>' + esc(GROUP_TITLE[g] || g) + '</strong> · ' : '') +
+               esc(t.label) + '</td><td style="padding:0.3rem 0" class="' + (g === 'gps' ? 'mono' : '') + '">' +
+               esc(t.value) + '</td></tr>';
+        });
+        h += '</tbody>';
+      });
+      h += '</table></div>';
+    } else if (!report.note) {
+      h += '<p class="muted" style="font-size:0.88rem;margin:0.4rem 0">No readable metadata — this file carries nothing beyond the pixels.</p>';
+    }
+
+    if (hasGps) {
+      h += '<p style="font-size:0.85rem;margin:0.5rem 0 0">This is the record a recipient sees. ' +
+           '<a href="../remove-gps-from-photo/">Strip it without uploading →</a></p>';
+    }
+    h += '</div></div>';
+    return h;
+  }
+
+  var pending = 0;
+  function addFiles(files) {
+    var imgs = Array.prototype.slice.call(files).filter(function (f) {
+      return /^image\//.test(f.type) || /\.(jpe?g|png|webp|heic|heif|gif|avif)$/i.test(f.name);
+    });
+    if (!imgs.length) { toast('No image files in that selection'); return; }
+    results.hidden = false;
+    var anyGps = false, done = 0;
+
+    imgs.forEach(function (file) {
+      pending++;
+      LPTExif.parse(file).then(function (report) {
+        pending--;
+        done++;
+        if (report.gps) anyGps = true;
+        list.insertAdjacentHTML('beforeend', renderCard(file, report));
+        summary.textContent = done + ' of ' + imgs.length + ' inspected' + (pending > 0 ? '…' : '');
+        gpsCta.hidden = !anyGps;
+        if (done === imgs.length) {
+          var n = imgs.filter(function (_, i) { return i >= 0; }).length;
+          engineText.textContent = 'Done — ' + n + ' file' + (n > 1 ? 's' : '') + ' parsed locally';
+          if (anyGps) toast('GPS coordinates found — see the report');
+        }
+      }).catch(function () {
+        pending--;
+        done++;
+        list.insertAdjacentHTML('beforeend',
+          '<div class="result result is-error" style="display:flex;gap:1rem"><div class="result__main">' +
+          '<div class="result__name">' + esc(file.name) + '</div>' +
+          '<p class="muted" style="margin:0.3rem 0 0;font-size:0.88rem">Could not be read.</p></div></div>');
+      });
+    });
+    summary.textContent = 'Inspecting ' + imgs.length + ' file' + (imgs.length > 1 ? 's' : '') + '…';
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  $('#browseBtn').addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', function () { addFiles(input.files); input.value = ''; });
+  $('#clearBtn').addEventListener('click', function () {
+    list.innerHTML = '';
+    results.hidden = true;
+    gpsCta.hidden = true;
+    summary.textContent = '';
+    engineText.textContent = 'Ready — parsing runs locally, nothing is sent anywhere';
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add('is-dragover'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.remove('is-dragover'); });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+})();
+</script>
+</body>
+</html>
