@@ -1053,6 +1053,13 @@ input[type="range"]::-moz-range-thumb {
   color: var(--text-faint); font-size: 0.8rem;
 }
 .footer__bottom .sep { margin-left: auto; }
+/* The build stamp is written by _dev/stamp-build.py on every deploy. Tabular
+   figures keep the date from jittering as the day number changes width. */
+.build-stamp { font-variant-numeric: tabular-nums; }
+.build-stamp code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95em; color: var(--text-muted);
+}
 
 @media (max-width: 700px) {
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; }

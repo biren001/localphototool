@@ -5,13 +5,26 @@ Cloudflare Pages drag-and-drop sees a ready-to-serve project, and it must
 include _worker.js, which is what powers /api/count.
 
     python _dev/package-zip.py
+
+Before zipping, the deploy stamp on every page is refreshed (date + git commit)
+and sw.js's VERSION is bumped if the stamp moved -- see stamp-build.py for why
+both have to happen together.
 """
 import os
 import zipfile
 
+import stamp_build
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "localphototool")
 OUT = os.path.join(ROOT, "localphototool-deploy.zip")
+
+stamp = stamp_build.apply_stamp()
+if stamp["changed"]:
+    print("build stamp refreshed on %d pages, sw.js -> %s"
+          % (len(stamp["changed"]), stamp["sw_version"]))
+else:
+    print("build stamp already current (%s)" % stamp["sw_version"])
 
 SKIP_DIRS = {"__pycache__", ".git", ".workbuddy", "_dev"}
 SKIP_FILES = {".DS_Store", "Thumbs.db"}
