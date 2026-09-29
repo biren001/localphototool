@@ -11,8 +11,12 @@ and sw.js's VERSION is bumped if the stamp moved -- see stamp-build.py for why
 both have to happen together.
 """
 import os
+import sys
 import zipfile
 
+# Python 3.11+ will not put the script's own directory on sys.path when
+# PYTHONSAFEPATH is set, and this script is run from the repo root.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import stamp_build
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -31,7 +31,10 @@ SITE = os.path.join(ROOT, "localphototool")
 # Every page ends its footer identically; the stamp goes right after the
 # copyright and before the spacer that pushes the slogan to the right edge.
 ANCHOR = '<span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>'
-STAMP_RE = re.compile(r'<span class="build-stamp">.*?</span>', re.S)
+# The opening tag carries a title attribute, so the pattern cannot end at
+# 'class="build-stamp"' -- matching only the bare tag would miss every stamp
+# already written and try to insert a second one.
+STAMP_RE = re.compile(r'<span class="build-stamp"[^>]*>.*?</span>', re.S)
 VERSION_RE = re.compile(r"var VERSION = 'v(\d+)';")
 
 # strftime('%b') is locale-dependent and returns Chinese under a zh-CN Windows

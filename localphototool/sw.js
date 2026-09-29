@@ -91,8 +91,16 @@ var OFFLINE = ROOT + 'offline.html';
    a single one of them being editorial. /png-to-jpg/ was the one substantive page
    that no other page mentioned in its body at all — and it is one of the three
    pages Search Console reports as crawled-but-not-indexed. The three pages are now
-   a mesh instead of three leaves. */
-var VERSION = 'v38';
+   a mesh instead of three leaves.
+   v39 — every page's footer now carries a build stamp: the date it was packed
+   and the git commit it was packed from. The stamp goes into all 19 pages and
+   all of them are in this shell, so the version has to move with it — otherwise
+   returning visitors keep last week's build number and the stamp is a lie.
+   _dev/stamp_build.py rewrites the stamp and bumps this line together, and
+   package-zip.py calls it, so the two can no longer drift apart. Later numbers
+   may move with no prose of their own: the stamp is the changelog entry from
+   here on, and it names the commit that carries the reasoning. */
+var VERSION = 'v40';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
