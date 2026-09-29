@@ -31,6 +31,9 @@
     resizeH: 1080,
     resizeFit: 'contain',
     resizePercent: 50,
+    rotate: 0,
+    flipH: false,
+    flipV: false,
     sharpen: 'auto',
     dither: true,
     pngColors: 'auto',
@@ -629,6 +632,10 @@
       var p = Math.min(400, Math.max(1, Number(o.resizePercent) || 0));
       if (p !== 100) resize = { kind: 'percent', percent: p };
     }
+    var rot = Number(o.rotate) || 0;
+    var transform = (rot === 90 || rot === 180 || rot === 270 || o.flipH || o.flipV)
+      ? { rotate: rot, flipH: !!o.flipH, flipV: !!o.flipV }
+      : null;
     return {
       mode: o.mode,
       format: o.format,
@@ -636,6 +643,7 @@
       targetKB: Number(o.targetKB),
       maxDimension: Number(o.maxDimension) || 0,
       resize: resize,
+      transform: transform,
       sharpen: o.sharpen,
       dither: !!o.dither,
       pngColors: o.pngColors === 'auto' ? 'auto'
@@ -1395,6 +1403,10 @@
     if (rh) rh.value = String(state.options.resizeH);
     if (rfit) rfit.value = String(state.options.resizeFit);
     if (rp) rp.value = String(state.options.resizePercent);
+    var rrot = $('#resizeRotate'), rfh = $('#resizeFlipH'), rfv = $('#resizeFlipV');
+    if (rrot) rrot.value = String(Number(state.options.rotate) || 0);
+    if (rfh) rfh.checked = !!state.options.flipH;
+    if (rfv) rfv.checked = !!state.options.flipV;
 
     function syncResizeMode() {
       var dims = state.options.resizeMode === 'dims';
@@ -1483,6 +1495,19 @@
     });
     if (rp) rp.addEventListener('input', function () {
       state.options.resizePercent = Math.max(1, Math.min(400, Number(rp.value) || 100));
+      saveOptions(); recompressAll();
+    });
+    if (rrot) rrot.addEventListener('change', function () {
+      var v = Number(rrot.value) || 0;
+      state.options.rotate = (v === 90 || v === 180 || v === 270) ? v : 0;
+      saveOptions(); recompressAll();
+    });
+    if (rfh) rfh.addEventListener('change', function () {
+      state.options.flipH = rfh.checked;
+      saveOptions(); recompressAll();
+    });
+    if (rfv) rfv.addEventListener('change', function () {
+      state.options.flipV = rfv.checked;
       saveOptions(); recompressAll();
     });
   }

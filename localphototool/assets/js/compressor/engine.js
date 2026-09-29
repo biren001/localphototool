@@ -657,6 +657,30 @@
     return renderToCanvas(tile, cw, ch, tw, th, opaque);
   }
 
+  /* User transform (rotate/flip), applied right after decode so every later
+     step — analysis, resize, cover-crop, sharpen — sees the oriented image.
+     rotate is clockwise degrees (90/180/270). Flips mirror the ROTATED result
+     (rotate first, then flip) — the order every editor uses, so "flip
+     horizontally" means left/right of what the user sees after the turn.
+     Identity input returns the source untouched (no canvas copy). */
+  function applyUserTransform(src, w, h, tr) {
+    if (!tr) return src;
+    var rot = tr.rotate === 90 || tr.rotate === 180 || tr.rotate === 270 ? tr.rotate : 0;
+    var fh = !!tr.flipH, fv = !!tr.flipV;
+    if (!rot && !fh && !fv) return src;
+    var rw = (rot === 90 || rot === 270) ? h : w;
+    var rh = (rot === 90 || rot === 270) ? w : h;
+    var out = createCanvas(rw, rh);
+    var ctx = ctx2d(out, true);
+    ctx.translate(rw / 2, rh / 2);
+    /* Canvas stacks right-to-left, so scale BEFORE rotate = flip applied
+       AFTER rotation. */
+    ctx.scale(fh ? -1 : 1, fv ? -1 : 1);
+    if (rot) ctx.rotate(rot * Math.PI / 180);
+    ctx.drawImage(src, -w / 2, -h / 2, w, h);
+    return out;
+  }
+
   /* ---------------------------------------------------------------------
      Unsharp mask
      --------------------------------------------------------------------- */
@@ -1031,6 +1055,16 @@
       var size = sourceSize(src);
       if (!size.w || !size.h) throw new Error('decode-failed');
       if (size.w * size.h > MAX_PIXELS) throw new Error('too-large');
+
+      /* User rotate/flip runs before anything else downstream, so resize
+         targets and cover-crop frames are computed against the oriented
+         image — "rotate 90° then fit 400×300" behaves the way it reads. */
+      if (opts.transform) {
+        var tsrc = applyUserTransform(src, size.w, size.h, opts.transform);
+        if (tsrc !== src && typeof src.close === 'function') src.close();
+        src = tsrc;
+        size = sourceSize(src);
+      }
 
       report(0.15, 'Analyzing');
       var proxy = proxyOf(src, size.w, size.h);
