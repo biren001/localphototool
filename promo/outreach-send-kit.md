@@ -41,7 +41,8 @@ Affiliation: I am the developer of LocalPhotoTool. Full disclosure up front.
 What it is
 ----------
 A static site of browser-only image tools: compression (JPEG/WebP/AVIF/PNG), HEIC->JPG,
-HEIC conversion, target-size compression (e.g. "compress to 500 KB"), EXIF/GPS stripping,
+HEIC conversion, target-size compression (e.g. "compress to 500 KB"), batch resizing and
+cropping (fit inside or center-crop to exact pixel dimensions), EXIF/GPS stripping,
 and phone<->computer file transfer. All processing happens in the originating browser
 via Canvas/WebAssembly. Source: https://github.com/biren001/localphototool (MIT).
 
@@ -64,7 +65,8 @@ What it provides
 
 What it cannot provide
 ----------------------
-Not a pixel editor, no cropping, and the EXIF stripping path strips metadata by
+Not a freeform pixel editor: resizing and cropping are batch operations with fixed
+modes (fit inside / center-crop), not a canvas. The EXIF stripping path strips metadata by
 re-encoding, so it is lossy by design (the page says so explicitly rather than burying it).
 
 Why it over the alternatives
@@ -117,7 +119,8 @@ Hi Louis — tool suggestion for Web Tools Weekly (not an article):
 
 LocalPhotoTool (https://localphototool.com) — browser-only image tools:
 compress JPEG/WebP/AVIF/PNG, convert HEIC, hit an exact target size
-("compress to 500 KB"), strip EXIF/GPS, and phone<->computer file transfer.
+("compress to 500 KB"), batch-resize/crop, strip EXIF/GPS, and
+phone<->computer file transfer.
 Zero bytes uploaded, no account, no analytics, no cookies, works offline.
 Open source, MIT: https://github.com/biren001/localphototool
 
