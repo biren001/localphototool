@@ -37,6 +37,7 @@ const PAGES = [
   'heic-to-jpg/index.html',
   'resize-image/index.html',
   'exif-viewer/index.html',
+  'images-to-pdf/index.html',
   'compress-to-100kb/index.html',
   'compress-to-50kb/index.html',
   'compress-to-200kb/index.html',
@@ -56,7 +57,7 @@ const PAGES = [
 ];
 /* Pages that are meant to be found by a human or a crawler. /stats/ is
    deliberately absent from both the sitemap and the shell cache. */
-const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'compress-to-100kb/', 'compress-to-50kb/',
+const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'images-to-pdf/', 'compress-to-100kb/', 'compress-to-50kb/',
   'compress-to-200kb/', 'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
   'compress-photos-for-email/', 'compress-without-uploading/', 'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/', 'about/', 'privacy/', 'terms/', 'share/'];

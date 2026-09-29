@@ -21,7 +21,7 @@ import sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, "..", "localphototool")
 
-PAGES = ["index.html", "compress/index.html", "heic-to-jpg/index.html", "exif-viewer/index.html", "resize-image/index.html"]
+PAGES = ["index.html", "compress/index.html", "heic-to-jpg/index.html", "exif-viewer/index.html", "images-to-pdf/index.html", "resize-image/index.html"]
 
 DETAILS_RE = re.compile(
     r'<details class="faq__item"[^>]*>\s*<summary>([\s\S]*?)</summary>\s*'
