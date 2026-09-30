@@ -552,6 +552,14 @@ html[data-theme="dark"] .hero::before {
 .settings__body { padding: 16px; display: grid; gap: 18px; }
 
 .field { display: grid; gap: 8px; min-width: 0; }
+
+/* Two related fields side by side on wide screens (e.g. rotate/flip + crop
+   on the resize page); they stack on narrow viewports like any other field. */
+.field-duo { display: grid; gap: 18px; min-width: 0; }
+@media (min-width: 760px) {
+  .field-duo { grid-template-columns: 1fr 1fr; }
+  .field-duo > .field { margin: 0; }
+}
 .field__label {
   display: flex; align-items: center; gap: 8px;
   font-size: 0.8125rem; font-weight: 620; color: var(--text-2);

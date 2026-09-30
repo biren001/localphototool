@@ -1416,6 +1416,11 @@
     var cr = $('#cropRatio'), ca = $('#cropAnchor');
     if (cr) cr.value = String(state.options.cropRatio || 'none');
     if (ca) ca.value = String(state.options.cropAnchor || 'center');
+    /* The anchor only means something once a ratio is picked. */
+    function syncCropAnchor() {
+      if (cr && ca) ca.classList.toggle('hidden', cr.value === 'none');
+    }
+    syncCropAnchor();
 
     function syncResizeMode() {
       var dims = state.options.resizeMode === 'dims';
@@ -1521,7 +1526,7 @@
     });
     if (cr) cr.addEventListener('change', function () {
       state.options.cropRatio = cr.value === 'none' || !cr.value ? 'none' : cr.value;
-      saveOptions(); recompressAll();
+      syncCropAnchor(); saveOptions(); recompressAll();
     });
     if (ca) ca.addEventListener('change', function () {
       state.options.cropAnchor = ca.value || 'center';
