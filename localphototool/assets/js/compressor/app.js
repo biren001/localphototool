@@ -438,6 +438,10 @@
     var done = state.items.filter(function (i) { return i.status === 'done'; });
     if (!done.length) return;
 
+    /* The count changed, so the save button's label may need to follow
+       ("Download all (.zip)" vs the single-image "Download image"). */
+    syncSaveButtons();
+
     var elapsed = Date.now() - batch.start;
     if (elapsed < CHIME_AFTER_MS && !document.hidden) return;
 
@@ -918,10 +922,17 @@
     return !saveCap.ios;
   }
 
+  function doneCount() {
+    return state.items.filter(function (i) { return i.status === 'done'; }).length;
+  }
+
+  /* The label follows the count: with a single result the desktop button
+     says "Download image" — promising "all (.zip)" for one file is a lie
+     the click would then have to walk back. */
   function saveModeLabel(mode) {
     if (mode === 'share') return saveCap.ios ? 'Save to Photos' : 'Save images';
     if (mode === 'download') return saveCap.ios ? 'How to save' : 'Save all images';
-    return 'Download all (.zip)';
+    return doneCount() === 1 ? 'Download image' : 'Download all (.zip)';
   }
 
   function saveHintText(mode, webpish) {
@@ -1204,6 +1215,16 @@
   function downloadAll() {
     var done = state.items.filter(function (i) { return i.status === 'done'; });
     if (!done.length) return;
+
+    /* One finished image is not an archive. A lone-file .zip buys nothing
+       and confuses everyone who expected a picture, so it goes out as the
+       image itself — desktop included. */
+    if (done.length === 1) {
+      var solo = done[0];
+      triggerDownload(solo.outputBlob, solo.outputName || 'image.jpg');
+      toast('Downloading 1 image.');
+      return;
+    }
 
     /* Last line of defence: even if some other code path reaches the ZIP
        builder on an iPhone, route it to the share sheet instead. */

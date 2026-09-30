@@ -1,7 +1,8 @@
 /* Verify the phone save flow:
    A. iPhone with file sharing  -> "Save to Photos", hands files to the share sheet
    B. iPhone without sharing    -> "Save all images" + Files-app hint
-   C. Desktop                   -> unchanged "Download all (.zip)"                */
+   C. Desktop                   -> one result downloads as an image,
+                                   two or more download as a .zip          */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -53,7 +54,8 @@ async function makePage(browser, opts) {
     viewport: opts.viewport || { width: 1280, height: 900 },
     isMobile: !!opts.mobile,
     hasTouch: !!opts.mobile,
-    deviceScaleFactor: opts.mobile ? 3 : 1
+    deviceScaleFactor: opts.mobile ? 3 : 1,
+    acceptDownloads: true
   });
   if (opts.ua) await ctx.addInitScript(mockShare, opts.supportsFiles !== false);
   const page = await ctx.newPage();
@@ -284,12 +286,14 @@ function run() {
     check('no JS errors on android', page.__errors.length === 0, page.__errors[0] || 'clean');
     await page.context().close();
 
-    /* ---------- C. Desktop unchanged ---------- */
+    /* ---------- C. Desktop: count decides image vs archive ---------- */
     console.log('\n=== C. Desktop ===');
     page = await makePage(browser, {});
+    const dls = [];
+    page.on('download', (d) => dls.push(d.suggestedFilename()));
     await compressOne(page);
     const labelC = await page.textContent('#barDownloadLabel');
-    check('desktop still says "Download all (.zip)"', labelC.trim() === 'Download all (.zip)', labelC.trim());
+    check('desktop with one result says "Download image"', labelC.trim() === 'Download image', labelC.trim());
     const hintHidden = await page.evaluate(() => {
       const h = document.querySelector('#saveHint');
       return !h || h.hidden;
@@ -300,6 +304,25 @@ function run() {
       return b.dataset.act;
     });
     check('desktop button keeps the zip action', dl === 'zip', dl);
+    await page.click('#barDownload');
+    await page.waitForTimeout(600);
+    check('a lone result downloads as an image, not a zip',
+      dls.length === 1 && !/\.zip$/i.test(dls[0]), dls.join(', ') || 'no download');
+
+    /* a second image flips the same button back to the archive */
+    const dlsBefore = dls.length;
+    await page.setInputFiles('#fileInput', IMG);
+    await page.waitForFunction(() => document.querySelectorAll('.result').length >= 2,
+      { timeout: 120000 });
+    await page.waitForTimeout(400);
+    const labelC2 = await page.textContent('#barDownloadLabel');
+    check('with two results the label returns to "Download all (.zip)"',
+      labelC2.trim() === 'Download all (.zip)', labelC2.trim());
+    await page.click('#barDownload');
+    await page.waitForTimeout(1500);
+    const batch = dls.slice(dlsBefore);
+    check('two results download as a single .zip',
+      batch.length === 1 && /\.zip$/i.test(batch[0]), batch.join(', ') || 'no download');
     check('no JS errors on desktop', page.__errors.length === 0, page.__errors[0] || 'clean');
     await page.context().close();
 
