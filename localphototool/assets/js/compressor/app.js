@@ -42,6 +42,7 @@
     wmColor: '#ffffff',
     wmOpacity: 60,
     wmTile: false,
+    wmDensity: 'medium',
     sharpen: 'auto',
     dither: true,
     pngColors: 'auto',
@@ -1432,7 +1433,8 @@
     if (cr) cr.value = String(state.options.cropRatio || 'none');
     if (ca) ca.value = String(state.options.cropAnchor || 'center');
     var wmt = $('#wmText'), wmp = $('#wmPosition'), wms = $('#wmSize'),
-        wmc = $('#wmColor'), wmo = $('#wmOpacity'), wmtile = $('#wmTile');
+        wmc = $('#wmColor'), wmo = $('#wmOpacity'), wmtile = $('#wmTile'),
+        wmd = $('#wmDensity');
     if (wmt) wmt.value = String(state.options.wmText || '');
     if (wmp) wmp.value = String(state.options.wmPosition || 'br');
     if (wms) wms.value = String(Number(state.options.wmSize) || 4);
@@ -1441,6 +1443,14 @@
     if (wmo) wmo.value = String(Number(state.options.wmOpacity) || 60);
     if (wmo) { var wmov = $('#wmOpacityValue'); if (wmov) wmov.textContent = (Number(state.options.wmOpacity) || 60) + '%'; }
     if (wmtile) wmtile.checked = !!state.options.wmTile;
+    if (wmd) wmd.value = String(state.options.wmDensity || 'medium');
+    /* The nine-grid position means nothing once the tile repeats everywhere. */
+    function syncWmTileUI() {
+      if (wmp) wmp.classList.toggle('hidden', !!state.options.wmTile);
+      var wmdf = $('#wmDensityField');
+      if (wmdf) wmdf.classList.toggle('hidden', !state.options.wmTile);
+    }
+    syncWmTileUI();
     /* The anchor only means something once a ratio is picked. */
     function syncCropAnchor() {
       if (cr && ca) ca.classList.toggle('hidden', cr.value === 'none');
@@ -1578,7 +1588,10 @@
       wmChanged();
     });
     if (wmtile) wmtile.addEventListener('change', function () {
-      state.options.wmTile = wmtile.checked; wmChanged();
+      state.options.wmTile = wmtile.checked; syncWmTileUI(); wmChanged();
+    });
+    if (wmd) wmd.addEventListener('change', function () {
+      state.options.wmDensity = wmd.value || 'medium'; wmChanged();
     });
   }
 

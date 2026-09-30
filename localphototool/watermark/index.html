@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Add a Text Watermark to Photos — Batch, Free, No Upload</title>
-<meta name="description" content="Put a text watermark on your photos in your browser without uploading them. Nine positions, custom color and transparency, optional tiled overlay, true batch processing. Free, no sign-up.">
+<meta name="description" content="Put a text watermark on your photos in your browser without uploading them. Nine positions, custom color and transparency, a tiled overlay with three densities — including a dense grid for protecting ID document copies. True batch processing. Free, no sign-up.">
 <link rel="canonical" href="https://localphototool.com/watermark/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -92,7 +92,15 @@
           "name": "Where can the watermark be placed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Anywhere on a nine-way grid: the four corners, the middle of each edge, or the centre. A soft shadow behind the text keeps it readable on both bright and dark areas. There is also a tiled mode that repeats the text diagonally across the whole frame, which is harder to crop out than a single mark."
+            "text": "Anywhere on a nine-way grid: the four corners, the middle of each edge, or the centre. A soft shadow behind the text keeps it readable on both bright and dark areas. There is also a tiled mode that repeats the text diagonally across the whole frame, in three densities, which is harder to crop out than a single mark."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I watermark a copy of my ID, passport or licence?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Switch on Tile diagonally, set Tile density to Dense, and type the purpose into the text — for example \"For rental application only — 30 Sep 2026\". A grey or red colour at about half opacity keeps the document readable while a size of 5–6% makes each line cross the document number and photo. The dense diagonal grid means no crop can remove every line, so the copy cannot be quietly reused for something else. And since the page runs entirely in your browser, the document is never uploaded anywhere."
           }
         },
         {
@@ -239,7 +247,17 @@
               <span class="switch__track"></span>
               <span class="switch__text">Tile diagonally across the whole image</span>
             </label>
-            <p class="muted mb-0" style="font-size:0.8rem">A single corner mark can be cropped away; a diagonal tile pattern cannot. Use the corner for aesthetics, the tile when the point is deterrence.</p>
+            <div class="hidden" id="wmDensityField" style="margin-top:0.6rem">
+              <label class="field__label" for="wmDensity" style="font-size:0.82rem">Tile density
+                <span class="hint">dense for document protection</span>
+              </label>
+              <select class="select" id="wmDensity" aria-label="How tightly the watermark tiles">
+                <option value="sparse">Sparse — a light decorative repeat</option>
+                <option value="medium" selected>Medium — balanced</option>
+                <option value="dense">Dense — for ID documents &amp; contracts</option>
+              </select>
+            </div>
+            <p class="muted mb-0" style="font-size:0.8rem">A single corner mark can be cropped away; a diagonal tile pattern cannot. Use the corner for aesthetics, the tile when the point is deterrence — or when you are sending a copy of an ID document (see below).</p>
           </div>
 
           <div class="field">
@@ -446,6 +464,10 @@
       <h3>Position, or tile?</h3>
       <p>A mark in one of the nine grid positions — corners, edge midpoints, or centre — is the aesthetic choice, and a soft shadow keeps it readable on both bright skies and dark shadows. It is also the cropable choice: anything in a corner can be trimmed off. The <strong>tiled overlay</strong> repeats the text diagonally across the entire frame, which makes casual cropping useless. Marking proofs or paid previews? Use the tile. Signing your own photography? A corner mark usually looks better.</p>
 
+      <h3>Protecting copies of ID documents</h3>
+      <p>Whenever you send a photo of a passport, driver's licence or national ID to a bank, landlord or employer, it can be reused by whoever receives it. The standard defence is a full-frame tiled watermark that states the purpose, and this page has the pattern built in: switch on <strong>Tile diagonally</strong>, set density to <strong>Dense</strong>, and use text like <em>"For bank account opening only — 30 Sep 2026"</em>. Pick a grey or red colour at roughly half opacity, and a size of 5–6% so every line crosses the document number and photo. With lines packed that tight, cropping out one mark leaves the others intact, and the copy becomes useless for anything but the stated purpose.</p>
+      <p>Because everything happens in your browser, the document itself never touches a server — which is exactly the kind of file you least want to hand to an unknown uploader.</p>
+
       <h3>Watermark plus resize plus a KB budget, in one pass</h3>
       <p>Because the watermark runs on the same pipeline as everything else, you can combine steps that other tools split across uploads: switch Strategy to <strong>Target size</strong> and the engine watermarks, then searches encoder quality until the file fits the budget — useful for marketplace listings that cap file size. Under Advanced you can cap the maximum edge, so "1280 px wide, JPEG, under 200 KB, watermarked bottom-right" is a single drag-and-drop. The same combination minus the watermark lives on the <a href="../compress-to-200kb/">compress to 200 KB</a> page.</p>
 
@@ -470,7 +492,11 @@
         </details>
         <details class="faq__item">
           <summary>Where can the watermark be placed?</summary>
-          <div class="faq__body"><p>Anywhere on a nine-way grid: the four corners, the middle of each edge, or the centre. A soft shadow behind the text keeps it readable on both bright and dark areas. There is also a tiled mode that repeats the text diagonally across the whole frame, which is harder to crop out than a single mark.</p></div>
+          <div class="faq__body"><p>Anywhere on a nine-way grid: the four corners, the middle of each edge, or the centre. A soft shadow behind the text keeps it readable on both bright and dark areas. There is also a tiled mode that repeats the text diagonally across the whole frame, in three densities, which is harder to crop out than a single mark.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I watermark a copy of my ID, passport or licence?</summary>
+          <div class="faq__body"><p>Switch on <strong>Tile diagonally</strong>, set Tile density to <strong>Dense</strong>, and type the purpose into the text — for example <em>"For rental application only — 30 Sep 2026"</em>. A grey or red colour at about half opacity keeps the document readable while a size of 5–6% makes each line cross the document number and photo. The dense diagonal grid means no crop can remove every line, so the copy cannot be quietly reused for something else. And since the page runs entirely in your browser, the document is never uploaded anywhere.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is a watermark enough to protect my photos?</summary>

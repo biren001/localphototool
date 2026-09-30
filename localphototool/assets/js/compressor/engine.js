@@ -726,6 +726,9 @@
        color    CSS color, default #ffffff
        opacity  0..1, default 0.6
        tile     repeat diagonally across the whole frame
+       density  'sparse' | 'medium' (default) | 'dense' — tile spacing only;
+                dense packs the rows tight enough that no crop of an ID
+                document copy can excise every line
      A soft dark shadow keeps light text readable on bright photos. */
   function drawWatermark(canvas, wm) {
     if (!wm || !wm.text) return;
@@ -744,7 +747,11 @@
     if (wm.tile) {
       ctx.translate(w / 2, h / 2);
       ctx.rotate(-Math.PI / 6);
-      var stepX = px * 9, stepY = px * 6;
+      /* Spacing scales with the font so every density keeps the same
+         visual rhythm; 'dense' for document protection, 'sparse' when
+         the repeat is decorative. */
+      var gap = wm.density === 'dense' ? 0.6 : (wm.density === 'sparse' ? 1.35 : 1);
+      var stepX = px * 9 * gap, stepY = px * 6 * gap;
       /* Cover the rotated frame: the diagonal spans at most w+h on each axis. */
       for (var y = -(w + h) / 2; y < (w + h) / 2; y += stepY) {
         for (var x = -(w + h) / 2; x < (w + h) / 2; x += stepX) {
