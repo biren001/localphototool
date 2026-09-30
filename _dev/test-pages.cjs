@@ -54,6 +54,7 @@ const PAGES = [
   'webp-to-jpg/index.html',
   'webp-to-png/index.html',
   'image-to-base64/index.html',
+  'batch-rename/index.html',
   'about/index.html',
   'privacy/index.html',
   'terms/index.html',
@@ -66,7 +67,7 @@ const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'watermark/', 
   'compress-to-200kb/', 'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
   'compress-photos-for-email/', 'compress-without-uploading/', 'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/', 'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/',
-  'image-to-base64/', 'about/', 'privacy/', 'terms/', 'share/'];
+  'image-to-base64/', 'batch-rename/', 'about/', 'privacy/', 'terms/', 'share/'];
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -258,7 +259,7 @@ PUBLIC.forEach(function (p) {
   'compress-photos-for-email/', 'compress-without-uploading/',
   'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/',
-  'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/', 'image-to-base64/'].forEach(function (p) {
+  'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/', 'image-to-base64/', 'batch-rename/'].forEach(function (p) {
   ok('the offline shell precaches /' + p, new RegExp("'" + (p || '') + "',").test(sw));
 });
 /* Read the SHELL array itself, not the whole file: the comment above it names

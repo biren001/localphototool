@@ -136,6 +136,7 @@ var SHELL = [
   'webp-to-jpg/',
   'webp-to-png/',
   'image-to-base64/',
+  'batch-rename/',
   'share/',
   'about/',
   'offline.html',

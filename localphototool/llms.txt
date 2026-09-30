@@ -47,6 +47,7 @@ LocalPhotoTool is a static web app. There is no server-side image processing and
 - [WebP to JPG](https://localphototool.com/webp-to-jpg/): converts WebP to JPG for software that does not open WebP.
 - [WebP to PNG](https://localphototool.com/webp-to-png/): converts WebP to PNG losslessly, keeping transparency.
 - [Image to Base64](https://localphototool.com/image-to-base64/): encodes images to Base64 data URIs for CSS, HTML and JSON.
+- [Batch rename](https://localphototool.com/batch-rename/): renames images in batches — custom names, sequence numbers, lowercase — without re-encoding the files.
 - [Compress without uploading](https://localphototool.com/compress-without-uploading/): how to tell whether an image compressor really keeps your file on your own device — a ten-second check with the browser's network panel, what the request list should and should not contain, and what this site collects (one self-hosted anonymous counter, nothing else).
 - [Image compressor upload test](https://localphototool.com/image-compressor-upload-test/): a measured test of nine online image compressors - a marked JPEG, every outbound request recorded, which send the whole file to a server and which keep it in the browser, plus the method to re-run it.
 
