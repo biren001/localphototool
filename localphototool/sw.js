@@ -104,7 +104,7 @@ var OFFLINE = ROOT + 'offline.html';
    percentage, fit-inside or centre-crop, batch, ZIP) built on the shared
    compressor app with a resize layer in engine.js. New page in the shell means
    the version moves with it. */
-var VERSION = 'v58';
+var VERSION = 'v59';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
@@ -142,15 +142,15 @@ var SHELL = [
   'icon-192.png',
   'icon-512.png',
   'maskable-512.png',
-  'assets/css/style.css?v=240af0b',
-  'assets/js/site.js?v=240af0b',
-  'assets/js/pwa.js?v=240af0b',
-  'assets/js/stats.js?v=240af0b',
-  'assets/js/share.js?v=240af0b',
-  'assets/js/chime.js?v=240af0b',
-  'assets/js/compressor/app.js?v=240af0b',
-  'assets/js/compressor/engine.js?v=240af0b',
-  'assets/js/compressor/worker.js?v=240af0b'
+  'assets/css/style.css?v=240af0b?v=ef78fa7',
+  'assets/js/site.js?v=240af0b?v=ef78fa7',
+  'assets/js/pwa.js?v=240af0b?v=ef78fa7',
+  'assets/js/stats.js?v=240af0b?v=ef78fa7',
+  'assets/js/share.js?v=240af0b?v=ef78fa7',
+  'assets/js/chime.js?v=240af0b?v=ef78fa7',
+  'assets/js/compressor/app.js?v=240af0b?v=ef78fa7',
+  'assets/js/compressor/engine.js?v=240af0b?v=ef78fa7',
+  'assets/js/compressor/worker.js?v=240af0b?v=ef78fa7'
 ].map(function (p) { return ROOT + p; });
 
 var VENDOR_HOSTS = ['esm.sh', 'cdn.jsdelivr.net'];

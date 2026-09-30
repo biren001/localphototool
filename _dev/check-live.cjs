@@ -500,7 +500,14 @@ function finish() {
   for (const [asset, why] of LIVE_ASSETS) {
     const localPath = path.join(__dirname, '..', 'localphototool', asset);
     const want = fs.readFileSync(localPath, 'utf8');
-    const got = await text('https://' + HOST + '/' + asset);
+    /* Fetch the versioned URL exactly as a page does: the bare URL can keep
+       serving a cache that is legitimately aging out, which would cry wolf.
+       The version comes from /compress/ because the homepage is a landing
+       page and loads none of the compressor assets at all. */
+    const ver = (fs.readFileSync(path.join(__dirname, '..', 'localphototool', 'compress', 'index.html'), 'utf8')
+      .match(/assets\/js\/compressor\/engine\.js\?v=([0-9a-f]+)/) || [])[1] || '';
+    const q = asset === 'sw.js' || asset.indexOf('?v=') !== -1 || !ver ? '' : '?v=' + ver;
+    const got = await text('https://' + HOST + '/' + asset + q);
     check('live ' + asset + ' matches the local build (' + why + ')',
       got.status === 200 && got.text === want,
       got.status !== 200 ? 'status ' + got.status
