@@ -26,6 +26,7 @@ LocalPhotoTool is a static web app. There is no server-side image processing and
 - [Compress images](https://localphototool.com/compress/): the compressor itself — auto quality, exact target size, batch and ZIP export.
 - [HEIC to JPG](https://localphototool.com/heic-to-jpg/): converts iPhone HEIC/HEIF photos to JPG in the browser, with batch support.
 - [Resize images](https://localphototool.com/resize-image/): batch-resizes to exact pixel dimensions or a percentage — fit-inside keeps the aspect ratio, crop-to-fill delivers the exact size by trimming the edges; same no-upload engine, ZIP export included.
+- [Add a text watermark](https://localphototool.com/watermark/): batch text watermarking — nine positions, custom color and opacity, optional diagonal tile overlay, or tiled deterrence marks; runs in-browser, never uploads.
 - [About](https://localphototool.com/about/): why the tool is local-first, and the engineering trade-offs behind that choice.
 - [Privacy policy](https://localphototool.com/privacy/): what is stored (an aggregate counter) and what is not (your images).
 - [Terms](https://localphototool.com/terms/): terms of use.

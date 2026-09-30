@@ -213,7 +213,7 @@ function check(name, ok, extra) {
      page other than compress/ — the resize page owns the resizeW/H/fit/percent
      controls, for instance. The wiring check accepts an id found on any page
      that loads the app. */
-  const appPages = ['compress/index.html', 'resize-image/index.html'];
+  const appPages = ['compress/index.html', 'resize-image/index.html', 'watermark/index.html'];
   const toolHtmlAll = appPages
     .map(p => fs.readFileSync(path.join(ROOT, p), 'utf8')).join('\n');
   const appSrc = fs.readFileSync(path.join(ROOT, 'assets/js/compressor/app.js'), 'utf8');

@@ -713,6 +713,56 @@
   }
 
   /* ---------------------------------------------------------------------
+     Text watermark
+     --------------------------------------------------------------------- */
+
+  /* Burns a text watermark onto the output canvas. Runs after resize and
+     sharpening, right before encoding, so the font scales with the DELIVERED
+     image — a 4% watermark is 4% of what the user downloads, not of some
+     intermediate frame. Options:
+       text     string to draw (empty/absent = no-op)
+       position one of tl tc tr ml c mr bl bc br (9-grid)
+       size     font height as % of min(width,height), default 4
+       color    CSS color, default #ffffff
+       opacity  0..1, default 0.6
+       tile     repeat diagonally across the whole frame
+     A soft dark shadow keeps light text readable on bright photos. */
+  function drawWatermark(canvas, wm) {
+    if (!wm || !wm.text) return;
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width, h = canvas.height;
+    var base = Math.min(w, h);
+    var px = Math.max(10, Math.round(base * (Number(wm.size) || 4) / 100));
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, Math.max(0.05, Number(wm.opacity) || 0.6));
+    ctx.fillStyle = wm.color || '#ffffff';
+    ctx.font = 'bold ' + px + 'px system-ui, -apple-system, "Segoe UI", sans-serif';
+    ctx.textBaseline = 'alphabetic';
+    ctx.shadowColor = 'rgba(0,0,0,0.45)';
+    ctx.shadowBlur = px * 0.35;
+    ctx.shadowOffsetY = 1;
+    if (wm.tile) {
+      ctx.translate(w / 2, h / 2);
+      ctx.rotate(-Math.PI / 6);
+      var stepX = px * 9, stepY = px * 6;
+      /* Cover the rotated frame: the diagonal spans at most w+h on each axis. */
+      for (var y = -(w + h) / 2; y < (w + h) / 2; y += stepY) {
+        for (var x = -(w + h) / 2; x < (w + h) / 2; x += stepX) {
+          ctx.fillText(wm.text, x, y);
+        }
+      }
+    } else {
+      var m = Math.round(base * 0.03);
+      var tw = ctx.measureText(wm.text).width;
+      var pos = String(wm.position || 'br');
+      var x = pos.charAt(1) === 'l' ? m : (pos.charAt(1) === 'c' ? (w - tw) / 2 : w - tw - m);
+      var y = pos.charAt(0) === 't' ? m + px * 0.8 : (pos === 'mc' ? h / 2 + px * 0.35 : h - m - px * 0.2);
+      ctx.fillText(wm.text, x, y);
+    }
+    ctx.restore();
+  }
+
+  /* ---------------------------------------------------------------------
      Unsharp mask
      --------------------------------------------------------------------- */
   function blur121(src, dst, w, h) {
@@ -1169,6 +1219,11 @@
       if (doSharpen && format !== 'png') {
         report(0.33, 'Sharpening');
         applyUnsharp(canvas, opts.sharpenAmount || 0.55);
+      }
+
+      if (opts.watermark && opts.watermark.text) {
+        report(0.36, 'Watermarking');
+        drawWatermark(canvas, opts.watermark);
       }
 
       var strategy = '';

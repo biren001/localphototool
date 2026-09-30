@@ -114,6 +114,7 @@ var SHELL = [
   '',
   'compress/',
   'resize-image/',
+  'watermark/',
   'exif-viewer/',
   'images-to-pdf/',
   'heic-to-jpg/',

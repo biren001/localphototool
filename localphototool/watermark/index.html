@@ -1,35 +1,25 @@
-<!--
-  HEIC to JPG converter.
-
-  The header, tool block, footer, modals and script tags are shared
-  verbatim with /compress/ — edit one, edit both. _dev/test-pages.cjs
-  compares the regions and fails the suite if they drift apart.
-  The <html> element pins the output format, so a tool that promises
-  JPG can never hand back a PNG chosen by the compressor's "auto"
-  format logic.
--->
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-compressor-defaults='{"format":"jpeg"}'>
+<html lang="en" data-theme="light" data-compressor-defaults='{"mode":"auto","format":"original"}'>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>HEIC to JPG Converter — Convert iPhone Photos Privately</title>
-<meta name="description" content="Convert HEIC and HEIF photos to JPG in your browser — no upload, no account, no file limit. Batch convert iPhone photos into a format that opens everywhere.">
-<link rel="canonical" href="https://localphototool.com/heic-to-jpg/">
+<title>Add a Text Watermark to Photos — Batch, Free, No Upload</title>
+<meta name="description" content="Put a text watermark on your photos in your browser without uploading them. Nine positions, custom color and transparency, optional tiled overlay, true batch processing. Free, no sign-up.">
+<link rel="canonical" href="https://localphototool.com/watermark/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
-<meta property="og:title" content="HEIC to JPG Converter — Free, Private, No Upload">
-<meta property="og:description" content="iPhone photos that open everywhere. Convert HEIC to JPG inside your browser — your pictures never leave your device.">
-<meta property="og:url" content="https://localphototool.com/heic-to-jpg/">
+<meta property="og:title" content="Add a Text Watermark — Free, Private, No Upload">
+<meta property="og:description" content="Batch text watermarking inside your browser: nine positions, your color and opacity, optional tiled overlay. Photos never leave your device.">
+<meta property="og:url" content="https://localphototool.com/watermark/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HEIC to JPG Converter — Free, Private, No Upload">
-<meta name="twitter:description" content="Convert HEIC to JPG entirely in your browser. Batch conversion, correct orientation, nothing uploaded.">
+<meta name="twitter:title" content="Add a Text Watermark — Free, Private, No Upload">
+<meta name="twitter:description" content="Batch text watermarking inside your browser: nine positions, your color and opacity, optional tiled overlay.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -49,11 +39,11 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "name": "LocalPhotoTool HEIC to JPG Converter",
-      "url": "https://localphototool.com/heic-to-jpg/",
+      "name": "LocalPhotoTool Watermark Tool",
+      "url": "https://localphototool.com/watermark/",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any modern web browser",
-      "description": "Browser-based HEIC and HEIF to JPG converter. Photos are decoded on the user's own device with WebAssembly and are never uploaded.",
+      "description": "Browser-based batch text watermarking for photos: nine positions, custom color and opacity, optional tiled overlay, optional resize and KB target. Files are processed locally and never uploaded.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -73,29 +63,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "HEIC to JPG",
-          "item": "https://localphototool.com/heic-to-jpg/"
-        }
-      ]
-    },
-    {
-      "@type": "HowTo",
-      "name": "How to convert HEIC photos to JPG",
-      "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Add your HEIC photos",
-          "text": "Drag the .heic or .heif files onto the page, paste them, or pick them from your photo library."
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Let the decoder run",
-          "text": "The HEIC decoder runs inside your browser tab and produces a JPG. Nothing is uploaded, and portrait photos keep their upright orientation."
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Save the JPGs",
-          "text": "Download files individually, take them all as one ZIP on desktop, or save straight to your photo library on a phone."
+          "name": "Add a text watermark",
+          "item": "https://localphototool.com/watermark/"
         }
       ]
     },
@@ -104,18 +73,42 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is a HEIC file and why won't it open on my computer?",
+          "name": "How do I add a text watermark to my photos?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "HEIC is the format iPhones have used for photos since iOS 11. It stores the same picture at roughly half the size of a JPEG, but it is built on HEVC, and support outside Apple's ecosystem is patchy: Windows needs an extra codec pack, Android support depends on the version, and many web forms and older editors refuse the file outright. Converting to JPG solves the compatibility problem permanently."
+            "text": "Drop your images on the page, type the watermark text — a copyright line, your name, a brand — pick a position, size, color and transparency, and save. Everything runs in your browser: the text is drawn onto the picture locally and the watermarked files come straight back as downloads."
           }
         },
         {
           "@type": "Question",
-          "name": "Is this HEIC to JPG converter free, and is there a limit?",
+          "name": "Can I watermark a whole batch of photos at once?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It is free and unlimited. There is no account, no file count limit and no file size limit, because the conversion runs on your own device rather than on a server that would have to meter it."
+            "text": "Yes. Select any number of files, or drag a multi-selection onto the page. The same watermark applies to every image, they process in parallel background workers, and Download all packages the finished files into a single ZIP. The font scales with each image's shorter edge, so mixed sizes get consistently proportioned marks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can the watermark be placed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anywhere on a nine-way grid: the four corners, the middle of each edge, or the centre. A soft shadow behind the text keeps it readable on both bright and dark areas. There is also a tiled mode that repeats the text diagonally across the whole frame, which is harder to crop out than a single mark."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a watermark enough to protect my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Honestly: no tool can make theft impossible — a watermark in one corner can be cropped away. Put the mark where a crop would hurt the picture, or use the tiled overlay for high-value images, and keep originals elsewhere. What this page does is make proper marking fast enough that you actually do it, on every image, in one pass."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I resize or compress the photos while watermarking them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The watermark is drawn after any resize and before encoding, so the text scales with the delivered image — a 4% mark is 4% of what you download. You can also switch Strategy to Target size to hit a KB budget, and pick JPEG, WebP, AVIF or PNG as the output format."
           }
         },
         {
@@ -123,55 +116,7 @@
           "name": "Are my photos uploaded anywhere?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The HEIC decoder is a WebAssembly module served from this site and executed inside your browser tab, so your photos are never transmitted. The page makes no request that carries image data."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does converting HEIC to JPG reduce quality?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The photo is decoded once from the original and encoded once at high fidelity, and the pixel dimensions are preserved. JPG is a lossy format, so it cannot be perfectly lossless for photographs — keep your original HEIC files as the master copies and convert the versions you need to share."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why is the JPG sometimes larger than the HEIC file?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "HEIC compresses roughly twice as efficiently as JPG, so a JPG of the same picture usually weighs more. That is expected. The converter still re-encodes the result to keep the file as small as it can at a high fidelity floor, and it always gives you a JPG rather than handing the original HEIC back just because it happened to be smaller."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will portrait photos come out sideways?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. An iPhone portrait photo is stored as a landscape image plus a rotation tag. The decoder applies that tag to the pixels during conversion, so a portrait photo arrives as a portrait JPG."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I convert many photos at once, and does it work on a phone?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Drop an entire folder and the files are converted in sequence. On desktop you can take everything as a single ZIP archive; on an iPhone the finished JPGs can be handed to the system share sheet so they land directly in your photo library."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I convert HEIC on Windows, Android or Linux?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, on any of them. The HEIC decoder is bundled with this site and runs inside the browser, so the operating system's own HEIC support is irrelevant — you do not need a codec pack on Windows, a particular Android version, or any software installed at all. If your browser can open this page, it can convert the file."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need to change my iPhone camera settings?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Leave the camera on High Efficiency and keep shooting HEIC — it stores the same photo at about half the size of JPEG, so it is the better format to keep your originals in. Convert to JPG only at the moment you need to share, upload or print, and let your iPhone keep the higher-quality master."
+            "text": "No. Your files are only ever read by your own browser — there is no server-side component that accepts image data. The only network requests the page makes are for the site's own assets and, optionally, WASM codec modules from a public CDN. Once the page has loaded, watermarking works offline."
           }
         }
       ]
@@ -181,7 +126,7 @@
 </script>
 </head>
 <body>
-<a class="skip-link" href="#tool">Skip to the compressor</a>
+<a class="skip-link" href="#tool">Skip to the watermark tool</a>
 
 <header class="site-header">
   <div class="container">
@@ -195,7 +140,7 @@
 
       <div class="nav__links" id="navLinks">
         <a class="nav__link" href="../compress/">Compress</a>
-        <a class="nav__link" href="../heic-to-jpg/" aria-current="page">HEIC to JPG</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
         <a class="nav__link" href="../compress-without-uploading/">No upload</a>
         <a class="nav__link" href="../#how-it-works">How it works</a>
         <a class="nav__link" href="../#compare">Why it is better</a>
@@ -221,19 +166,22 @@
   <section class="hero hero--compact">
     <div class="container">
       <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
-        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> HEIC to JPG</span>
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Text watermark</span>
       </nav>
-      <h1>Convert HEIC to JPG — without uploading your photos</h1>
-      <p class="hero__lead" style="max-width:660px">Your iPhone saves photos as HEIC, and half the world cannot open them. Drop them here and get ordinary JPGs back, decoded on your own device.</p>
+      <h1>Add a text watermark without uploading your photos</h1>
+      <p class="hero__lead" style="max-width:660px">Type your name, brand or copyright line, pick where it goes, and stamp it on one photo or five hundred — entirely inside your browser. Nine positions, your color and transparency, an optional tiled overlay. Nothing is uploaded either way.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
           Nothing is uploaded
         </li>
-        <li class="badge">HEIC &amp; HEIF in, JPG out</li>
-        <li class="badge">Portrait photos stay upright</li>
+        <li class="badge">JPEG · PNG · WebP · AVIF</li>
+        <li class="badge">HEIC from iPhone</li>
         <li class="badge">Unlimited &amp; free</li>
       </ul>
+      <p class="hero__share" style="max-width:660px">
+        <a href="../share/">On a phone? This tool runs there too — grab the QR code and share links →</a>
+      </p>
     </div>
   </section>
 
@@ -260,11 +208,64 @@
       <!-- Settings -->
       <div class="settings">
         <div class="settings__head">
-          <h2 class="settings__title">Compression settings</h2>
+          <h2 class="settings__title">Watermark settings</h2>
           <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
         </div>
 
         <div class="settings__body">
+          <div class="field">
+            <label class="field__label" for="wmText">Watermark text
+              <span class="hint">what gets stamped on every image</span>
+            </label>
+            <input class="input" type="text" id="wmText" placeholder="© Your Name 2026" maxlength="80" autocomplete="off">
+          </div>
+
+          <div class="field-duo">
+          <div class="field">
+            <span class="field__label">Position</span>
+            <select class="select" id="wmPosition" aria-label="Where the watermark sits">
+              <option value="tl">Top-left corner</option>
+              <option value="tc">Top edge, centred</option>
+              <option value="tr">Top-right corner</option>
+              <option value="ml">Left edge, middle</option>
+              <option value="mc">Centre of the image</option>
+              <option value="mr">Right edge, middle</option>
+              <option value="bl">Bottom-left corner</option>
+              <option value="bc">Bottom edge, centred</option>
+              <option value="br" selected>Bottom-right corner</option>
+            </select>
+            <label class="switch switch--sm" for="wmTile" style="margin-top:0.6rem">
+              <input type="checkbox" id="wmTile">
+              <span class="switch__track"></span>
+              <span class="switch__text">Tile diagonally across the whole image</span>
+            </label>
+            <p class="muted mb-0" style="font-size:0.8rem">A single corner mark can be cropped away; a diagonal tile pattern cannot. Use the corner for aesthetics, the tile when the point is deterrence.</p>
+          </div>
+
+          <div class="field">
+            <div class="field__label">
+              <label for="wmSize">Size</label>
+              <span class="hint">% of the shorter edge</span>
+            </div>
+            <div class="field__row">
+              <input type="range" id="wmSize" min="2" max="15" step="1" value="4">
+              <span class="field__value" id="wmSizeValue">4%</span>
+            </div>
+            <div class="field__label" style="margin-top:0.9rem">
+              <label for="wmOpacity">Opacity</label>
+              <span class="hint">subtle marks stay readable</span>
+            </div>
+            <div class="field__row">
+              <input type="range" id="wmOpacity" min="10" max="100" step="5" value="60">
+              <span class="field__value" id="wmOpacityValue">60%</span>
+            </div>
+            <div class="field__label" style="margin-top:0.9rem">
+              <label for="wmColor">Color</label>
+            </div>
+            <input class="input" type="color" id="wmColor" value="#ffffff" style="height:2.4rem;padding:0.15rem;width:5.5rem">
+          </div>
+          </div>
+
           <div class="field">
             <span class="field__label">Strategy</span>
             <div class="segmented" role="radiogroup" aria-label="Compression strategy">
@@ -308,9 +309,9 @@
           <div class="field">
             <span class="field__label">Output format</span>
             <div class="segmented segmented--wrap" role="radiogroup" aria-label="Output format">
-              <input type="radio" name="format" id="fmtAuto" value="auto" checked>
+              <input type="radio" name="format" id="fmtAuto" value="auto">
               <label for="fmtAuto">Auto</label>
-              <input type="radio" name="format" id="fmtOriginal" value="original">
+              <input type="radio" name="format" id="fmtOriginal" value="original" checked>
               <label for="fmtOriginal">Keep format</label>
               <input type="radio" name="format" id="fmtJpeg" value="jpeg">
               <label for="fmtJpeg">JPEG</label>
@@ -344,7 +345,7 @@
                 <option value="1024">1024 px — thumbnails</option>
                 <option value="800">800 px — very small</option>
               </select>
-              <p class="muted mb-0" style="font-size:0.78rem">Need exact dimensions or a centre crop instead of a cap? The <a href="../resize-image/">batch image resizer</a> does that.</p>
+              <p class="muted mb-0" style="font-size:0.78rem">The watermark is drawn after any resize, so the text scales with the delivered image — a 4% mark stays 4% no matter the output size.</p>
             </div>
 
             <div class="field">
@@ -385,10 +386,6 @@
                 <span class="switch__track"></span>
                 <span class="switch__text">Play a soft chime — only if it took a while, or while you were on another tab</span>
               </label>
-              <p class="muted mb-0" style="font-size:0.78rem">
-                Generated in your browser by a synth — no audio file is downloaded, and it stays silent when a batch finishes in a couple of seconds.
-                <button class="linkish" type="button" id="chimeTest">Preview the sound</button>
-              </p>
             </div>
 
             <div class="field">
@@ -442,89 +439,74 @@
   <!-- SEO content -->
   <section class="section section--subtle">
     <div class="container prose">
-      <h2>What is a HEIC file, and why won't it open?</h2>
-      <p>Since iOS 11 an iPhone camera has saved photos as <strong>HEIC</strong> — High Efficiency Image Container. It is genuinely better at its job: the same picture at roughly half the size of a JPEG. The catch is that it is built on HEVC, and support outside Apple's world is patchy. Windows needs an optional codec pack from the Microsoft Store. Android support depends on the version and the app. Many web forms, content systems and older editors refuse the file outright, sometimes without even a useful error.</p>
-      <p>The fix is unglamorous but permanent: turn the photo into a JPG, a format every device made in the last twenty-five years can open.</p>
+      <h2>What this watermark tool actually does</h2>
+      <p>Every "add watermark" service that runs in a browser tab wants your photos on their server first. This one has nowhere to send them: the picture is decoded, the text is drawn onto it, and the file is re-encoded inside your own browser tab. The same engine powers the site's <a href="../compress/">image compressor</a> and <a href="../resize-image/">batch resizer</a> — this page just adds one more step to the same local pipeline.</p>
+      <p>Add one image or several hundred. The watermark settings apply to every image in the batch, files process in parallel background workers, and <strong>Download all</strong> hands you a single ZIP. The font size is a percentage of each image's shorter edge, so a mixed batch of portraits and landscapes gets consistently proportioned marks rather than one mark that is huge on thumbnails and invisible on posters.</p>
 
-      <h2>What this converter does differently</h2>
-      <ol>
-        <li><strong>Your photos are decoded on your device.</strong> The HEIC decoder is a WebAssembly build of libheif, served from this site and executed in your browser tab. Nothing is uploaded. That matters here more than elsewhere: a camera roll is about as personal as data gets, and uploading it to an unknown server to change a file extension is a bad trade.</li>
-        <li><strong>It converts <em>and</em> optimises.</strong> HEIC is already efficiently compressed, so a naive conversion often produces a <em>larger</em> JPG. This tool runs the result through the same perceptual engine as the <a href="../compress/">image compressor</a>: it measures the picture, picks an encoder setting that keeps fidelity high, and strips the metadata that would otherwise ride along. You always get a JPG back — the tool never hands your original HEIC back just because it happened to be the smaller file.</li>
-        <li><strong>Portrait photos stay upright.</strong> An iPhone portrait photo is physically stored as a landscape image with a note attached saying "rotate this". Tools that ignore the note hand you a sideways picture, which is worse than an error message. The decoder here applies the rotation to the pixels, so what you see is what you save.</li>
-        <li><strong>Batch, with no artificial limits.</strong> Drop a whole folder at once. On a desktop you can take everything as one ZIP archive. On an iPhone the finished JPGs go through the system share sheet straight into your photo library, because iOS cannot unzip an archive from a web page and nobody wants to save forty photos one at a time.</li>
-      </ol>
+      <h3>Position, or tile?</h3>
+      <p>A mark in one of the nine grid positions — corners, edge midpoints, or centre — is the aesthetic choice, and a soft shadow keeps it readable on both bright skies and dark shadows. It is also the cropable choice: anything in a corner can be trimmed off. The <strong>tiled overlay</strong> repeats the text diagonally across the entire frame, which makes casual cropping useless. Marking proofs or paid previews? Use the tile. Signing your own photography? A corner mark usually looks better.</p>
 
-      <h2>How to convert HEIC to JPG</h2>
-      <ol>
-        <li><strong>Add the files.</strong> Drag <code>.heic</code> or <code>.heif</code> photos onto the page, paste them from the clipboard, or use the file picker. A whole folder is fine.</li>
-        <li><strong>Wait for the decoder.</strong> The first conversion downloads a 1.4 MB decoder once; the browser caches it, so later conversions start instantly. Progress is shown per file.</li>
-        <li><strong>Save the results.</strong> Download each JPG individually, take them all as a single ZIP on a computer, or save straight to the photo library on a phone.</li>
-      </ol>
+      <h3>Watermark plus resize plus a KB budget, in one pass</h3>
+      <p>Because the watermark runs on the same pipeline as everything else, you can combine steps that other tools split across uploads: switch Strategy to <strong>Target size</strong> and the engine watermarks, then searches encoder quality until the file fits the budget — useful for marketplace listings that cap file size. Under Advanced you can cap the maximum edge, so "1280 px wide, JPEG, under 200 KB, watermarked bottom-right" is a single drag-and-drop. The same combination minus the watermark lives on the <a href="../compress-to-200kb/">compress to 200 KB</a> page.</p>
 
-      <h3>HEIC vs JPG — what you gain and what you give up</h3>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr><th></th><th>HEIC</th><th>JPG</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>File size at equal quality</strong></td><td>About half</td><td>Larger</td></tr>
-            <tr><td><strong>Opens on Windows, Android, older apps</strong></td><td>Often not</td><td>Always</td></tr>
-            <tr><td><strong>Accepted by upload forms and CMSs</strong></td><td>Inconsistently</td><td>Universally</td></tr>
-            <tr><td><strong>Transparency</strong></td><td>Supports it</td><td>Flattens it</td></tr>
-            <tr><td><strong>Editing latitude</strong></td><td>Good</td><td>Good</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <h3>What the mark does to the file</h3>
+      <ul>
+        <li><strong>Metadata</strong> — EXIF, GPS coordinates, embedded thumbnails — is stripped in the same pass. If privacy is the goal rather than attribution, the dedicated <a href="../remove-gps-from-photo/">remove GPS from photo</a> page does metadata removal alone.</li>
+        <li><strong>Output format</strong> defaults to keeping whatever you put in; JPEG in, JPEG out. Switch to WebP, AVIF or PNG when the destination needs a specific type. PNG files with photography in them can also be palette-reduced — see Advanced.</li>
+        <li><strong>The text is burned in</strong> — permanently part of the pixels, like any real watermark. That is the point, and also why you should keep clean originals.</li>
+      </ul>
 
-      <div class="callout">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
-        <p><strong>Keep your originals.</strong> Converting is one-way: JPG discards some information and cannot be converted back into an identical HEIC. This tool never modifies your files — it reads them and writes new ones — so your original photos stay exactly as they were.</p>
-      </div>
+      <p>Coming from an iPhone? The <a href="../heic-to-jpg/">HEIC to JPG</a> converter accepts the same files and this page handles HEIC directly too. Everything on this site runs on your device; the <a href="../image-compressor-upload-test/">upload test</a> shows you how to verify that claim against any tool, including this one.</p>
 
-      <h2>Other conversions</h2>
-      <p>If your file is not a HEIC: <a href="../png-to-jpg/">convert PNG to JPG</a> flattens transparency onto a white background, <a href="../jpg-to-webp/">convert JPG to WebP</a> produces a smaller file that every current browser still reads, and the <a href="../compress/">main compressor</a> shrinks a file without changing its format at all. And if the pixels themselves need to change rather than the format, the <a href="../resize-image/">batch image resizer</a> makes images an exact size — fit inside or crop to fill — with no upload either.</p>
       <h2>Frequently asked questions</h2>
       <div class="faq mt-4">
         <details class="faq__item" open>
-          <summary>What is a HEIC file and why won't it open on my computer?</summary>
-          <div class="faq__body"><p>HEIC is the format iPhones have used for photos since iOS 11. It stores the same picture at roughly half the size of a JPEG, but it is built on HEVC, and support outside Apple's ecosystem is patchy: Windows needs an extra codec pack, Android support depends on the version, and many web forms and older editors refuse the file outright. Converting to JPG solves the compatibility problem permanently.</p></div>
+          <summary>How do I add a text watermark to my photos?</summary>
+          <div class="faq__body"><p>Drop your images on the page, type the watermark text — a copyright line, your name, a brand — pick a position, size, color and transparency, and save. Everything runs in your browser: the text is drawn onto the picture locally and the watermarked files come straight back as downloads.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Is this HEIC to JPG converter free, and is there a limit?</summary>
-          <div class="faq__body"><p>It is free and unlimited. There is no account, no file count limit and no file size limit, because the conversion runs on your own device rather than on a server that would have to meter it.</p></div>
+          <summary>Can I watermark a whole batch of photos at once?</summary>
+          <div class="faq__body"><p>Yes. Select any number of files, or drag a multi-selection onto the page. The same watermark applies to every image, they process in parallel background workers, and <strong>Download all</strong> packages the finished files into a single ZIP. The font scales with each image's shorter edge, so mixed sizes get consistently proportioned marks.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Where can the watermark be placed?</summary>
+          <div class="faq__body"><p>Anywhere on a nine-way grid: the four corners, the middle of each edge, or the centre. A soft shadow behind the text keeps it readable on both bright and dark areas. There is also a tiled mode that repeats the text diagonally across the whole frame, which is harder to crop out than a single mark.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is a watermark enough to protect my photos?</summary>
+          <div class="faq__body"><p>Honestly: no tool can make theft impossible — a watermark in one corner can be cropped away. Put the mark where a crop would hurt the picture, or use the tiled overlay for high-value images, and keep originals elsewhere. What this page does is make proper marking fast enough that you actually do it, on every image, in one pass.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I resize or compress the photos while watermarking them?</summary>
+          <div class="faq__body"><p>Yes. The watermark is drawn after any resize and before encoding, so the text scales with the delivered image — a 4% mark is 4% of what you download. You can also switch Strategy to <strong>Target size</strong> to hit a KB budget, and pick JPEG, WebP, AVIF or PNG as the output format.</p></div>
         </details>
         <details class="faq__item">
           <summary>Are my photos uploaded anywhere?</summary>
-          <div class="faq__body"><p>No. The HEIC decoder is a WebAssembly module served from this site and executed inside your browser tab, so your photos are never transmitted. The page makes no request that carries image data.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary>Does converting HEIC to JPG reduce quality?</summary>
-          <div class="faq__body"><p>The photo is decoded once from the original and encoded once at high fidelity, and the pixel dimensions are preserved. JPG is a lossy format, so it cannot be perfectly lossless for photographs — keep your original HEIC files as the master copies and convert the versions you need to share.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary>Why is the JPG sometimes larger than the HEIC file?</summary>
-          <div class="faq__body"><p>HEIC compresses roughly twice as efficiently as JPG, so a JPG of the same picture usually weighs more. That is expected. The converter still re-encodes the result to keep the file as small as it can at a high fidelity floor, and it always gives you a JPG rather than handing the original HEIC back just because it happened to be smaller.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary>Will portrait photos come out sideways?</summary>
-          <div class="faq__body"><p>No. An iPhone portrait photo is stored as a landscape image plus a rotation tag. The decoder applies that tag to the pixels during conversion, so a portrait photo arrives as a portrait JPG.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary>Can I convert many photos at once, and does it work on a phone?</summary>
-          <div class="faq__body"><p>Yes. Drop an entire folder and the files are converted in sequence. On desktop you can take everything as a single ZIP archive; on an iPhone the finished JPGs can be handed to the system share sheet so they land directly in your photo library.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary>Can I convert HEIC on Windows, Android or Linux?</summary>
-          <div class="faq__body"><p>Yes, on any of them. The HEIC decoder is bundled with this site and runs inside the browser, so the operating system's own HEIC support is irrelevant — you do not need a codec pack on Windows, a particular Android version, or any software installed at all. If your browser can open this page, it can convert the file.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary>Do I need to change my iPhone camera settings?</summary>
-          <div class="faq__body"><p>No. Leave the camera on <strong>High Efficiency</strong> and keep shooting HEIC — it stores the same photo at about half the size of JPEG, so it is the better format to keep your originals in. Convert to JPG only at the moment you need to share, upload or print, and let your iPhone keep the higher-quality master.</p></div>
+          <div class="faq__body"><p>No. Your files are only ever read by your own browser — there is no server-side component that accepts image data. The only network requests the page makes are for the site's own assets and, optionally, WASM codec modules from a public CDN. Once the page has loaded, watermarking works offline.</p></div>
         </details>
       </div>
     </div>
   </section>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <div class="share-qr">
+        <a class="share-qr__panel" href="../share/" aria-label="Open the share page">
+          <img class="share-qr__img" src="../share/qr-code-1024.png" width="656" height="656" loading="lazy" alt="QR code linking to https://localphototool.com/">
+        </a>
+        <div class="share-qr__side">
+          <h2 class="share-qr__title">Take it to your phone</h2>
+          <p class="muted">Most photos live on a phone, so most of the work happens there too. Scan the code and this compressor opens in your mobile browser — nothing to install. In WeChat, long-press the code and choose <em>Extract QR code</em>.</p>
+          <div class="share-actions">
+            <a class="btn btn--primary" href="../share/">Posters &amp; share links</a>
+            <button class="btn btn--ghost" type="button" data-copy-link data-status-for="copySiteStatus">Copy link</button>
+          </div>
+          <p class="share-note" id="copySiteStatus" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
@@ -582,7 +564,7 @@
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
-      <span class="build-stamp" title="Built from git commit f27c551">Updated <time datetime="2026-09-30">30 Sep 2026</time> &middot; build <code>f27c551</code></span>
+      <span class="build-stamp" title="Built from git commit 7551cec">Updated <time datetime="2026-09-30">30 Sep 2026</time> &middot; build <code>7551cec</code></span>
       <span class="sep"></span>
       <span>Made for people who would rather not hand over their photos.</span>
     </div>
@@ -604,7 +586,7 @@
       <div class="compare__layer compare__layer--base"><img id="compareBase" alt="Original image"></div>
       <div class="compare__layer compare__layer--over"><img id="compareOver" alt="Compressed image"></div>
       <span class="compare__label compare__label--l">Original</span>
-      <span class="compare__label compare__label--r">Compressed</span>
+      <span class="compare__label compare__label--r">Result</span>
       <div class="compare__handle" id="compareHandle" role="slider" tabindex="0"
            aria-label="Comparison position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
         <div class="compare__grip" aria-hidden="true">

@@ -36,6 +36,12 @@
     flipV: false,
     cropRatio: 'none',
     cropAnchor: 'center',
+    wmText: '',
+    wmPosition: 'br',
+    wmSize: 4,
+    wmColor: '#ffffff',
+    wmOpacity: 60,
+    wmTile: false,
     sharpen: 'auto',
     dither: true,
     pngColors: 'auto',
@@ -544,7 +550,7 @@
            courtesy, not a universal rule: when the user asked for different
            pixels — a resize, a crop, or a format conversion — the new file IS
            the deliverable, even if it happens to weigh more than the original. */
-        var resizing = !!options.resize || !!options.crop;
+        var resizing = !!options.resize || !!options.crop || !!options.watermark;
         var worse = !converting && !resizing && result.blob.size >= item.file.size;
         item.worse = worse;
         item.outputBlob = worse ? item.file : result.blob;
@@ -641,11 +647,20 @@
     var crop = (o.cropRatio && o.cropRatio !== 'none')
       ? { ratio: o.cropRatio, anchor: o.cropAnchor || 'center' }
       : null;
+    var watermark = (o.wmText && String(o.wmText).trim()) ? {
+      text: String(o.wmText).trim(),
+      position: o.wmPosition || 'br',
+      size: Number(o.wmSize) || 4,
+      color: o.wmColor || '#ffffff',
+      opacity: Math.min(1, Math.max(0.05, (Number(o.wmOpacity) || 60) / 100)),
+      tile: !!o.wmTile
+    } : null;
     return {
       mode: o.mode,
       format: o.format,
       quality: Number(o.quality),
       targetKB: Number(o.targetKB),
+      watermark: watermark,
       maxDimension: Number(o.maxDimension) || 0,
       resize: resize,
       transform: transform,
@@ -1416,6 +1431,16 @@
     var cr = $('#cropRatio'), ca = $('#cropAnchor');
     if (cr) cr.value = String(state.options.cropRatio || 'none');
     if (ca) ca.value = String(state.options.cropAnchor || 'center');
+    var wmt = $('#wmText'), wmp = $('#wmPosition'), wms = $('#wmSize'),
+        wmc = $('#wmColor'), wmo = $('#wmOpacity'), wmtile = $('#wmTile');
+    if (wmt) wmt.value = String(state.options.wmText || '');
+    if (wmp) wmp.value = String(state.options.wmPosition || 'br');
+    if (wms) wms.value = String(Number(state.options.wmSize) || 4);
+    if (wms) { var wmsv = $('#wmSizeValue'); if (wmsv) wmsv.textContent = (Number(state.options.wmSize) || 4) + '%'; }
+    if (wmc) wmc.value = String(state.options.wmColor || '#ffffff');
+    if (wmo) wmo.value = String(Number(state.options.wmOpacity) || 60);
+    if (wmo) { var wmov = $('#wmOpacityValue'); if (wmov) wmov.textContent = (Number(state.options.wmOpacity) || 60) + '%'; }
+    if (wmtile) wmtile.checked = !!state.options.wmTile;
     /* The anchor only means something once a ratio is picked. */
     function syncCropAnchor() {
       if (cr && ca) ca.classList.toggle('hidden', cr.value === 'none');
@@ -1531,6 +1556,29 @@
     if (ca) ca.addEventListener('change', function () {
       state.options.cropAnchor = ca.value || 'center';
       saveOptions(); recompressAll();
+    });
+    function wmChanged() { saveOptions(); recompressAll(); }
+    if (wmt) wmt.addEventListener('input', function () {
+      state.options.wmText = wmt.value; wmChanged();
+    });
+    if (wmp) wmp.addEventListener('change', function () {
+      state.options.wmPosition = wmp.value || 'br'; wmChanged();
+    });
+    if (wms) wms.addEventListener('input', function () {
+      state.options.wmSize = Number(wms.value) || 4;
+      var wmsv = $('#wmSizeValue'); if (wmsv) wmsv.textContent = state.options.wmSize + '%';
+      wmChanged();
+    });
+    if (wmc) wmc.addEventListener('input', function () {
+      state.options.wmColor = wmc.value || '#ffffff'; wmChanged();
+    });
+    if (wmo) wmo.addEventListener('input', function () {
+      state.options.wmOpacity = Number(wmo.value) || 60;
+      var wmov = $('#wmOpacityValue'); if (wmov) wmov.textContent = state.options.wmOpacity + '%';
+      wmChanged();
+    });
+    if (wmtile) wmtile.addEventListener('change', function () {
+      state.options.wmTile = wmtile.checked; wmChanged();
     });
   }
 
