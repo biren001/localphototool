@@ -2,6 +2,7 @@
 .workbuddy/
 _dev/.tmp/
 _dev/.indexnow-key
+_dev/.env.local
 _dev/pipcheck.txt
 
 # --- generated, large, or machine-local ---
