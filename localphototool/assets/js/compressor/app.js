@@ -654,7 +654,8 @@
       size: Number(o.wmSize) || 4,
       color: o.wmColor || '#ffffff',
       opacity: Math.min(1, Math.max(0.05, (Number(o.wmOpacity) || 60) / 100)),
-      tile: !!o.wmTile
+      tile: !!o.wmTile,
+      density: (o.wmDensity === 'dense' || o.wmDensity === 'sparse') ? o.wmDensity : 'medium'
     } : null;
     return {
       mode: o.mode,
@@ -1451,6 +1452,68 @@
       if (wmdf) wmdf.classList.toggle('hidden', !state.options.wmTile);
     }
     syncWmTileUI();
+
+    /* Live preview (watermark page only): a sample document painted by code —
+       no asset fetch, no upload — with the current settings drawn on top by
+       the very same engine routine the batch uses, so the preview cannot
+       drift from the real output. */
+    function renderWmPreview() {
+      var cv = $('#wmPreview');
+      if (!cv || !window.LPT || !LPT.engine || !LPT.engine.drawWatermark) return;
+      var x = cv.getContext('2d');
+      var w = cv.width, h = cv.height;
+      function rr(pxc, py, pw, ph, r) {
+        x.beginPath();
+        if (x.roundRect) x.roundRect(pxc, py, pw, ph, r); else x.rect(pxc, py, pw, ph);
+        x.fill();
+      }
+      /* Backdrop — a photo-ish gradient. */
+      var g = x.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, '#54749c'); g.addColorStop(0.55, '#7b98a8'); g.addColorStop(1, '#93a98c');
+      x.fillStyle = g; x.fillRect(0, 0, w, h);
+      /* The document card. */
+      var cw = Math.round(w * 0.74), chh = Math.round(h * 0.64);
+      var cx = Math.round((w - cw) / 2), cy = Math.round((h - chh) / 2);
+      x.save();
+      x.shadowColor = 'rgba(0,0,0,0.35)'; x.shadowBlur = 16; x.shadowOffsetY = 6;
+      x.fillStyle = '#f6f7f9';
+      rr(cx, cy, cw, chh, 12);
+      x.restore();
+      x.save();
+      x.beginPath();
+      if (x.roundRect) x.roundRect(cx, cy, cw, chh, 12); else x.rect(cx, cy, cw, chh);
+      x.clip();
+      /* Header strip. */
+      x.fillStyle = '#2e4a66';
+      x.fillRect(cx, cy, cw, Math.round(chh * 0.15));
+      /* Photo box with a head-and-shoulders silhouette. */
+      var pw2 = Math.round(cw * 0.26), ph = Math.round(chh * 0.44);
+      var px0 = cx + Math.round(cw * 0.06), py0 = cy + Math.round(chh * 0.24);
+      x.fillStyle = '#c9cdd3';
+      x.fillRect(px0, py0, pw2, ph);
+      x.fillStyle = '#9aa1ab';
+      x.beginPath(); x.arc(px0 + pw2 / 2, py0 + ph * 0.38, ph * 0.17, 0, Math.PI * 2); x.fill();
+      x.beginPath(); x.arc(px0 + pw2 / 2, py0 + ph * 0.95, ph * 0.30, Math.PI, 0); x.fill();
+      /* Data lines. */
+      var lw = cw - (px0 - cx) - pw2 - Math.round(cw * 0.06);
+      var lx = px0 + pw2 + Math.round(cw * 0.06);
+      var ly = py0;
+      x.fillStyle = '#b8bec7';
+      for (var i = 0; i < 5; i++) {
+        rr(lx, ly, lw * (i === 4 ? 0.55 : 1), Math.max(4, Math.round(chh * 0.035)), 3);
+        ly += Math.round(chh * 0.085);
+      }
+      /* MRZ-style footer lines. */
+      x.fillStyle = '#4a5563';
+      var my = cy + Math.round(chh * 0.82);
+      rr(cx + Math.round(cw * 0.05), my, cw * 0.9, Math.max(4, Math.round(chh * 0.045)), 3);
+      rr(cx + Math.round(cw * 0.05), my + Math.round(chh * 0.065), cw * 0.9, Math.max(4, Math.round(chh * 0.045)), 3);
+      x.restore();
+      /* Same options object the batch pipeline consumes. */
+      var wm = buildOptions().watermark;
+      if (wm) LPT.engine.drawWatermark(cv, wm);
+    }
+    renderWmPreview();
     /* The anchor only means something once a ratio is picked. */
     function syncCropAnchor() {
       if (cr && ca) ca.classList.toggle('hidden', cr.value === 'none');
@@ -1567,7 +1630,7 @@
       state.options.cropAnchor = ca.value || 'center';
       saveOptions(); recompressAll();
     });
-    function wmChanged() { saveOptions(); recompressAll(); }
+    function wmChanged() { saveOptions(); renderWmPreview(); recompressAll(); }
     if (wmt) wmt.addEventListener('input', function () {
       state.options.wmText = wmt.value; wmChanged();
     });

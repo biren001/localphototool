@@ -1397,6 +1397,7 @@
     createCanvas: createCanvas,
     drawResized: drawResized,
     encodeCanvas: encodeCanvas,
+    drawWatermark: drawWatermark,
     psnr: psnr,
     _internal: { medianCut: medianCut, mapToPalette: mapToPalette, buildIndexedPng: buildIndexedPng, deflateZlib: deflateZlib, crc32: crc32 }
   };
