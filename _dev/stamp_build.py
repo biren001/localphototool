@@ -37,6 +37,19 @@ ANCHOR = '<span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>'
 STAMP_RE = re.compile(r'<span class="build-stamp"[^>]*>.*?</span>', re.S)
 VERSION_RE = re.compile(r"var VERSION = 'v(\d+)';")
 
+# Asset URLs carry ?v=<commit> so a deploy is never eaten by caches that only
+# saw the old file. Why this is not paranoia: /assets/* used to ship a 24h
+# edge+browser TTL with bare URLs, so for a day after every deploy the pages
+# were new but the JS was old (2026-09-30: the watermark live preview drew
+# nothing because the cached engine.js predated drawWatermark). Only js/css
+# under assets/ is versioned -- transfer/ keeps its own ?v= scheme for
+# ./app.js, and the 1.4MB libheif bundle stays bare so it is not re-downloaded
+# on every release.
+ASSET_REF = re.compile(
+    r'((?:src|href)=")((?:\.\./)?assets/(?:js|css)/[^"?]+?\.(?:js|css))(\?v=[0-9A-Za-z_.-]+)?(")')
+SHELL_REF = re.compile(
+    r"('assets/(?:js|css)/[^'?]+?\.(?:js|css))(\?v=[0-9A-Za-z_.-]+)?(')")
+
 # strftime('%b') is locale-dependent and returns Chinese under a zh-CN Windows
 # locale, so the month names are spelled out here instead.
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -88,9 +101,23 @@ def pages():
     return out
 
 
+def version_asset_refs(text, ver, pattern, close_group):
+    """Rewrite every asset URL to ...?v=ver, replacing any older ?v=.
+
+    close_group is the index of the closing-quote group: 4 for ASSET_REF,
+    3 for SHELL_REF. Group 2 (an older ?v=) is optional and comes back as
+    None when the URL was still bare.
+    """
+    return pattern.sub(
+        lambda m: m.group(1) + (m.group(2) or '') + '?v=' + ver +
+                  m.group(close_group), text)
+
+
 def apply_stamp(dry=False, today=None):
+    today = today or datetime.date.today()
     commit, dirty = build_id()
     stamp = stamp_html(commit, dirty, today=today)
+    asset_ver = commit or today.strftime('d%Y%m%d')
 
     changed = []
     for path in pages():
@@ -104,15 +131,26 @@ def apply_stamp(dry=False, today=None):
                                  % (path, src.count(anchor)))
             new = src.replace(anchor, ANCHOR + '\n      ' + stamp +
                               '\n      <span class="sep"></span>', 1)
+        new = version_asset_refs(new, asset_ver, ASSET_REF, 4)
         if new != src:
             changed.append(os.path.relpath(path, ROOT).replace('\\', '/'))
             if not dry:
                 open(path, 'w', encoding='utf-8', newline='').write(new)
 
+    # The SW's precache list must request the exact same versioned URLs the
+    # pages ask for, or the precached copies are dead weight for offline use.
+    sw = os.path.join(SITE, 'sw.js')
+    sw_src = open(sw, 'r', encoding='utf-8').read()
+    sw_new = version_asset_refs(sw_src, asset_ver, SHELL_REF, 3)
+    shell_changed = sw_new != sw_src
+    if shell_changed and not dry:
+        open(sw, 'w', encoding='utf-8', newline='').write(sw_new)
+    if shell_changed:
+        changed.append('localphototool/sw.js (asset refs)')
+
     bumped = None
-    if changed and not dry:
-        sw = os.path.join(SITE, 'sw.js')
-        src = open(sw, 'r', encoding='utf-8').read()
+    if (changed or shell_changed) and not dry:
+        src = sw_new if shell_changed else sw_src
         m = VERSION_RE.search(src)
         if not m:
             raise SystemExit('sw.js: could not find var VERSION')

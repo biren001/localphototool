@@ -5,7 +5,10 @@
    ========================================================================== */
 'use strict';
 
-importScripts('engine.js');
+/* location.search carries the ?v= the page gave worker.js; forwarding it to
+   engine.js keeps the worker's copy of the engine on the same version as the
+   page's copy (caches key on the full URL, query included). */
+importScripts('engine.js' + (location.search || ''));
 
 var engine = self.LPT.engine;
 var caps = null;

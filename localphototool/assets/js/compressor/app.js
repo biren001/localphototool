@@ -8,9 +8,16 @@
   var zipLib = window.LPT.zip;
 
   // Resolve the worker relative to this script so the site works from the
-  // domain root, a sub-directory, or a plain file:// preview.
+  // domain root, a sub-directory, or a plain file:// preview. Our own ?v= is
+  // propagated to the worker (and worker.js forwards it to engine.js via
+  // location.search): otherwise a deploy could pair a fresh app.js with a
+  // cached old engine inside the worker, where every byte is actually
+  // compressed.
   var SELF_SRC = (document.currentScript && document.currentScript.src) || '';
-  var WORKER_URL = SELF_SRC ? new URL('worker.js', SELF_SRC).href : 'worker.js';
+  var MY_VER = (SELF_SRC.match(/[?&]v=([^&]+)/) || ['', ''])[1];
+  var WORKER_URL = SELF_SRC
+    ? new URL('worker.js' + (MY_VER ? '?v=' + MY_VER : ''), SELF_SRC).href
+    : 'worker.js';
   /* Our own copy, two levels up from assets/js/compressor/. Kept next to the
      rest of the assets so the decoder is never a third-party request. */
   var HEIC_URL = SELF_SRC

@@ -483,6 +483,29 @@ function finish() {
       (decoder.status === 200 && decType.indexOf('javascript') === -1
         ? ' → the browser will refuse the import; _worker.js must pin the type' : ''));
 
+  /* A deploy can reach the HTML but not the JS: /assets/* used to carry a
+     24h edge+browser TTL on bare URLs, so every page said the new build
+     number while the engine inside was yesterday's (2026-09-30: the
+     watermark live preview sat on a blank canvas because the cached
+     engine.js predated drawWatermark). Asset URLs are versioned with
+     ?v=<commit> at package time and /assets/* is no-cache now; this check
+     pins the promise by comparing bytes. */
+  const LIVE_ASSETS = [
+    ['assets/js/compressor/engine.js', 'watermark + tile density'],
+    ['assets/js/compressor/app.js', 'preview canvas wiring'],
+    ['assets/js/compressor/worker.js', 'worker engine version forwarding'],
+    ['assets/css/style.css', 'shared stylesheet'],
+    ['sw.js', 'service worker version']
+  ];
+  for (const [asset, why] of LIVE_ASSETS) {
+    const localPath = path.join(__dirname, '..', 'localphototool', asset);
+    const want = fs.readFileSync(localPath, 'utf8');
+    const got = await text('https://' + HOST + '/' + asset);
+    check('live ' + asset + ' matches the local build (' + why + ')',
+      got.status === 200 && got.text === want,
+      got.status !== 200 ? 'status ' + got.status
+        : (got.text === want ? '' : 'live copy differs from local — a deploy did not reach this asset'));
+  }
   /* The converter is unreachable unless the site links to it. */
   if (homePage.status === 200) {
     check('every page links to the HEIC converter',

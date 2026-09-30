@@ -204,7 +204,11 @@ function check(name, ok, extra) {
   /* ---------------- Worker source sanity ---------------- */
   console.log('\n=== Worker source ===');
   const workerSrc = fs.readFileSync(path.join(ROOT, 'assets/js/compressor/worker.js'), 'utf8');
-  check('worker imports the shared engine', /importScripts\('engine\.js'\)/.test(workerSrc));
+  /* worker.js forwards its own ?v= to engine.js (location.search), so the
+     worker's copy of the engine is version-locked to the page's copy. */
+  check('worker imports the shared engine, version-locked',
+    /importScripts\('engine\.js' \+ \(location\.search \|\| ''\)\)/.test(workerSrc)
+      && !/importScripts\('engine\.js'\)/.test(workerSrc));
   check('worker exposes a compress message handler', /msg\.type !== 'compress'/.test(workerSrc));
 
   console.log('\n=== HTML / asset wiring ===');
