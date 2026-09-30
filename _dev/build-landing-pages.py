@@ -354,7 +354,7 @@ SPECS = [
         <li><strong>Anything with transparency you intend to keep.</strong></li>
         <li><strong>An intermediate step in an editing workflow.</strong> If you will open the file again, keep it lossless; export to JPG only at the very end.</li>
       </ul>
-      <p>This tool respects that distinction. In Auto mode it measures the image and keeps it in PNG when PNG is genuinely the better answer — it will hand you back the original rather than a bigger file.</p>
+      <p>This page always hands back a JPG — a converter that returns the format you asked it to leave is not a converter, even when the JPG happens to weigh a little more than the PNG. If you would rather let the engine decide format per image, the <a href="../compress/">main compressor</a> in Auto mode does exactly that, and keeps the smaller file.</p>
 
       <h2>Converting a whole folder</h2>
       <p>Select every PNG you want in the file picker, or drag a multi-selection onto the page. Files are processed in parallel background workers, and <strong>Download all</strong> packages the finished JPGs into a single ZIP. On a phone the same results can be handed to the system share sheet so they land directly in your photo library — we deliberately do not send a ZIP to iOS, because the Files app will not unpack it into your camera roll.</p>""",
@@ -372,8 +372,8 @@ SPECS = [
                 "Yes. Select as many as you like and they convert in parallel. On desktop you can take everything as one ZIP archive; on an iPhone the finished files go to the system share sheet so they land in your photo library.",
             ),
             (
-                "Why did my file come back unchanged?",
-                "If re-encoding would have produced a larger file than the original, the original is kept and the row is labelled \"already optimal\". A screenshot that is already a well-optimised PNG is a common case — there is genuinely nothing left to remove.",
+                "What quality will the JPG have?",
+                "The engine runs the same auto quality search the main compressor uses: it encodes at several quality levels and keeps the lowest one whose measured fidelity clears a ~40 dB PSNR floor, which is past the point where differences are visible at normal viewing sizes. You can also pin a quality yourself in the settings.",
             ),
             (
                 "Is my PNG uploaded anywhere?",
@@ -439,6 +439,196 @@ SPECS = [
             (
                 "Are my images uploaded to a server?",
                 "No. There is no upload endpoint on this site. The conversion happens in your browser tab, and the only network requests are for the site's own files and the optional WebP encoder module.",
+            ),
+        ],
+    },
+    {
+        "slug": "jpg-to-png",
+        "crumb": "JPG to PNG",
+        "title": "JPG to PNG Converter — Lossless Output, Batch, in Your Browser",
+        "description": "Convert JPG files to PNG in your browser. The output is lossless from here on, and the conversion runs on your own device — batch, free, nothing uploaded.",
+        "h1": "Convert JPG to PNG without uploading anything",
+        "lead": "PNG is a lossless container: once your picture is a PNG, saving it again never costs quality. Drop a JPG in and get a PNG back — one file or a whole folder, converted on your own device.",
+        "badges": ["Nothing is uploaded", "Lossless from here on", "Batch conversion", "Unlimited &amp; free"],
+        "defaults": {"format": "png"},
+        "body": """      <h2>What converting does — and what it cannot undo</h2>
+      <p>Honesty first: a JPG has already discarded detail, and no converter can put it back. Converting to PNG does not restore the quality the JPG lost when it was created. What it does is freeze the picture exactly as it is now: PNG stores every pixel of the decoded image, so <strong>every future edit, crop and re-save costs nothing</strong>.</p>
+      <p>That is the reason the conversion exists at all. JPG is an endpoint format — fine for publishing, punishing for working. PNG is a working format.</p>
+
+      <h2>When JPG to PNG is the right move</h2>
+      <ul>
+        <li><strong>You are about to edit the image.</strong> Opening, adjusting and re-saving a JPG repeatedly compounds the loss. Convert to PNG once, edit the PNG, export a JPG at the end.</li>
+        <li><strong>The destination demands PNG.</strong> Design handoffs, some asset pipelines and a fair number of upload forms whitelist <code>.png</code> and reject everything else.</li>
+        <li><strong>You need an alpha channel later.</strong> PNG supports transparency; a PNG copy of a JPG has a fully opaque alpha channel ready for whatever masking comes next.</li>
+        <li><strong>Archive copies.</strong> For pictures you intend to keep and re-use for years, lossless storage removes the question of what repeated saves did to them.</li>
+      </ul>
+
+      <h2>The trade, stated plainly</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>JPG</th><th>PNG</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Compression</td><td>Lossy</td><td>Lossless</td></tr>
+            <tr><td>Photograph size</td><td>Baseline</td><td>Often several times larger</td></tr>
+            <tr><td>Re-saving</td><td>Costs quality each time</td><td>Free, forever</td></tr>
+            <tr><td>Transparency</td><td>None</td><td>Full alpha channel</td></tr>
+            <tr><td>Best for</td><td>Publishing and sharing</td><td>Editing, archives, graphics</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A photograph that weighs 400 KB as a JPG can easily weigh several megabytes as a PNG, because PNG stores detail the JPG had thrown away as invisible. That is expected and it is the price of losslessness — the reverse trip is <a href="../png-to-jpg/">PNG to JPG</a>, which shrinks the file again when you publish.</p>
+
+      <h2>Converting a whole folder</h2>
+      <p>Select every JPG you want in the file picker, or drag a multi-selection onto the page. Files are processed in parallel background workers. On a phone the finished PNGs can be handed to the system share sheet so they land directly in your photo library.</p>
+
+      <h2>Related conversions</h2>
+      <p>Going the other way is <a href="../png-to-jpg/">PNG to JPG</a>; for the modern web format that keeps transparency <em>and</em> stays small, see <a href="../jpg-to-webp/">JPG to WebP</a>; and if your file is already WebP, <a href="../webp-to-png/">WebP to PNG</a> does the same lossless hop from there.</p>""",
+        "faq": [
+            (
+                "Is converting JPG to PNG lossless?",
+                "The PNG output preserves the decoded JPG exactly — every pixel, no further loss, and every future re-save is free. The loss the JPG picked up when it was first created is already baked in and cannot be recovered by any converter.",
+            ),
+            (
+                "Will the PNG file be larger than the JPG?",
+                "Almost always, and often by several times for photographs — PNG stores detail that JPG deliberately discards. That is the normal cost of moving to a lossless format. If you need the file small again later, PNG to JPG brings it back down.",
+            ),
+            (
+                "Why would I convert to a bigger file?",
+                "Because size is not the only property that matters. PNG survives editing and repeated saving without degrading, carries an alpha channel, and is the format a number of design tools and upload forms insist on.",
+            ),
+            (
+                "Can I convert many JPG files at once?",
+                "Yes. Select as many as you like and they convert in parallel background workers. On desktop the finished files download individually or as one archive; on an iPhone they go to the share sheet and land in your photo library.",
+            ),
+            (
+                "Are my images uploaded to a server?",
+                "No. This is a static site with no upload endpoint. The conversion runs in your browser tab, on your own hardware.",
+            ),
+        ],
+    },
+    {
+        "slug": "webp-to-jpg",
+        "crumb": "WebP to JPG",
+        "title": "WebP to JPG Converter — Open WebP Anywhere, in Your Browser",
+        "description": "Convert WebP images to JPG in your browser so older editors, print workflows and upload forms can open them. Batch conversion, honest about the trade-offs, nothing uploaded.",
+        "h1": "Convert WebP to JPG without uploading anything",
+        "lead": "WebP is the better format almost everywhere — except wherever an old editor, a print shop or an upload form insists on .jpg. Drop a WebP in and get a JPG back, converted on your own device.",
+        "badges": ["Nothing is uploaded", "Opens in older software", "Batch conversion", "Unlimited &amp; free"],
+        "defaults": {"format": "jpeg"},
+        "body": """      <h2>Why you are probably here</h2>
+      <p>WebP won the browser war years ago — every current browser displays it. What it did not win is everything else: a client's legacy CMS, the photo counter at a print shop, a government form that whitelists <code>.jpg</code> by extension, an older editing tool that shows a broken file icon instead of your picture. The file is fine; the destination is not. Converting to JPG is the compatibility move.</p>
+
+      <h2>What you give up, stated plainly</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>WebP</th><th>JPG</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>File size</td><td>Smaller</td><td>Usually larger — expected</td></tr>
+            <tr><td>Transparency</td><td>Full alpha channel</td><td>None — flattened onto white</td></tr>
+            <tr><td>Acceptance</td><td>Every current browser</td><td>Universal, including old software</td></tr>
+            <tr><td>Re-saving</td><td>Costs a little each time</td><td>Costs a little each time</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Two rows deserve emphasis. The JPG will usually come out larger — that is the WebP compression you are trading away for compatibility, not a fault in the conversion. And if the WebP has transparent areas, JPG cannot keep them: they are flattened onto white. If you need transparency to survive, <a href="../webp-to-png/">WebP to PNG</a> is the conversion that keeps it.</p>
+
+      <h2>How the conversion is done here</h2>
+      <p>Your WebP is decoded once and encoded once to JPG — one generation of loss, not a re-compression spiral. The engine runs the same auto quality search as the main compressor: it keeps the lowest quality whose measured fidelity clears a perceptual floor, so the output is not blindly squashed to a preset.</p>
+      <p>Everything runs locally in your browser tab. There is no upload endpoint on this site, so the file never leaves your device.</p>
+
+      <h2>Batch conversion</h2>
+      <p>Drop a whole folder in and the files convert in parallel background workers. On a phone the finished JPGs can be handed to the system share sheet so they go straight into your photo library.</p>
+
+      <h2>Related conversions</h2>
+      <p>If the destination turns out to accept modern formats after all, <a href="../jpg-to-webp/">JPG to WebP</a> is the trip back and it shrinks the file. For pictures that must keep transparency, <a href="../webp-to-png/">WebP to PNG</a> is the lossless route.</p>""",
+        "faq": [
+            (
+                "Will the JPG be larger than my WebP?",
+                "Usually yes — WebP compresses more efficiently than JPG at the same visual quality, and that advantage is what you are trading away for compatibility with older software. The conversion is honest: the JPG you get is the best JPG the engine can produce at its measured fidelity floor.",
+            ),
+            (
+                "What happens to transparency in the WebP?",
+                "JPG has no alpha channel, so transparent areas are flattened onto white. If the transparency matters, convert to PNG instead — PNG stores a full alpha channel and the conversion is lossless.",
+            ),
+            (
+                "Is converting WebP to JPG lossy?",
+                "JPG is a lossy format, so yes — one generation of loss. The image is decoded once from your WebP and encoded once at high fidelity; it is not re-compressed twice. Keep your WebP as the master and convert the copy you publish.",
+            ),
+            (
+                "Why did the file get bigger if nothing was added?",
+                "JPG's encoder is simply less efficient than WebP's. Bytes are not a measure of information — the same pixels take more room in JPG. The upside is that the result opens in software that has never heard of WebP.",
+            ),
+            (
+                "Are my images uploaded to a server?",
+                "No. This is a static site with no upload endpoint. The conversion happens in your browser, on your own hardware.",
+            ),
+        ],
+    },
+    {
+        "slug": "webp-to-png",
+        "crumb": "WebP to PNG",
+        "title": "WebP to PNG Converter — Lossless, Keeps Transparency, in Your Browser",
+        "description": "Convert WebP images to PNG in your browser. Lossless output that keeps transparency, ready for editors and tools that refuse WebP. Batch conversion, nothing uploaded.",
+        "h1": "Convert WebP to PNG without uploading anything",
+        "lead": "PNG preserves every pixel of the decoded image and its transparency, and opens in every editor ever made — the trade is a larger file. Convert one image or a whole folder, on your own device.",
+        "badges": ["Nothing is uploaded", "Keeps transparency", "Lossless output", "Unlimited &amp; free"],
+        "defaults": {"format": "png"},
+        "body": """      <h2>When WebP to PNG is the right move</h2>
+      <p>WebP's weakness is the same as JPG's, one decade later: software that predates it. Design tools, some print and cut workflows, asset pipelines and desktop apps still choke on <code>.webp</code>. PNG opens everywhere and loses nothing in the conversion — every pixel of the decoded image, including the alpha channel, arrives intact.</p>
+      <ul>
+        <li><strong>Transparency must survive.</strong> PNG keeps the alpha channel exactly; JPG would flatten it onto white.</li>
+        <li><strong>The image is going into an editing workflow.</strong> Lossless storage means every re-save is free from that point on.</li>
+        <li><strong>The receiving tool refuses WebP.</strong> Older editors, some CMS media libraries and quite a few desktop utilities.</li>
+      </ul>
+
+      <h2>The trade, stated plainly</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>WebP</th><th>PNG</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Compression</td><td>Lossy or lossless</td><td>Lossless</td></tr>
+            <tr><td>File size</td><td>Smaller</td><td>Larger — expected</td></tr>
+            <tr><td>Transparency</td><td>Supported</td><td>Supported, preserved here</td></tr>
+            <tr><td>Software support</td><td>Current browsers, newer apps</td><td>Everything</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The PNG will come out larger than the WebP — that is the cost of lossless storage and the point of the exercise. If the destination accepts JPG after all and size matters more than losslessness, <a href="../webp-to-jpg/">WebP to JPG</a> produces the smaller compatible file instead.</p>
+
+      <h2>How the conversion is done here</h2>
+      <p>The WebP is decoded once and re-encoded to PNG — a lossless container swap, not a re-compression. Because everything runs locally in your browser, the file never leaves your device; the site has no upload endpoint at all.</p>
+
+      <h2>Batch conversion</h2>
+      <p>Select every WebP you want in the file picker, or drag a multi-selection onto the page. Files convert in parallel background workers, and on a phone the results can be handed to the share sheet so they land in your photo library.</p>
+
+      <h2>Related conversions</h2>
+      <p>From JPG instead? <a href="../jpg-to-png/">JPG to PNG</a> does the same lossless hop. To shrink a PNG for publishing, use <a href="../png-to-jpg/">PNG to JPG</a> or the <a href="../compress/">main compressor</a>.</p>""",
+        "faq": [
+            (
+                "Does the PNG keep the WebP's transparency?",
+                "Yes. PNG stores a full alpha channel, and the conversion preserves it exactly — transparent areas stay transparent. This is the main reason to pick PNG over JPG for this conversion, since JPG flattens transparency onto white.",
+            ),
+            (
+                "Is converting WebP to PNG lossless?",
+                "The PNG stores the decoded image exactly, with no further loss and no cost on future re-saves. If the WebP itself was lossy, that loss is of course already in the source; a lossless WebP maps pixel-perfectly to PNG.",
+            ),
+            (
+                "Will the PNG be larger than the WebP?",
+                "Almost always. PNG's lossless encoding needs more room than WebP's — for photographs often several times more. That is the price of losslessness and universal software support.",
+            ),
+            (
+                "Can I convert a whole folder of WebP files?",
+                "Yes. Select as many as you like and they convert in parallel. On desktop the finished files download individually or as one archive; on an iPhone they go to the share sheet and land in your photo library.",
+            ),
+            (
+                "Are my images uploaded to a server?",
+                "No. This is a static site with no upload endpoint. The conversion runs in your browser tab, on your own hardware.",
             ),
         ],
     },

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Compress an Image to Under 100 KB — Free, No Upload</title>
-<meta name="description" content="Shrink a photo or screenshot to under 100 KB in your browser. The engine finds the highest quality that still fits. No uploads, no account, no limits.">
+<meta name="description" content="Shrink a photo or screenshot to under 100 KB in your browser. Set the budget once and the engine finds the highest quality that still fits. No uploads, no account, no limits.">
 <link rel="canonical" href="https://localphototool.com/compress-to-100kb/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -293,7 +293,7 @@
               <span class="hint">downscales automatically if needed</span>
             </div>
             <div class="input-group">
-              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="100" inputmode="numeric">
+              <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="200" inputmode="numeric">
               <span class="input-group__suffix">KB</span>
             </div>
           </div>
@@ -337,6 +337,7 @@
                 <option value="1024">1024 px — thumbnails</option>
                 <option value="800">800 px — very small</option>
               </select>
+              <p class="muted mb-0" style="font-size:0.78rem">Need exact dimensions or a centre crop instead of a cap? The <a href="../resize-image/">batch image resizer</a> does that.</p>
             </div>
 
             <div class="field">
@@ -474,7 +475,7 @@
       </ul>
 
       <h2>Other budgets in one place</h2>
-      <p>Some limits come up so often that they have their own page: <a href="../compress-to-50kb/">compress an image to 50 KB</a> for passport and ID uploads, <a href="../compress-to-200kb/">compress an image to 200 KB</a> for university forms and marketplace listings, <a href="../compress-to-500kb/">compress an image to 500 KB</a> for job portals and CMS libraries, and <a href="../compress-photos-for-email/">compressing photos for email</a> when a whole batch has to fit in one message. The same control also works for any number — type <code>2000</code> into the target field, it is kilobytes and it is the only setting you need to change. On the <a href="../compress/">main compressor</a> you can switch between target size, a fixed quality, and full auto.</p>
+      <p>The same control works for any number. Type <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code> or <code>2000</code> into the target field — it is kilobytes, and it is the only setting you need to change. On the <a href="../compress/">main compressor</a> you can switch between target size, a fixed quality, and full auto.</p>
       <h2>Frequently asked questions</h2>
       <div class="faq mt-4">
         <details class="faq__item" open>
@@ -506,6 +507,7 @@
   </section>
 
 </main>
+</main>
 
 <footer class="site-footer">
   <div class="container">
@@ -529,6 +531,9 @@
           <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
           <li><a href="../png-to-jpg/">PNG to JPG</a></li>
           <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+          <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+          <li><a href="../webp-to-png/">WebP to PNG</a></li>
           <li><a href="../compress/">PNG optimizer</a></li>
           <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
           <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
@@ -539,6 +544,7 @@
           <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
           <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
           <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../image-to-base64/">Image to Base64</a></li>
           <li><a href="../images-to-pdf/">Images to PDF</a></li>
           <li><a href="../transfer/">Transfer phone to PC</a></li>
         </ul>

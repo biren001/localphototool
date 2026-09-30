@@ -79,6 +79,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://localphototool.com/jpg-to-png/</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://localphototool.com/webp-to-jpg/</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://localphototool.com/webp-to-png/</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://localphototool.com/image-to-base64/</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
     <loc>https://localphototool.com/jpg-to-webp/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>

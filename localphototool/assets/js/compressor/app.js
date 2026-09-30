@@ -534,9 +534,14 @@
     /* Keeping the original when the re-encode came out bigger is a good trade
        for compression — and the wrong one for a format conversion. Somebody
        converting a HEIC is here precisely because .heic does not open where
-       they need it, so handing the HEIC back (smaller!) would defeat the whole
-       point of the visit. Size logic applies only while the format holds. */
-    var converting = state.options.heic && isHeic(item.file);
+       they need it, and somebody on /jpg-to-png/ wants a PNG even when PNG
+       weighs more. Whenever the requested output format differs from the
+       input's, the converted file IS the deliverable. Size logic applies
+       only while the format holds. */
+    var WANT_MIME = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', avif: 'image/avif' };
+    var wantMime = WANT_MIME[options.format];
+    var converting = (state.options.heic && isHeic(item.file)) ||
+      (!!wantMime && !!item.file.type && item.file.type !== wantMime);
     var step = function (frac, label) {
       if (item.runToken !== token) return;
       item.progress = frac;

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Image to Base64 — Data URI Encoder, Free, No Upload</title>
+<meta name="description" content="Encode an image to Base64 or a data URI in your browser and copy it straight into CSS, HTML or JSON. Batch conversion, nothing is uploaded — the file is read locally.">
+<link rel="canonical" href="https://localphototool.com/image-to-base64/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Image to Base64 — Data URI Encoder, Free, No Upload">
+<meta property="og:description" content="Encode an image to Base64 or a data URI in your browser and copy it straight into CSS, HTML or JSON. Batch conversion, nothing is uploaded — the file is read locally.">
+<meta property="og:url" content="https://localphototool.com/image-to-base64/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Image to Base64 — Data URI Encoder, Free, No Upload">
+<meta name="twitter:description" content="Encode an image to Base64 or a data URI in your browser and copy it straight into CSS, HTML or JSON. Batch conversion, nothing is uploaded — the file is read locally.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css?v=4bf65b2" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=4bf65b2">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/image-to-base64/#page",
+      "url": "https://localphototool.com/image-to-base64/",
+      "name": "Image to Base64 — Data URI Encoder, Free, No Upload",
+      "description": "Encode an image to Base64 or a data URI in your browser and copy it straight into CSS, HTML or JSON. Batch conversion, nothing is uploaded — the file is read locally.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/image-to-base64/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/image-to-base64/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Image to Base64 — Data URI Encoder, Free, No Upload",
+          "item": "https://localphototool.com/image-to-base64/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/image-to-base64/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Base64 encoding used for with images?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Base64 turns the raw bytes of an image into plain text, which lets the picture travel inside formats that only accept text: a data URI in CSS or HTML, a JSON payload, an XML file, an email template or a single-file build. The image stops being a separate file and becomes a string you can paste."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my image uploaded when I encode it here?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The file is read with the browser's own File API and encoded by JavaScript running on your device. This site has no upload endpoint at all — the network tab will show no request carrying your image."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use the data URI or the raw Base64 string?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the data URI (the one starting with data:image/...) when pasting into HTML, CSS or anywhere the format must identify itself — it works as a drop-in image source. Use the raw string when the surrounding code already knows the type, such as a Base64 field in a JSON API or the src of an <img> tag that carries its own type attribute."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much bigger does Base64 make the file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Base64 encodes every three bytes as four characters, so the text is about 33% larger than the binary file — plus the data URI prefix. Gzip compression recovers part of that on a website, but a Base64 image is always heavier than the same image served as a file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When is embedding an image as Base64 a bad idea?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For large photos: a Base64 image cannot be cached separately by the browser, cannot be lazy-loaded, and bloats the HTML or CSS that carries it. Data URIs shine for small graphics — icons, logos, placeholder patterns — and for single-file builds. Keep photographs as separate, cacheable files."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I encode several images at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Drop as many as you like and each gets its own output block with a copy button. Everything is encoded locally, in your browser, with no upload and no file-count limit."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the encoder</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../compress-without-uploading/">No upload</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#tools">All tools</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero hero--compact">
+    <div class="container">
+      <p class="eyebrow">Free &middot; no account &middot; nothing leaves your device</p>
+      <h1>Image to Base64 — paste any picture as text</h1>
+      <p class="hero__lead">Turn an image into a data URI or a raw Base64 string you can paste straight into CSS, HTML or JSON. Drop one in, copy the text out — encoded in your browser, never uploaded.</p>
+    </div>
+  </section>
+
+  <section class="tool" id="tool">
+    <div class="container">
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px"><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/><path d="M4 7h16v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M8 11h8M8 15h5"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop images here to encode them</h2>
+        <p class="dropzone__hint">PNG, JPG, WebP, GIF, SVG — anything the browser can read. The file is read in your browser — this page has no upload endpoint at all.</p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad" id="browseBtn" type="button">Choose images</button>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        </div>
+      </div>
+
+      <div class="engine-status" id="engineStatus" aria-live="polite">
+        <span class="dot dot--on" aria-hidden="true"></span>
+        <span id="engineText">Ready — encoding runs locally, nothing is sent anywhere</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="results" id="results" hidden aria-live="polite">
+    <div class="container">
+      <div class="results__head">
+        <h2 class="results__title">Base64 output</h2>
+        <div class="results__actions">
+          <button class="btn btn--ghost btn--sm" id="clearBtn" type="button">Clear list</button>
+        </div>
+      </div>
+      <p class="results__summary" id="b64Summary"></p>
+
+      <fieldset class="field" style="border:0;padding:0;margin:0 0 1rem">
+        <legend class="field__label" style="padding:0">Output format</legend>
+        <div class="trust-row" role="radiogroup" aria-label="Output format">
+          <label class="badge" style="cursor:pointer"><input type="radio" name="b64mode" id="b64ModeUri" checked style="margin-right:0.4em"> Data URI (data:image/...)</label>
+          <label class="badge" style="cursor:pointer"><input type="radio" name="b64mode" id="b64ModeRaw" style="margin-right:0.4em"> Raw Base64 only</label>
+        </div>
+      </fieldset>
+
+      <div class="result-list" id="b64List"></div>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>What Base64 encoding actually does</h2>
+      <p>Computers move images as bytes; a lot of the web moves text. Base64 is the bridge: it rewrites the raw bytes of your image using 64 safe characters — letters, digits, <code>+</code> and <code>/</code> — so the picture can live inside a CSS file, an HTML document, a JSON payload or an email template without breaking anything along the way. The result is called a <strong>data URI</strong> when it carries its own type header:</p>
+      <p><code>data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...</code></p>
+      <p>Paste that anywhere a URL or a file path would go, and the image is simply there — no request, no separate file.</p>
+
+      <h2>Where a data URI earns its keep</h2>
+      <ul>
+        <li><strong>Icons and logos in CSS.</strong> <code>background-image: url("data:image/svg+xml;base64,...")</code> removes a network request and works in email templates that refuse external images.</li>
+        <li><strong>Single-file builds.</strong> A demo, a code sample or an offline page that must carry its own images.</li>
+        <li><strong>JSON and XML payloads.</strong> APIs that accept images as Base64 strings instead of multipart uploads.</li>
+        <li><strong>Small placeholder graphics.</strong> Inline a 1 KB blur or pattern instead of a second round-trip.</li>
+      </ul>
+
+      <h2>The cost, stated plainly</h2>
+      <p>Base64 encodes every three bytes as four characters, so the text is about 33% larger than the binary file. The browser also cannot cache a data URI separately, lazy-load it, or show it while the rest of the page streams in. The working rule: <strong>inline small, serve large</strong>. A 2 KB icon inlined is a win; a 200 KB photo inlined is a page-weight problem. If the photo is heavy before encoding, shrink it first with the <a href="../compress/">main compressor</a> and encode the smaller version.</p>
+
+      <h2>Two ready-to-paste snippets</h2>
+      <p>In CSS:</p>
+      <p><code>.logo { background-image: url("data:image/png;base64,...."); }</code></p>
+      <p>In HTML:</p>
+      <p><code>&lt;img src="data:image/png;base64,...." alt="Logo"&gt;</code></p>
+
+      <h2>Related tools</h2>
+      <p>Shrink an image before you encode it with the <a href="../compress/">main compressor</a>; pin it to a specific format with <a href="../png-to-jpg/">PNG to JPG</a>, <a href="../jpg-to-webp/">JPG to WebP</a> or <a href="../heic-to-jpg/">HEIC to JPG</a>; check what metadata it carries with the <a href="../exif-viewer/">EXIF viewer</a>. Every tool on this site runs in your browser, with no upload.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>What is Base64 encoding used for with images?</summary>
+          <div class="faq__body"><p>Base64 turns the raw bytes of an image into plain text, which lets the picture travel inside formats that only accept text: a data URI in CSS or HTML, a JSON payload, an XML file, an email template or a single-file build. The image stops being a separate file and becomes a string you can paste.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is my image uploaded when I encode it here?</summary>
+          <div class="faq__body"><p>No. The file is read with the browser's own File API and encoded by JavaScript running on your device. This site has no upload endpoint at all — the network tab will show no request carrying your image.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Should I use the data URI or the raw Base64 string?</summary>
+          <div class="faq__body"><p>Use the data URI (the one starting with <code>data:image/...</code>) when pasting into HTML, CSS or anywhere the format must identify itself — it works as a drop-in image source. Use the raw string when the surrounding code already knows the type, such as a Base64 field in a JSON API or the src of an &lt;img&gt; tag that carries its own type attribute.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How much bigger does Base64 make the file?</summary>
+          <div class="faq__body"><p>Base64 encodes every three bytes as four characters, so the text is about 33% larger than the binary file — plus the data URI prefix. Gzip compression recovers part of that on a website, but a Base64 image is always heavier than the same image served as a file.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>When is embedding an image as Base64 a bad idea?</summary>
+          <div class="faq__body"><p>For large photos: a Base64 image cannot be cached separately by the browser, cannot be lazy-loaded, and bloats the HTML or CSS that carries it. Data URIs shine for small graphics — icons, logos, placeholder patterns — and for single-file builds. Keep photographs as separate, cacheable files.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I encode several images at once?</summary>
+          <div class="faq__body"><p>Yes. Drop as many as you like and each gets its own output block with a copy button. Everything is encoded locally, in your browser, with no upload and no file-count limit.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../resize-image/">Resize images</a></li>
+          <li><a href="../watermark/">Text watermark</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+          <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+          <li><a href="../webp-to-png/">WebP to PNG</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+          <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../image-to-base64/">Image to Base64</a></li>
+          <li><a href="../images-to-pdf/">Images to PDF</a></li>
+          <li><a href="../transfer/">Transfer phone to PC</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit 4bf65b2">Updated <time datetime="2026-09-30">30 Sep 2026</time> &middot; build <code>4bf65b2</code></span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/site.js?v=4bf65b2"></script>
+<script src="../assets/js/pwa.js?v=4bf65b2" defer></script>
+<script src="../assets/js/stats.js?v=4bf65b2" defer></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var dropzone = $('#dropzone'), input = $('#fileInput'), list = $('#b64List'),
+      results = $('#results'), summary = $('#b64Summary'), engineText = $('#engineText');
+  var items = [];
+
+  function toast(msg) {
+    var t = $('#toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('is-visible');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.classList.remove('is-visible'); }, 2600);
+  }
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(n < 10240 ? 1 : 0) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  function modeIsUri() { return $('#b64ModeUri').checked; }
+
+  function outputFor(it) {
+    return modeIsUri() ? it.dataUrl : it.dataUrl.slice(it.dataUrl.indexOf(',') + 1);
+  }
+
+  function updateSummary() {
+    if (!items.length) { summary.textContent = ''; return; }
+    var total = items.reduce(function (a, it) { return a + outputFor(it).length; }, 0);
+    summary.textContent = items.length + ' image' + (items.length === 1 ? '' : 's') +
+      ' encoded — ' + fmtBytes(total) + ' of text in total.';
+  }
+
+  function measure(it) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+      img.onload = function () { it.dims = img.naturalWidth + '\u00d7' + img.naturalHeight; resolve(); };
+      img.onerror = function () { it.dims = ''; resolve(); };
+      img.src = it.dataUrl;
+    });
+  }
+
+  function render() {
+    list.innerHTML = '';
+    items.forEach(function (it, idx) {
+      var card = document.createElement('div');
+      card.className = 'result';
+
+      var thumb = document.createElement('div');
+      thumb.className = 'result__thumb';
+      var img = document.createElement('img');
+      img.src = it.dataUrl;
+      img.alt = '';
+      thumb.appendChild(img);
+
+      var body = document.createElement('div');
+      body.style.minWidth = '0';
+      var name = document.createElement('strong');
+      name.textContent = it.file.name;
+      var meta = document.createElement('div');
+      meta.className = 'muted';
+      meta.style.fontSize = '0.85rem';
+      meta.style.marginTop = '2px';
+      meta.textContent = (it.dims ? it.dims + ' \u00b7 ' : '') +
+        fmtBytes(it.file.size) + ' \u2192 ' + fmtBytes(outputFor(it).length) + ' text';
+
+      var out = document.createElement('textarea');
+      out.className = 'b64-output';
+      out.readOnly = true;
+      out.rows = 4;
+      out.spellcheck = false;
+      out.style.width = '100%';
+      out.style.marginTop = '8px';
+      out.style.fontFamily = 'monospace';
+      out.style.fontSize = '0.78rem';
+      out.value = outputFor(it);
+      out.setAttribute('aria-label', 'Base64 output for ' + it.file.name);
+
+      body.appendChild(name);
+      body.appendChild(meta);
+      body.appendChild(out);
+
+      var actions = document.createElement('div');
+      actions.style.display = 'flex';
+      actions.style.flexDirection = 'column';
+      actions.style.gap = '8px';
+      var copy = document.createElement('button');
+      copy.type = 'button';
+      copy.className = 'btn btn--primary btn--sm';
+      copy.textContent = 'Copy';
+      copy.addEventListener('click', function () {
+        copyText(out.value, copy);
+      });
+      var dl = document.createElement('button');
+      dl.type = 'button';
+      dl.className = 'btn btn--ghost btn--sm';
+      dl.textContent = 'Download .txt';
+      dl.addEventListener('click', function () {
+        var base = it.file.name.replace(/\.[^.]+$/, '');
+        triggerDownload(new Blob([out.value], { type: 'text/plain' }), base + '.base64.txt');
+      });
+      var rm = document.createElement('button');
+      rm.type = 'button';
+      rm.className = 'btn btn--ghost btn--sm';
+      rm.textContent = 'Remove';
+      rm.addEventListener('click', function () {
+        items.splice(idx, 1);
+        render();
+        updateSummary();
+        if (!items.length) results.hidden = true;
+      });
+      actions.appendChild(copy);
+      actions.appendChild(dl);
+      actions.appendChild(rm);
+
+      card.appendChild(thumb);
+      card.appendChild(body);
+      card.appendChild(actions);
+      list.appendChild(card);
+    });
+  }
+
+  function copyText(text, btn) {
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = old; }, 1400);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+    } else {
+      fallbackCopy(text);
+      done();
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) { /* best effort */ }
+    document.body.removeChild(ta);
+  }
+
+  function triggerDownload(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1200);
+  }
+
+  function readFile(file) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { resolve(String(r.result)); };
+      r.onerror = function () { reject(new Error('read failed')); };
+      r.readAsDataURL(file);
+    });
+  }
+
+  function addFiles(fileList) {
+    var incoming = Array.prototype.slice.call(fileList).filter(function (f) {
+      return f && (f.type.indexOf('image/') === 0 || /\.(png|jpe?g|webp|gif|svg|bmp|avif)$/i.test(f.name || ''));
+    });
+    if (!incoming.length) { toast('Those files are not images.'); return; }
+    if (engineText) engineText.textContent = 'Encoding ' + incoming.length +
+      ' image' + (incoming.length === 1 ? '' : 's') + '\u2026';
+    results.hidden = false;
+    Promise.all(incoming.map(function (f) {
+      return readFile(f).then(function (dataUrl) {
+        var it = { file: f, dataUrl: dataUrl, dims: '' };
+        items.push(it);
+        return measure(it);
+      });
+    })).then(function () {
+      render();
+      updateSummary();
+      if (engineText) engineText.textContent = 'Ready — encoding runs locally, nothing is sent anywhere';
+    }).catch(function () {
+      toast('Could not read one of those files.');
+      if (engineText) engineText.textContent = 'Ready — encoding runs locally, nothing is sent anywhere';
+    });
+  }
+
+  /* Re-encode every visible output when the mode radio flips. */
+  ['b64ModeUri', 'b64ModeRaw'].forEach(function (id) {
+    var el = $('#' + id);
+    if (el) el.addEventListener('change', function () { render(); updateSummary(); });
+  });
+
+  var clearBtn = $('#clearBtn');
+  if (clearBtn) clearBtn.addEventListener('click', function () {
+    items = [];
+    render();
+    results.hidden = true;
+  });
+
+  var browseBtn = $('#browseBtn');
+  if (browseBtn) browseBtn.addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', function () { addFiles(input.files); input.value = ''; });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.remove('is-dragover');
+    });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+})();
+</script>
+</body>
+</html>

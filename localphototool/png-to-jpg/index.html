@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PNG to JPG Converter — Batch, Free, Runs in Your Browser</title>
-<meta name="description" content="Convert PNG to JPG without uploading. Flatten transparency onto white when needed, convert a whole folder at once. No account, no limits, free.">
+<meta name="description" content="Convert PNG files to JPG without uploading them. Keep quality where it matters, flatten transparency onto white when you need to, and convert a whole folder at once. No account, no limits.">
 <link rel="canonical" href="https://localphototool.com/png-to-jpg/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -124,10 +124,10 @@
         },
         {
           "@type": "Question",
-          "name": "Why did my file come back unchanged?",
+          "name": "What quality will the JPG have?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "If re-encoding would have produced a larger file than the original, the original is kept and the row is labelled \"already optimal\". A screenshot that is already a well-optimised PNG is a common case — there is genuinely nothing left to remove."
+            "text": "The engine runs the same auto quality search the main compressor uses: it encodes at several quality levels and keeps the lowest one whose measured fidelity clears a ~40 dB PSNR floor, which is past the point where differences are visible at normal viewing sizes. You can also pin a quality yourself in the settings."
           }
         },
         {
@@ -329,6 +329,7 @@
                 <option value="1024">1024 px — thumbnails</option>
                 <option value="800">800 px — very small</option>
               </select>
+              <p class="muted mb-0" style="font-size:0.78rem">Need exact dimensions or a centre crop instead of a cap? The <a href="../resize-image/">batch image resizer</a> does that.</p>
             </div>
 
             <div class="field">
@@ -454,13 +455,10 @@
         <li><strong>Anything with transparency you intend to keep.</strong></li>
         <li><strong>An intermediate step in an editing workflow.</strong> If you will open the file again, keep it lossless; export to JPG only at the very end.</li>
       </ul>
-      <p>This tool respects that distinction. In Auto mode it measures the image and keeps it in PNG when PNG is genuinely the better answer — it will hand you back the original rather than a bigger file.</p>
+      <p>This page always hands back a JPG — a converter that returns the format you asked it to leave is not a converter, even when the JPG happens to weigh a little more than the PNG. If you would rather let the engine decide format per image, the <a href="../compress/">main compressor</a> in Auto mode does exactly that, and keeps the smaller file.</p>
 
       <h2>Converting a whole folder</h2>
       <p>Select every PNG you want in the file picker, or drag a multi-selection onto the page. Files are processed in parallel background workers, and <strong>Download all</strong> packages the finished JPGs into a single ZIP. On a phone the same results can be handed to the system share sheet so they land directly in your photo library — we deliberately do not send a ZIP to iOS, because the Files app will not unpack it into your camera roll.</p>
-
-      <h2>Other conversions</h2>
-      <p>If PNG is not the format you are fighting: <a href="../jpg-to-webp/">convert JPG to WebP</a> gets a smaller file that every current browser still reads, <a href="../heic-to-jpg/">convert HEIC to JPG</a> handles the iPhone format that Windows and older Android apps refuse to open, and the <a href="../compress/">main compressor</a> shrinks a file without changing its format at all. And if the pixels themselves need to change rather than the format, the <a href="../resize-image/">batch image resizer</a> makes images an exact size — fit inside or crop to fill — with no upload either.</p>
       <h2>Frequently asked questions</h2>
       <div class="faq mt-4">
         <details class="faq__item" open>
@@ -476,8 +474,8 @@
           <div class="faq__body"><p>Yes. Select as many as you like and they convert in parallel. On desktop you can take everything as one ZIP archive; on an iPhone the finished files go to the system share sheet so they land in your photo library.</p></div>
         </details>
         <details class="faq__item">
-          <summary>Why did my file come back unchanged?</summary>
-          <div class="faq__body"><p>If re-encoding would have produced a larger file than the original, the original is kept and the row is labelled "already optimal". A screenshot that is already a well-optimised PNG is a common case — there is genuinely nothing left to remove.</p></div>
+          <summary>What quality will the JPG have?</summary>
+          <div class="faq__body"><p>The engine runs the same auto quality search the main compressor uses: it encodes at several quality levels and keeps the lowest one whose measured fidelity clears a ~40 dB PSNR floor, which is past the point where differences are visible at normal viewing sizes. You can also pin a quality yourself in the settings.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is my PNG uploaded anywhere?</summary>
@@ -487,6 +485,7 @@
     </div>
   </section>
 
+</main>
 </main>
 
 <footer class="site-footer">
@@ -511,6 +510,9 @@
           <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
           <li><a href="../png-to-jpg/">PNG to JPG</a></li>
           <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+          <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+          <li><a href="../webp-to-png/">WebP to PNG</a></li>
           <li><a href="../compress/">PNG optimizer</a></li>
           <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
           <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
@@ -521,6 +523,7 @@
           <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
           <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
           <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../image-to-base64/">Image to Base64</a></li>
           <li><a href="../images-to-pdf/">Images to PDF</a></li>
           <li><a href="../transfer/">Transfer phone to PC</a></li>
         </ul>
