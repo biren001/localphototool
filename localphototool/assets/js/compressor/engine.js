@@ -681,6 +681,37 @@
     return out;
   }
 
+  /* Batch crop: trim every image to an aspect ratio (1:1, 4:3, 16:9, 3:2),
+     keeping the largest rectangle that fits inside the (already oriented)
+     image, positioned by a 9-way anchor. Applied right after the rotate/flip
+     step so resize targets and the KB ceilings are computed against the
+     cropped frame — "crop to square then fit 400x300" reads the way it
+     behaves. A ratio that already matches the image is a no-op (no canvas
+     copy), and so is anything unparseable. */
+  function applyCrop(src, w, h, crop) {
+    if (!crop || !crop.ratio) return src;
+    var m = /^(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)$/.exec(String(crop.ratio));
+    if (!m) return src;
+    var rw = parseFloat(m[1]), rh = parseFloat(m[2]);
+    if (!(rw > 0) || !(rh > 0)) return src;
+    var target = rw / rh, source = w / h;
+    /* Treat near-matching ratios as no-ops: a 1599/1000 image asked for 16:9
+       should not lose a pixel column to float noise. */
+    if (Math.abs(source - target) / target < 0.001) return src;
+    var cw, ch;
+    if (source > target) { ch = h; cw = Math.round(h * target); }
+    else { cw = w; ch = Math.round(w / target); }
+    var a = String(crop.anchor || 'center');
+    var ax = a.indexOf('left') >= 0 ? 0 : (a.indexOf('right') >= 0 ? w - cw : Math.round((w - cw) / 2));
+    var ay = a.indexOf('top') >= 0 ? 0 : (a.indexOf('bottom') >= 0 ? h - ch : Math.round((h - ch) / 2));
+    ax = Math.max(0, Math.min(ax, w - cw));
+    ay = Math.max(0, Math.min(ay, h - ch));
+    if (cw >= w && ch >= h) return src;
+    var out = createCanvas(cw, ch);
+    ctx2d(out, true).drawImage(src, ax, ay, cw, ch, 0, 0, cw, ch);
+    return out;
+  }
+
   /* ---------------------------------------------------------------------
      Unsharp mask
      --------------------------------------------------------------------- */
@@ -1063,6 +1094,16 @@
         var tsrc = applyUserTransform(src, size.w, size.h, opts.transform);
         if (tsrc !== src && typeof src.close === 'function') src.close();
         src = tsrc;
+        size = sourceSize(src);
+      }
+
+      /* Crop runs right after the orientation step, before analysis and any
+         resize: every later decision (proxy, KB budget, fit) is computed
+         against the cropped frame. */
+      if (opts.crop) {
+        var csrc = applyCrop(src, size.w, size.h, opts.crop);
+        if (csrc !== src && typeof src.close === 'function') src.close();
+        src = csrc;
         size = sourceSize(src);
       }
 

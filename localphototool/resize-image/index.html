@@ -118,6 +118,14 @@
         },
         {
           "@type": "Question",
+          "name": "Can I crop images to a fixed aspect ratio while resizing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Crop to a ratio section trims every image to 1:1, 4:3, 3:2 or 16:9 — always the largest rectangle that fits, with a nine-way anchor for keeping the centre, an edge, or a corner. Cropping runs before the resize, so the target size is computed against the cropped frame, and images that already match the chosen ratio are passed through untouched. It all happens in your browser."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Can I resize a whole batch of images at once?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -309,6 +317,29 @@
               <span class="switch__text">Flip vertically — mirror top/bottom</span>
             </label>
             <p class="muted mb-0" style="font-size:0.8rem">Rotation happens before resizing, so the fit is computed against the image as it stands after the turn: an 800×600 photo turned 90° becomes 600×800 before any resize is applied, and "crop to fill" still delivers the exact size you typed.</p>
+          </div>
+
+          <div class="field">
+            <span class="field__label">Crop to a ratio</span>
+            <select class="select" id="cropRatio" aria-label="Crop every image to an aspect ratio">
+              <option value="none" selected>No crop</option>
+              <option value="1:1">1:1 — square</option>
+              <option value="4:3">4:3 — classic</option>
+              <option value="3:2">3:2 — photo print</option>
+              <option value="16:9">16:9 — widescreen</option>
+            </select>
+            <select class="select" id="cropAnchor" aria-label="Which part of the image to keep" style="margin-top:0.6rem">
+              <option value="center" selected>Keep the centre</option>
+              <option value="top">Keep the top</option>
+              <option value="bottom">Keep the bottom</option>
+              <option value="left">Keep the left</option>
+              <option value="right">Keep the right</option>
+              <option value="top-left">Keep the top-left corner</option>
+              <option value="top-right">Keep the top-right corner</option>
+              <option value="bottom-left">Keep the bottom-left corner</option>
+              <option value="bottom-right">Keep the bottom-right corner</option>
+            </select>
+            <p class="muted mb-0" style="font-size:0.8rem">Every image is trimmed to the ratio you pick — the largest rectangle that fits, positioned by the anchor. Cropping happens before resizing, so the target size is computed against the cropped frame, and images that already match the ratio are left untouched.</p>
           </div>
 
           <div class="field">
@@ -550,6 +581,10 @@
           <div class="faq__body"><p>Yes. The <strong>Rotate &amp; flip</strong> section turns every image by 90°, 180° or 270° and mirrors it horizontally or vertically — in any combination. Rotation is applied first and the flip mirrors what you see afterwards, and both run before the resize so the fit is computed against the oriented image. Like everything else on this site, it happens entirely in your browser.</p></div>
         </details>
         <details class="faq__item">
+          <summary>Can I crop images to a fixed aspect ratio while resizing?</summary>
+          <div class="faq__body"><p>Yes. The <strong>Crop to a ratio</strong> section trims every image to 1:1, 4:3, 3:2 or 16:9 — always the largest rectangle that fits, with a nine-way anchor for keeping the centre, an edge, or a corner. Cropping runs before the resize, so the target size is computed against the cropped frame, and images that already match the chosen ratio are passed through untouched. It all happens in your browser.</p></div>
+        </details>
+        <details class="faq__item">
           <summary>Can I resize a whole batch of images at once?</summary>
           <div class="faq__body"><p>Yes. Select any number of files, or drag a multi-selection onto the page. The same setting applies to every image, they process in parallel background workers, and <strong>Download all</strong> packages the finished files into a single ZIP. Percent mode scales each image by the same factor, so mixed sizes keep their relative proportions.</p></div>
         </details>
@@ -648,7 +683,7 @@
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
-      <span class="build-stamp" title="Built from git commit 6787aa7">Updated <time datetime="2026-09-29">29 Sep 2026</time> &middot; build <code>6787aa7</code></span>
+      <span class="build-stamp" title="Built from git commit 15538ad">Updated <time datetime="2026-09-29">29 Sep 2026</time> &middot; build <code>15538ad</code></span>
       <span class="sep"></span>
       <span>Made for people who would rather not hand over their photos.</span>
     </div>

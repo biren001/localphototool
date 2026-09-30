@@ -34,6 +34,8 @@
     rotate: 0,
     flipH: false,
     flipV: false,
+    cropRatio: 'none',
+    cropAnchor: 'center',
     sharpen: 'auto',
     dither: true,
     pngColors: 'auto',
@@ -540,9 +542,9 @@
         item.result = result;
         /* "Keep the original when re-encoding made it bigger" is a compression
            courtesy, not a universal rule: when the user asked for different
-           pixels — a resize or a format conversion — the new file IS the
-           deliverable, even if it happens to weigh more than the original. */
-        var resizing = !!options.resize;
+           pixels — a resize, a crop, or a format conversion — the new file IS
+           the deliverable, even if it happens to weigh more than the original. */
+        var resizing = !!options.resize || !!options.crop;
         var worse = !converting && !resizing && result.blob.size >= item.file.size;
         item.worse = worse;
         item.outputBlob = worse ? item.file : result.blob;
@@ -636,6 +638,9 @@
     var transform = (rot === 90 || rot === 180 || rot === 270 || o.flipH || o.flipV)
       ? { rotate: rot, flipH: !!o.flipH, flipV: !!o.flipV }
       : null;
+    var crop = (o.cropRatio && o.cropRatio !== 'none')
+      ? { ratio: o.cropRatio, anchor: o.cropAnchor || 'center' }
+      : null;
     return {
       mode: o.mode,
       format: o.format,
@@ -644,6 +649,7 @@
       maxDimension: Number(o.maxDimension) || 0,
       resize: resize,
       transform: transform,
+      crop: crop,
       sharpen: o.sharpen,
       dither: !!o.dither,
       pngColors: o.pngColors === 'auto' ? 'auto'
@@ -1407,6 +1413,9 @@
     if (rrot) rrot.value = String(Number(state.options.rotate) || 0);
     if (rfh) rfh.checked = !!state.options.flipH;
     if (rfv) rfv.checked = !!state.options.flipV;
+    var cr = $('#cropRatio'), ca = $('#cropAnchor');
+    if (cr) cr.value = String(state.options.cropRatio || 'none');
+    if (ca) ca.value = String(state.options.cropAnchor || 'center');
 
     function syncResizeMode() {
       var dims = state.options.resizeMode === 'dims';
@@ -1508,6 +1517,14 @@
     });
     if (rfv) rfv.addEventListener('change', function () {
       state.options.flipV = rfv.checked;
+      saveOptions(); recompressAll();
+    });
+    if (cr) cr.addEventListener('change', function () {
+      state.options.cropRatio = cr.value === 'none' || !cr.value ? 'none' : cr.value;
+      saveOptions(); recompressAll();
+    });
+    if (ca) ca.addEventListener('change', function () {
+      state.options.cropAnchor = ca.value || 'center';
       saveOptions(); recompressAll();
     });
   }
