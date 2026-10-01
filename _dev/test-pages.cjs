@@ -259,7 +259,8 @@ PUBLIC.forEach(function (p) {
   'compress-photos-for-email/', 'compress-without-uploading/',
   'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/',
-  'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/', 'image-to-base64/', 'batch-rename/'].forEach(function (p) {
+  'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/', 'image-to-base64/', 'batch-rename/',
+  'metadata-editor/'].forEach(function (p) {
   ok('the offline shell precaches /' + p, new RegExp("'" + (p || '') + "',").test(sw));
 });
 /* Read the SHELL array itself, not the whole file: the comment above it names

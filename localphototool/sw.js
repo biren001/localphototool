@@ -137,6 +137,7 @@ var SHELL = [
   'webp-to-png/',
   'image-to-base64/',
   'batch-rename/',
+  'metadata-editor/', /* lossless EXIF/XMP strip + XMP inject, v61 */
   'share/',
   'about/',
   'offline.html',

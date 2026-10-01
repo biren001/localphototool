@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edit Photo Metadata Online — Lossless, No Upload</title>
+<meta name="description" content="Add or remove image metadata in your browser: title, creator, copyright and keywords written as XMP; EXIF, GPS and XMP stripped. Pixels stay byte-for-byte identical — no re-encoding, no upload.">
+<link rel="canonical" href="https://localphototool.com/metadata-editor/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Edit Photo Metadata Online — Lossless, No Upload">
+<meta property="og:description" content="Add or remove image metadata in your browser: title, creator, copyright and keywords written as XMP; EXIF, GPS and XMP stripped. Pixels stay byte-for-byte identical — no re-encoding, no upload.">
+<meta property="og:url" content="https://localphototool.com/metadata-editor/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Edit Photo Metadata Online — Lossless, No Upload">
+<meta name="twitter:description" content="Add or remove image metadata in your browser: title, creator, copyright and keywords written as XMP; EXIF, GPS and XMP stripped. Pixels stay byte-for-byte identical — no re-encoding, no upload.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css?v=c9638be" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=c9638be">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/metadata-editor/#page",
+      "url": "https://localphototool.com/metadata-editor/",
+      "name": "Edit Photo Metadata Online — Lossless, No Upload",
+      "description": "Add or remove image metadata in your browser: title, creator, copyright and keywords written as XMP; EXIF, GPS and XMP stripped. Pixels stay byte-for-byte identical — no re-encoding, no upload.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/metadata-editor/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/metadata-editor/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Edit Photo Metadata Online — Lossless, No Upload",
+          "item": "https://localphototool.com/metadata-editor/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/metadata-editor/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does lossless metadata editing mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Metadata lives in container segments that sit next to the pixels, not inside them. This tool rewrites only those segments: the compressed image data is copied byte-for-byte, so the picture is never decoded or re-encoded and its quality cannot change. The file size shifts by a few hundred bytes — the size of the metadata itself — and nothing else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which metadata is removed, and which can I add?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Removed: EXIF (camera, settings, GPS coordinates, embedded thumbnail), XMP and IPTC from JPEG files; text and eXIf chunks from PNG files; EXIF and XMP chunks from WebP files. An option also removes the ICC colour profile. Added: your title, creator, description, copyright, keywords and tool name, written as a standard XMP packet. New XMP can be written into JPG and PNG; for WebP this tool strips only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the image look different afterwards?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The pixels are untouched, so the picture renders exactly as before. The one exception is the optional colour-profile removal: if you tick it, apps that ignore colour management may interpret the colours slightly differently. Leave the box unticked and the profile survives along with everything visual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on a phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Each edited file has its own download button, and the files land in your browser's downloads. On desktop, and on Android, a batch can also be taken as one ZIP archive; iPhones get per-file downloads instead, because iOS does not unpack ZIPs into the photo library."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my photos uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This is a static site with no upload endpoint. The files are read and rewritten in your browser, on your own device — you can watch the network tab and confirm that nothing leaves it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why leave fields empty on purpose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Submitting with every field empty is the quickest way to strip metadata: all EXIF, XMP and IPTC blocks are removed and nothing is written back. It is the same guarantee as the dedicated GPS-removal tool, but across every metadata block at once — useful before selling a camera, publishing a portfolio, or sending files to a printer."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the editor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../compress-without-uploading/">No upload</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#tools">All tools</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero hero--compact">
+    <div class="container">
+      <p class="eyebrow">Free &middot; no account &middot; nothing leaves your device</p>
+      <h1>Edit image metadata without re-encoding it</h1>
+      <p class="hero__lead">Write a title, creator, copyright and keywords into your photos — or strip EXIF, GPS and XMP out of them — while the pixels stay byte-for-byte identical. No re-compression, no quality change, no upload.</p>
+    </div>
+  </section>
+
+  <section class="tool" id="tool">
+    <div class="container">
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="12" cy="13" r="3"/><path d="M12 10V7"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop images here to edit their metadata</h2>
+        <p class="dropzone__hint">JPG, PNG and WebP — only container segments are rewritten, so nothing is uploaded and nothing is re-encoded.</p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad" id="browseBtn" type="button">Choose images</button>
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/*" multiple hidden>
+        </div>
+      </div>
+
+      <div class="engine-status" id="engineStatus" aria-live="polite">
+        <span class="dot dot--on" aria-hidden="true"></span>
+        <span id="engineText">Ready — editing runs locally, nothing is sent anywhere</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="results" id="results" hidden aria-live="polite">
+    <div class="container">
+      <div class="results__head">
+        <h2 class="results__title">Metadata to write</h2>
+        <div class="results__actions">
+          <button class="btn btn--ghost btn--sm" id="clearBtn" type="button">Clear list</button>
+        </div>
+      </div>
+
+      <p class="muted" style="font-size:0.88rem;margin:0.4rem 0 0.6rem">Existing EXIF, XMP and IPTC blocks are always removed first; your fields below are then written as clean XMP. Leave every field empty to strip metadata only.</p>
+
+      <div class="field-duo" style="margin:0.4rem 0 0.4rem">
+        <div class="field">
+          <label class="field__label" for="meTitle">Title</label>
+          <input class="input" type="text" id="meTitle" placeholder="e.g. Harbor at dawn" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="field__label" for="meCreator">Creator</label>
+          <input class="input" type="text" id="meCreator" placeholder="e.g. Jane Doe" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="field__label" for="meCopyright">Copyright</label>
+          <input class="input" type="text" id="meCopyright" placeholder="e.g. &copy; 2026 Jane Doe" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="field__label" for="meDescription">Description</label>
+          <input class="input" type="text" id="meDescription" placeholder="What the picture shows" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="field__label" for="meKeywords">Keywords <span class="muted">(comma-separated)</span></label>
+          <input class="input" type="text" id="meKeywords" placeholder="harbor, dawn, sea" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="field__label" for="meSoftware">Tool / software</label>
+          <input class="input" type="text" id="meSoftware" placeholder="e.g. Jane's Studio" autocomplete="off">
+        </div>
+        <div class="field">
+          <span class="field__label">Colour profile</span>
+          <label class="switch switch--sm" for="meDropIcc" style="margin-top:0.35rem">
+            <input type="checkbox" id="meDropIcc">
+            <span class="switch__track"></span>
+            <span class="switch__text">Also remove ICC profile</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="results__summary" id="meSummary"></p>
+      <div class="results__actions" style="margin:0.4rem 0 0.8rem">
+        <button class="btn btn--primary btn--sm" id="zipAllBtn" type="button" hidden>Download all (.zip)</button>
+      </div>
+
+      <div class="result-list" id="meList"></div>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>Metadata is a label, not a layer of paint</h2>
+      <p>Most online "metadata editors" load your photo into a canvas, let you type fields into a form, and then <strong>re-encode the whole image</strong> to hand you a file with the new labels. The pixels get regenerated on the way: a quality setting is chosen for you, generation is lost, and a picture that was crisp at 480 KB comes back softer at 520 KB. The label changed; the painting got repainted to hang it.</p>
+      <p>This tool takes the other route. EXIF, XMP and IPTC live in container segments that sit <em>next to</em> the compressed pixels, not inside them. So the editor copies the image data through untouched, rewrites only those segments, and hands you back a file whose picture is <strong>byte-for-byte identical</strong> to the one you dropped in. The file size moves by a few hundred bytes — the size of the metadata itself — and nothing else.</p>
+
+      <h2>What it removes, and what it writes</h2>
+      <ul>
+        <li><strong>Removed, always.</strong> EXIF blocks (camera model, exposure settings, GPS coordinates, the embedded preview thumbnail), existing XMP packets and IPTC records from JPEG; text and eXIf chunks from PNG; EXIF and XMP chunks from WebP. What was found in each file is shown per row before you download anything.</li>
+        <li><strong>Written, if you fill the fields.</strong> Title, creator, description, copyright, keywords and tool name, as one standards-compliant <a href="https://www.adobe.com/devnet/xmp.html" rel="noopener">XMP</a> packet — readable by Lightroom, Photoshop, Windows Photos, macOS Preview and every photo library that matters.</li>
+        <li><strong>Optional.</strong> The ICC colour profile survives by default; tick the box to remove it too, for the rare workflow that demands a profile-free file.</li>
+      </ul>
+
+      <h2>Why fields-empty is a feature</h2>
+      <p>Submit the form with nothing filled in and the tool becomes a total metadata stripper: every EXIF, XMP and IPTC block goes, and nothing is written back. That is the strongest privacy pass available without touching pixels — broader than the dedicated <a href="../remove-gps-from-photo/">GPS remover</a>, which keeps camera and colour information. Use it before selling a camera with its cards, publishing a portfolio, or handing files to anyone who does not need the shooting history.</p>
+
+      <h2>Honest limits</h2>
+      <p>New XMP is written into JPG and PNG. WebP files get their EXIF and XMP chunks stripped, but this tool does not write new metadata into them losslessly — the WebP container gates its metadata behind a header flag that has to be rewritten carefully, and a half-correct edit there is worse than none. Files in other formats pass through untouched. JPEG files are also limited to one XMP packet per file, which is what every reader expects anyway.</p>
+
+      <h2>Related tools</h2>
+      <p>Inspect what a photo reveals with the <a href="../exif-viewer/">EXIF viewer</a>; strip location only with <a href="../remove-gps-from-photo/">Remove GPS from a photo</a>; shrink the result for the web with the <a href="../compress/">compressor</a>; tidy filenames first with <a href="../batch-rename/">Batch rename</a>; and convert the iPhone format with <a href="../heic-to-jpg/">HEIC to JPG</a>. Everything runs in your browser, with no upload.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>What does lossless metadata editing mean?</summary>
+          <div class="faq__body"><p>Metadata lives in container segments that sit next to the pixels, not inside them. This tool rewrites only those segments: the compressed image data is copied byte-for-byte, so the picture is never decoded or re-encoded and its quality cannot change. The file size shifts by a few hundred bytes — the size of the metadata itself — and nothing else.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Which metadata is removed, and which can I add?</summary>
+          <div class="faq__body"><p>Removed: EXIF (camera, settings, GPS coordinates, embedded thumbnail), XMP and IPTC from JPEG files; text and eXIf chunks from PNG files; EXIF and XMP chunks from WebP files. An option also removes the ICC colour profile. Added: your title, creator, description, copyright, keywords and tool name, written as a standard XMP packet. New XMP can be written into JPG and PNG; for WebP this tool strips only.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Will the image look different afterwards?</summary>
+          <div class="faq__body"><p>No. The pixels are untouched, so the picture renders exactly as before. The one exception is the optional colour-profile removal: if you tick it, apps that ignore colour management may interpret the colours slightly differently. Leave the box unticked and the profile survives along with everything visual.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it work on a phone?</summary>
+          <div class="faq__body"><p>Yes. Each edited file has its own download button, and the files land in your browser's downloads. On desktop, and on Android, a batch can also be taken as one ZIP archive; iPhones get per-file downloads instead, because iOS does not unpack ZIPs into the photo library.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Are my photos uploaded to a server?</summary>
+          <div class="faq__body"><p>No. This is a static site with no upload endpoint. The files are read and rewritten in your browser, on your own device — you can watch the network tab and confirm that nothing leaves it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why leave fields empty on purpose?</summary>
+          <div class="faq__body"><p>Submitting with every field empty is the quickest way to strip metadata: all EXIF, XMP and IPTC blocks are removed and nothing is written back. It is the same guarantee as the dedicated GPS-removal tool, but across every metadata block at once — useful before selling a camera, publishing a portfolio, or sending files to a printer.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../resize-image/">Resize images</a></li>
+          <li><a href="../watermark/">Text watermark</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+          <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../images-to-pdf/">Images to PDF</a></li>
+          <li><a href="../transfer/">Transfer phone to PC</a></li>
+          <li><a href="../batch-rename/">Batch rename</a></li>
+          <li><a href="../metadata-editor/">Metadata editor</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit c9638be">Updated <time datetime="2026-09-30">30 Sep 2026</time> &middot; build <code>c9638be</code></span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/exif.js?v=c9638be"></script>
+<script src="../assets/js/xmpmeta.js?v=c9638be"></script>
+<script src="../assets/js/zip.js?v=c9638be"></script>
+<script src="../assets/js/site.js?v=c9638be"></script>
+<script src="../assets/js/pwa.js?v=c9638be" defer></script>
+<script src="../assets/js/stats.js?v=c9638be" defer></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var dropzone = $('#dropzone'), input = $('#fileInput'), list = $('#meList'),
+      results = $('#results'), summary = $('#meSummary'),
+      zipAllBtn = $('#zipAllBtn');
+  var files = [];
+  var urls = {};
+  var reports = {};          /* LPTExif.parse results, keyed per file */
+  var outCache = {};         /* { sig, promise } per file */
+  var lastSig = null;
+
+  var isIOS = /iP(hone|ad|od)/i.test(navigator.userAgent) ||
+    (/Macintosh/.test(navigator.userAgent) && (navigator.maxTouchPoints || 0) > 1);
+
+  function toast(msg) {
+    var t = $('#toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('is-visible');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.classList.remove('is-visible'); }, 2600);
+  }
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(n < 10240 ? 1 : 0) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  function keyOf(file) { return file.name + '\u0000' + file.size + '\u0000' + file.lastModified; }
+
+  function readFields() {
+    return {
+      title: $('#meTitle').value.trim(),
+      creator: $('#meCreator').value.trim(),
+      copyright: $('#meCopyright').value.trim(),
+      description: $('#meDescription').value.trim(),
+      keywords: $('#meKeywords').value.trim(),
+      software: $('#meSoftware').value.trim()
+    };
+  }
+
+  function hasFields(f) {
+    return Object.keys(f).some(function (k) { return f[k]; });
+  }
+
+  function optionsSignature() {
+    return JSON.stringify([readFields(), $('#meDropIcc').checked]);
+  }
+
+  function crc32fn(bytes) {
+    return window.LPT && window.LPT.zip ? window.LPT.zip.crc32(bytes) : 0;
+  }
+
+  /* ---- per-file processing (cached by options signature) ---- */
+
+  function outFor(file) {
+    var key = keyOf(file);
+    var sig = lastSig;
+    var cached = outCache[key];
+    if (cached && cached.sig === sig) return cached.promise;
+    var fields = readFields();
+    var dropIcc = $('#meDropIcc').checked;
+    var p;
+    if (!window.LPTMeta) {
+      p = Promise.resolve({ blob: file, kind: 'other', error: 'Engine not available in this browser.' });
+    } else {
+      p = LPTMeta.kindOf(file).then(function (kind) {
+        if (kind === 'other') {
+          return { blob: file, kind: kind, before: file.size, after: file.size };
+        }
+        return LPTMeta.strip(file, { dropIcc: dropIcc }).then(function (stripped) {
+          if (kind === 'webp' || !hasFields(fields)) {
+            return { blob: stripped, kind: kind, before: file.size, after: stripped.size };
+          }
+          return LPTMeta.injectXmp(stripped, fields, crc32fn).then(function (res) {
+            if (res) return { blob: res, kind: kind, injected: true, before: file.size, after: res.size };
+            return { blob: stripped, kind: kind, before: file.size, after: stripped.size };
+          });
+        });
+      }).catch(function () {
+        return { blob: file, kind: 'other', error: 'This file could not be read.' };
+      });
+    }
+    outCache[key] = { sig: sig, promise: p };
+    return p;
+  }
+
+  function describe(res, file) {
+    if (res.error) return res.error;
+    if (res.kind === 'other') {
+      return 'Not a JPG/PNG/WebP — passed through byte-for-byte.';
+    }
+    var line = fmtBytes(res.before) + ' \u2192 ' + fmtBytes(res.after) + ' \u00b7 pixels byte-identical';
+    if (res.kind === 'webp') line += ' \u00b7 WebP: stripped only';
+    return line;
+  }
+
+  function triggerDownload(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1200);
+  }
+
+  /* ---- rows: built once per file, then updated in place. Rebuilding the
+         list on every keystroke destroys the button under a real user's
+         pointer (mousedown fires blur -> re-render before mouseup), so the
+         click lands on a node that is no longer in the document. ---- */
+
+  var rows = [];
+
+  function flagBadges(rep) {
+    if (!rep) return '';
+    var f = rep.flags || {};
+    var names = [];
+    if (f.exif) names.push('EXIF');
+    if (rep.gps) names.push('GPS');
+    if (f.xmp) names.push('XMP');
+    if (f.iptc) names.push('IPTC');
+    if (f.icc) names.push('ICC');
+    if (f.thumbnail) names.push('thumbnail');
+    if (f.pngText) names.push('text chunks');
+    return names;
+  }
+
+  function buildRow(file) {
+    var card = document.createElement('div');
+    card.className = 'result';
+
+    var thumb = document.createElement('div');
+    thumb.className = 'result__thumb';
+    var img = document.createElement('img');
+    img.src = urls[keyOf(file)] || '';
+    img.alt = '';
+    thumb.appendChild(img);
+
+    var body = document.createElement('div');
+    body.style.minWidth = '0';
+    var name = document.createElement('div');
+    name.style.fontWeight = '680';
+    name.textContent = file.name;
+    var badges = document.createElement('div');
+    badges.className = 'muted';
+    badges.style.fontSize = '0.8rem';
+    badges.textContent = 'Reading metadata\u2026';
+    var meta = document.createElement('div');
+    meta.className = 'muted';
+    meta.style.fontSize = '0.8rem';
+    meta.textContent = fmtBytes(file.size);
+    body.appendChild(name);
+    body.appendChild(badges);
+    body.appendChild(meta);
+
+    var actions = document.createElement('div');
+    actions.style.display = 'flex';
+    actions.style.flexDirection = 'column';
+    actions.style.gap = '8px';
+    var dl = document.createElement('button');
+    dl.type = 'button';
+    dl.className = 'btn btn--primary btn--sm';
+    dl.textContent = 'Download';
+    dl.setAttribute('data-key', keyOf(file));
+    dl.setAttribute('aria-label', 'Download edited ' + file.name);
+    dl.addEventListener('click', function () {
+      var file2 = files.filter(function (f) { return keyOf(f) === dl.getAttribute('data-key'); })[0];
+      if (!file2) return;
+      dl.disabled = true;
+      outFor(file2).then(function (res) {
+        triggerDownload(res.blob, file2.name);
+        meta.textContent = describe(res, file2);
+      }).catch(function () {
+        toast('Could not read that file.');
+      }).then(function () { dl.disabled = false; });
+    });
+    actions.appendChild(dl);
+
+    card.appendChild(thumb);
+    card.appendChild(body);
+    card.appendChild(actions);
+    list.appendChild(card);
+    return { badges: badges, meta: meta, dl: dl };
+  }
+
+  function render() {
+    if (rows.length !== files.length) {
+      list.innerHTML = '';
+      rows = files.map(function (file) { return buildRow(file); });
+    }
+  }
+
+  function refreshRows() {
+    rows.forEach(function (row, i) {
+      var file = files[i];
+      var rep = reports[keyOf(file)];
+      if (rep) {
+        var names = flagBadges(rep);
+        row.badges.textContent = names.length
+          ? 'Found: ' + names.join(', ')
+          : 'No EXIF/XMP metadata found';
+      }
+      outFor(file).then(function (res) {
+        /* only the row for this file, in case the list changed meanwhile */
+        if (files[i] === file) row.meta.textContent = describe(res, file);
+      });
+    });
+  }
+
+  function refresh() {
+    if (!files.length) { results.hidden = true; return; }
+    results.hidden = false;
+    render();
+    var sig = optionsSignature();
+    if (sig !== lastSig) {
+      lastSig = sig;
+      refreshRows();
+    }
+    var kinds = { jpeg: 0, png: 0, webp: 0, other: 0 };
+    files.forEach(function (f) {
+      var rep = reports[keyOf(f)];
+      kinds[rep && rep.kind ? rep.kind : 'other']++;
+    });
+    var editable = kinds.jpeg + kinds.png + kinds.webp;
+    summary.textContent = files.length + ' file' + (files.length === 1 ? '' : 's') +
+      ' \u00b7 ' + editable + ' editable (JPG/PNG/WebP)' +
+      (kinds.other ? ' \u00b7 ' + kinds.other + ' will pass through unchanged' : '') +
+      (lastSig && hasFields(readFields()) ? ' \u00b7 new XMP will be written' : ' \u00b7 strip-only mode');
+    zipAllBtn.hidden = files.length < 2 || isIOS;
+  }
+
+  function addFiles(fileList) {
+    var incoming = Array.prototype.slice.call(fileList).filter(function (f) {
+      return f && (f.type.indexOf('image/') === 0 || /\.(png|jpe?g|webp|gif|svg|bmp|avif|heic|heif)$/i.test(f.name || ''));
+    });
+    if (!incoming.length) { toast('Those files are not images.'); return; }
+    incoming.forEach(function (f) {
+      files.push(f);
+      try { urls[keyOf(f)] = URL.createObjectURL(f); } catch (e) { /* preview is optional */ }
+      if (window.LPTExif) {
+        LPTExif.parse(f).then(function (rep) {
+          reports[keyOf(f)] = rep;
+          refresh();
+          /* parse is async: the options signature has not changed, so refresh()
+             alone would never repaint the badges. Paint them now. */
+          if (rows.length === files.length) refreshRows();
+        }).catch(function () { /* badges stay as "reading" — non-fatal */ });
+      }
+    });
+    refresh();
+  }
+
+  ['meTitle', 'meCreator', 'meCopyright', 'meDescription', 'meKeywords', 'meSoftware', 'meDropIcc'].forEach(function (id) {
+    var el = $('#' + id);
+    if (!el) return;
+    el.addEventListener('input', refresh);
+    el.addEventListener('change', refresh);
+  });
+
+  zipAllBtn.addEventListener('click', function () {
+    if (!files.length) return;
+    zipAllBtn.disabled = true;
+    var label = zipAllBtn.textContent;
+    zipAllBtn.textContent = 'Packing\u2026';
+    Promise.all(files.map(function (f) {
+      return outFor(f).then(function (res) {
+        return { name: f.name, data: res.blob };
+      });
+    })).then(function (entries) {
+      var pack = [];
+      var chain = Promise.resolve();
+      entries.forEach(function (e) {
+        chain = chain.then(function () {
+          return e.data.arrayBuffer().then(function (buf) {
+            pack.push({ name: e.name, data: new Uint8Array(buf) });
+          });
+        });
+      });
+      return chain.then(function () {
+        var zip = window.LPT && window.LPT.zip ? window.LPT.zip.create(pack) : null;
+        if (zip) triggerDownload(zip, 'edited-images.zip');
+        else toast('Packing is not available in this browser — use the per-file buttons.');
+      });
+    }).catch(function () {
+      toast('Could not read one of those files.');
+    }).then(function () {
+      zipAllBtn.disabled = false;
+      zipAllBtn.textContent = label;
+    });
+  });
+
+  var clearBtn = $('#clearBtn');
+  if (clearBtn) clearBtn.addEventListener('click', function () {
+    Object.keys(urls).forEach(function (k) { URL.revokeObjectURL(urls[k]); });
+    urls = {};
+    files = [];
+    rows = [];
+    reports = {};
+    outCache = {};
+    list.innerHTML = '';
+    refresh();
+  });
+
+  var browseBtn = $('#browseBtn');
+  if (browseBtn) browseBtn.addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', function () { addFiles(input.files); input.value = ''; });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.remove('is-dragover');
+    });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+})();
+</script>
+</body>
+</html>
