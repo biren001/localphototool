@@ -89,7 +89,10 @@ for (const f of files) {
   // Signature of a page cloned from /privacy/ whose shared footer link was never
   // rewritten: a "Privacy" label resolving to "./" lands on the page you are on.
   const selfPrivacyLink = /href=["']\.\/["'][^>]*>\s*Privacy\s*</i.test(html);
-  const imgs = [...html.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
+  // Count only real markup: a page mentioning <img> inside JSON-LD prose (or a
+  // <script>) used to be reported as an image missing alt.
+  const markup = html.replace(/<script[\s\S]*?<\/script>/gi, ' ');
+  const imgs = [...markup.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
   const imgsMissingAlt = imgs.filter((s) => !/\balt\s*=/i.test(s)).length;
   const internal = [...html.matchAll(/href=["'](?!https?:|mailto:|#)([^"'#]+)["']/g)].map(
     (m) => m[1]
