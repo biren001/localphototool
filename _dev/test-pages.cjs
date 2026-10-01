@@ -382,9 +382,16 @@ function entityTypes(block) {
   while ((m = re.exec(block))) types.push(m[1]);
   return types;
 }
+/* Only the entities a page can legitimately write inside a visible FAQ body.
+   sync-faq-schema.py unescapes every named entity on its way into the schema,
+   so the normaliser has to know this one too: "1024&times;1024" renders as
+   "1024×1024" and the schema holds the ×, which strips down to nothing —
+   without &times; here the only difference is the word "times" and the
+   answer-drift check fails a page whose copy is identical. */
 function decode(s) {
   return s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ');
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+    .replace(/&times;/g, '×').replace(/&mdash;/g, '\u2014').replace(/&middot;/g, '\u00b7');
 }
 function norm(s) {
   return decode(String(s)).replace(/<[^>]+>/g, '').replace(/[^a-z0-9]/gi, '').toLowerCase();

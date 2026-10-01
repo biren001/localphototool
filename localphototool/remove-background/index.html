@@ -108,6 +108,14 @@
         },
         {
           "@type": "Question",
+          "name": "What does the cut strength slider change?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tolerance is how far a pixel may sit from the background colour before it counts as background. The engine measures it as the straight-line distance between the three channel values, so a step of 16 accepts only near-identical pixels and a step of 120 accepts anything reasonably close. Auto starts at the smallest step and goes up until the cut clears at least a tenth of the frame. Background surviving in patches around your subject means the step was too tight for the lighting; part of the subject going with it means the step was too loose. The exact number the tool used is printed on every row."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Is this AI background removal, and what does it fail at?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -257,6 +265,12 @@
         </div>
       </div>
 
+      <div class="field" style="margin:0.6rem 0 0.2rem">
+        <label class="field__label" for="rbTol">Cut strength <span class="hint" id="rbTolLabel">auto</span></label>
+        <input type="range" id="rbTol" min="-1" max="6" step="1" value="-1">
+        <p class="muted" style="font-size:0.78rem;margin:0">Slide right when colour that looks like the background survives in patches around your subject; slide left when part of the subject starts going with it. Auto takes the first step that clears at least a tenth of the frame.</p>
+      </div>
+
       <p class="results__summary" id="rbSummary"></p>
       <div class="results__actions" style="margin:0.4rem 0 0.8rem">
         <button class="btn btn--primary btn--sm" id="zipAllBtn" type="button" hidden>Download all (.zip)</button>
@@ -281,6 +295,9 @@
         <li><strong>Paths through the subject survive.</strong> The fill only reaches the background from the border, so a gap between two arms, a hole in a guitar string, or the loop of a hanging cord stays opaque.</li>
       </ul>
 
+      <h2>If the cut looks wrong, the slider is the knob</h2>
+      <p>Auto is not a lie, it is a starting point. It takes the lowest step that clears at least a tenth of the frame, which is right for a clean product shot on white and wrong for a photo whose background falls away in a gradient, or whose subject sits close to the colour of the wall behind it. Two symptoms are worth naming, because both have a direction. Background surviving in patches around the subject means the tolerance was too tight for the light in the room — slide right. Part of the subject going transparent along with it means the tolerance was too loose — slide left. The number the tool used is printed on every row, so a cut that worked can be reproduced instead of re-guessed from scratch.</p>
+
       <h2>How it behaves on a phone</h2>
       <p>Large photos are masked on a downscaled copy of themselves and the mask is then scaled back up — the picture you download is still the full frame, but a phone never has to hold a flood-fill stack for twelve million pixels. HEIC files are decoded by the same decoder this site uses for its other tools, served from this origin rather than from a third party, so an iPhone photo can be cut without being converted first. Results land in your downloads one by one; on desktop and Android a batch can also be taken as a single ZIP, and iPhones get per-file downloads instead because iOS does not unpack ZIPs into the photo library.</p>
 
@@ -292,6 +309,10 @@
         <details class="faq__item" open>
           <summary>How does it decide which pixels are the background?</summary>
           <div class="faq__body"><p>It samples the edge of the photo to guess the background colour, then floods inward from all four borders through every pixel that matches that colour. Whatever the flood cannot reach is the subject and is kept. A neural network would draw a finer hairline than this does; the trade is that nothing has to be downloaded, and the whole mask engine is one 9 KB file that runs on your own device.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What does the cut strength slider change?</summary>
+          <div class="faq__body"><p>Tolerance is how far a pixel may sit from the background colour before it counts as background. The engine measures it as the straight-line distance between the three channel values, so a step of 16 accepts only near-identical pixels and a step of 120 accepts anything reasonably close. Auto starts at the smallest step and goes up until the cut clears at least a tenth of the frame. Background surviving in patches around your subject means the step was too tight for the lighting; part of the subject going with it means the step was too loose. The exact number the tool used is printed on every row.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is this AI background removal, and what does it fail at?</summary>
@@ -414,6 +435,18 @@
   var MAX_WORK_PIXELS = 4000000;
   /* A canvas above roughly this area makes iOS Safari refuse to allocate. */
   var MAX_CANVAS_PIXELS = 16000000;
+
+  /* The engine's seven steps, as already built into bgmask.js. The slider
+     indexes them; -1 is "auto", which leaves the engine to take the first
+     step that clears at least a tenth of the frame. */
+  var TOL_STEPS = [16, 24, 34, 48, 66, 90, 120];
+
+  function toleranceOf() {
+    var el = $('#rbTol');
+    if (!el) return undefined;
+    var i = parseInt(el.value, 10);
+    return i < 0 ? undefined : TOL_STEPS[i];
+  }
 
   function toast(msg) {
     var t = $('#toast');
@@ -540,18 +573,18 @@
 
   /* compute() edits the pixels it is given (despill), so it always gets a
      copy — the full-size frame has to stay untouched for the re-encode. */
-  function maskFor(pixels, mode) {
+  function maskFor(pixels, mode, tol) {
     var n = pixels.w * pixels.h;
     var scale = Math.sqrt(Math.min(1, MAX_WORK_PIXELS / n));
     if (scale >= 1) {
       var full = new Uint8ClampedArray(pixels.data);
-      var res = window.LPTBg.compute(full, pixels.w, pixels.h, { mode: mode });
+      var res = window.LPTBg.compute(full, pixels.w, pixels.h, { mode: mode, tolerance: tol });
       return { alpha: res.alpha, info: res.info };
     }
     var dw = Math.max(1, Math.round(pixels.w * scale));
     var dh = Math.max(1, Math.round(pixels.h * scale));
     var small = new Uint8ClampedArray(shrink(pixels.data, pixels.w, pixels.h, dw, dh));
-    var res2 = window.LPTBg.compute(small, dw, dh, { mode: mode });
+    var res2 = window.LPTBg.compute(small, dw, dh, { mode: mode, tolerance: tol });
     return {
       alpha: window.LPTBg.upscale(res2.alpha, pixels.w, pixels.h, dw, dh),
       info: res2.info
@@ -655,6 +688,11 @@
                                    : mode + ' screen';
     row.badges.appendChild(rowBadge(modeText, 'brand'));
     row.badges.appendChild(rowBadge('cut ' + Math.round(got.info.cleared * 100) + '% of the frame'));
+    /* Only worth saying when the user asked for it: on auto the chosen step
+       is a guess that already printed itself as the percentage above. */
+    if (typeof toleranceOf() === 'number') {
+      row.badges.appendChild(rowBadge('match \u00b1' + got.info.tolerance, 'accent'));
+    }
     if (got.info.despilled) row.badges.appendChild(rowBadge('spill pulled back', 'accent'));
     /* The two ways this heuristic is wrong are worth saying out loud: it cuts
        nothing (a subject that touches every edge) and it cuts everything
@@ -719,7 +757,8 @@
       if (!pixels || files[i] !== file) return null;
       var mode = $('#rbMode').value;
       var type = $('#rbFormat').value;
-      var mask = maskFor(pixels, mode);
+      var tol = toleranceOf();
+      var mask = maskFor(pixels, mode, tol);
       window.LPTBg.compose(pixels.data, mask.alpha);
       return encode(pixels, type).then(function (blob) {
         out[key] = { blob: blob, ext: type === 'image/webp' ? 'webp' : 'png', info: mask.info };
@@ -760,6 +799,26 @@
       t = setTimeout(runAll, 250);
     });
   });
+
+  var rbTol = $('#rbTol');
+  var rbTolLabel = $('#rbTolLabel');
+  var paintTolLabel = function () {
+    if (!rbTolLabel) return;
+    var t = toleranceOf();
+    rbTolLabel.textContent = t === undefined ? 'auto' : 'match \u00b1' + t;
+  };
+  if (rbTol) {
+    var tolTimer = null;
+    /* Moving the slider only moves the label; the recompute — which means
+       decoding every photo again — waits for the drag to stop. */
+    rbTol.addEventListener('input', paintTolLabel);
+    rbTol.addEventListener('change', function () {
+      paintTolLabel();
+      clearTimeout(tolTimer);
+      tolTimer = setTimeout(runAll, 250);
+    });
+    paintTolLabel();
+  }
 
   zipAllBtn.addEventListener('click', function () {
     var entries = files.map(function (f) {

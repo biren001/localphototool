@@ -18,16 +18,89 @@
       "name": "Share LocalPhotoTool — QR code and poster downloads",
       "description": "Scan the QR code to open the image compressor on your phone, or save a ready-made poster and share it anywhere. Nothing to install, nothing uploaded.",
       "inLanguage": "en",
-      "isPartOf": { "@id": "https://localphototool.com/#website" },
-      "about": { "@id": "https://localphototool.com/#org" },
-      "breadcrumb": { "@id": "https://localphototool.com/share/#breadcrumb" }
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/share/#breadcrumb"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/share/#faq",
+      "isPartOf": {
+        "@id": "https://localphototool.com/share/#page"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need an app to scan the QR code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The code is meant for the camera app that is already on the phone — iOS and Android both read a code off a screen without an extra download. In-app browsers are the exception: open this page inside WeChat, Telegram or a social app's browser and scanning sometimes has to be started from a button, because those apps replace the native camera. If that happens, long-press the image and choose Extract QR code (iOS) or Scan QR code (Android), or copy the link from the button above and paste it into the browser instead."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the code decode to, and why the home page?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The code carries the bare domain, localphototool.com. Anyone who scans it lands on the home page, where the compressor and every other tool are one tap away. A code that jumped straight into the compressor would be a shorter path for someone who already wanted that one tool, and a dead end for everyone else who scans out of curiosity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do the posters carry any data of mine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Both posters are flat PNG files showing a picture of the code. They contain no account, no identifier, no uploaded photo and no tracking pixel — you are sharing a picture of the tool, not the state of the tool. The QR image itself is a static file too."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the code still scan after WhatsApp or Telegram shrinks the poster?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Those apps re-compress an image before it is sent, and again when the recipient opens the thread. We checked both posters after that process: the code still scans at about 480 pixels wide, which is roughly where a re-compressed image ends up. Save the Chinese poster or the English poster as a PNG and send the original if the code has to survive something harsher."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I put my own code on a poster?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use Download QR above — the file is a plain 1024×1024 PNG — and drop it into any editor on top of your own design. The phone-to-PC transfer page uses the same kind of code for a different job, because there the two screens have to sit side by side. This site has no QR generator of its own; this code was made once and is served from the same folder as everything else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is anything on this page tracking me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No advertising, no cookies, no cross-site tracking and no upload endpoint. Every page here is a static file your browser reads directly. The one third party involved is Cloudflare, which counts visits through its privacy-preserving Web Analytics — cookie-free, no profiles, nothing to identify you."
+          }
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",
       "@id": "https://localphototool.com/share/#breadcrumb",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://localphototool.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Share", "item": "https://localphototool.com/share/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Share",
+          "item": "https://localphototool.com/share/"
+        }
       ]
     },
     {
@@ -44,7 +117,9 @@
       "url": "https://localphototool.com/",
       "name": "LocalPhotoTool",
       "inLanguage": "en",
-      "publisher": { "@id": "https://localphototool.com/#org" }
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
     }
   ]
 }
@@ -208,6 +283,52 @@ https://localphototool.com/</p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>Do I need an app to scan the QR code?</summary>
+          <div class="faq__body"><p>No. The code is meant for the camera app that is already on the phone — iOS and Android both read a code off a screen without an extra download. In-app browsers are the exception: open this page inside WeChat, Telegram or a social app's browser and scanning sometimes has to be started from a button, because those apps replace the native camera. If that happens, long-press the image and choose <em>Extract QR code</em> (iOS) or <em>Scan QR code</em> (Android), or copy the link from the button above and paste it into the browser instead.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What does the code decode to, and why the home page?</summary>
+          <div class="faq__body"><p>The code carries the bare domain, <strong>localphototool.com</strong>. Anyone who scans it lands on the home page, where the compressor and every other tool are one tap away. A code that jumped straight into the compressor would be a shorter path for someone who already wanted that one tool, and a dead end for everyone else who scans out of curiosity.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Do the posters carry any data of mine?</summary>
+          <div class="faq__body"><p>No. Both posters are flat PNG files showing a picture of the code. They contain no account, no identifier, no uploaded photo and no tracking pixel — you are sharing a picture of the tool, not the state of the tool. The QR image itself is a static file too.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Will the code still scan after WhatsApp or Telegram shrinks the poster?</summary>
+          <div class="faq__body"><p>Yes. Those apps re-compress an image before it is sent, and again when the recipient opens the thread. We checked both posters after that process: the code still scans at about 480 pixels wide, which is roughly where a re-compressed image ends up. Save the <a href="poster-cn.png">Chinese poster</a> or the <a href="poster-en.png">English poster</a> as a PNG and send the original if the code has to survive something harsher.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I put my own code on a poster?</summary>
+          <div class="faq__body"><p>Yes. Use <em>Download QR</em> above — the file is a plain 1024&times;1024 PNG — and drop it into any editor on top of your own design. The <a href="../transfer/">phone-to-PC transfer page</a> uses the same kind of code for a different job, because there the two screens have to sit side by side. This site has no QR generator of its own; this code was made once and is served from the same folder as everything else.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is anything on this page tracking me?</summary>
+          <div class="faq__body"><p>No advertising, no cookies, no cross-site tracking and no upload endpoint. Every page here is a static file your browser reads directly. The one third party involved is Cloudflare, which counts visits through its privacy-preserving Web Analytics — cookie-free, no profiles, nothing to identify you.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--subtle">
+    <div class="container">
+      <h2>Related tools</h2>
+      <p class="muted">Once the phone is on the site, these are the tools most people reach for next.</p>
+      <ul>
+        <li><a href="../compress/">Compress images</a> — the tool the code leads to.</li>
+        <li><a href="../transfer/">Transfer a photo from phone to computer</a> — the same idea without a code, over the same wifi.</li>
+        <li><a href="../compress-without-uploading/">Compress without uploading</a> — what “no upload” actually means on this site.</li>
+        <li><a href="../batch-rename/">Batch rename</a> and <a href="../metadata-editor/">Metadata editor</a>, for files after they have been through the compressor.</li>
+        <li><a href="../remove-background/">Remove background</a>, if the photo needs a transparent canvas instead of a smaller one.</li>
+      </ul>
     </div>
   </section>
 </main>
