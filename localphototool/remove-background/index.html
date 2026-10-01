@@ -148,6 +148,14 @@
         },
         {
           "@type": "Question",
+          "name": "My photo is a .png or .webp and still will not open. What is happening?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The name is lying, not the page. A photo that has been passed around inside a chat app is often still the original iPhone HEIC, just saved under a .png or .webp name, and this page reads what a file is rather than what it is called: the first bytes of a HEIF file announce their own format, so such a photo is handed to the HEIC decoder and cut like any other. Only a file that is genuinely something else — text with a picture's name on it, or a format no current browser decodes — ends as a row that says the browser could not read it, and the rest of your list is still processed instead of waiting behind it."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Does it work with iPhone HEIC files and on a phone?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -331,6 +339,10 @@
           <div class="faq__body"><p>Bigger, usually: the subject occupies fewer pixels than the whole frame did, but PNG stores that shape as a transparency mask, which costs more than the flat background did. Very large photos — above about four megapixels — are masked on a downscaled copy and the mask is then scaled back up, which keeps a phone from running out of memory; the picture itself is still written at full size.</p></div>
         </details>
         <details class="faq__item">
+          <summary>My photo is a .png or .webp and still will not open. What is happening?</summary>
+          <div class="faq__body"><p>The name is lying, not the page. A photo that has been passed around inside a chat app is often still the original iPhone HEIC, just saved under a .png or .webp name, and this page reads what a file is rather than what it is called: the first bytes of a HEIF file announce their own format, so such a photo is handed to the HEIC decoder and cut like any other. Only a file that is genuinely something else — text with a picture's name on it, or a format no current browser decodes — ends as a row that says the browser could not read it, and the rest of your list is still processed instead of waiting behind it.</p></div>
+        </details>
+        <details class="faq__item">
           <summary>Does it work with iPhone HEIC files and on a phone?</summary>
           <div class="faq__body"><p>Yes to both. HEIC is decoded locally by the same decoder this site uses elsewhere, so the transparency you get is the same you would get from the JPEG. On a phone each result has its own download button; on desktop, and on Android, a batch of results can also be taken as one ZIP archive. iPhones get per-file downloads instead, because iOS does not unpack ZIPs into the photo library.</p></div>
         </details>
@@ -423,6 +435,7 @@
   var files = [];
   var urls = {};        /* preview URLs for the originals */
   var out = {};         /* key -> { blob, ext, info } */
+  var failed = {};      /* key -> the reason a photo could not be read */
   var previews = {};    /* key -> object URL for the cut result */
   var rows = [];
   var queue = Promise.resolve();
@@ -494,23 +507,88 @@
     return heicLib;
   }
 
+  /* display() promises to call back, and on some HEIF files it simply never
+     does. A promise that never settles would park the whole queue on that one
+     photo — every later row stuck on "Working…" with nothing on screen to say
+     why — so the callback is guarded both ways: a throw is caught and a
+     callback that never arrives is turned into a rejection. */
+  var HEIC_TIMEOUT = 8000;
+  var BITMAP_TIMEOUT = 4000;   /* a long decode is welcome; an undecodable file is not */
+  var IMG_TIMEOUT = 6000;
+  var ENCODE_TIMEOUT = 20000;  /* encoding a 48 MP frame is allowed to take its time */
   function heicSource(file) {
     return file.arrayBuffer().then(function (buf) {
       return loadHeic().then(function (lib) {
-        var images = new lib.HeifDecoder().decode(buf);
-        if (!images || !images.length) throw new Error('heic-no-image');
+        var images;
+        try {
+          images = new lib.HeifDecoder().decode(buf);
+        } catch (e) {
+          throw new Error('heic-unsupported');
+        }
+        if (!images || !images.length) throw new Error('heic-unsupported');
         var img = images[0];
         var w = img.get_width(), h = img.get_height();
         if (!w || !h) throw new Error('heic-bad-size');
         var pixels = new Uint8ClampedArray(w * h * 4);
-        return new Promise(function (resolve) {
-          img.display({ data: pixels, width: w, height: h }, function (out) {
-            resolve(out && out.data ? { data: out.data, w: out.width, h: out.height }
-                                    : { data: pixels, w: w, h: h });
-          });
+        return new Promise(function (resolve, reject) {
+          var settled = false;
+          var settle = function (fn, value) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            fn(value);
+          };
+          var timer = setTimeout(function () {
+            settle(reject, new Error('heic-timeout'));
+          }, HEIC_TIMEOUT);
+          try {
+            img.display({ data: pixels, width: w, height: h }, function (out) {
+              settle(resolve, out && out.data ? { data: out.data, w: out.width, h: out.height }
+                                              : { data: pixels, w: w, h: h });
+            });
+          } catch (e) {
+            settle(reject, new Error('heic-display-failed'));
+          }
         });
       });
     });
+  }
+
+  /* The HEIF container announces itself in the first twelve bytes whatever
+     the file is called: an iPhone photo that has been handed around as .webp
+     by a chat app still carries the ftyp box, and decoding it as a .webp is
+     what makes the whole batch look like a format problem. */
+  function looksHeic(buf) {
+    if (!buf || buf.byteLength < 12) return false;
+    var head = buf.byteLength > 64 ? buf.slice(0, 64) : buf;
+    var a = new Uint8Array(head);
+    for (var i = 0; i + 12 <= a.length; i++) {
+      var tag = String.fromCharCode(a[i + 4], a[i + 5], a[i + 6], a[i + 7]);
+      if (tag !== 'ftyp') continue;
+      var brand = String.fromCharCode(a[i + 8], a[i + 9], a[i + 10], a[i + 11]);
+      return /^(heic|heix|hevc|hevx|heim|heis|hevm|hevs|mif1|msf1|avif|avis)/.test(brand);
+    }
+    return false;
+  }
+
+  /* createImageBitmap is the fast path but not the only one: some browsers
+     refuse it a file that the <img> element renders perfectly well, so the
+     last resort decodes through an <img> on an object URL. */
+  function imgSource(file) {
+    return withTimeout(new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var im = new Image();
+      im.onload = function () {
+        var w = im.naturalWidth || im.width, h = im.naturalHeight || im.height;
+        if (!w || !h) { URL.revokeObjectURL(url); reject(new Error('no-size')); return; }
+        resolve({ bmp: im, w: w, h: h });
+      };
+      im.onerror = function () {
+        URL.revokeObjectURL(url);
+        reject(new Error('decode-failed'));
+      };
+      im.src = url;
+    }), IMG_TIMEOUT, 'img-timeout');
   }
 
   function scaleToFit(w, h) {
@@ -519,12 +597,47 @@
     return { w: Math.max(1, Math.round(w * s)), h: Math.max(1, Math.round(h * s)) };
   }
 
+  /* Every step below is a browser promise that is allowed to keep its answer
+     to itself. Asked for a bitmap of a file it cannot decode, Chromium
+     rejects some of the time and — for a HEIF wearing a .webp name — sits on
+     the request forever. A promise that never settles parks the whole queue
+     on that one photo, so a later row can sit on "Working…" for as long as
+     the tab stays open, and there is nothing anywhere to say why. Racing each
+     step against a clock turns both outcomes into the same decision. */
+  function withTimeout(promise, ms, reason) {
+    return new Promise(function (resolve, reject) {
+      var done = false;
+      var timer = setTimeout(function () {
+        if (done) return;
+        done = true;
+        reject(new Error(reason));
+      }, ms);
+      promise.then(function (v) {
+        if (done) return;
+        done = true; clearTimeout(timer); resolve(v);
+      }, function (e) {
+        if (done) return;
+        done = true; clearTimeout(timer); reject(e);
+      });
+    });
+  }
+
   function sourceOf(file) {
     if (isHeic(file)) return heicSource(file);
-    if (!window.createImageBitmap) return Promise.reject(new Error('no-bitmap'));
-    return createImageBitmap(file).then(function (bmp) {
-      return { bmp: bmp, w: bmp.width, h: bmp.height };
-    });
+    if (window.createImageBitmap) {
+      return withTimeout(createImageBitmap(file), BITMAP_TIMEOUT, 'bitmap-timeout')
+        .then(function (bmp) {
+          return { bmp: bmp, w: bmp.width, h: bmp.height };
+        }, function () {
+        /* Bitmap decoding is the fast path, not the only one: when it refuses a
+           file that is really a HEIF in disguise, or one this browser's bitmap
+           reader dislikes, the bytes settle it and then the <img> has a go. */
+        return file.arrayBuffer().then(function (buf) {
+          return looksHeic(buf) ? heicSource(file) : imgSource(file);
+        }, function () { return imgSource(file); });
+      });
+    }
+    return imgSource(file);
   }
 
   /* Draw whatever we have into a canvas and read the pixels back. */
@@ -548,11 +661,11 @@
     var frame = ctx.createImageData(pixels.w, pixels.h);
     frame.data.set(pixels.data);
     ctx.putImageData(frame, 0, 0);
-    return new Promise(function (resolve, reject) {
+    return withTimeout(new Promise(function (resolve, reject) {
       canvas.toBlob(function (blob) {
         blob ? resolve(blob) : reject(new Error('encode-failed'));
       }, type, 1);
-    });
+    }), ENCODE_TIMEOUT, 'encode-failed');
   }
 
   /* Nearest-neighbour shrink: only the background colour estimate and the
@@ -673,8 +786,12 @@
     row.img.alt = '';
 
     if (!got) {
-      var b = rowBadge('Working\u2026', 'warning');
-      row.badges.appendChild(b);
+      /* A failure used to look exactly like work in progress — both were a
+         badge that said "Working…" — so a row that could not be read has to
+         name the reason itself or the page is unreadable. */
+      var why = failed[key];
+      if (why) { row.card.classList.add('is-error'); }
+      row.badges.appendChild(rowBadge(why ? 'Could not read it \u2014 ' + why : 'Working\u2026', 'warning'));
       row.dl.disabled = true;
       row.dl.removeAttribute('data-name');
       return;
@@ -714,8 +831,10 @@
 
   function paintSummary() {
     var done = files.filter(function (f) { return !!out[keyOf(f)]; }).length;
+    var bad = files.filter(function (f) { return !!failed[keyOf(f)]; }).length;
     summary.textContent = files.length + ' file' + (files.length === 1 ? '' : 's') +
       ' \u00b7 ' + done + ' done, ' + (files.length - done) + ' to go.' +
+      (bad ? ' ' + bad + ' could not be read.' : '') +
       (done ? ' Output is PNG or WebP, both of which keep the transparency.' : '');
     zipAllBtn.hidden = files.length < 2 || isIOS;
   }
@@ -745,10 +864,21 @@
     queue = queue.then(function () { paintSummary(); }, function () { paintSummary(); });
   }
 
+  /* The reason a photo could not be read, in words that describe what went
+     wrong rather than blaming the file. */
+  function failText(err) {
+    var m = err && err.message ? String(err.message) : '';
+    if (/no-bitmap|decode-failed|no-size|bitmap-timeout|img-timeout/.test(m)) return 'this browser could not decode it';
+    if (/^heic-/.test(m)) return 'its HEIF decoder could not handle it';
+    if (/encode-failed/.test(m)) return 'the browser could not write the result';
+    return ((err && err.name && err.name !== 'Error') ? err.name + ' ' : '') + m;
+  }
+
   function processOne(file, i) {
     if (files[i] !== file) return Promise.resolve();      /* the list was cleared */
     var key = keyOf(file);
     out[key] = null;
+    failed[key] = null;
     paintRow(i);
     return sourceOf(file).then(function (source) {
       if (files[i] !== file) return null;
@@ -769,9 +899,20 @@
       });
     }).catch(function (err) {
       out[key] = null;
-      rows[i] && rows[i].card.classList.add('is-error');
+      failed[key] = failText(err);
+      console.error('[remove-background] ' + file.name + ' failed:', err && (err.name + ': ' + err.message));
       paintRow(i);
-      toast('Could not read ' + file.name + ' \u2014 try it as JPG or PNG first.');
+      /* Only a decode failure is answered by changing the format. Sending that
+         to somebody whose photo is already a JPEG would be a story about a
+         problem they do not have. */
+      var m = String((err && err.message) || '');
+      var cannotDecode = /no-bitmap|decode-failed|no-size|bitmap-timeout|img-timeout/.test(m) ||
+                         /^heic-/.test(m);
+      if (cannotDecode) {
+        toast('Could not read ' + file.name + ' \u2014 this browser could not decode it, so try it as JPG or PNG first.');
+      } else {
+        toast('Could not read ' + file.name + ' \u2014 ' + failed[key] + '.');
+      }
     });
   }
 
@@ -851,6 +992,7 @@
     files = [];
     rows = [];
     out = {};
+    failed = {};
     Object.keys(urls).forEach(function (k) { URL.revokeObjectURL(urls[k]); });
     Object.keys(previews).forEach(function (k) { URL.revokeObjectURL(previews[k]); });
     urls = {};
