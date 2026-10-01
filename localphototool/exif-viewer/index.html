@@ -119,7 +119,7 @@
           "name": "How do I remove GPS location from a photo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Use the companion tool on this site: Remove GPS from photo strips location data — and all other metadata — by re-encoding the image, and it works without uploading the file either. Sharing through messaging apps usually strips metadata automatically; email attachments and cloud links usually do not."
+            "text": "Use the companion tool on this site: Remove GPS from photo rewrites only the metadata blocks — EXIF (with the GPS), XMP and IPTC — and copies the pixels byte-for-byte, so the scrubbed copy is identical to the original and nothing is uploaded either. Sharing through messaging apps usually strips metadata automatically; email attachments and cloud links usually do not."
           }
         },
         {
@@ -277,7 +277,7 @@
 
       <h2>The check worth doing before you share</h2>
       <p>Marketplaces, classified ads, and "look at my new flat" photos are the classic case: a full-resolution photo attached to an email still carries the exact coordinates of the room it was taken in. Messaging apps usually strip metadata on delivery — email attachments and cloud download links usually do not. Dropping the photo here takes two seconds and answers the question with the file's own bytes rather than a general rule of thumb.</p>
-      <p>And if the report finds coordinates you would rather not publish, the same site has the fix: <a href="../remove-gps-from-photo/">Remove GPS from a photo</a> strips all metadata by re-encoding the image in your browser, so the shared copy carries nothing but pixels. For the wider claim — that "private" tools really do keep your file local — see the <a href="../image-compressor-upload-test/">measured upload test</a>, where nine popular compressors were watched at the network level and two were caught transmitting the whole file.</p>
+      <p>And if the report finds coordinates you would rather not publish, the same site has the fix: <a href="../remove-gps-from-photo/">Remove GPS from a photo</a> rewrites only the metadata blocks and copies the pixels byte-for-byte, so the shared copy carries nothing but pixels — and stays identical to the original. For the wider claim — that "private" tools really do keep your file local — see the <a href="../image-compressor-upload-test/">measured upload test</a>, where nine popular compressors were watched at the network level and two were caught transmitting the whole file.</p>
 
       <h2>Reading the report</h2>
       <ul>
@@ -302,7 +302,7 @@
         </details>
         <details class="faq__item">
           <summary>How do I remove GPS location from a photo?</summary>
-          <div class="faq__body"><p>Use the companion tool on this site: <a href="../remove-gps-from-photo/">Remove GPS from photo</a> strips location data — and all other metadata — by re-encoding the image, and it works without uploading the file either. Sharing through messaging apps usually strips metadata automatically; email attachments and cloud links usually do not.</p></div>
+          <div class="faq__body"><p>Use the companion tool on this site: <a href="../remove-gps-from-photo/">Remove GPS from photo</a> rewrites only the metadata blocks — EXIF (with the GPS), XMP and IPTC — and copies the pixels byte-for-byte, so the scrubbed copy is identical to the original and nothing is uploaded either. Sharing through messaging apps usually strips metadata automatically; email attachments and cloud links usually do not.</p></div>
         </details>
         <details class="faq__item">
           <summary>Do screenshots and images from the web have EXIF data?</summary>

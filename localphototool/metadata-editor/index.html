@@ -119,7 +119,7 @@
           "name": "Will the image look different afterwards?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The pixels are untouched, so the picture renders exactly as before. The one exception is the optional colour-profile removal: if you tick it, apps that ignore colour management may interpret the colours slightly differently. Leave the box unticked and the profile survives along with everything visual."
+            "text": "No. The pixels are untouched, so the picture renders exactly as before. The one exception is the optional colour-profile removal: if you tick it, apps that ignore colour management may interpret the colours slightly differently. Leave the box unticked and the profile survives along with everything visual. One thing to know: portrait photos are often stored landscape with an EXIF orientation flag that rotates them on display, and that flag goes with the EXIF block — affected files are flagged with an ORIENTATION badge, and the GPS-removal tool's FAQ explains the fix."
           }
         },
         {
@@ -143,7 +143,7 @@
           "name": "Why leave fields empty on purpose?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Submitting with every field empty is the quickest way to strip metadata: all EXIF, XMP and IPTC blocks are removed and nothing is written back. It is the same guarantee as the dedicated GPS-removal tool, but across every metadata block at once — useful before selling a camera, publishing a portfolio, or sending files to a printer."
+            "text": "Submitting with every field empty is the quickest way to strip metadata: all EXIF, XMP and IPTC blocks are removed and nothing is written back. It is the same lossless scrub as the dedicated GPS-removal tool — this page simply frames it as the empty-fields path of a full editor. Useful before selling a camera, publishing a portfolio, or sending files to a printer."
           }
         }
       ]
@@ -299,7 +299,7 @@
       </ul>
 
       <h2>Why fields-empty is a feature</h2>
-      <p>Submit the form with nothing filled in and the tool becomes a total metadata stripper: every EXIF, XMP and IPTC block goes, and nothing is written back. That is the strongest privacy pass available without touching pixels — broader than the dedicated <a href="../remove-gps-from-photo/">GPS remover</a>, which keeps camera and colour information. Use it before selling a camera with its cards, publishing a portfolio, or handing files to anyone who does not need the shooting history.</p>
+      <p>Submit the form with nothing filled in and the tool becomes a total metadata stripper: every EXIF, XMP and IPTC block goes, and nothing is written back. That is the same lossless scrub the dedicated <a href="../remove-gps-from-photo/">GPS remover</a> performs — this page is the same operation wearing an editor's interface, for when you want the blocks gone <em>and</em> new fields written in. Use it before selling a camera with its cards, publishing a portfolio, or handing files to anyone who does not need the shooting history.</p>
 
       <h2>Honest limits</h2>
       <p>New XMP is written into JPG and PNG. WebP files get their EXIF and XMP chunks stripped, but this tool does not write new metadata into them losslessly — the WebP container gates its metadata behind a header flag that has to be rewritten carefully, and a half-correct edit there is worse than none. Files in other formats pass through untouched. JPEG files are also limited to one XMP packet per file, which is what every reader expects anyway.</p>
@@ -319,7 +319,7 @@
         </details>
         <details class="faq__item">
           <summary>Will the image look different afterwards?</summary>
-          <div class="faq__body"><p>No. The pixels are untouched, so the picture renders exactly as before. The one exception is the optional colour-profile removal: if you tick it, apps that ignore colour management may interpret the colours slightly differently. Leave the box unticked and the profile survives along with everything visual.</p></div>
+          <div class="faq__body"><p>No. The pixels are untouched, so the picture renders exactly as before. The one exception is the optional colour-profile removal: if you tick it, apps that ignore colour management may interpret the colours slightly differently. Leave the box unticked and the profile survives along with everything visual. One thing to know: portrait photos are often stored landscape with an EXIF orientation flag that rotates them on display, and that flag goes with the EXIF block — affected files are flagged with an ORIENTATION badge, and the <a href="../remove-gps-from-photo/">GPS-removal tool's FAQ</a> explains the fix.</p></div>
         </details>
         <details class="faq__item">
           <summary>Does it work on a phone?</summary>
@@ -331,7 +331,7 @@
         </details>
         <details class="faq__item">
           <summary>Why leave fields empty on purpose?</summary>
-          <div class="faq__body"><p>Submitting with every field empty is the quickest way to strip metadata: all EXIF, XMP and IPTC blocks are removed and nothing is written back. It is the same guarantee as the dedicated GPS-removal tool, but across every metadata block at once — useful before selling a camera, publishing a portfolio, or sending files to a printer.</p></div>
+          <div class="faq__body"><p>Submitting with every field empty is the quickest way to strip metadata: all EXIF, XMP and IPTC blocks are removed and nothing is written back. It is the same lossless scrub as the dedicated <a href="../remove-gps-from-photo/">GPS-removal tool</a> — this page simply frames it as the empty-fields path of a full editor. Useful before selling a camera, publishing a portfolio, or sending files to a printer.</p></div>
         </details>
       </div>
     </div>
@@ -616,9 +616,13 @@
       var rep = reports[keyOf(file)];
       if (rep) {
         var names = flagBadges(rep);
-        row.badges.textContent = names.length
+        var text = names.length
           ? 'Found: ' + names.join(', ')
           : 'No EXIF/XMP metadata found';
+        if (rep.orientation && rep.orientation > 1) {
+          text += ' \u00b7 ORIENTATION flag will be removed \u2014 the photo may display sideways in some apps';
+        }
+        row.badges.textContent = text;
       }
       outFor(file).then(function (res) {
         /* only the row for this file, in case the list changed meanwhile */

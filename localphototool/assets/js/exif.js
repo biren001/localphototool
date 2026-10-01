@@ -174,7 +174,11 @@
       ent = ifd0.entries[i];
       if (ent.tag === 0x8769) exifOffset = dv.getUint32(ent.off, little);
       else if (ent.tag === 0x8825) gpsOffset = dv.getUint32(ent.off, little);
-      else {
+      else if (ent.tag === 0x0112) {
+        val = readValue(dv, ent, little);
+        var o = firstNum(val);
+        if (o) report.orientation = o;   // 1..8; >1 means pixel data lies on its side
+      } else {
         var def = IFD0_TAGS[ent.tag];
         if (!def) continue;
         val = readValue(dv, ent, little);
@@ -401,6 +405,7 @@
       var report = {
         kind: detectKind(u8),
         gps: null,
+        orientation: null,
         tags: [],
         flags: { exif: false, xmp: false, iptc: false, icc: false, thumbnail: false, pngText: false },
         note: null
