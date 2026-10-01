@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Remove Photo Background Online — Free, No Upload</title>
+<meta name="description" content="Cut the background out of a photo in your browser: product shots on white, studio black, green screen. No AI download, no upload, nothing leaves your device. Output PNG or WebP with a real transparency channel.">
+<link rel="canonical" href="https://localphototool.com/remove-background/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Remove Photo Background Online — Free, No Upload">
+<meta property="og:description" content="Cut the background out of a photo in your browser: product shots on white, studio black, green screen. No AI download, no upload, nothing leaves your device. Output PNG or WebP with a real transparency channel.">
+<meta property="og:url" content="https://localphototool.com/remove-background/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Remove Photo Background Online — Free, No Upload">
+<meta name="twitter:description" content="Cut the background out of a photo in your browser: product shots on white, studio black, green screen. No AI download, no upload, nothing leaves your device. Output PNG or WebP with a real transparency channel.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css?v=ee0746d" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=ee0746d">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/remove-background/#page",
+      "url": "https://localphototool.com/remove-background/",
+      "name": "Remove Photo Background Online — Free, No Upload",
+      "description": "Cut the background out of a photo in your browser: product shots on white, studio black, green screen. No AI download, no upload, nothing leaves your device. Output PNG or WebP with a real transparency channel.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/remove-background/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/remove-background/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Remove Photo Background Online — Free, No Upload",
+          "item": "https://localphototool.com/remove-background/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/remove-background/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does it decide which pixels are the background?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It samples the edge of the photo to guess the background colour, then floods inward from all four borders through every pixel that matches that colour. Whatever the flood cannot reach is the subject and is kept. A neural network would draw a finer hairline than this does; the trade is that nothing has to be downloaded, and the whole mask engine is one 9 KB file that runs on your own device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this AI background removal, and what does it fail at?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No — there is no model involved. That means it is exact on flat backgrounds (product shots on white or grey, studio black, green screen) and honest about failure elsewhere: hair, fur, smoke, glass and a busy photographic background keep part of the background behind them, because those pixels genuinely match the colour they came from. The tool reports how much of the frame it cleared, so you can see immediately whether it worked rather than discovering it after the download."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my photos uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. There is no upload endpoint on this site at all. The photo is decoded in this tab, the mask is computed in this tab, and the result is written to a file on your device. iPhone HEIC files are decoded by a decoder served from this same site, so even those never leave the phone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What format do I get, and does it keep transparency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PNG or WebP, both of which store a real per-pixel alpha channel, so the cut follows the subject's own edge and the subject is still on the canvas. JPEG cannot store transparency at all, which is why it is not offered here: a transparent PNG saved as JPEG turns the background into black or white and the cut is thrown away."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the result smaller or bigger than the original?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bigger, usually: the subject occupies fewer pixels than the whole frame did, but PNG stores that shape as a transparency mask, which costs more than the flat background did. Very large photos — above about four megapixels — are masked on a downscaled copy and the mask is then scaled back up, which keeps a phone from running out of memory; the picture itself is still written at full size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work with iPhone HEIC files and on a phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes to both. HEIC is decoded locally by the same decoder this site uses elsewhere, so the transparency you get is the same you would get from the JPEG. On a phone each result has its own download button; on desktop, and on Android, a batch of results can also be taken as one ZIP archive. iPhones get per-file downloads instead, because iOS does not unpack ZIPs into the photo library."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the background remover</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../compress-without-uploading/">No upload</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#tools">All tools</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero hero--compact">
+    <div class="container">
+      <p class="eyebrow">Free &middot; no account &middot; nothing leaves your device</p>
+      <h1>Remove a photo background without uploading it</h1>
+      <p class="hero__lead">Product shots on white, studio black, a green screen — drop a photo and the background is cut from the frame. The mask runs in this tab, there is no model to download, and the file never leaves your device.</p>
+    </div>
+  </section>
+
+  <section class="tool" id="tool">
+    <div class="container">
+      <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px"><path d="M4 8V6a2 2 0 0 1 2-2h8l5 5v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/><circle cx="12" cy="13" r="3"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop images here to cut their background</h2>
+        <p class="dropzone__hint">JPG, PNG, WebP and iPhone HEIC. Everything is decoded and masked in this tab.</p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad" id="browseBtn" type="button">Choose images</button>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        </div>
+      </div>
+
+      <div class="engine-status" id="engineStatus" aria-live="polite">
+        <span class="dot dot--on" aria-hidden="true"></span>
+        <span id="engineText">Ready — the mask is computed in this tab, nothing is uploaded</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="results" id="results" hidden aria-live="polite">
+    <div class="container">
+      <div class="results__head">
+        <h2 class="results__title">Background removed</h2>
+        <div class="results__actions">
+          <button class="btn btn--ghost btn--sm" id="clearBtn" type="button">Clear list</button>
+        </div>
+      </div>
+
+      <div class="field-duo" style="margin:0.6rem 0 0.4rem">
+        <div class="field">
+          <label class="field__label" for="rbMode">Background colour</label>
+          <select class="input" id="rbMode">
+            <option value="auto" selected>Detect it from the photo</option>
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="green">Green screen</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="rbFormat">Output format</label>
+          <select class="input" id="rbFormat">
+            <option value="image/png" selected>PNG — keeps the transparency</option>
+            <option value="image/webp">WebP — lighter file</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="results__summary" id="rbSummary"></p>
+      <div class="results__actions" style="margin:0.4rem 0 0.8rem">
+        <button class="btn btn--primary btn--sm" id="zipAllBtn" type="button" hidden>Download all (.zip)</button>
+      </div>
+
+      <div class="result-list" id="rbList"></div>
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+      <h2>It is a flood fill, not a neural network — and that is why it runs here</h2>
+      <p>Most background removers hand your photo to a machine-learning model. The model is good: it learned what a person's hair edge looks like. It is also several megabytes of weights, it usually wants the image on a server somewhere, and on a phone that is a slow download before the first result appears. This tool does something older and dumber. It looks at the four edges of the photo, guesses the background colour from them, and then floods inward from the border through every pixel that matches — a connected-region fill, the same primitive every paint program has had since the eighties. Whatever the flood cannot reach is the subject.</p>
+      <p>That is exact when the background is flat, which covers a surprising share of the work people bring it: catalogue product shots on white, jerseys on a black studio card, video stills cut on a green screen, sky against a silhouette. It is honest about the rest: hair, fur, smoke, glass, and a background that is a photograph of a photograph will keep part of itself behind the subject, because those pixels really do match the colour they came from. Every row tells you what it did — the colour it decided the background was, how far it cut, and when it found almost nothing at all.</p>
+
+      <h2>What the cut actually produces</h2>
+      <ul>
+        <li><strong>A real transparency channel.</strong> The output is PNG or WebP, so the subject still sits on a canvas and the transparency travels with it into design tools, mockups and listings. JPEG has no alpha channel at all, so it is not offered here — saving a cut photo as JPEG throws the cut away and replaces it with flat white or black.</li>
+        <li><strong>A soft edge, not a staircase.</strong> The hard cut leaves a stair-step outline at any size, so the mask is smoothed with two 3&times;3 passes before it is written. Hair sitting on a background it matched is kept as a partially transparent pixel rather than chopped in half.</li>
+        <li><strong>Spill pulled back.</strong> On a green or cyan screen the subject's outline keeps a rim of the screen colour. The tool measures how much of that rim is there and pulls it back in proportion to how much of the pixel survived the cut.</li>
+        <li><strong>Paths through the subject survive.</strong> The fill only reaches the background from the border, so a gap between two arms, a hole in a guitar string, or the loop of a hanging cord stays opaque.</li>
+      </ul>
+
+      <h2>How it behaves on a phone</h2>
+      <p>Large photos are masked on a downscaled copy of themselves and the mask is then scaled back up — the picture you download is still the full frame, but a phone never has to hold a flood-fill stack for twelve million pixels. HEIC files are decoded by the same decoder this site uses for its other tools, served from this origin rather than from a third party, so an iPhone photo can be cut without being converted first. Results land in your downloads one by one; on desktop and Android a batch can also be taken as a single ZIP, and iPhones get per-file downloads instead because iOS does not unpack ZIPs into the photo library.</p>
+
+      <h2>Related tools</h2>
+      <p>Once the background is gone, name the set with the <a href="../batch-rename/">Batch renamer</a>; rewrite what is left inside the file with the <a href="../metadata-editor/">Metadata editor</a>; shrink the result with the <a href="../compress/">main compressor</a> or <a href="../compress-photos-for-email/">Compress for email</a>; switch the iPhone format with <a href="../heic-to-jpg/">HEIC to JPG</a>; check what the original still reveals with the <a href="../exif-viewer/">EXIF viewer</a>; and strip the location data afterwards with <a href="../remove-gps-from-photo/">Remove GPS from a photo</a>.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>How does it decide which pixels are the background?</summary>
+          <div class="faq__body"><p>It samples the edge of the photo to guess the background colour, then floods inward from all four borders through every pixel that matches that colour. Whatever the flood cannot reach is the subject and is kept. A neural network would draw a finer hairline than this does; the trade is that nothing has to be downloaded, and the whole mask engine is one 9 KB file that runs on your own device.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is this AI background removal, and what does it fail at?</summary>
+          <div class="faq__body"><p>No — there is no model involved. That means it is exact on flat backgrounds (product shots on white or grey, studio black, green screen) and honest about failure elsewhere: hair, fur, smoke, glass and a busy photographic background keep part of the background behind them, because those pixels genuinely match the colour they came from. The tool reports how much of the frame it cleared, so you can see immediately whether it worked rather than discovering it after the download.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Are my photos uploaded to a server?</summary>
+          <div class="faq__body"><p>No. There is no upload endpoint on this site at all. The photo is decoded in this tab, the mask is computed in this tab, and the result is written to a file on your device. iPhone HEIC files are decoded by a decoder served from this same site, so even those never leave the phone.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What format do I get, and does it keep transparency?</summary>
+          <div class="faq__body"><p>PNG or WebP, both of which store a real per-pixel alpha channel, so the cut follows the subject's own edge and the subject is still on the canvas. JPEG cannot store transparency at all, which is why it is not offered here: a transparent PNG saved as JPEG turns the background into black or white and the cut is thrown away.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why is the result smaller or bigger than the original?</summary>
+          <div class="faq__body"><p>Bigger, usually: the subject occupies fewer pixels than the whole frame did, but PNG stores that shape as a transparency mask, which costs more than the flat background did. Very large photos — above about four megapixels — are masked on a downscaled copy and the mask is then scaled back up, which keeps a phone from running out of memory; the picture itself is still written at full size.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it work with iPhone HEIC files and on a phone?</summary>
+          <div class="faq__body"><p>Yes to both. HEIC is decoded locally by the same decoder this site uses elsewhere, so the transparency you get is the same you would get from the JPEG. On a phone each result has its own download button; on desktop, and on Android, a batch of results can also be taken as one ZIP archive. iPhones get per-file downloads instead, because iOS does not unpack ZIPs into the photo library.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../resize-image/">Resize images</a></li>
+          <li><a href="../watermark/">Text watermark</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+          <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../images-to-pdf/">Images to PDF</a></li>
+          <li><a href="../transfer/">Transfer phone to PC</a></li>
+          <li><a href="../batch-rename/">Batch rename</a></li>
+          <li><a href="../metadata-editor/">Metadata editor</a></li>
+          <li><a href="../remove-background/">Remove background</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit ee0746d">Updated <time datetime="2026-10-01">1 Oct 2026</time> &middot; build <code>ee0746d</code></span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/bgmask.js?v=ee0746d"></script>
+<script src="../assets/js/zip.js?v=ee0746d"></script>
+<script src="../assets/js/site.js?v=ee0746d"></script>
+<script src="../assets/js/pwa.js?v=ee0746d" defer></script>
+<script src="../assets/js/stats.js?v=ee0746d" defer></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var dropzone = $('#dropzone'), input = $('#fileInput'), list = $('#rbList'),
+      results = $('#results'), summary = $('#rbSummary'), engineText = $('#engineText'),
+      zipAllBtn = $('#zipAllBtn');
+
+  var files = [];
+  var urls = {};        /* preview URLs for the originals */
+  var out = {};         /* key -> { blob, ext, info } */
+  var previews = {};    /* key -> object URL for the cut result */
+  var rows = [];
+  var queue = Promise.resolve();
+
+  var isIOS = /iP(hone|ad|od)/i.test(navigator.userAgent) ||
+    (/Macintosh/.test(navigator.userAgent) && (navigator.maxTouchPoints || 0) > 1);
+
+  /* The mask is computed on a downscaled copy above this area, then scaled
+     back up; the picture itself is still written at full size. */
+  var MAX_WORK_PIXELS = 4000000;
+  /* A canvas above roughly this area makes iOS Safari refuse to allocate. */
+  var MAX_CANVAS_PIXELS = 16000000;
+
+  function toast(msg) {
+    var t = $('#toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('is-visible');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.classList.remove('is-visible'); }, 2600);
+  }
+
+  function fmtBytes(n) {
+    if (n === null || n === undefined) return '';
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(n < 10240 ? 1 : 0) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  function keyOf(f) { return f.name + '\u0000' + f.size + '\u0000' + f.lastModified; }
+
+  function isHeic(f) {
+    return /heic|heif/i.test(f.type || '') || /\.(heic|heif)$/i.test(f.name || '');
+  }
+
+  function outName(f, ext) {
+    return (f.name || 'image').replace(/\.[^.]+$/, '') + '-nobg.' + ext;
+  }
+
+  /* -------------------------------------------------------------------
+     Getting pixels. HEIC is the only format that needs a decoder we do
+     not already have, and the decoder is our own bundle served from this
+     origin — it is imported lazily, so a page of JPGs never downloads it.
+     ------------------------------------------------------------------- */
+  var heicLib = null;
+  function loadHeic() {
+    if (!heicLib) {
+      heicLib = import('../assets/vendor/libheif-bundle.mjs').then(function (mod) {
+        var f = mod.default || mod;
+        return typeof f === 'function' ? f() : f;
+      }).then(function (lib) {
+        if (!lib || typeof lib.HeifDecoder !== 'function') throw new Error('heic-no-decoder');
+        return lib;
+      });
+      heicLib.catch(function () { heicLib = null; });   /* a failed load may be retried */
+    }
+    return heicLib;
+  }
+
+  function heicSource(file) {
+    return file.arrayBuffer().then(function (buf) {
+      return loadHeic().then(function (lib) {
+        var images = new lib.HeifDecoder().decode(buf);
+        if (!images || !images.length) throw new Error('heic-no-image');
+        var img = images[0];
+        var w = img.get_width(), h = img.get_height();
+        if (!w || !h) throw new Error('heic-bad-size');
+        var pixels = new Uint8ClampedArray(w * h * 4);
+        return new Promise(function (resolve) {
+          img.display({ data: pixels, width: w, height: h }, function (out) {
+            resolve(out && out.data ? { data: out.data, w: out.width, h: out.height }
+                                    : { data: pixels, w: w, h: h });
+          });
+        });
+      });
+    });
+  }
+
+  function scaleToFit(w, h) {
+    if (w * h <= MAX_CANVAS_PIXELS) return { w: w, h: h };
+    var s = Math.sqrt(MAX_CANVAS_PIXELS / (w * h));
+    return { w: Math.max(1, Math.round(w * s)), h: Math.max(1, Math.round(h * s)) };
+  }
+
+  function sourceOf(file) {
+    if (isHeic(file)) return heicSource(file);
+    if (!window.createImageBitmap) return Promise.reject(new Error('no-bitmap'));
+    return createImageBitmap(file).then(function (bmp) {
+      return { bmp: bmp, w: bmp.width, h: bmp.height };
+    });
+  }
+
+  /* Draw whatever we have into a canvas and read the pixels back. */
+  function pixelsOf(source) {
+    var w = source.w, h = source.h;
+    if (!source.bmp) return Promise.resolve({ data: source.data, w: w, h: h });
+    var fit = scaleToFit(w, h);
+    var canvas = document.createElement('canvas');
+    canvas.width = fit.w; canvas.height = fit.h;
+    var ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(source.bmp, 0, 0, fit.w, fit.h);
+    try { source.bmp.close(); } catch (e) { /* optional */ }
+    var frame = ctx.getImageData(0, 0, fit.w, fit.h);
+    return Promise.resolve({ data: frame.data, w: fit.w, h: fit.h });
+  }
+
+  function encode(pixels, type) {
+    var canvas = document.createElement('canvas');
+    canvas.width = pixels.w; canvas.height = pixels.h;
+    var ctx = canvas.getContext('2d');
+    var frame = ctx.createImageData(pixels.w, pixels.h);
+    frame.data.set(pixels.data);
+    ctx.putImageData(frame, 0, 0);
+    return new Promise(function (resolve, reject) {
+      canvas.toBlob(function (blob) {
+        blob ? resolve(blob) : reject(new Error('encode-failed'));
+      }, type, 1);
+    });
+  }
+
+  /* Nearest-neighbour shrink: only the background colour estimate and the
+     mask depend on it, so a cheap sample is worth four megabytes less. */
+  function shrink(data, w, h, dw, dh) {
+    var out = new Uint8ClampedArray(dw * dh * 4);
+    var sx = w / dw, sy = h / dh;
+    for (var y = 0; y < dh; y++) {
+      var r0 = Math.min(h - 1, (y * sy) | 0);
+      for (var x = 0; x < dw; x++) {
+        var c0 = Math.min(w - 1, (x * sx) | 0);
+        var s = (r0 * w + c0) * 4, d = (y * dw + x) * 4;
+        out[d] = data[s]; out[d + 1] = data[s + 1]; out[d + 2] = data[s + 2]; out[d + 3] = data[s + 3];
+      }
+    }
+    return out;
+  }
+
+  /* compute() edits the pixels it is given (despill), so it always gets a
+     copy — the full-size frame has to stay untouched for the re-encode. */
+  function maskFor(pixels, mode) {
+    var n = pixels.w * pixels.h;
+    var scale = Math.sqrt(Math.min(1, MAX_WORK_PIXELS / n));
+    if (scale >= 1) {
+      var full = new Uint8ClampedArray(pixels.data);
+      var res = window.LPTBg.compute(full, pixels.w, pixels.h, { mode: mode });
+      return { alpha: res.alpha, info: res.info };
+    }
+    var dw = Math.max(1, Math.round(pixels.w * scale));
+    var dh = Math.max(1, Math.round(pixels.h * scale));
+    var small = new Uint8ClampedArray(shrink(pixels.data, pixels.w, pixels.h, dw, dh));
+    var res2 = window.LPTBg.compute(small, dw, dh, { mode: mode });
+    return {
+      alpha: window.LPTBg.upscale(res2.alpha, pixels.w, pixels.h, dw, dh),
+      info: res2.info
+    };
+  }
+
+  /* -------------------------------------------------------------------
+     Rows. Built once per file and then updated in place: rebuilding the
+     list would destroy the Download button between a real user's
+     mousedown and mouseup and swallow the click.
+     ------------------------------------------------------------------- */
+  function buildRow(file) {
+    var card = document.createElement('div');
+    card.className = 'result';
+
+    var thumb = document.createElement('div');
+    thumb.className = 'result__thumb';
+    var img = document.createElement('img');
+    img.alt = '';
+    thumb.appendChild(img);
+
+    var main = document.createElement('div');
+    main.className = 'result__main';
+    var name = document.createElement('div');
+    name.className = 'result__name';
+    name.textContent = file.name;
+    name.style.overflowWrap = 'anywhere';
+    var badges = document.createElement('div');
+    badges.style.display = 'flex';
+    badges.style.flexWrap = 'wrap';
+    badges.style.gap = '6px';
+    var meta = document.createElement('div');
+    meta.className = 'result__meta';
+    main.appendChild(name);
+    main.appendChild(badges);
+    main.appendChild(meta);
+
+    var actions = document.createElement('div');
+    actions.className = 'result__actions';
+    var dl = document.createElement('button');
+    dl.type = 'button';
+    dl.className = 'btn btn--primary btn--sm';
+    dl.textContent = 'Download';
+    /* One listener per built row: rows are never rebuilt for the same list,
+       so a second one could not pile up here. */
+    dl.addEventListener('click', function () {
+      var got = out[keyOf(file)];
+      if (got) triggerDownload(got.blob, outName(file, got.ext));
+    });
+    actions.appendChild(dl);
+
+    card.appendChild(thumb);
+    card.appendChild(main);
+    card.appendChild(actions);
+    list.appendChild(card);
+    return { card: card, img: img, badges: badges, meta: meta, dl: dl };
+  }
+
+  function rowBadge(text, kind) {
+    var b = document.createElement('span');
+    b.className = 'badge' + (kind ? ' badge--' + kind : '');
+    b.textContent = text;
+    return b;
+  }
+
+  function renderRows() {
+    if (rows.length !== files.length) {
+      list.innerHTML = '';
+      rows = files.map(function (file) { return buildRow(file); });
+    }
+  }
+
+  function paintRow(i) {
+    var row = rows[i];
+    var file = files[i];
+    if (!row || !file) return;
+    var key = keyOf(file);
+    var got = out[key];
+    row.card.classList.remove('is-error');
+
+    row.badges.innerHTML = '';
+    row.meta.innerHTML = '';
+
+    if (previews[key]) { row.img.src = previews[key]; }
+    else { row.img.removeAttribute('src'); }
+    row.img.alt = '';
+
+    if (!got) {
+      var b = rowBadge('Working\u2026', 'warning');
+      row.badges.appendChild(b);
+      row.dl.disabled = true;
+      row.dl.removeAttribute('data-name');
+      return;
+    }
+    row.dl.disabled = false;
+    row.dl.setAttribute('data-name', outName(file, got.ext));
+    row.dl.setAttribute('aria-label', 'Download ' + outName(file, got.ext));
+
+    var mode = got.info.mode;
+    var modeText = mode === 'auto' ? 'detected ' + got.info.background.join(', ')
+                                   : mode + ' screen';
+    row.badges.appendChild(rowBadge(modeText, 'brand'));
+    row.badges.appendChild(rowBadge('cut ' + Math.round(got.info.cleared * 100) + '% of the frame'));
+    if (got.info.despilled) row.badges.appendChild(rowBadge('spill pulled back', 'accent'));
+    /* The two ways this heuristic is wrong are worth saying out loud: it cuts
+       nothing (a subject that touches every edge) and it cuts everything
+       (a frame with no background in it at all). */
+    if (got.info.cleared < 0.02) {
+      row.badges.appendChild(rowBadge('almost nothing was removed', 'warning'));
+    } else if (got.info.cleared > 0.98) {
+      row.badges.appendChild(rowBadge('the whole frame was cut — a flat background is needed', 'warning'));
+    }
+    if (isHeic(file)) row.badges.appendChild(rowBadge('HEIC decoded locally', 'accent'));
+
+    row.meta.innerHTML = '';
+    row.meta.appendChild(document.createTextNode(outName(file, got.ext)));
+    row.meta.appendChild(Object.assign(document.createElement('span'),
+      { className: 'sep', textContent: ' \u00b7 ' }));
+    row.meta.appendChild(document.createTextNode(
+      fmtBytes(file.size) + ' \u2192 ' + fmtBytes(got.blob.size) + ' \u00b7 ' + got.ext.toUpperCase()));
+  }
+
+  function paintSummary() {
+    var done = files.filter(function (f) { return !!out[keyOf(f)]; }).length;
+    summary.textContent = files.length + ' file' + (files.length === 1 ? '' : 's') +
+      ' \u00b7 ' + done + ' done, ' + (files.length - done) + ' to go.' +
+      (done ? ' Output is PNG or WebP, both of which keep the transparency.' : '');
+    zipAllBtn.hidden = files.length < 2 || isIOS;
+  }
+
+  function addFiles(fileList) {
+    var incoming = Array.prototype.slice.call(fileList).filter(function (f) {
+      return f && (f.type.indexOf('image/') === 0 || /\.(heic|heif)$/i.test(f.name || ''));
+    });
+    if (!incoming.length) { toast('Those files are not images.'); return; }
+    incoming.forEach(function (f) {
+      files.push(f);
+      try { urls[keyOf(f)] = URL.createObjectURL(f); } catch (e) { /* preview is optional */ }
+    });
+    results.hidden = false;
+    renderRows();
+    files.forEach(function (f, i) { paintRow(i); });
+    runAll();
+  }
+
+  /* One photo at a time: a 12 MP frame is ~48 MB of RGBA, and a phone that
+     decodes four of those at once is a phone that kills the tab. */
+  function runAll() {
+    files.forEach(function (f, i) {
+      queue = queue.then(function () { return processOne(f, i); },
+                         function () { return processOne(f, i); });
+    });
+    queue = queue.then(function () { paintSummary(); }, function () { paintSummary(); });
+  }
+
+  function processOne(file, i) {
+    if (files[i] !== file) return Promise.resolve();      /* the list was cleared */
+    var key = keyOf(file);
+    out[key] = null;
+    paintRow(i);
+    return sourceOf(file).then(function (source) {
+      if (files[i] !== file) return null;
+      return pixelsOf(source);
+    }).then(function (pixels) {
+      if (!pixels || files[i] !== file) return null;
+      var mode = $('#rbMode').value;
+      var type = $('#rbFormat').value;
+      var mask = maskFor(pixels, mode);
+      window.LPTBg.compose(pixels.data, mask.alpha);
+      return encode(pixels, type).then(function (blob) {
+        out[key] = { blob: blob, ext: type === 'image/webp' ? 'webp' : 'png', info: mask.info };
+        if (previews[key]) { URL.revokeObjectURL(previews[key]); }
+        previews[key] = URL.createObjectURL(blob);
+        paintRow(i);
+        paintSummary();
+      });
+    }).catch(function (err) {
+      out[key] = null;
+      rows[i] && rows[i].card.classList.add('is-error');
+      paintRow(i);
+      toast('Could not read ' + file.name + ' \u2014 try it as JPG or PNG first.');
+    });
+  }
+
+  function triggerDownload(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1200);
+  }
+
+  ['rbMode', 'rbFormat'].forEach(function (id) {
+    var el = $('#' + id);
+    if (!el) return;
+    /* Recomputing means decoding the file again, so the controls are debounced
+       rather than run on every change. */
+    var t = null;
+    el.addEventListener('change', function () {
+      clearTimeout(t);
+      t = setTimeout(runAll, 250);
+    });
+  });
+
+  zipAllBtn.addEventListener('click', function () {
+    var entries = files.map(function (f) {
+      var got = out[keyOf(f)];
+      return got ? { name: outName(f, got.ext), blob: got.blob } : null;
+    }).filter(Boolean);
+    if (!entries.length) { toast('Nothing is ready to pack yet.'); return; }
+    zipAllBtn.disabled = true;
+    var label = zipAllBtn.textContent;
+    zipAllBtn.textContent = 'Packing\u2026';
+    Promise.all(entries.map(function (e) {
+      return e.blob.arrayBuffer().then(function (buf) {
+        return { name: e.name, data: new Uint8Array(buf) };
+      });
+    })).then(function (items) {
+      var zip = window.LPT && window.LPT.zip ? window.LPT.zip.create(items) : null;
+      if (zip) triggerDownload(zip, 'background-removed.zip');
+      else toast('Packing is not available in this browser \u2014 use the per-file buttons.');
+    }).catch(function () {
+      toast('Could not read one of those results.');
+    }).then(function () {
+      zipAllBtn.disabled = false;
+      zipAllBtn.textContent = label;
+    });
+  });
+
+  var clearBtn = $('#clearBtn');
+  if (clearBtn) clearBtn.addEventListener('click', function () {
+    queue = queue.catch(function () {});
+    files = [];
+    rows = [];
+    out = {};
+    Object.keys(urls).forEach(function (k) { URL.revokeObjectURL(urls[k]); });
+    Object.keys(previews).forEach(function (k) { URL.revokeObjectURL(previews[k]); });
+    urls = {};
+    previews = {};
+    list.innerHTML = '';
+    summary.textContent = '';
+    results.hidden = true;
+    zipAllBtn.hidden = true;
+  });
+
+  var browseBtn = $('#browseBtn');
+  if (browseBtn) browseBtn.addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', function () { addFiles(input.files); input.value = ''; });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.remove('is-dragover');
+    });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+})();
+</script>
+</body>
+</html>

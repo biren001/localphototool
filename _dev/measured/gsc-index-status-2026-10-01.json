@@ -1,0 +1,249 @@
+{
+ "siteUrl": "sc-domain:localphototool.com",
+ "rows": [
+  {
+   "url": "https://localphototool.com/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T23:28:55Z",
+   "googleCanonical": "https://localphototool.com/"
+  },
+  {
+   "url": "https://localphototool.com/compress/",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "robotsTxt": "ROBOTS_TXT_STATE_UNSPECIFIED",
+   "indexingState": "INDEXING_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://localphototool.com/heic-to-jpg/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-10-01T01:25:20Z",
+   "googleCanonical": "https://localphototool.com/heic-to-jpg/"
+  },
+  {
+   "url": "https://localphototool.com/resize-image/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T04:56:24Z",
+   "googleCanonical": "https://localphototool.com/resize-image/"
+  },
+  {
+   "url": "https://localphototool.com/watermark/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T17:34:27Z",
+   "googleCanonical": "https://localphototool.com/watermark/"
+  },
+  {
+   "url": "https://localphototool.com/exif-viewer/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T04:00:06Z",
+   "googleCanonical": "https://localphototool.com/exif-viewer/"
+  },
+  {
+   "url": "https://localphototool.com/images-to-pdf/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T04:37:37Z",
+   "googleCanonical": "https://localphototool.com/images-to-pdf/"
+  },
+  {
+   "url": "https://localphototool.com/share/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T20:58:54Z",
+   "googleCanonical": "https://localphototool.com/share/"
+  },
+  {
+   "url": "https://localphototool.com/about/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-28T13:23:50Z",
+   "googleCanonical": "https://localphototool.com/about/"
+  },
+  {
+   "url": "https://localphototool.com/privacy/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-10-01T06:58:54Z",
+   "googleCanonical": "https://localphototool.com/privacy/"
+  },
+  {
+   "url": "https://localphototool.com/terms/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-10-01T01:58:51Z",
+   "googleCanonical": "https://localphototool.com/terms/"
+  },
+  {
+   "url": "https://localphototool.com/compress-to-100kb/",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "robotsTxt": "ROBOTS_TXT_STATE_UNSPECIFIED",
+   "indexingState": "INDEXING_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://localphototool.com/png-to-jpg/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T05:34:09Z",
+   "googleCanonical": "https://localphototool.com/png-to-jpg/"
+  },
+  {
+   "url": "https://localphototool.com/jpg-to-png/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T13:17:44Z",
+   "googleCanonical": "https://localphototool.com/jpg-to-png/"
+  },
+  {
+   "url": "https://localphototool.com/webp-to-jpg/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T18:38:57Z",
+   "googleCanonical": "https://localphototool.com/webp-to-jpg/"
+  },
+  {
+   "url": "https://localphototool.com/webp-to-png/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T13:53:51Z",
+   "googleCanonical": "https://localphototool.com/webp-to-png/"
+  },
+  {
+   "url": "https://localphototool.com/batch-rename/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T20:47:15Z",
+   "googleCanonical": "https://localphototool.com/batch-rename/"
+  },
+  {
+   "url": "https://localphototool.com/metadata-editor/",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "robotsTxt": "ROBOTS_TXT_STATE_UNSPECIFIED",
+   "indexingState": "INDEXING_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://localphototool.com/image-to-base64/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T15:28:22Z",
+   "googleCanonical": "https://localphototool.com/image-to-base64/"
+  },
+  {
+   "url": "https://localphototool.com/jpg-to-webp/",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "robotsTxt": "ROBOTS_TXT_STATE_UNSPECIFIED",
+   "indexingState": "INDEXING_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://localphototool.com/compress-to-50kb/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T11:25:11Z",
+   "googleCanonical": "https://localphototool.com/compress-to-50kb/"
+  },
+  {
+   "url": "https://localphototool.com/compress-to-200kb/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-10-01T04:29:05Z",
+   "googleCanonical": "https://localphototool.com/compress-to-200kb/"
+  },
+  {
+   "url": "https://localphototool.com/compress-photos-for-email/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T18:28:50Z",
+   "googleCanonical": "https://localphototool.com/compress-photos-for-email/"
+  },
+  {
+   "url": "https://localphototool.com/compress-without-uploading/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T12:40:14Z",
+   "googleCanonical": "https://localphototool.com/compress-without-uploading/"
+  },
+  {
+   "url": "https://localphototool.com/compress-to-500kb/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-27T23:46:47Z",
+   "googleCanonical": "https://localphototool.com/compress-to-500kb/"
+  },
+  {
+   "url": "https://localphototool.com/remove-gps-from-photo/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T14:43:50Z",
+   "googleCanonical": "https://localphototool.com/remove-gps-from-photo/"
+  },
+  {
+   "url": "https://localphototool.com/transfer/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-30T19:43:22Z",
+   "googleCanonical": "https://localphototool.com/transfer/"
+  },
+  {
+   "url": "https://localphototool.com/image-compressor-upload-test/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-09-27T21:47:22Z",
+   "googleCanonical": "https://localphototool.com/image-compressor-upload-test/"
+  }
+ ]
+}

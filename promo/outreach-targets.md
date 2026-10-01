@@ -420,3 +420,30 @@ from an independent site that writes about us.
    the pool by guessing at *privacy* sites is nearly exhausted — the remaining leverage is in
    **adjacent audiences** (local-first, web performance) and in **HN**.
 
+---
+
+## 8. Re-measured 2026-09-30 — the A0 account is still restricted, and the category is intact
+
+Four read-only probes against `discuss.privacyguides.net` (`_dev/.tmp/probe-pg{,2,3,4,5}.cjs`,
+output kept next to them).
+
+| check | result | reading |
+|---|---|---|
+| `/site.json` categories | **Site Development is still id 7**, slug `site-development` | the route has not moved since 2026-09-26 |
+| `/u/biren001.json` | **200, `profile_hidden: true`, `created_at` stripped, `summary.json` → 404** | still hidden from guests |
+| control `/u/defiling9046.json` | 200, `created_at: 2026-09-02`, `trust_level: 1`, `profile_hidden` absent | **so the hiding is per-account, not the anonymous view** — the biren001 card really is restricted |
+| `/search.json?q=localphototool` | **0 topics, 0 posts** (both `order=latest` and default) | either the topic is still queued, or it never went through |
+| `/c/site-development/7/l/latest.json?order=created` | 200 but `topics: []`; `/latest.json` and `/topics.json` also empty | the anonymous topic-list endpoints are not returning anything from here — do not read that as "the forum is empty" |
+
+**Consequence for the operator:** the account state can only be read from inside — log in,
+avatar → **Activity → Topics**, and look for an "awaiting approval" banner. Until someone
+confirms the freeze has lifted, the rule from §6 stands: no re-post, no second account, no
+chasing moderators. The paste-ready post itself is written and lives in
+`promo/pg-topic.md`, so the moment the account is usable the whole thing goes out in one
+paste.
+
+**Also worth fixing while this is dormant:** the A0/Privacy Guides route is *not* in
+`distribution-kit.md` at all — that file's Tier 1 table stops at awesome-privacy and the
+writer-outreach row. A channel that needs to be re-learned twice is a channel that costs
+time every time it is picked up again.
+

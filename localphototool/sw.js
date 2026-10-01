@@ -138,6 +138,7 @@ var SHELL = [
   'image-to-base64/',
   'batch-rename/',
   'metadata-editor/', /* lossless EXIF/XMP strip + XMP inject, v61 */
+  'remove-background/', /* model-free flood-fill background cut, v63 */
   'share/',
   'about/',
   'offline.html',
