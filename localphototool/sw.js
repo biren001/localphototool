@@ -104,7 +104,7 @@ var OFFLINE = ROOT + 'offline.html';
    percentage, fit-inside or centre-crop, batch, ZIP) built on the shared
    compressor app with a resize layer in engine.js. New page in the shell means
    the version moves with it. */
-var VERSION = 'v63';
+var VERSION = 'v64';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
