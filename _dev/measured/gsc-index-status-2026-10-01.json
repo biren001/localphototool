@@ -59,7 +59,7 @@
    "coverageState": "Submitted and indexed",
    "robotsTxt": "ALLOWED",
    "indexingState": "INDEXING_ALLOWED",
-   "lastCrawlTime": "2026-09-30T04:37:37Z",
+   "lastCrawlTime": "2026-10-01T09:28:50Z",
    "googleCanonical": "https://localphototool.com/images-to-pdf/"
   },
   {
@@ -152,10 +152,20 @@
   },
   {
    "url": "https://localphototool.com/metadata-editor/",
+   "verdict": "PASS",
+   "coverageState": "Submitted and indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_ALLOWED",
+   "lastCrawlTime": "2026-10-01T11:15:48Z",
+   "googleCanonical": "https://localphototool.com/metadata-editor/"
+  },
+  {
+   "url": "https://localphototool.com/remove-background/",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "robotsTxt": "ROBOTS_TXT_STATE_UNSPECIFIED",
-   "indexingState": "INDEXING_STATE_UNSPECIFIED"
+   "coverageState": "Crawled - currently not indexed",
+   "robotsTxt": "ALLOWED",
+   "indexingState": "INDEXING_STATE_UNSPECIFIED",
+   "lastCrawlTime": "2026-10-01T11:25:52Z"
   },
   {
    "url": "https://localphototool.com/image-to-base64/",
