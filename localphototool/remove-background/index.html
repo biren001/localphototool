@@ -806,7 +806,12 @@
     card.appendChild(thumb);
     card.appendChild(main);
     card.appendChild(actions);
-    list.appendChild(card);
+    /* The list is built newest-first: what the user is cutting right now is the
+       photo they came for, so the rows they cut earlier sink below it. The card
+       goes after the rows already built, so the order on screen is the order of
+       the list — the rows array is rebuilt wholesale whenever a photo is added,
+       and putting each card on top of the last would flip that back. */
+    list.insertBefore(card, list.children[rows.length] || null);
     return { card: card, img: img, thumb: thumb, cmp: cmp, badges: badges, meta: meta, dl: dl };
   }
 
@@ -906,8 +911,9 @@
       return f && (f.type.indexOf('image/') === 0 || /\.(heic|heif)$/i.test(f.name || ''));
     });
     if (!incoming.length) { toast('Those files are not images.'); return; }
+    /* Newest first — see buildRow. The old rows stay in place and sink. */
+    files = incoming.concat(files);
     incoming.forEach(function (f) {
-      files.push(f);
       try { urls[keyOf(f)] = URL.createObjectURL(f); } catch (e) { /* preview is optional */ }
     });
     results.hidden = false;
@@ -918,10 +924,13 @@
 
   /* One photo at a time: a 12 MP frame is ~48 MB of RGBA, and a phone that
      decodes four of those at once is a phone that kills the tab. */
+  /* Newest first, in step with the rows: the photo the user just dropped sits on
+     the top row, so it is the one they are waiting for and it is processed
+     first. The rows above it finish first too. */
   function runAll() {
-    files.forEach(function (f, i) {
-      queue = queue.then(function () { return processOne(f, i); },
-                         function () { return processOne(f, i); });
+    files.forEach(function (f) {
+      queue = queue.then(function () { return processOne(f); },
+                         function () { return processOne(f); });
     });
     queue = queue.then(function () { paintSummary(); }, function () { paintSummary(); });
   }
@@ -936,17 +945,22 @@
     return ((err && err.name && err.name !== 'Error') ? err.name + ' ' : '') + m;
   }
 
-  function processOne(file, i) {
-    if (files[i] !== file) return Promise.resolve();      /* the list was cleared */
+  function processOne(file) {
+    /* The list is newest-first, so a photo still being worked on can move down
+       a few rows: the guard looks the file up instead of trusting the index. */
+    if (files.indexOf(file) < 0) return Promise.resolve();   /* the list was cleared */
+    /* The list is newest-first, so a photo moves down the page as more are
+       dropped: the paint looks its row up rather than trusting an index. */
+    var at = files.indexOf(file);
     var key = keyOf(file);
     out[key] = null;
     failed[key] = null;
-    paintRow(i);
+    paintRow(at);
     return sourceOf(file).then(function (source) {
-      if (files[i] !== file) return null;
+      if (files.indexOf(file) < 0) return null;
       return pixelsOf(source);
     }).then(function (pixels) {
-      if (!pixels || files[i] !== file) return null;
+      if (!pixels || files.indexOf(file) < 0) return null;
       var mode = $('#rbMode').value;
       var type = $('#rbFormat').value;
       var tol = toleranceOf();
@@ -956,14 +970,14 @@
         out[key] = { blob: blob, ext: type === 'image/webp' ? 'webp' : 'png', info: mask.info };
         if (previews[key]) { URL.revokeObjectURL(previews[key]); }
         previews[key] = URL.createObjectURL(blob);
-        paintRow(i);
+        paintRow(at);
         paintSummary();
       });
     }).catch(function (err) {
       out[key] = null;
       failed[key] = failText(err);
       console.error('[remove-background] ' + file.name + ' failed:', err && (err.name + ': ' + err.message));
-      paintRow(i);
+      paintRow(at);
       /* Only a decode failure is answered by changing the format. Sending that
          to somebody whose photo is already a JPEG would be a story about a
          problem they do not have. */
