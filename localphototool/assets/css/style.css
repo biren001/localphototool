@@ -506,6 +506,16 @@ html[data-theme="dark"] .hero::before {
 .pinned__clear:hover { color: var(--text); text-decoration-color: currentColor; }
 .pinned__list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .pinned__mine { margin-top: 0.95rem; padding-top: 0.95rem; border-top: 1px dashed var(--border); }
+/* v69 — grouped tool index */
+.cat + .cat { margin-top: 2.5rem; }
+.cat__name {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin: 0 0 0.85rem;
+}
 
 .pin-wrap {
   display: inline-flex; align-items: center;

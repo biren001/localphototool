@@ -288,7 +288,7 @@
         100% on-device — your photos never leave your browser
       </span>
       <h1>Compress images without<br>uploading them anywhere</h1>
-      <p class="hero__lead">The page you were uploading to says your file is too big. Drop it in here instead: it gets shrunk inside your browser, on your own device, an exact size target is hit when a form demands one, and the smaller file comes straight back to you as a download — no upload, no account, no watermark.</p>
+      <p class="hero__lead">Compression started it; the toolkit has grown around it. Seventeen tools for shrinking, converting, resizing, cutting backgrounds and scrubbing metadata — and none of them ever uploads your file.</p>
       <div class="hero__cta">
         <a class="btn btn--grad btn--lg" href="compress/">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
@@ -336,19 +336,34 @@
               </div>
               <span class="badge badge--success" style="font-size:0.72rem">−89%</span>
             </div>
-            <div style="display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:10px;border:1px solid var(--border);border-radius:11px">
-              <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#34d399,#0ea5e9)"></div>
-              <div>
-                <strong style="font-size:0.83rem;display:block">product-shot-01.jpg</strong>
-                <span class="muted" style="font-size:0.73rem">6.7 MB → <b style="color:var(--text)">184 KB</b> · target 200 KB reached</span>
-              </div>
-              <span class="badge badge--success" style="font-size:0.72rem">−97%</span>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+      <div class="pinned" id="pinned">
+        <div class="pinned__head">
+          <span class="pinned__title">Popular tools</span>
+          <span class="pinned__hint">the six people reach for most</span>
+          <button class="pinned__clear" type="button" id="pinClear" hidden>Clear your tools</button>
+        </div>
+        <ul class="pinned__list" id="pinPopular">
+          <li class="pin-wrap"><a class="pin__main" href="compress/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></svg><span class="pin__label">Compress images</span></a></li>
+          <li class="pin-wrap"><a class="pin__main" href="heic-to-jpg/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="pin__label">HEIC to JPG</span></a></li>
+          <li class="pin-wrap"><a class="pin__main" href="resize-image/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span class="pin__label">Resize images</span></a></li>
+          <li class="pin-wrap"><a class="pin__main" href="png-to-jpg/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg><span class="pin__label">PNG to JPG</span></a></li>
+          <li class="pin-wrap"><a class="pin__main" href="jpg-to-webp/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="pin__label">JPG to WebP</span></a></li>
+          <li class="pin-wrap"><a class="pin__main" href="remove-background/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h8l5 5v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/><circle cx="12" cy="14" r="3"/><path d="m4 20 5-5"/></svg><span class="pin__label">Remove background</span></a></li>
+        </ul>
+        <div class="pinned__mine" id="pinMine" hidden>
+          <div class="pinned__head" style="margin-bottom:0.7rem">
+            <span class="pinned__title">Your tools</span>
+            <span class="pinned__hint">remembered in your own browser — nothing is sent anywhere</span>
+          </div>
+          <ul class="pinned__list" id="pinMineList"></ul>
+        </div>
+      </div>
 
   <!-- Stats -->
   <section class="section--tight">
@@ -409,50 +424,26 @@
   <!-- Comparison -->
   <section class="section section--tight" id="tools">
     <div class="container">
-      <div class="section-head" style="max-width:620px">
+      <div class="section-head" style="max-width:640px">
         <span class="eyebrow">The toolkit</span>
-        <h2>One engine, every tool, zero uploads</h2>
-        <p>The compressor came first, but it is no longer alone. Every tool below runs on the same local-first engine, entirely in your browser — free, no account, no file ever leaves your device.</p>
-      </div>
-      <div class="pinned" id="pinned">
-        <div class="pinned__head">
-          <span class="pinned__title">Popular tools</span>
-          <span class="pinned__hint">the six people reach for most</span>
-          <button class="pinned__clear" type="button" id="pinClear" hidden>Clear your tools</button>
-        </div>
-        <ul class="pinned__list" id="pinPopular">
-          <li class="pin-wrap"><a class="pin__main" href="compress/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></svg><span class="pin__label">Compress images</span></a></li>
-          <li class="pin-wrap"><a class="pin__main" href="heic-to-jpg/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="pin__label">HEIC to JPG</span></a></li>
-          <li class="pin-wrap"><a class="pin__main" href="resize-image/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span class="pin__label">Resize images</span></a></li>
-          <li class="pin-wrap"><a class="pin__main" href="png-to-jpg/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg><span class="pin__label">PNG to JPG</span></a></li>
-          <li class="pin-wrap"><a class="pin__main" href="jpg-to-webp/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="pin__label">JPG to WebP</span></a></li>
-          <li class="pin-wrap"><a class="pin__main" href="remove-background/"><svg class="pin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h8l5 5v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/><circle cx="12" cy="14" r="3"/><path d="m4 20 5-5"/></svg><span class="pin__label">Remove background</span></a></li>
-        </ul>
-        <div class="pinned__mine" id="pinMine" hidden>
-          <div class="pinned__head" style="margin-bottom:0.7rem">
-            <span class="pinned__title">Your tools</span>
-            <span class="pinned__hint">remembered in your own browser — nothing is sent anywhere</span>
-          </div>
-          <ul class="pinned__list" id="pinMineList"></ul>
-        </div>
+        <h2>Seventeen tools on one local engine</h2>
+        <p>Compression started it, but the toolkit has grown. Everything below runs on the same local-first engine, entirely in your browser — free, no account, and no file ever leaves your device.</p>
       </div>
 
+      <div class="cat">
+      <h3 class="cat__name">Shrink files</h3>
       <div class="grid grid--3">
         <a class="card feature" href="compress/" style="text-decoration:none;color:inherit">
           <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></svg></div>
           <h3>Compress images</h3>
           <p>JPG, PNG, WebP and AVIF with measured quality — auto mode, exact KB targets, batch ZIP.</p>
         </a>
-        <a class="card feature" href="resize-image/" style="text-decoration:none;color:inherit">
-          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-          <h3>Resize images</h3>
-          <p>Exact dimensions or percentages, plus batch rotate, flip and crop to 1:1, 4:3, 3:2 or 16:9.</p>
-        </a>
-        <a class="card feature" href="watermark/" style="text-decoration:none;color:inherit">
-          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-          <h3>Text watermark</h3>
-          <p>Stamp your name or brand on a batch — nine positions, your color and opacity, tiled deterrence mode.</p>
-        </a>
+      </div>
+      </div>
+
+      <div class="cat">
+      <h3 class="cat__name">Convert formats</h3>
+      <div class="grid grid--3">
         <a class="card feature" href="heic-to-jpg/" style="text-decoration:none;color:inherit">
           <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></div>
           <h3>HEIC to JPG</h3>
@@ -483,21 +474,60 @@
           <h3>WebP to PNG</h3>
           <p>Lossless and everywhere — transparency included, nothing re-compressed.</p>
         </a>
+      </div>
+      </div>
+
+      <div class="cat">
+      <h3 class="cat__name">Resize, rotate and watermark</h3>
+      <div class="grid grid--3">
+        <a class="card feature" href="resize-image/" style="text-decoration:none;color:inherit">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <h3>Resize images</h3>
+          <p>Exact dimensions or percentages, plus batch rotate, flip and crop to 1:1, 4:3, 3:2 or 16:9.</p>
+        </a>
+        <a class="card feature" href="watermark/" style="text-decoration:none;color:inherit">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <h3>Text watermark</h3>
+          <p>Stamp your name or brand on a batch — nine positions, your color and opacity, tiled deterrence mode.</p>
+        </a>
+      </div>
+      </div>
+
+      <div class="cat">
+      <h3 class="cat__name">Cut out backgrounds</h3>
+      <div class="grid grid--3">
+        <a class="card feature" href="remove-background/" style="text-decoration:none;color:inherit">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h8l5 5v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/><circle cx="12" cy="14" r="3"/><path d="m4 20 5-5"/></svg></div>
+          <h3>Remove photo background</h3>
+          <p>Cut background from white, black or green-screen shots — no model to download, output keeps transparency.</p>
+        </a>
+      </div>
+      </div>
+
+      <div class="cat">
+      <h3 class="cat__name">Inspect and clean metadata</h3>
+      <div class="grid grid--3">
         <a class="card feature" href="exif-viewer/" style="text-decoration:none;color:inherit">
           <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
           <h3>EXIF viewer</h3>
           <p>See exactly what metadata a photo reveals — GPS, camera, software — before you share it.</p>
-        </a>
-        <a class="card feature" href="image-to-base64/" style="text-decoration:none;color:inherit">
-          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"/><path d="M9 12h.01M15 12h.01"/></svg></div>
-          <h3>Image to Base64</h3>
-          <p>Encode any picture as a data URI and paste it straight into CSS, HTML or JSON.</p>
         </a>
         <a class="card feature" href="remove-gps-from-photo/" style="text-decoration:none;color:inherit">
           <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><path d="m4 4 16 16"/></svg></div>
           <h3>Remove GPS from photo</h3>
           <p>Strip location and other metadata losslessly — the pixels stay byte-identical, so the picture no longer tells where you took it.</p>
         </a>
+        <a class="card feature" href="metadata-editor/" style="text-decoration:none;color:inherit">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2M4 17h16M9 7v10M4 12h16M15 7v10"/></svg></div>
+          <h3>Metadata editor</h3>
+          <p>Write title, creator and keywords as XMP, or strip EXIF and GPS — container surgery, pixels untouched.</p>
+        </a>
+      </div>
+      </div>
+
+      <div class="cat">
+      <h3 class="cat__name">Batch work, PDF and quick tools</h3>
+      <div class="grid grid--3">
         <a class="card feature" href="images-to-pdf/" style="text-decoration:none;color:inherit">
           <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg></div>
           <h3>Images to PDF</h3>
@@ -508,22 +538,19 @@
           <h3>Batch rename</h3>
           <p>Rename a whole shoot in one pass — sequence numbers and clean names, bytes untouched.</p>
         </a>
-        <a class="card feature" href="metadata-editor/" style="text-decoration:none;color:inherit">
-          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2M4 17h16M9 7v10M4 12h16M15 7v10"/></svg></div>
-          <h3>Metadata editor</h3>
-          <p>Write title, creator and keywords as XMP, or strip EXIF and GPS — container surgery, pixels untouched.</p>
-        </a>
-        <a class="card feature" href="remove-background/" style="text-decoration:none;color:inherit">
-          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h8l5 5v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/><circle cx="12" cy="14" r="3"/><path d="m4 20 5-5"/></svg></div>
-          <h3>Remove photo background</h3>
-          <p>Cut background from white, black or green-screen shots — no model to download, output keeps transparency.</p>
-        </a>
 <a class="card feature" href="transfer/" style="text-decoration:none;color:inherit">
           <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
           <h3>Phone to PC transfer</h3>
           <p>Move photos from a phone to a computer peer-to-peer — no cable, no cloud, no account.</p>
         </a>
+        <a class="card feature" href="image-to-base64/" style="text-decoration:none;color:inherit">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"/><path d="M9 12h.01M15 12h.01"/></svg></div>
+          <h3>Image to Base64</h3>
+          <p>Encode any picture as a data URI and paste it straight into CSS, HTML or JSON.</p>
+        </a>
       </div>
+      </div>
+
       <div class="trust-row" style="margin-top:18px">
         <span class="chip">Compress to an exact KB target</span>
         <span class="chip">Batch ZIP on desktop and Android</span>
@@ -536,8 +563,8 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Honest comparison</span>
-        <h2>How this differs from a typical online compressor</h2>
-        <p>Upload-based services are not necessarily bad, but they make a specific set of trade-offs. Here is exactly what changes when compression happens on your own device.</p>
+        <h2>How this differs from a typical upload service</h2>
+        <p>Things that run on a server are not necessarily bad, but they trade the same three things away. This is what changes when the work happens on your own device.</p>
       </div>
       <div class="table-scroll">
         <table class="card" style="padding:0;border-collapse:collapse;overflow:hidden">
@@ -550,12 +577,8 @@
           </thead>
           <tbody>
             <tr><td><strong>Privacy</strong></td><td>Files never leave the device — no upload endpoint exists</td><td>Originals are transferred to and stored on a third-party server</td></tr>
-            <tr><td><strong>Quality control</strong></td><td>Measured per image against a fidelity floor</td><td>Fixed preset such as "80%" for every image</td></tr>
-            <tr><td><strong>Target size</strong></td><td>Binary search lands under an exact KB budget</td><td>Usually a slider you adjust by trial and error</td></tr>
-            <tr><td><strong>Speed</strong></td><td>No transfer — limited only by your device</td><td>Upload + queue + download for every batch</td></tr>
-            <tr><td><strong>Batch export</strong></td><td>Parallel workers plus one-click ZIP</td><td>Often capped at a handful of files for free</td></tr>
-            <tr><td><strong>PNG handling</strong></td><td>Palette quantization with dithering and lossless re-encode</td><td>Frequently just converts PNG to lossy JPEG</td></tr>
-            <tr><td><strong>Metadata</strong></td><td>EXIF and GPS stripped, orientation applied first</td><td>Varies; sometimes reused for analytics</td></tr>
+            <tr><td><strong>Quality control</strong></td><td>Measured per image against a 40 dB fidelity floor, with an exact KB target when a form demands one</td><td>A fixed preset such as "80%", plus a slider you adjust by trial and error</td></tr>
+            <tr><td><strong>Batch and formats</strong></td><td>Parallel workers, one-click ZIP, palette-quantized PNG and EXIF stripped up front</td><td>Often capped at a handful of files, and PNG quietly turned into lossy JPEG</td></tr>
             <tr><td><strong>Cost</strong></td><td>Free, unlimited, no account</td><td>Watermarks, file caps or subscriptions</td></tr>
           </tbody>
         </table>
@@ -568,21 +591,21 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">How it works</span>
-        <h2>Three steps, no learning curve</h2>
+        <h2>Three steps, the same in every tool</h2>
       </div>
       <div class="grid grid--3">
         <div class="steps" style="display:contents">
           <div class="step">
             <h3>Add your images</h3>
-            <p>Drag and drop, paste from the clipboard, or tap to browse. On mobile you can pick straight from your photo library, including HEIC files.</p>
+            <p>Drag and drop, paste from the clipboard, or tap to browse. On a phone you can pick straight from the photo library, HEIC included.</p>
           </div>
           <div class="step">
             <h3>Pick a strategy</h3>
-            <p>Leave it on Auto and the engine decides per image, or switch to Quality or Target Size when you need precise control over the outcome.</p>
+            <p>For the compressor, Auto lets the engine decide per image and Target Size lands under an exact KB budget.</p>
           </div>
           <div class="step">
             <h3>Save the results</h3>
-            <p>Download files individually or grab everything at once as a ZIP. Compare before and after with the built-in split viewer before you commit.</p>
+            <p>Take them one at a time, or the whole batch as a ZIP. Compare before and after with the split viewer first.</p>
           </div>
         </div>
       </div>
