@@ -446,6 +446,20 @@
   </div>
 </footer>
 
+<dialog class="rb-preview" id="rbPreview" aria-labelledby="rbPreviewName">
+  <div class="rb-preview__head">
+    <span class="rb-preview__name" id="rbPreviewName"></span>
+    <button class="btn btn--ghost btn--sm" type="button" id="rbPreviewClose">Close</button>
+  </div>
+  <div class="rb-preview__stage">
+    <img id="rbPreviewImg" alt="The photo with its background cut away, on a checkerboard showing the transparency">
+  </div>
+  <div class="rb-preview__foot">
+    <button class="btn btn--ghost btn--sm" type="button" id="rbPreviewToggle">Show the original</button>
+    <span class="rb-preview__hint" id="rbPreviewHint"></span>
+  </div>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="../assets/js/bgmask.js?v=b888b2d"></script>
@@ -738,15 +752,75 @@
      list would destroy the Download button between a real user's
      mousedown and mouseup and swallow the click.
      ------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------
+     v72 preview. The cut is a transparency and a transparency cannot be
+     judged from a 60px crop, so the row's thumbnail opens a larger view on a
+     checkerboard. The original is one tap away, because the difference
+     between the two is the only thing worth looking at.
+     ------------------------------------------------------------------- */
+  var previewDlg = $('#rbPreview'),
+      previewImg = $('#rbPreviewImg'),
+      previewName = $('#rbPreviewName'),
+      previewHint = $('#rbPreviewHint'),
+      previewToggle = $('#rbPreviewToggle'),
+      previewShown = {},      /* key -> the original is on screen, not the cut */
+      previewKey = null;
+
+  function applyPreview() {
+    if (!previewKey || !previewDlg) return;
+    var original = !!previewShown[previewKey];
+    var src = original ? urls[previewKey] : previews[previewKey];
+    if (!src) return;
+    previewImg.src = src;
+    previewImg.alt = original
+      ? 'The photo before the background was cut'
+      : 'The photo after the background was cut, on a checkerboard showing the transparency';
+    previewToggle.textContent = original ? 'Show the cut' : 'Show the original';
+    previewHint.textContent = original
+      ? 'This is what came in — the squares behind the subject are what the cut took away'
+      : 'The squares behind the subject are transparent: the background is gone';
+  }
+
+  function openPreview(key) {
+    if (!previews[key] || !previewDlg || typeof previewDlg.showModal !== 'function') return;
+    previewKey = key;
+    previewShown[key] = false;
+    var file = files.filter(function (f) { return keyOf(f) === key; })[0];
+    previewName.textContent = (file ? file.name : 'Preview') + ' \u00b7 after the cut';
+    applyPreview();
+    previewDlg.showModal();
+  }
+
+  if (previewToggle) {
+    previewToggle.addEventListener('click', function () {
+      if (!previewKey) return;
+      previewShown[previewKey] = !previewShown[previewKey];
+      applyPreview();
+    });
+  }
+  var previewCloseBtn = $('#rbPreviewClose');
+  if (previewCloseBtn && previewDlg) {
+    previewCloseBtn.addEventListener('click', function () { previewDlg.close(); });
+    /* A click on the backdrop lands on the dialog element itself, not on the
+       stage inside it, so that is where "dismiss" can safely live. */
+    previewDlg.addEventListener('click', function (e) {
+      if (e.target === previewDlg) previewDlg.close();
+    });
+  }
+
   function buildRow(file) {
     var card = document.createElement('div');
     card.className = 'result';
 
-    var thumb = document.createElement('div');
+    /* v72: the thumbnail is the button that opens the preview — a cut photo is
+       hard to judge from a 60px crop, so the row has to offer a closer look. */
+    var thumb = document.createElement('button');
+    thumb.type = 'button';
     thumb.className = 'result__thumb';
     var img = document.createElement('img');
     img.alt = '';
     thumb.appendChild(img);
+    thumb.addEventListener('click', function () { openPreview(keyOf(file)); });
 
     var main = document.createElement('div');
     main.className = 'result__main';
@@ -782,7 +856,7 @@
     card.appendChild(main);
     card.appendChild(actions);
     list.appendChild(card);
-    return { card: card, img: img, badges: badges, meta: meta, dl: dl };
+    return { card: card, img: img, thumb: thumb, badges: badges, meta: meta, dl: dl };
   }
 
   function rowBadge(text, kind) {
@@ -813,6 +887,12 @@
     if (previews[key]) { row.img.src = previews[key]; }
     else { row.img.removeAttribute('src'); }
     row.img.alt = '';
+    /* There is nothing to look at until the cut exists, and nothing to open
+       once the list has been cleared. */
+    row.thumb.disabled = !previews[key];
+    row.thumb.setAttribute('aria-label', previews[key]
+      ? 'Preview the cut — open a larger view of ' + outName(file, 'png')
+      : 'Not ready to preview yet');
 
     if (!got) {
       /* A failure used to look exactly like work in progress — both were a
@@ -1026,6 +1106,8 @@
     Object.keys(previews).forEach(function (k) { URL.revokeObjectURL(previews[k]); });
     urls = {};
     previews = {};
+    if (previewDlg) previewDlg.close();
+    previewKey = null;
     list.innerHTML = '';
     summary.textContent = '';
     results.hidden = true;
