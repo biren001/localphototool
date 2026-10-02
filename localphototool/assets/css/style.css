@@ -844,56 +844,40 @@ input[type="range"]::-moz-range-thumb {
 .result__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .result__thumb .ph { color: var(--text-faint); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; }
 
-/* v72 — the cut used to be previewed as a 60px cover thumbnail: the transparent
-   ring around the subject was cropped away, the panel behind it was a flat
-   colour, and the result looked exactly like the photo that came in — so
+/* v72/v72b — the cut used to be previewed as a 60px cover thumbnail: the
+   transparent ring around the subject was cropped away, the panel behind it was
+   a flat colour, and the result looked exactly like the photo that came in — so
    "is there a preview?" could not be answered by looking at the row. Only the
    background-removal list produces a transparency, so only it gets the
-   checkerboard and the whole frame in view, plus a bigger thumbnail you can
-   open for a closer look (compare with .rb-preview below). */
-#rbList .result { grid-template-columns: 78px minmax(0, 1fr) auto; }
-#rbList .result__thumb {
-  width: 78px; height: 78px; padding: 3px;
+   checkerboard and the whole frame in view. The frame is now the row itself:
+   open: a 60px crop cannot show a transparency, and a thumbnail that opens a
+   bigger copy is one click the user has to think about. Each row therefore
+   leads with the picture itself, on a checkerboard so the transparent ring is
+   the visible thing; the original stays one line below, for comparing. */
+#rbList .result {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'preview preview' 'main actions';
+  gap: 10px 12px; align-items: start;
+}
+#rbList .result__preview {
+  grid-area: preview;
+  display: grid; place-items: center;
+  padding: 10px; overflow: hidden;
   background-color: transparent;
   background-image: repeating-conic-gradient(color-mix(in srgb, var(--text) 13%, transparent) 0% 25%, transparent 0% 50%);
-  background-position: 0 0; background-size: 16px 16px;
-  border-color: color-mix(in srgb, var(--text) 24%, var(--border));
-  cursor: zoom-in;
+  background-position: 0 0; background-size: 18px 18px;
+  border: 1px solid var(--border); border-radius: var(--r-sm);
 }
-#rbList .result__thumb img { object-fit: contain; }
-#rbList .result__thumb:disabled { cursor: default; }
-#rbList .result__thumb:focus-visible { outline: 2px solid var(--brand-500); outline-offset: 2px; }
-
-/* The open preview: the cut on its checkerboard, with the original one tap
-   away so the difference is the thing you are looking at. */
-.rb-preview {
-  width: min(96vw, 900px); padding: 0; border: 1px solid var(--border);
-  border-radius: var(--r-md); background: var(--surface); color: var(--text);
-  box-shadow: var(--shadow-lg); overflow: hidden;
-}
-.rb-preview::backdrop { background: rgba(4, 7, 14, 0.72); backdrop-filter: blur(3px); }
-.rb-preview__head, .rb-preview__foot {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  padding: 10px 14px;
-}
-.rb-preview__head { border-bottom: 1px solid var(--border); }
-.rb-preview__foot { border-top: 1px solid var(--border); }
-.rb-preview__name {
-  flex: 1 1 auto; min-width: 0; font-size: 0.875rem; font-weight: 620;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.rb-preview__stage {
-  display: grid; place-items: center; padding: 18px;
-  min-height: 220px;
-  background-color: transparent;
-  background-image: repeating-conic-gradient(color-mix(in srgb, var(--text) 11%, transparent) 0% 25%, transparent 0% 50%);
-  background-position: 0 0; background-size: 22px 22px;
-}
-.rb-preview__stage img {
-  display: block; max-width: 100%; max-height: min(62vh, 560px);
+#rbList .result__preview img {
+  display: block; max-width: 100%; max-height: 320px;
   object-fit: contain; border-radius: 4px;
 }
-.rb-preview__hint { font-size: 0.78rem; color: var(--text-muted); }
+#rbList .result__main { grid-area: main; }
+#rbList .result__actions { grid-area: actions; margin-top: 0; }
+#rbList .result__compare {
+  justify-self: start; font-size: 0.78rem;
+  padding: 0.34rem 0.6rem;
+}
 
 .result__main { min-width: 0; display: grid; gap: 5px; }
 .result__name {
@@ -935,12 +919,15 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 620px) {
   .result { grid-template-columns: 52px minmax(0, 1fr); gap: 12px; }
   .result__thumb { width: 52px; height: 52px; }
-  /* v72: the cut preview has to stay readable on a phone, so it keeps the
-     step up rather than the shared thumbnail size. */
-  #rbList .result { grid-template-columns: 68px minmax(0, 1fr); }
-  #rbList .result__thumb { width: 68px; height: 68px; }
-  .rb-preview__stage { padding: 10px; }
-  .rb-preview__stage img { max-height: 44vh; }
+  /* v72b: on a phone the whole picture still has to fit, so the preview gets a
+     short frame and the actions drop under the name rather than beside it. */
+  #rbList .result {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'preview' 'main' 'actions';
+  }
+  #rbList .result__preview { padding: 6px; }
+  #rbList .result__preview img { max-height: 46vh; }
+  #rbList .result__actions { grid-column: 1; margin-top: 4px; }
   .result__actions { grid-column: 2; margin-top: 2px; }
   .result__meta { font-size: 0.74rem; }
 }
