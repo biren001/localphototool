@@ -1129,6 +1129,23 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 700px) {
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; }
   .footer__about { grid-column: 1 / -1; }
+  /* v70 — on a phone the tool list used to stack one link per row, which made
+     the footer taller than the screen (1407px at 390px wide). Give it a
+     full-width row and flow the links in two columns: every link stays in the
+     DOM, in the same order, at half the height. */
+  .footer__col--tools { grid-column: 1 / -1; }
+  .footer__col--tools ul { display: block; column-count: 2; column-gap: 1.5rem; }
+  .footer__col--tools li { break-inside: avoid; }
+  .footer__bottom { margin-top: 1.75rem; padding-top: 1.1rem; gap: 8px; }
+}
+
+@media (min-width: 431px) and (max-width: 700px) {
+  .footer__col--tools ul { column-count: 3; }
+}
+
+@media (max-width: 430px) {
+  .site-footer { padding-bottom: 1.5rem; }
+  .footer__bottom { font-size: 0.76rem; }
 }
 
 /* --------------------------------------------------------------------------
