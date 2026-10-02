@@ -54,6 +54,45 @@
   var EXT = { jpeg: 'jpg', webp: 'webp', avif: 'avif', png: 'png' };
 
   /* ---------------------------------------------------------------------
+     Async guards — every browser-side decode/encode races a clock
+     -------------------------------------------------------------------------
+     Chromium is not consistent about an image it cannot decode: the same file
+     makes createImageBitmap() reject on one run and never settle on the next.
+     The never-settling case is the dangerous one — it is indistinguishable
+     from "still working" until the tab dies, and in here it parks not one
+     image but a whole worker pool. So each stage gets a deadline and a reason
+     string, and a hang becomes a message.
+
+     Budgets are per stage on purpose. A long decode is welcome; an
+     undecodable file is not. See also the per-codec WASM budgets a little
+     below, which failed the same way before they were split. */
+  var BITMAP_TIMEOUT = 6000;
+  var IMG_TIMEOUT = 8000;
+  var ENCODE_TIMEOUT = 30000;
+
+  function withTimeout(promise, ms, reason) {
+    return new Promise(function (resolve, reject) {
+      var done = false;
+      var timer = setTimeout(function () {
+        if (done) return;
+        done = true;
+        reject(new Error(reason || 'timeout'));
+      }, ms);
+      promise.then(function (value) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        resolve(value);
+      }, function (err) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        reject(err);
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------------------
      Canvas factory — OffscreenCanvas in workers, <canvas> on the page
      --------------------------------------------------------------------- */
   var isWorker = (typeof WorkerGlobalScope !== 'undefined' &&
@@ -78,17 +117,24 @@
   }
 
   function canvasToBlob(canvas, mime, quality) {
+    var raw;
     if (typeof canvas.convertToBlob === 'function' && typeof canvas.toBlob !== 'function') {
-      return canvas.convertToBlob({ type: mime, quality: quality });
+      raw = canvas.convertToBlob({ type: mime, quality: quality });
+    } else {
+      raw = new Promise(function (resolve, reject) {
+        try {
+          canvas.toBlob(function (blob) {
+            /* A null blob means "no encoder for this type" — said as much, not
+               as "the image failed". */
+            if (!blob) return reject(new Error('encoder-unavailable'));
+            resolve(blob);
+          }, mime, quality);
+        } catch (err) { reject(err); }
+      });
     }
-    return new Promise(function (resolve, reject) {
-      try {
-        canvas.toBlob(function (blob) {
-          if (!blob) return reject(new Error('encoder-unavailable'));
-          resolve(blob);
-        }, mime, quality);
-      } catch (err) { reject(err); }
-    });
+    /* An encoder that never calls back used to hang a batch with no message at
+       all. A 30s ceiling is generous for a 48 MP frame and still finite. */
+    return withTimeout(raw, ENCODE_TIMEOUT, 'encode-timeout');
   }
 
   /* ---------------------------------------------------------------------
@@ -586,20 +632,28 @@
   function decode(blob) {
     if (typeof createImageBitmap !== 'function') return Promise.reject(new Error('decode-unsupported'));
     // `imageOrientation: from-image` bakes the EXIF rotation into pixels.
-    return createImageBitmap(blob, { imageOrientation: 'from-image' })
-      .catch(function () { return createImageBitmap(blob); })
-      .catch(function () {
-        if (typeof document === 'undefined') throw new Error('decode-failed');
-        return decodeViaImg(blob);
-      });
+    return withTimeout(
+      createImageBitmap(blob, { imageOrientation: 'from-image' }),
+      BITMAP_TIMEOUT, 'bitmap-timeout'
+    ).catch(function () {
+      return withTimeout(createImageBitmap(blob), BITMAP_TIMEOUT, 'bitmap-timeout');
+    }).catch(function () {
+      if (typeof document === 'undefined') throw new Error('decode-failed');
+      return decodeViaImg(blob);
+    });
   }
 
   function decodeViaImg(blob) {
     return new Promise(function (resolve, reject) {
       var url = URL.createObjectURL(blob);
       var img = new Image();
-      img.onload = function () { URL.revokeObjectURL(url); resolve(img); };
-      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('decode-failed')); };
+      var timer = setTimeout(function () {
+        URL.revokeObjectURL(url);
+        reject(new Error('img-timeout'));
+      }, IMG_TIMEOUT);
+      function done() { clearTimeout(timer); }
+      img.onload = function () { done(); URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = function () { done(); URL.revokeObjectURL(url); reject(new Error('decode-failed')); };
       img.src = url;
     });
   }

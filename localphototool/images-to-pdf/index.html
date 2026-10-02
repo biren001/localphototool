@@ -30,8 +30,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
 <link rel="manifest" href="../site.webmanifest">
-<link rel="preload" href="../assets/css/style.css?v=be13919" as="style">
-<link rel="stylesheet" href="../assets/css/style.css?v=be13919">
+<link rel="preload" href="../assets/css/style.css?v=6899977" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=6899977">
 
 <script type="application/ld+json">
 {
@@ -392,7 +392,7 @@
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
-      <span class="build-stamp" title="Built from git commit be13919">Updated <time datetime="2026-10-01">1 Oct 2026</time> &middot; build <code>be13919</code></span>
+      <span class="build-stamp" title="Built from git commit 6899977">Updated <time datetime="2026-10-01">1 Oct 2026</time> &middot; build <code>6899977</code></span>
       <span class="sep"></span>
       <span>Made for people who would rather not hand over their photos.</span>
     </div>
@@ -401,14 +401,44 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="../assets/js/pdfwriter.js?v=be13919"></script>
-<script src="../assets/js/site.js?v=be13919"></script>
-<script src="../assets/js/pwa.js?v=be13919" defer></script>
-<script src="../assets/js/stats.js?v=be13919" defer></script>
+<script src="../assets/js/pdfwriter.js?v=6899977"></script>
+<script src="../assets/js/site.js?v=6899977"></script>
+<script src="../assets/js/pwa.js?v=6899977" defer></script>
+<script src="../assets/js/stats.js?v=6899977" defer></script>
 <script>
 (function () {
   'use strict';
   var $ = function (s) { return document.querySelector(s); };
+
+  /* An image this browser cannot decode may reject — or may simply never
+     settle. The second case is the visible one here: the batch would sit on
+     "Converting 1 of 4" forever, with no error and no way out. Every decode
+     and encode below therefore races a clock. */
+  var BITMAP_TIMEOUT = 6000;
+  var ENCODE_TIMEOUT = 20000;
+
+  function withTimeout(promise, ms, reason) {
+    return new Promise(function (resolve, reject) {
+      var done = false;
+      var timer = setTimeout(function () {
+        if (done) return;
+        done = true;
+        reject(new Error(reason));
+      }, ms);
+      promise.then(function (value) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        resolve(value);
+      }, function (err) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        reject(err);
+      });
+    });
+  }
+
   var dropzone = $('#dropzone'), input = $('#fileInput'), list = $('#pageList'),
       results = $('#results'), summary = $('#listSummary'), engineText = $('#engineText'),
       buildBtn = $('#buildBtn'), buildNote = $('#buildNote'), outputCard = $('#outputCard'),
@@ -490,7 +520,10 @@
   /* decode -> canvas -> JPEG bytes + true pixel dims */
   var MAX_EDGE = 4096;
   function toJpeg(file) {
-    return createImageBitmap(file, { imageOrientation: 'from-image' }).then(function (bmp) {
+    return withTimeout(
+      createImageBitmap(file, { imageOrientation: 'from-image' }),
+      BITMAP_TIMEOUT, 'bitmap-timeout'
+    ).then(function (bmp) {
       var w = bmp.width, h = bmp.height;
       var s = Math.min(1, MAX_EDGE / Math.max(w, h));
       var cw = Math.max(1, Math.round(w * s)), ch = Math.max(1, Math.round(h * s));
@@ -501,14 +534,14 @@
       g.imageSmoothingQuality = 'high';
       g.drawImage(bmp, 0, 0, cw, ch);
       bmp.close();
-      return new Promise(function (res, rej) {
+      return withTimeout(new Promise(function (res, rej) {
         c.toBlob(function (blob) {
           if (!blob) { rej(new Error('encode-failed')); return; }
           blob.arrayBuffer().then(function (ab) {
             res({ data: new Uint8Array(ab), width: cw, height: ch });
           }, rej);
         }, 'image/jpeg', 0.92);
-      });
+      }), ENCODE_TIMEOUT, 'encode-timeout');
     });
   }
 
@@ -516,21 +549,27 @@
     if (!items.length || busy) return;
     busy = true; buildBtn.disabled = true; outputCard.hidden = true; heicNote.hidden = true;
     var t0 = Date.now();
-    var imgs = [], failed = 0;
+    var imgs = [], failed = 0, why0 = '';
 
     function step(i) {
       if (i >= items.length) return Promise.resolve();
       engineText.textContent = 'Converting ' + (i + 1) + ' of ' + items.length + '…';
       return toJpeg(items[i].file).then(function (r) {
         imgs.push(r);
-      }).catch(function () {
+      }).catch(function (e) {
         failed++;
+        /* Name the file and the reason. A single silent counter is how a
+           client-side tool ends up blamed for a browser limitation. */
+        var why = (e && e.message) || 'unknown error';
+        if (!why0) why0 = items[i].name + ' (' + why + ')';
       }).then(function () { return step(i + 1); });
     }
 
     step(0).then(function () {
       if (!imgs.length) {
-        engineText.textContent = 'None of the files could be decoded in this browser.';
+        engineText.textContent = why0
+          ? 'None of the files could be decoded — the first was ' + why0 + '.'
+          : 'None of the files could be decoded in this browser.';
         heicNote.hidden = false;
         busy = false; buildBtn.disabled = false;
         return;
@@ -546,7 +585,7 @@
       downloadBtn.download = (title || 'images').slice(0, 60) + '.pdf';
       $('#outputName').textContent = downloadBtn.download;
       $('#outputMeta').textContent = imgs.length + (imgs.length === 1 ? ' page' : ' pages') +
-        ' · ' + kb(blob.size) + (failed ? ' · ' + failed + ' file(s) skipped (could not be decoded)' : '') +
+        ' · ' + kb(blob.size) + (failed ? ' · ' + failed + ' file(s) skipped (' + (why0 || 'could not be decoded') + ')' : '') +
         ' · built in ' + (Date.now() - t0) + ' ms';
       outputCard.hidden = false;
       engineText.textContent = 'Done — the PDF never touched a server';

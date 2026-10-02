@@ -68,6 +68,44 @@
   };
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
+
+  /* ---------------------------------------------------------------------
+     Async guards — the same shape as engine.js
+     -------------------------------------------------------------------------
+     An image this browser refuses to decode does not fail politely: it makes
+     createImageBitmap() reject on one run and never settle on the next. A
+     never-settling promise is the costly one here — every item of a batch
+     waits on it. Each stage therefore races a clock and a hang becomes a
+     message naming the stage that gave up.
+     --------------------------------------------------------------------- */
+  var BITMAP_TIMEOUT = 6000;
+  var IMG_TIMEOUT = 8000;
+  var READ_TIMEOUT = 20000;
+  var ENCODE_TIMEOUT = 30000;
+  var HEIC_LIB_TIMEOUT = 20000;  /* fetching the 1.4 MB decoder itself */
+  var DISPLAY_TIMEOUT = 20000;   /* libheif's callback-shaped display() */
+
+  function withTimeout(promise, ms, reason) {
+    return new Promise(function (resolve, reject) {
+      var done = false;
+      var timer = setTimeout(function () {
+        if (done) return;
+        done = true;
+        reject(new Error(reason || 'timeout'));
+      }, ms);
+      promise.then(function (value) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        resolve(value);
+      }, function (err) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        reject(err);
+      });
+    });
+  }
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
   /* ---------------------------------------------------------------------
@@ -294,6 +332,38 @@
      Decoding is serialised on purpose: one 12 MP frame is ~48 MB of RGBA, and
      a phone that decodes four of those at once is a phone that kills the tab.
      --------------------------------------------------------------------- */
+  /* Which ftyp brands count as HEIF. mif1/msf1 are the generic container
+     brands: a real photo from an iPhone or a Pixel is one of these. */
+  var HEIF_BRANDS = ('heic heix hevc hevx heim heis hevm hevs mif1 msf1 avif avis').split(' ');
+
+  /* Read the container, not the file name. Chat apps, mail clients and desktop
+     sync tools all rename what they forward: an iPhone HEIF ends up as a .webp
+     in WhatsApp, and a plain JPEG ends up as a .heic in a cloud backup. Both
+     mistakes used to be fatal here — the first never reached the HEIF decoder
+     (its file type said image/webp), the second was fed to a decoder that
+     could only answer "corrupt". The box that matters is the ftyp brand, four
+     bytes after the tag, inside the first few dozen bytes. */
+  function looksHeic(buf) {
+    if (!buf || buf.byteLength < 16) return false;
+    var head = new Uint8Array(buf, 0, Math.min(64, buf.byteLength));
+    for (var i = 0; i + 12 <= head.length; i++) {
+      if (head[i] !== 0x66 || head[i + 1] !== 0x74 || head[i + 2] !== 0x79 || head[i + 3] !== 0x70) continue;
+      /* Layout after the 'ftyp' tag itself: major brand (i+4), minor version
+         (i+8), then the compatible-brand list. Reading a fixed offset used to
+         land on the minor version — four zero bytes — and every HEIF was
+         therefore "not HEIF", quietly handled by the <img> fallback instead of
+         the decoder that exists for exactly this. Major brand first, then
+         every compatible one, so a file that merely *claims* mif1 with a
+         heic-compatible list is still recognised. */
+      for (var b = i + 4; b + 4 <= head.length; b += 4) {
+        var brand = String.fromCharCode(head[b], head[b + 1], head[b + 2], head[b + 3]);
+        if (HEIF_BRANDS.indexOf(brand) !== -1) return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
   var heicLib = null;
 
   function loadHeicLib() {
@@ -315,10 +385,64 @@
     return /heic|heif/i.test(file.type || '') || /\.(heic|heif)$/i.test(file.name || '');
   }
 
+  function jpegBlob(canvas) {
+    return withTimeout(new Promise(function (resolve, reject) {
+      /* 0.96 rather than 1.0: this is an intermediate the compressor will
+         re-encode, so one clean pass is enough — but two lossy passes at
+         low quality would be visible in the final file. */
+      canvas.toBlob(function (blob) {
+        blob ? resolve(blob) : reject(new Error('encode-failed'));
+      }, 'image/jpeg', 0.96);
+    }), ENCODE_TIMEOUT, 'encode-timeout');
+  }
+
+  /* Any non-HEIF bytes, even under a .heic name. Returns a JPEG blob so the
+     rest of the pipeline only ever sees one format. */
+  function jpegFromImg(blob) {
+    return withTimeout(new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(blob);
+      var img = new Image();
+      var timer = setTimeout(function () {
+        URL.revokeObjectURL(url);
+        reject(new Error('img-timeout'));
+      }, IMG_TIMEOUT);
+      img.onload = function () { clearTimeout(timer); URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = function () { clearTimeout(timer); URL.revokeObjectURL(url); reject(new Error('decode-failed')); };
+      img.src = url;
+    }), IMG_TIMEOUT, 'img-timeout').then(function (img) {
+      var w = img.naturalWidth || img.width;
+      var h = img.naturalHeight || img.height;
+      if (!w || !h) throw new Error('no-size');
+      return jpegFromSource(img, w, h);
+    });
+  }
+
+  function jpegFromSource(source, w, h) {
+    var canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return Promise.reject(new Error('no-canvas'));
+    ctx.drawImage(source, 0, 0, w, h);
+    return jpegBlob(canvas);
+  }
+
   function decodeHeicOnce(file) {
-    return file.arrayBuffer().then(function (buffer) {
-      return loadHeicLib().then(function (lib) {
-        var images = new lib.HeifDecoder().decode(buffer);
+    return withTimeout(file.arrayBuffer(), READ_TIMEOUT, 'read-timeout').then(function (buffer) {
+      /* Second line of defence, under normalizeInput(): decide by container.
+         A JPEG renamed *.heic must never reach the HEIF decoder, and an HEIF
+         stored under a .webp name must still be given one. */
+      if (!looksHeic(buffer)) return jpegFromImg(buffer);
+
+      return withTimeout(loadHeicLib(), HEIC_LIB_TIMEOUT, 'heic-lib-timeout').then(function (lib) {
+        var images;
+        try {
+          images = new lib.HeifDecoder().decode(buffer);
+        } catch (err) {
+          /* A decoder that throws on unexpected bytes is the honest answer to
+             an unexpected file — surface it as one. */
+          throw new Error('heic-unsupported');
+        }
         if (!images || !images.length) throw new Error('heic-no-image');
         var img = images[0];
         var w = img.get_width();
@@ -326,11 +450,13 @@
         if (!w || !h) throw new Error('heic-bad-size');
 
         var pixels = new Uint8ClampedArray(w * h * 4);
-        return new Promise(function (resolve) {
+        /* display() is callback-shaped, so nothing stops it from never calling
+           back. Give it a deadline, and release the frame either way. */
+        return withTimeout(new Promise(function (resolve) {
           img.display({ data: pixels, width: w, height: h }, function (out) {
             resolve(out && out.data ? out : { data: pixels, width: w, height: h });
           });
-        }).then(function (out) {
+        }), DISPLAY_TIMEOUT, 'heic-display-timeout').then(function (out) {
           try { img.free(); } catch (e) { /* not fatal */ }
 
           var canvas = document.createElement('canvas');
@@ -340,15 +466,10 @@
           var frame = ctx.createImageData(out.width, out.height);
           frame.data.set(out.data);
           ctx.putImageData(frame, 0, 0);
-
-          return new Promise(function (resolve, reject) {
-            /* 0.96 rather than 1.0: this is an intermediate the compressor will
-               re-encode, so one clean pass is enough — but two lossy passes at
-               low quality would be visible in the final file. */
-            canvas.toBlob(function (blob) {
-              blob ? resolve(blob) : reject(new Error('heic-encode-failed'));
-            }, 'image/jpeg', 0.96);
-          });
+          return jpegBlob(canvas);
+        }, function (err) {
+          try { img.free(); } catch (e) { /* not fatal */ }
+          throw err;
         });
       });
     });
@@ -364,11 +485,19 @@
   }
 
   function normalizeInput(file) {
-    if (!state.options.heic || !isHeic(file)) return Promise.resolve(file);
-    return decodeHeic(file).then(function (blob) {
-      var name = (file.name || 'photo.heic').replace(/\.(heic|heif)$/i, '.jpg');
-      return new File([blob], name, { type: 'image/jpeg', lastModified: file.lastModified });
-    });
+    if (!state.options.heic) return Promise.resolve(file);
+    /* Container first, name only as a fallback. Two naming mistakes reach this
+       function in the wild — a plain JPEG renamed *.heic by a desktop sync
+       tool, and an iPhone HEIF forwarded as .webp by a chat client — and the
+       first one used to be handed to a decoder that can only say "corrupt". */
+    return withTimeout(file.arrayBuffer(), READ_TIMEOUT, 'read-timeout')
+      .then(function (buf) { return looksHeic(buf) ? decodeHeic(file) : file; })
+      .catch(function () { return isHeic(file) ? decodeHeic(file) : file; })
+      .then(function (blob) {
+        if (blob === file || !blob) return file;
+        var name = (file.name || 'photo.heic').replace(/\.(heic|heif)$/i, '.jpg');
+        return new File([blob], name, { type: 'image/jpeg', lastModified: file.lastModified });
+      });
   }
 
   /* ---------------------------------------------------------------------
@@ -605,13 +734,27 @@
 
   function friendlyError(err) {
     var msg = (err && err.message) || 'unknown';
-    if (msg === 'decode-failed' || msg === 'decode-unsupported') {
+    /* Decoding first: a timeout is usually the browser giving up, not a bad
+       file, and "try a different output format" would be advice against a
+       problem the visitor does not have. */
+    if (msg === 'decode-failed' || msg === 'decode-unsupported' || msg === 'no-size' ||
+        msg === 'bitmap-timeout' || msg === 'img-timeout' || msg === 'read-timeout') {
       return 'This file could not be decoded in your browser.';
     }
+    if (msg === 'encode-failed' || msg === 'encode-timeout' ||
+        msg === 'encoder-unavailable' || msg === 'no-canvas') {
+      return 'Your browser could not write the result — try a smaller image.';
+    }
+    if (/timeout$/.test(msg)) {
+      return 'That took too long in your browser, so it was stopped.';
+    }
     if (msg === 'too-large') return 'Image is too large for in-browser processing.';
-    if (/^heic-no-decoder/.test(msg)) return 'The HEIC decoder could not be loaded. Reload the page and try again.';
+    if (msg === 'heic-no-decoder') return 'The HEIC decoder could not be loaded. Reload the page and try again.';
     if (/^heic-/.test(msg)) return 'This HEIC file could not be opened — it may be damaged.';
-    return 'Compression failed — try a different output format.';
+    /* Anything unrecognised is shown as it is, error code included. The worst
+       failure mode of a client-side tool is a message that blames the file
+       when the real problem is internal. */
+    return 'Compression failed (' + msg + ').';
   }
 
   /* On a phone the results land far below the fold, so pull them into view as
@@ -963,17 +1106,22 @@
 
   function toJpegBlob(blob, quality) {
     if (typeof createImageBitmap !== 'function') return Promise.resolve(null);
-    return createImageBitmap(blob).then(function (bmp) {
+    var encoded;
+    return withTimeout(createImageBitmap(blob), BITMAP_TIMEOUT, 'bitmap-timeout').then(function (bmp) {
       var c;
       if (typeof OffscreenCanvas !== 'undefined') c = new OffscreenCanvas(bmp.width, bmp.height);
       else { c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height; }
       var cx = c.getContext('2d');
-      if (!cx) return null;
+      if (!cx) throw new Error('no-canvas');
       cx.drawImage(bmp, 0, 0);
       if (typeof c.convertToBlob === 'function') {
-        return c.convertToBlob({ type: 'image/jpeg', quality: quality || 0.92 });
+        encoded = c.convertToBlob({ type: 'image/jpeg', quality: quality || 0.92 });
+      } else {
+        encoded = new Promise(function (resolve) { c.toBlob(resolve, 'image/jpeg', quality || 0.92); });
       }
-      return new Promise(function (resolve) { c.toBlob(resolve, 'image/jpeg', quality || 0.92); });
+      /* This twin only ever unlocks a share sheet — it must never be the thing
+         that stalls. A deadline of "few seconds" is the right one here. */
+      return withTimeout(encoded, ENCODE_TIMEOUT, 'encode-timeout');
     }).catch(function () { return null; });
   }
 
