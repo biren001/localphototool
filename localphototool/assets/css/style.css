@@ -483,6 +483,53 @@ html[data-theme="dark"] .hero::before {
 .feature h3 { margin-bottom: 0.4rem; }
 .feature p { font-size: 0.925rem; margin: 0; color: var(--text-muted); }
 
+/* Pinned tools strip — the shortcut row at the top of the toolkit section on
+   the homepage. Everything here is a plain link, so it works with JS off; the
+   "your tools" half is filled in by site.js from localStorage only. */
+.pinned {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 1rem 1.15rem 1.15rem;
+  box-shadow: var(--shadow-sm); margin-bottom: clamp(1.05rem, 2vw, 1.6rem);
+}
+.pinned__head {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px;
+  margin-bottom: 0.85rem;
+}
+.pinned__title { font-size: 0.94rem; font-weight: 680; letter-spacing: -0.01em; }
+.pinned__hint { font-size: 0.7725rem; color: var(--text-faint); }
+.pinned__clear {
+  margin-left: auto; background: none; border: 0; padding: 4px 0;
+  font: inherit; font-size: 0.78rem; font-weight: 560; color: var(--text-muted);
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--border-strong); cursor: pointer;
+}
+.pinned__clear:hover { color: var(--text); text-decoration-color: currentColor; }
+.pinned__list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.pinned__mine { margin-top: 0.95rem; padding-top: 0.95rem; border-top: 1px dashed var(--border); }
+
+.pin-wrap {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--border); border-radius: var(--r-full);
+  background: var(--surface-2); max-width: 100%;
+}
+.pin-wrap:hover { border-color: var(--border-strong); background: var(--surface); }
+.pin-wrap--mine { border-color: var(--brand-500); }
+.pin__main {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 11px; max-width: 100%;
+  font-size: 0.8125rem; font-weight: 600; color: var(--text); text-decoration: none;
+}
+.pin__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pin__icon { width: 15px; height: 15px; color: var(--brand-500); flex: none; }
+.pin__x {
+  width: 22px; height: 22px; flex: none; margin-right: 5px; padding: 0;
+  border: 0; border-radius: 50%; background: transparent; color: var(--text-faint);
+  display: grid; place-items: center; cursor: pointer;
+}
+.pin__x svg { width: 11px; height: 11px; }
+.pin__x:hover { background: var(--border); color: var(--text); }
+@media (max-width: 420px) { .pinned__clear { margin-left: 0; } }
+
 .stat-strip {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1px; background: var(--border); border: 1px solid var(--border);
