@@ -68,7 +68,9 @@ function ok(name, cond, extra) {
         /* Only meaningful while the links are laid out in the row: in the
            dropdown they are position:fixed across the full viewport on purpose. */
         if (inline) {
-          inner.querySelectorAll('a, button').forEach(function (el) {
+          /* summary is in here because v71 turned the All-tools link into a
+             <details>; without it a wider label would slip past unnoticed. */
+          inner.querySelectorAll('a, button, summary').forEach(function (el) {
             const r = el.getBoundingClientRect();
             if (!r.width) return;
             if (r.right > box.right + 1 || r.left < box.left - 1) {

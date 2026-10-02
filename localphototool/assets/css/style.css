@@ -285,6 +285,42 @@ code, kbd, samp {
 .nav__link:hover { background: var(--surface-hover); color: var(--text); text-decoration: none; }
 .nav__link[aria-current="page"] { color: var(--brand-500); background: var(--brand-tint); }
 
+/* v71 — All tools is a <details>, so the list opens with no JavaScript at all
+   and its links stay in the DOM for crawlers. The panel is absolutely placed so
+   opening it never reflows the header row. */
+.nav__tools { position: relative; }
+.nav__tools > summary {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 8px 10px; border-radius: var(--r-sm);
+  color: var(--text-2); font-size: 0.9125rem; font-weight: 560;
+  cursor: pointer; list-style: none; white-space: nowrap;
+  transition: background 0.18s var(--ease), color 0.18s var(--ease);
+}
+.nav__tools > summary::-webkit-details-marker { display: none; }
+.nav__tools > summary:hover { background: var(--surface-hover); color: var(--text); }
+.nav__tools > summary:focus-visible { outline: 2px solid var(--brand-500); outline-offset: 2px; }
+.nav__tools[open] > summary { background: var(--surface-hover); color: var(--text); }
+.nav__tools__caret {
+  width: 11px; height: 11px; flex: none; color: var(--text-faint);
+  transition: transform 0.18s var(--ease);
+}
+.nav__tools[open] > summary .nav__tools__caret { transform: rotate(180deg); }
+.nav__tools__panel {
+  position: absolute; top: calc(100% + 9px); left: 6px; z-index: 5;
+  min-width: 300px; max-width: min(520px, calc(100vw - 40px));
+  list-style: none; margin: 0; padding: 8px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: var(--shadow-lg);
+  max-height: min(60vh, 460px); overflow-y: auto; overscroll-behavior: contain;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 4px;
+}
+.nav__tools__panel a {
+  display: block; padding: 8px 10px; border-radius: var(--r-sm);
+  font-size: 0.85rem; color: var(--text-2); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.nav__tools__panel a:hover { background: var(--surface-hover); color: var(--text); text-decoration: none; }
+
 .nav__actions { display: flex; align-items: center; gap: 8px; margin-left: 8px; }
 
 /* Install entry: an icon on phones, icon + label once there is room. */
@@ -344,6 +380,17 @@ html[data-theme="dark"] .icon-btn .i-sun { display: none; }
   .nav__link { padding: 13px 14px; font-size: 1rem; }
   .nav__toggle { display: grid; }
   .nav__actions .btn { display: none; }
+  /* v71 — in the hamburger the same list is laid out in the flow rather than as
+     a floating panel, comes first (on a phone it is the only shortcut out of the
+     page you are standing on) and scrolls with the menu instead of the page. */
+  .nav__links { max-height: calc(100vh - var(--header-h)); overflow-y: auto; }
+  .nav__tools { order: -1; }
+  .nav__tools > summary { padding: 13px 12px; font-size: 1rem; }
+  .nav__tools__panel {
+    position: static; top: auto; left: auto; max-height: none; overflow: visible;
+    box-shadow: none; background: transparent; border: 0; padding: 2px 0 8px 14px;
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --------------------------------------------------------------------------
