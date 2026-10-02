@@ -513,18 +513,20 @@
   function render() {
     list.innerHTML = '';
     items.forEach(function (it, i) {
-      var h = '<div class="result" style="display:flex;gap:0.9rem;align-items:center">';
-      h += '<span class="muted" style="flex:none;width:1.4rem;text-align:right;font-size:0.85rem">' + (i + 1) + '</span>';
-      h += '<img src="' + it.url + '" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:10px;flex:none" onerror="this.style.visibility=\'hidden\'">';
-      h += '<div style="flex:1;min-width:0">';
-      h += '<div class="result__name">' + esc(it.name) + '</div>';
+      /* v72d: the picture is the whole picture here as well, so the page about
+         to be moved is the page you can see — same preview as everywhere else,
+         with the up / down buttons where they were. */
+      var h = '<div class="result">';
+      h += '<div class="result__thumb"><img src="' + it.url + '" alt="" onerror="this.style.visibility=\'hidden\'"></div>';
+      h += '<div class="result__main">';
+      h += '<div class="result__name">' + (i + 1) + '. ' + esc(it.name) + '</div>';
       h += '<div class="result__meta">' + kb(it.size) + '</div>';
       h += '</div>';
-      h += '<span style="display:flex;gap:0.3rem;flex:none">';
+      h += '<div class="result__actions">';
       h += '<button class="btn btn--ghost btn--sm" data-mv="' + i + '" data-dir="-1" type="button" aria-label="Move up"' + (i === 0 ? ' disabled' : '') + '>&uarr;</button>';
       h += '<button class="btn btn--ghost btn--sm" data-mv="' + i + '" data-dir="1" type="button" aria-label="Move down"' + (i === items.length - 1 ? ' disabled' : '') + '>&darr;</button>';
       h += '<button class="btn btn--ghost btn--sm" data-rm="' + i + '" type="button" aria-label="Remove">✕</button>';
-      h += '</span></div>';
+      h += '</div></div>';
       list.insertAdjacentHTML('beforeend', h);
     });
     summary.textContent = items.length

@@ -472,8 +472,9 @@
       img.alt = '';
       thumb.appendChild(img);
 
-      var body = document.createElement('div');
-      body.style.minWidth = '0';
+    var body = document.createElement('div');
+    body.style.minWidth = '0';
+    body.style.gridArea = 'main';
       var name = document.createElement('strong');
       name.textContent = it.file.name;
       var meta = document.createElement('div');

@@ -835,31 +835,40 @@ input[type="range"]::-moz-range-thumb {
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
 .result.is-error { border-color: color-mix(in srgb, var(--danger-500) 45%, var(--border)); }
 
+/* v72d — the picture leads the row. A 60px crop hides the thing the tool just
+   produced, and a picture that has to be opened in a dialog is one click the
+   user has to think about, so the preview frame is the row itself and shows the
+   whole picture. Only the cut produces a transparency, so the checkerboard
+   stays with the background remover; everywhere else the frame is a plain
+   sunken panel. */
 .result__thumb {
-  width: 60px; height: 60px; border-radius: var(--r-sm);
-  background-color: var(--bg-sunken); overflow: hidden; position: relative;
-  display: grid; place-items: center; flex: none;
-  border: 1px solid var(--border);
+  grid-area: preview;
+  display: grid; place-items: center; position: relative;
+  padding: 10px; overflow: hidden; min-width: 0;
+  background-color: var(--bg-sunken);
+  border: 1px solid var(--border); border-radius: var(--r-sm);
 }
-.result__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.result__thumb img {
+  display: block; max-width: 100%; max-height: 320px;
+  object-fit: contain; border-radius: 4px;
+}
 .result__thumb .ph { color: var(--text-faint); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; }
+/* Nothing to show yet, because the row is still working: keep the frame the
+   small square it always was instead of opening a hole in the row. */
+.result__thumb:has(> .ph) { width: 54px; height: 54px; padding: 0; justify-self: start; }
 
-/* v72/v72b — the cut used to be previewed as a 60px cover thumbnail: the
-   transparent ring around the subject was cropped away, the panel behind it was
-   a flat colour, and the result looked exactly like the photo that came in — so
-   "is there a preview?" could not be answered by looking at the row. Only the
-   background-removal list produces a transparency, so only it gets the
-   checkerboard and the whole frame in view. The frame is now the row itself:
-   open: a 60px crop cannot show a transparency, and a thumbnail that opens a
-   bigger copy is one click the user has to think about. Each row therefore
-   leads with the picture itself, on a checkerboard so the transparent ring is
-   the visible thing; the original stays one line below, for comparing. */
-#rbList .result {
+/* v72b/v72d — the frame the background remover leads with is now the frame
+   every tool leads with: the row, with the whole picture in view. `:has()` is
+   what keeps the old 60px row layout for the few rows that carry no picture at
+   all (an error line, a page-order list). The checkerboard only belongs to the
+   cut — it is the only preview that can be a transparency. */
+.result:has(> .result__thumb),
+.result:has(> .result__preview) {
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas: 'preview preview' 'main actions';
   gap: 10px 12px; align-items: start;
 }
-#rbList .result__preview {
+.result__preview {
   grid-area: preview;
   display: grid; place-items: center;
   padding: 10px; overflow: hidden;
@@ -868,18 +877,18 @@ input[type="range"]::-moz-range-thumb {
   background-position: 0 0; background-size: 18px 18px;
   border: 1px solid var(--border); border-radius: var(--r-sm);
 }
-#rbList .result__preview img {
+.result__preview img {
   display: block; max-width: 100%; max-height: 320px;
   object-fit: contain; border-radius: 4px;
 }
-#rbList .result__main { grid-area: main; }
-#rbList .result__actions { grid-area: actions; margin-top: 0; }
+.result:has(> .result__thumb) > .result__actions,
+.result:has(> .result__preview) > .result__actions { margin-top: 0; }
 #rbList .result__compare {
   justify-self: start; font-size: 0.78rem;
   padding: 0.34rem 0.6rem;
 }
 
-.result__main { min-width: 0; display: grid; gap: 5px; }
+.result__main { min-width: 0; display: grid; gap: 5px; grid-area: main; }
 .result__name {
   font-size: 0.875rem; font-weight: 620; color: var(--text);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -908,7 +917,7 @@ input[type="range"]::-moz-range-thumb {
 @keyframes slide { to { background-position: 200% 0; } }
 .result__bar.is-done > span { animation: none; background: var(--success-500); }
 
-.result__actions { display: flex; align-items: center; gap: 5px; }
+.result__actions { display: flex; align-items: center; gap: 5px; grid-area: actions; }
 .result__actions .btn { padding: 0.42rem 0.6rem; }
 
 .result__note {
@@ -918,17 +927,20 @@ input[type="range"]::-moz-range-thumb {
 
 @media (max-width: 620px) {
   .result { grid-template-columns: 52px minmax(0, 1fr); gap: 12px; }
-  .result__thumb { width: 52px; height: 52px; }
-  /* v72b: on a phone the whole picture still has to fit, so the preview gets a
-     short frame and the actions drop under the name rather than beside it. */
-  #rbList .result {
+  /* v72b/v72d: on a phone the whole picture still has to fit, so the preview
+     gets a short frame and the actions drop under the name rather than beside
+     it — whether the tool cut a background or compressed a photo. */
+  .result:has(> .result__thumb),
+  .result:has(> .result__preview) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'preview' 'main' 'actions';
   }
-  #rbList .result__preview { padding: 6px; }
-  #rbList .result__preview img { max-height: 46vh; }
+  .result__thumb, .result__preview { padding: 6px; }
+  .result__thumb img, .result__preview img { max-height: 46vh; }
   #rbList .result__actions { grid-column: 1; margin-top: 4px; }
-  .result__actions { grid-column: 2; margin-top: 2px; }
+  .result:not(:has(> .result__thumb)):not(:has(> .result__preview)) .result__actions {
+    grid-column: 2; margin-top: 2px;
+  }
   .result__meta { font-size: 0.74rem; }
 }
 

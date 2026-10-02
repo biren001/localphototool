@@ -458,10 +458,9 @@
   function renderCard(file, report) {
     var url = URL.createObjectURL(file);
     var hasGps = !!report.gps;
-    var h = '<div class="result' + (hasGps ? ' ' : '') + '" style="display:flex;gap:1rem;align-items:flex-start">';
-    h += '<img class="result__thumb" src="' + url + '" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:10px;flex:none" ' +
-         'onerror="this.style.visibility=\'hidden\'">';
-    h += '<div class="result__main" style="flex:1;min-width:0">';
+    var h = '<div class="result' + (hasGps ? ' ' : '') + '">';
+    h += '<div class="result__thumb"><img src="' + url + '" alt="" onerror="this.style.visibility=\'hidden\'"></div>';
+    h += '<div class="result__main">';
     h += '<div class="result__name">' + esc(file.name) + '</div>';
     h += '<div class="result__meta">' + KIND_LABEL[report.kind] + ' · ' + (file.size / 1024).toFixed(0) + ' KB</div>';
 
