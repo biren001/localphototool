@@ -272,6 +272,60 @@ async function cmdQueries(days, rows) {
   console.log('\nwrote ' + file);
 }
 
+/* Which pages are actually earning impressions, and which are invisible. This
+   is the first thing to check before restructuring a page: it says whether the
+   page carries any weight to lose. */
+async function cmdPages(days, rows) {
+  const creds = await authorised();
+  const site = await pickSite(creds);
+  const end = new Date(Date.now() - 3 * 86400000);   // GSC data lags ~2-3 days
+  const start = new Date(end.getTime() - days * 86400000);
+  const iso = (d) => d.toISOString().slice(0, 10);
+  console.log('property  ' + site);
+  console.log('window    ' + iso(start) + ' → ' + iso(end) + '  (' + days + 'd, ending 3 days back for latency)');
+
+  /* --page=/ narrows it to one URL, which is how you find out which query a
+     page is actually ranking for. The filter wants the full absolute URL. */
+  const want = process.argv.find((a) => a.startsWith('--page='));
+  const body = {
+    startDate: iso(start),
+    endDate: iso(end),
+    dimensions: ['page'],
+    rowLimit: rows,
+    type: 'web'
+  };
+  if (want) {
+    body.dimensionFilterClauses = [{
+      dimension: 'page',
+      operator: 'equals',
+      expression: (want.slice('--page='.length).indexOf('/') === 0 ? 'https://' + HOST : 'https://' + HOST) + want.slice('--page='.length)
+    }];
+  }
+  const r = await call('webmasters/v3/sites/' + encodeURIComponent(site) + '/searchAnalytics/query',
+    creds, body);
+  if (r.status !== 200) {
+    console.log('FAIL HTTP ' + r.status + ' ' + JSON.stringify(r.data).slice(0, 500));
+    process.exit(1);
+  }
+  const rowList = r.data.rows || [];
+  if (!rowList.length) {
+    console.log('\nno rows — nothing in the window was served in search. Nothing here is a bug.');
+    return;
+  }
+  console.log('\n' + rowList.length + ' pages with impressions\n');
+  console.log('  clicks  impress    ctr   pos   page');
+  rowList.forEach((q) => {
+    console.log('  ' + String(q.clicks).padStart(6) + String(q.impressions).padStart(9) +
+      (100 * q.ctr).toFixed(2).padStart(7) + '%' + q.position.toFixed(1).padStart(6) + '   ' +
+      q.keys[0].replace('https://' + HOST, ''));
+  });
+
+  fs.mkdirSync(OUT, { recursive: true });
+  const file = path.join(OUT, 'gsc-pages-' + iso(new Date()) + '.json');
+  fs.writeFileSync(file, JSON.stringify({ siteUrl: site, window: [iso(start), iso(end)], rows: rowList }, null, 1), 'utf8');
+  console.log('\nwrote ' + file);
+}
+
 async function cmdInspect() {
   const creds = await authorised();
   const site = await pickSite(creds);
@@ -335,6 +389,7 @@ async function cmdSubmitSitemap() {
     if (cmd === 'auth') return await cmdAuth();
     if (cmd === 'sites') return await cmdSites();
     if (cmd === 'queries') return await cmdQueries(days, rows);
+    if (cmd === 'pages') return await cmdPages(days, rows);
     if (cmd === 'inspect') return await cmdInspect();
     if (cmd === 'submit-sitemap') return await cmdSubmitSitemap();
     console.log('unknown command: ' + cmd);
