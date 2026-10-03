@@ -257,7 +257,13 @@ async function cmdQueries(days, rows) {
   }
   const rowList = r.data.rows || [];
   if (!rowList.length) {
-    console.log('\nno rows — normal for a property this young. Nothing here is a bug.');
+    /* The UI can still show query rows while the API returns none — on this
+       property the query dimension has never come back through the API, so an
+       empty result here does NOT mean "no impressions" (the `pages` query is
+       the one that carries the truth). */
+    console.log('\nno rows — the query dimension returns nothing for this property');
+    console.log('through the API even when the UI shows queries. Do not read this');
+    console.log('as zero impressions: run `pages` instead, or read the UI.');
     return;
   }
   console.log('\n' + rowList.length + ' queries\n');
@@ -295,11 +301,17 @@ async function cmdPages(days, rows) {
     type: 'web'
   };
   if (want) {
-    body.dimensionFilterClauses = [{
+    const clause = {
       dimension: 'page',
       operator: 'equals',
       expression: (want.slice('--page='.length).indexOf('/') === 0 ? 'https://' + HOST : 'https://' + HOST) + want.slice('--page='.length)
-    }];
+    };
+    /* dimensionFilterClauses is the deprecated spelling and the API now ignores
+       it — `--page=/` silently came back with the whole site instead of one
+       URL, which makes a page look like it has impressions when it does not.
+       dimensionFilterGroups is the field that actually binds. */
+    body.dimensionFilterClauses = [clause];
+    body.dimensionFilterGroups = [{ groupType: 'and', filters: [clause] }];
   }
   const r = await call('webmasters/v3/sites/' + encodeURIComponent(site) + '/searchAnalytics/query',
     creds, body);
