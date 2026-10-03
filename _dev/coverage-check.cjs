@@ -27,6 +27,27 @@ const GROUPS = {
     'remove background', 'cut out', 'cut the background', 'delete the background',
     'transparent background', 'transparent png', 'without background',
     'background from a', 'product photo', 'logo background'
+  ],
+  'compress-photos-for-email': [
+    'attach', 'attachment', 'email', 'e-mail', 'mail server', 'bounce', 'smtp',
+    'too large to send', 'size limit', 'mb limit', 'inbox', 'gmail', 'outlook'
+  ],
+  'images-to-pdf': [
+    'pdf', 'document', 'print', 'a4', 'letter size', 'page size', 'merge',
+    'combine', 'bind', 'photos into', 'screenshot to pdf', 'jpg to pdf', 'scan'
+  ],
+  'watermark': [
+    'watermark', 'logo', 'stamp', 'copyright', 'brand', 'transparent watermark',
+    'text on a photo', 'overlay', 'do not let anyone use', 'proof', 'draft'
+  ],
+  'metadata-editor': [
+    'metadata', 'exif', 'copyright', 'author', 'title', 'alt text', 'description',
+    'gps', 'date taken', 'camera', 'lens', 'aperture', 'edit the'
+  ],
+  'transfer': [
+    'send', 'another device', 'another phone', 'without a cable', 'qr code',
+    'airdrop', 'share link', 'wifi', 'between computers', 'move photos',
+    'offline transfer', 'no account'
   ]
 };
 

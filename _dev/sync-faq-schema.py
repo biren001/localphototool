@@ -23,7 +23,15 @@ SITE = os.path.join(ROOT, "..", "localphototool")
 
 PAGES = ["index.html", "compress/index.html", "heic-to-jpg/index.html", "exif-viewer/index.html", "images-to-pdf/index.html", "resize-image/index.html", "watermark/index.html", "png-to-jpg/index.html", "jpg-to-webp/index.html", "jpg-to-png/index.html", "webp-to-jpg/index.html", "webp-to-png/index.html", "image-to-base64/index.html", "batch-rename/index.html", "metadata-editor/index.html",
     "remove-background/index.html", "share/index.html",
-    "reduce-image-size/index.html"]
+    "reduce-image-size/index.html",
+    # 下面这些原本漏了登记：页面早早写了可见 FAQ，也带着手写的 FAQPage 实体，
+    # 却从没进过同步清单 —— 于是 schema 一直停在它被手写出来的那一天。
+    # 先跑 python _dev/audit-faq-sync.py 看还有没有新的漏网。
+    "compress-photos-for-email/index.html", "compress-to-100kb/index.html",
+    "compress-to-200kb/index.html", "compress-to-500kb/index.html",
+    "compress-to-50kb/index.html", "compress-without-uploading/index.html",
+    "image-compressor-upload-test/index.html", "remove-gps-from-photo/index.html",
+    "transfer/index.html"]
 
 DETAILS_RE = re.compile(
     r'<details class="faq__item"[^>]*>\s*<summary>([\s\S]*?)</summary>\s*'

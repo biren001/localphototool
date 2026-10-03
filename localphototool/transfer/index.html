@@ -342,6 +342,22 @@ html[data-theme="dark"] #beamApp {
         },
         {
           "@type": "Question",
+          "name": "Can I send photos from an iPhone to an Android phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Nothing about the transfer depends on either device's operating system: both browsers just have to open this page and be able to see the same network. The one thing that varies is the convenience of getting the page in front of the second screen — iPhones can open it from a shared link, Android can scan the QR code, and either can type the six-character code in. What you get on the far side is the original file, byte for byte, with no AirDrop, no Google Play services and no vendor's app in the way."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I move photos from a phone to a laptop without a cable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That is the usual reason to be here. Open this page on the phone and on the laptop, scan the code on the laptop with the phone, and the files land in the laptop's downloads — no cable, no driver, no sync client, and no copy of your pictures parked on a company's server. Keep both screens awake and on the same Wi-Fi and a batch of a few hundred photos takes about as long as the download button would take. After the transfer the two devices share nothing further; closing the tab ends the session."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Does it work if the phone is on mobile data and the computer is on Wi-Fi?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -552,6 +568,9 @@ html[data-theme="dark"] #beamApp {
       <p>Open this page on both devices — for example your phone and your computer. One device shows a six-character code and a QR code; the other scans it or types the code in. The two browsers then negotiate a direct, encrypted peer-to-peer connection using WebRTC, the same technology video call sites use. From that moment the files flow straight from one device to the other.</p>
       <p>This is the same promise as the rest of the site: nothing is uploaded. There is no server in the middle holding your photos, and there is no account anywhere. The connection details are exchanged through a signaling service — the operator that connects the call — and once the direct link is up, it is not involved any more.</p>
 
+      <h2>Why not just AirDrop, or a cable?</h2>
+      <p>AirDrop is the right tool when the two devices are both Apple and side by side; Android's quick share is the equivalent on the other side. The gap is everything else: a phone and a laptop that are not both Apple, a desktop you have never paired, a machine with no Bluetooth, or a tablet you picked up in a hurry. The shape of the problem is always the same: the picture is on one device and you need it on another device — another phone, a tablet, or the laptop on the other desk. This page does not care what either device is, provided both browsers can run it and both are on the same network. There is no driver, no cable, no pairing and no account, and unlike a cable the two screens do not have to be within arm's reach.</p>
+
       <h2>Why not just email the photos to yourself?</h2>
       <div class="table-scroll">
         <table>
@@ -588,6 +607,14 @@ html[data-theme="dark"] #beamApp {
         <details class="faq__item">
           <summary>Is there a file size limit?</summary>
           <div class="faq__body"><p>No hard limit. Files are streamed in small chunks, so even large videos transfer. Very large files take proportionally longer, and the speed depends on the slower of the two connections — the data goes over your networks, not through our servers.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I send photos from an iPhone to an Android phone?</summary>
+          <div class="faq__body"><p>Yes. Nothing about the transfer depends on either device's operating system: both browsers just have to open this page and be able to see the same network. The one thing that varies is the convenience of getting the page in front of the second screen — iPhones can open it from a shared link, Android can scan the QR code, and either can type the six-character code in. What you get on the far side is the original file, byte for byte, with no AirDrop, no Google Play services and no vendor's app in the way.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I move photos from a phone to a laptop without a cable?</summary>
+          <div class="faq__body"><p>That is the usual reason to be here. Open this page on the phone and on the laptop, scan the code on the laptop with the phone, and the files land in the laptop's downloads — no cable, no driver, no sync client, and no copy of your pictures parked on a company's server. Keep both screens awake and on the same Wi-Fi and a batch of a few hundred photos takes about as long as the download button would take. After the transfer the two devices share nothing further; closing the tab ends the session.</p></div>
         </details>
         <details class="faq__item">
           <summary>Does it work if the phone is on mobile data and the computer is on Wi-Fi?</summary>

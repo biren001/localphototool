@@ -113,6 +113,22 @@
         },
         {
           "@type": "Question",
+          "name": "How do I add my company logo to photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This tool draws text rather than stamping an image file, so there is no logo upload — but the result people usually want is the same. Type the brand's name or wordmark into Watermark text, set Color to your brand colour, and keep the size around 4% of the shorter edge. If you need the actual mark — the swoosh, the icon, the logotype as a graphic — it has to be a design tool, because stamping a picture onto a picture would be a second decode and a quality loss this page deliberately avoids. What you can do here is put the name on every photo in the batch in one pass, which is the part that takes time by hand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I make the watermark transparent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — the Opacity control runs from 10% to 100%, so a watermark at 40% is genuinely transparent: the photograph reads straight through the mark and only the letterforms darken the pixels underneath it. Around 60% is the usual balance for a name or brand that should be visible but not dominate. Transparency is per-image in the file it writes; nothing about it depends on the background the mark sits on. Combine it with the tile option and a low density when you want the mark to be felt across the whole frame rather than read in one corner."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Can I resize or compress the photos while watermarking them?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -237,7 +253,7 @@
         <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Text watermark</span>
       </nav>
       <h1>Add a text watermark without uploading your photos</h1>
-      <p class="hero__lead" style="max-width:660px">Type your name, brand or copyright line, pick where it goes, and stamp it on one photo or five hundred — entirely inside your browser. Nine positions, your color and transparency, an optional tiled overlay. Nothing is uploaded either way.</p>
+      <p class="hero__lead" style="max-width:660px">Type your name, your brand or your copyright line, pick where it goes, and stamp it on one photo or five hundred — entirely inside your browser. Nine positions, your color and transparency, an optional tiled overlay. If what you want on the picture is a logo rather than a word, this tool stamps the word: the logo's name, a wordmark, or the mark as text. Nothing is uploaded either way.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
@@ -534,6 +550,9 @@
       <h3>Position, or tile?</h3>
       <p>A mark in one of the nine grid positions — corners, edge midpoints, or centre — is the aesthetic choice, and a soft shadow keeps it readable on both bright skies and dark shadows. It is also the cropable choice: anything in a corner can be trimmed off. The <strong>tiled overlay</strong> repeats the text diagonally across the entire frame, which makes casual cropping useless. Marking proofs or paid previews? Use the tile. Signing your own photography? A corner mark usually looks better.</p>
 
+      <h3>A brand mark, or a transparent watermark</h3>
+      <p>If you are stamping your business on a set of images, the honest answer is that most people type the brand's own word rather than uploading its logo file: the tool draws text, and a wordmark on a soft background reads exactly like a logo mark at the size a photo shows it. Set the <strong>Color</strong> picker to the brand colour, drop the <strong>Opacity</strong> to 40–60% for a transparent watermark you can still read the photograph through, and leave the mark in a corner. Bump the opacity back to near solid when the image is going somewhere public and you want the mark to be the first thing someone notices. Either way the photograph underneath is untouched — only the pixels the text covers change.</p>
+
       <h3>Protecting copies of ID documents</h3>
       <p>Whenever you send a photo of a passport, driver's licence or national ID to a bank, landlord or employer, it can be reused by whoever receives it. The standard defence is a full-frame tiled watermark that states the purpose, and this page has the pattern built in: switch on <strong>Tile diagonally</strong>, set density to <strong>Dense</strong>, and use text like <em>"For bank account opening only — 30 Sep 2026"</em>. Pick a grey or red colour at roughly half opacity, and a size of 5–6% so every line crosses the document number and photo. With lines packed that tight, cropping out one mark leaves the others intact, and the copy becomes useless for anything but the stated purpose.</p>
       <p>Because everything happens in your browser, the document itself never touches a server — which is exactly the kind of file you least want to hand to an unknown uploader.</p>
@@ -571,6 +590,14 @@
         <details class="faq__item">
           <summary>Is a watermark enough to protect my photos?</summary>
           <div class="faq__body"><p>Honestly: no tool can make theft impossible — a watermark in one corner can be cropped away. Put the mark where a crop would hurt the picture, or use the tiled overlay for high-value images, and keep originals elsewhere. What this page does is make proper marking fast enough that you actually do it, on every image, in one pass.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I add my company logo to photos?</summary>
+          <div class="faq__body"><p>This tool draws text rather than stamping an image file, so there is no logo upload — but the result people usually want is the same. Type the brand's name or wordmark into <strong>Watermark text</strong>, set <strong>Color</strong> to your brand colour, and keep the size around 4% of the shorter edge. If you need the actual mark — the swoosh, the icon, the logotype as a graphic — it has to be a design tool, because stamping a picture onto a picture would be a second decode and a quality loss this page deliberately avoids. What you can do here is put the name on every photo in the batch in one pass, which is the part that takes time by hand.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I make the watermark transparent?</summary>
+          <div class="faq__body"><p>Yes — the <strong>Opacity</strong> control runs from 10% to 100%, so a watermark at 40% is genuinely transparent: the photograph reads straight through the mark and only the letterforms darken the pixels underneath it. Around 60% is the usual balance for a name or brand that should be visible but not dominate. Transparency is per-image in the file it writes; nothing about it depends on the background the mark sits on. Combine it with the tile option and a low density when you want the mark to be felt across the whole frame rather than read in one corner.</p></div>
         </details>
         <details class="faq__item">
           <summary>Can I resize or compress the photos while watermarking them?</summary>

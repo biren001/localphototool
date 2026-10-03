@@ -140,6 +140,30 @@
         },
         {
           "@type": "Question",
+          "name": "How do I credit myself as the author of my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Put your name in the Creator field and the year or the full notice in Copyright — \"Jane Doe\" and \"© 2026 Jane Doe\" is the combination every catalogue, stock library and archive expects. Those two are the fields humans read; the Title, Description and Keywords fields are what a search index and a photo library read, so they are worth filling in too. The editor writes one standards-compliant XMP packet, so the credit follows the file into Lightroom, Photoshop, Windows Photos and macOS Preview rather than sitting in a file the viewer cannot see."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add alt text to my images here?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not as alt text, and it is worth being precise about why. Alt text is a property of a web page: it is the HTML attribute that tells a screen reader what an image on that page shows, and a photo file has no such field. What this editor writes instead is a Description, which is the file-side label — the thing visible in a library's info panel, and what most catalogue systems ingest. If you need real alt text for a page, write it into that page's markup; use the Description field here and the two agree."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to the date taken on my photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is removed, because the whole EXIF block is removed before your fields are written back — the capture timestamp is part of that block, and there is no date field in the form to write it into. That is deliberate: a clean label block is the point of this page, and half-preserved EXIF is worse than none. If you need the date corrected on the file itself, you need a tool that rewrites EXIF in place rather than replacing the block; this one will not do it, and it does not pretend to."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Why leave fields empty on purpose?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -322,7 +346,7 @@
 
       <h2>What it removes, and what it writes</h2>
       <ul>
-        <li><strong>Removed, always.</strong> EXIF blocks (camera model, exposure settings, GPS coordinates, the embedded preview thumbnail), existing XMP packets and IPTC records from JPEG; text and eXIf chunks from PNG; EXIF and XMP chunks from WebP. What was found in each file is shown per row before you download anything.</li>
+        <li><strong>Removed, always.</strong> EXIF blocks (camera model, <strong>the date the photo was taken</strong>, lens and aperture, GPS coordinates, the embedded preview thumbnail), existing XMP packets and IPTC records from JPEG; text and eXIf chunks from PNG; EXIF and XMP chunks from WebP. What was found in each file is shown per row before you download anything.</li>
         <li><strong>Written, if you fill the fields.</strong> Title, creator, description, copyright, keywords and tool name, as one standards-compliant <a href="https://www.adobe.com/devnet/xmp.html" rel="noopener">XMP</a> packet — readable by Lightroom, Photoshop, Windows Photos, macOS Preview and every photo library that matters.</li>
         <li><strong>Optional.</strong> The ICC colour profile survives by default; tick the box to remove it too, for the rare workflow that demands a profile-free file.</li>
       </ul>
@@ -357,6 +381,18 @@
         <details class="faq__item">
           <summary>Are my photos uploaded to a server?</summary>
           <div class="faq__body"><p>No. This is a static site with no upload endpoint. The files are read and rewritten in your browser, on your own device — you can watch the network tab and confirm that nothing leaves it.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I credit myself as the author of my photos?</summary>
+          <div class="faq__body"><p>Put your name in the <strong>Creator</strong> field and the year or the full notice in <strong>Copyright</strong> — "Jane Doe" and "© 2026 Jane Doe" is the combination every catalogue, stock library and archive expects. Those two are the fields humans read; the <strong>Title</strong>, <strong>Description</strong> and <strong>Keywords</strong> fields are what a search index and a photo library read, so they are worth filling in too. The editor writes one standards-compliant XMP packet, so the credit follows the file into Lightroom, Photoshop, Windows Photos and macOS Preview rather than sitting in a file the viewer cannot see.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I add alt text to my images here?</summary>
+          <div class="faq__body"><p>Not as alt text, and it is worth being precise about why. Alt text is a property of a <em>web page</em>: it is the HTML attribute that tells a screen reader what an image on that page shows, and a photo file has no such field. What this editor writes instead is a <strong>Description</strong>, which is the file-side label — the thing visible in a library's info panel, and what most catalogue systems ingest. If you need real alt text for a page, write it into that page's markup; use the Description field here and the two agree.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What happens to the date taken on my photo?</summary>
+          <div class="faq__body"><p>It is removed, because the whole EXIF block is removed before your fields are written back — the capture timestamp is part of that block, and there is no date field in the form to write it into. That is deliberate: a clean label block is the point of this page, and half-preserved EXIF is worse than none. If you need the date corrected on the file itself, you need a tool that rewrites EXIF in place rather than replacing the block; this one will not do it, and it does not pretend to.</p></div>
         </details>
         <details class="faq__item">
           <summary>Why leave fields empty on purpose?</summary>
