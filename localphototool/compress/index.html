@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compress JPG, PNG, WebP &amp; AVIF — Free, No Upload</title>
+<title>Compress Images Online — JPG, PNG, WebP &amp; AVIF, No Upload</title>
 <meta name="description" content="Compress images in your browser without uploading them. Auto quality, exact target size, batch and ZIP. JPEG, PNG, WebP, AVIF, HEIC. Free, no watermark.">
 <link rel="canonical" href="https://localphototool.com/compress/">
 <meta name="theme-color" content="#ffffff">
@@ -11,14 +11,14 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
-<meta property="og:title" content="Compress Images Online — Free, Private, No Upload">
+<meta property="og:title" content="Compress Images Online — JPG, PNG, WebP &amp; AVIF, No Upload">
 <meta property="og:description" content="Perceptual quality control, exact target sizes and true batch ZIP export — all inside your browser. Your photos never leave your device.">
 <meta property="og:url" content="https://localphototool.com/compress/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Compress Images Online — Free, Private, No Upload">
+<meta name="twitter:title" content="Compress Images Online — JPG, PNG, WebP &amp; AVIF, No Upload">
 <meta name="twitter:description" content="Perceptual quality control, exact target sizes and true batch ZIP export — all inside your browser.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
@@ -154,6 +154,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Usually one of three reasons. The file was already optimised, so there is very little redundancy left to remove. Or it is a photograph saved as PNG, where lossless encoding is the wrong tool — exporting our 3 MB test photograph as WebP or JPEG cut 90% and 87% respectively, which the measured table shows in full. Or it uses the full 16.7 million colours, in which case palette quantization has little to work with; lowering the colour count or switching format is what actually helps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make my photos small enough to send by email or WhatsApp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick a budget that matches the limit you are hitting — 200 KB for an image that has to survive a chat app or an email preview, 1024 KB for most social uploads, 25000 KB for a plain email attachment — and switch the strategy to Target size. Every image is re-encoded on your own machine to land under that number, so you can bring a whole holiday album down to one consistent size and pull it out as a single ZIP. Nothing is uploaded, and the site does not add a watermark."
           }
         },
         {
@@ -640,6 +648,10 @@
         <details class="faq__item">
           <summary>Why did my PNG barely get smaller?</summary>
           <div class="faq__body"><p>Usually one of three reasons. The file was already optimised, so there is very little redundancy left to remove. Or it is a photograph saved as PNG, where lossless encoding is the wrong tool — exporting our 3 MB test photograph as WebP or JPEG cut 90% and 87% respectively, which the <a href="#measured">measured table</a> shows in full. Or it uses the full 16.7 million colours, in which case palette quantization has little to work with; lowering the colour count or switching format is what actually helps.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I make my photos small enough to send by email or WhatsApp?</summary>
+          <div class="faq__body"><p>Pick a budget that matches the limit you are hitting — <code>200</code> KB for an image that has to survive a chat app or an email preview, <code>1024</code> KB for most social uploads, <code>25000</code> KB for a plain email attachment — and switch the strategy to <strong>Target size</strong>. Every image is re-encoded on your own machine to land under that number, so you can bring a whole holiday album down to one consistent size and pull it out as a single ZIP. Nothing is uploaded, and the site does not add a watermark.</p></div>
         </details>
         <details class="faq__item">
           <summary>Does it work offline?</summary>
