@@ -102,6 +102,38 @@
         },
         {
           "@type": "Question",
+          "name": "My image is too large to upload — how do I make it smaller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Find out what the limit actually is first. Many forms measure the file in megabytes, and several measure the pixel dimensions instead — the form will say so in its error message. If it is a pixel limit, this is the right page: set a width or height below it and the image is made smaller. If it is a size limit, you need fewer bytes per pixel, which is the image compressor. A single action usually does both, because cutting the pixel count in half cuts the file to roughly a quarter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make a photo smaller without cutting anything off?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use Fit inside rather than Crop to fill. Fit inside shrinks the whole frame until it fits your box, keeps the aspect ratio exact and trims nothing, so every pixel of the scene is still there in a smaller image. Crop to fill hits the dimensions you typed exactly, but it trims the overflowing edges — which is what you want for a square avatar and what you do not want for a photograph. Rotation and crop both run before the resize, so what you see in the preview is what ends up in the file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What image size should I use for an email attachment or a website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a web page, 1200 px on the long edge is enough for a full-width photo on a desktop screen; 1600–2000 px is worth it only if viewers will zoom. For an email attachment, aim under about 1 MB per image, which at JPEG quality is roughly 1600 px on the long edge — mail servers bounce larger attachments more often than readers notice the resolution. The Common targets list further down this page has the exact conventional sizes for documents, avatars and listings. Set the width, choose fit-inside, and the pixel dimensions you get are the ones the file actually uses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "If I make the image smaller, does the file size come down too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, close to the square of the change — halving each side of an image makes the file about a quarter of its previous size. Shrinking the pixels and re-encoding the same picture into a leaner format are two separate levers, though, and this page only pulls the first one. If you need a specific file size — an upload cap in KB, an email limit — set the dimensions here and then switch Strategy to Target size, or drop the picture into the image compressor. Squeezing bytes out of a full-resolution picture rarely buys you anything, because encoded detail is exactly what makes a file big."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "What is the difference between fit-inside and crop-to-fill?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -274,7 +306,7 @@
         <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Resize images</span>
       </nav>
       <h1>Resize images without uploading them</h1>
-      <p class="hero__lead" style="max-width:660px">Type the size you need — exact pixels or a percentage — and the engine resizes one image or five hundred inside your browser. Fit inside keeps every pixel of the scene; crop to fill delivers the exact dimensions by trimming the edges. Nothing is uploaded either way.</p>
+      <p class="hero__lead" style="max-width:660px">Your image is too large to upload, or too big to attach to an email? Type the size you need — exact pixels or a percentage — and the engine makes it smaller inside your browser, one image or five hundred of them. Fit inside keeps every pixel of the scene; crop to fill delivers the exact pixel dimensions by trimming the edges. Nothing is uploaded either way.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
@@ -581,6 +613,7 @@
   <section class="section section--subtle">
     <div class="container prose">
       <h2>What this resizer actually does</h2>
+      <p>People usually arrive here for one of three reasons. A work form rejects the file because the image is too large for its limit. An attachment is too big to send and the recipient's mail server bounces it. Or a template — a listing photo, a document header, an avatar slot — needs a smaller image at a size the template asks for, not just a smaller file. All three are the same job: change the size of the image, in pixels. That is what happens here. Shrinking the file in bytes is a different job, and the <a href="../compress/">image compressor</a> does that one.</p>
       <p>Most online resizers want your file uploaded to their server before they touch it. This one doesn't have anywhere to upload to: the picture is decoded, resampled and re-encoded inside your own browser tab, and the result comes straight back as a download. The same engine powers the site's <a href="../compress/">image compressor</a> — the difference between the two pages is "make these pixels a different size" versus "make this file smaller".</p>
       <p>Add one image or several hundred. The dimension setting you choose applies to every image in the batch, the files are processed in parallel background workers, and <strong>Download all</strong> hands you a single ZIP. Each result row shows the exact output dimensions, so a mixed batch of portrait and landscape photos stays checkable at a glance.</p>
 
@@ -633,6 +666,22 @@
         <details class="faq__item" open>
           <summary>How do I resize an image to exact dimensions?</summary>
           <div class="faq__body"><p>Type the width and height you need into the dimension fields. In <strong>Fit inside</strong> the image keeps its aspect ratio and nothing is cropped — you get the largest image that fits your box. In <strong>Crop to fill</strong> you get exactly the size you typed: the image fills the box completely and the overflow is trimmed from the edges, centred.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>My image is too large to upload — how do I make it smaller?</summary>
+          <div class="faq__body"><p>Find out what the limit actually is first. Many forms measure the file in megabytes, and several measure the pixel dimensions instead — the form will say so in its error message. If it is a pixel limit, this is the right page: set a width or height below it and the image is made smaller. If it is a size limit, you need fewer bytes per pixel, which is the <a href="../compress/">image compressor</a>. A single action usually does both, because cutting the pixel count in half cuts the file to roughly a quarter.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I make a photo smaller without cutting anything off?</summary>
+          <div class="faq__body"><p>Use <strong>Fit inside</strong> rather than <strong>Crop to fill</strong>. Fit inside shrinks the whole frame until it fits your box, keeps the aspect ratio exact and trims nothing, so every pixel of the scene is still there in a smaller image. Crop to fill hits the dimensions you typed exactly, but it trims the overflowing edges — which is what you want for a square avatar and what you do not want for a photograph. Rotation and crop both run before the resize, so what you see in the preview is what ends up in the file.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What image size should I use for an email attachment or a website?</summary>
+          <div class="faq__body"><p>For a web page, 1200 px on the long edge is enough for a full-width photo on a desktop screen; 1600–2000 px is worth it only if viewers will zoom. For an email attachment, aim under about 1 MB per image, which at JPEG quality is roughly 1600 px on the long edge — mail servers bounce larger attachments more often than readers notice the resolution. The <strong>Common targets</strong> list further down this page has the exact conventional sizes for documents, avatars and listings. Set the width, choose fit-inside, and the pixel dimensions you get are the ones the file actually uses.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>If I make the image smaller, does the file size come down too?</summary>
+          <div class="faq__body"><p>Yes, close to the square of the change — halving each side of an image makes the file about a quarter of its previous size. Shrinking the pixels and re-encoding the same picture into a leaner format are two separate levers, though, and this page only pulls the first one. If you need a specific file size — an upload cap in KB, an email limit — set the dimensions here and then switch <strong>Strategy</strong> to <strong>Target size</strong>, or drop the picture into the <a href="../compress/">image compressor</a>. Squeezing bytes out of a full-resolution picture rarely buys you anything, because encoded detail is exactly what makes a file big.</p></div>
         </details>
         <details class="faq__item">
           <summary>What is the difference between fit-inside and crop-to-fill?</summary>

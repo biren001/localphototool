@@ -108,6 +108,22 @@
         },
         {
           "@type": "Question",
+          "name": "How do I remove the background from a photo for free, with no sign-up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open this page and drop the photo in — that is the whole procedure. There is no account, no quota, no e-mail address and no watermark on the result, and there is no upload step to get through first: the file is decoded and masked inside your own browser tab, so nothing is sent anywhere. Free is the permanent state here rather than a trial, because there is no server to bill for. If the cut comes out too tight or too loose, the slider next to each result is the only knob that matters, and the tolerance it used is printed on the row so a good setting can be reproduced."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My background will not come off — what am I doing wrong?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ask what kind of background you have. A flat one — white paper, a studio black card, a green screen — comes off exactly, usually at the auto setting. A background that is itself a photo, a busy room, a sky with clouds, or a gradient that runs from one tone into another, will leave patches behind the subject: those patches really do match the colour they came from, and the slider cannot tell \"background\" from \"part of the subject\". Slide right when colour survives in specks around the subject, slide left when part of the subject is going transparent with it. When neither direction helps, the background is too busy for this method and the picture needs a flat one behind it."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "What does the cut strength slider change?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -249,7 +265,7 @@
     <div class="container">
       <p class="eyebrow">Free &middot; no account &middot; nothing leaves your device</p>
       <h1>Remove a photo background without uploading it</h1>
-      <p class="hero__lead">Product shots on white, studio black, a green screen — drop a photo and the background is cut from the frame. The mask runs in this tab, there is no model to download, and the file never leaves your device.</p>
+      <p class="hero__lead">Product shots on white, studio black, a green screen — drop a photo and this tool removes the background from it. What is left keeps a transparent background you can put on any colour, and the file never leaves your device.</p>
     </div>
   </section>
 
@@ -320,6 +336,10 @@
   <!-- SEO content -->
   <section class="section section--subtle">
     <div class="container prose">
+      <h2>What people remove a background for</h2>
+      <p>The jobs that bring a photo here have one shape in common: the picture is right and the background is wrong. A marketplace listing needs a product photo on white, not the kitchen table it was shot on. A logo or a cut-out needs the frame gone so it can sit on the colour of whatever page it is about to land on. A passport or ID frame wants its own field. A set of holiday pictures wants one consistent backdrop instead of four different rooms. A green-screen still from a video wants the screen out so the new clip can take its place. In each case the goal is a photo with a transparent background that drops onto any colour — not a smaller file and not a sharper scan, which is why this is a different page from the <a href="../compress/">compressor</a>.</p>
+      <p>Before you start, it helps to know that the cut depends entirely on the background being flat. Shoot against white, a studio black card, or green, and the removal is exact at the first settings. A busy photograph behind the subject, or a subject whose hair is the same tone as the wall, is the case a flood fill cannot solve — not with a slider, and not with the neural networks either. If that is the photo you have, the honest answer is to re-shoot against a flat background, or to trace the subject by hand.</p>
+
       <h2>It is a flood fill, not a neural network — and that is why it runs here</h2>
       <p>Most background removers hand your photo to a machine-learning model. The model is good: it learned what a person's hair edge looks like. It is also several megabytes of weights, it usually wants the image on a server somewhere, and on a phone that is a slow download before the first result appears. This tool does something older and dumber. It looks at the four edges of the photo, guesses the background colour from them, and then floods inward from the border through every pixel that matches — a connected-region fill, the same primitive every paint program has had since the eighties. Whatever the flood cannot reach is the subject.</p>
       <p>That is exact when the background is flat, which covers a surprising share of the work people bring it: catalogue product shots on white, jerseys on a black studio card, video stills cut on a green screen, sky against a silhouette. It is honest about the rest: hair, fur, smoke, glass, and a background that is a photograph of a photograph will keep part of itself behind the subject, because those pixels really do match the colour they came from. Every row tells you what it did — the colour it decided the background was, how far it cut, and when it found almost nothing at all.</p>
@@ -346,6 +366,14 @@
         <details class="faq__item" open>
           <summary>How does it decide which pixels are the background?</summary>
           <div class="faq__body"><p>It samples the edge of the photo to guess the background colour, then floods inward from all four borders through every pixel that matches that colour. Whatever the flood cannot reach is the subject and is kept. A neural network would draw a finer hairline than this does; the trade is that nothing has to be downloaded, and the whole mask engine is one 9 KB file that runs on your own device.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I remove the background from a photo for free, with no sign-up?</summary>
+          <div class="faq__body"><p>Open this page and drop the photo in — that is the whole procedure. There is no account, no quota, no e-mail address and no watermark on the result, and there is no upload step to get through first: the file is decoded and masked inside your own browser tab, so nothing is sent anywhere. Free is the permanent state here rather than a trial, because there is no server to bill for. If the cut comes out too tight or too loose, the slider next to each result is the only knob that matters, and the tolerance it used is printed on the row so a good setting can be reproduced.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>My background will not come off — what am I doing wrong?</summary>
+          <div class="faq__body"><p>Ask what kind of background you have. A flat one — white paper, a studio black card, a green screen — comes off exactly, usually at the auto setting. A background that is itself a photo, a busy room, a sky with clouds, or a gradient that runs from one tone into another, will leave patches behind the subject: those patches really do match the colour they came from, and the slider cannot tell "background" from "part of the subject". Slide right when colour survives in specks around the subject, slide left when part of the subject is going transparent with it. When neither direction helps, the background is too busy for this method and the picture needs a flat one behind it.</p></div>
         </details>
         <details class="faq__item">
           <summary>What does the cut strength slider change?</summary>
