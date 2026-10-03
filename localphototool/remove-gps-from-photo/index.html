@@ -102,6 +102,14 @@
         },
         {
           "@type": "Question",
+          "name": "Does the location in my photo track me after I've left a place?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — that is the whole point of the field. The GPS record holds a latitude and a longitude that still describe the spot you were standing in weeks later, so anyone who receives the original file can drop it on a map and see where. The timestamp beside it extends the trail: two shots from the same morning place you twice. Scrubbing the metadata removes both, and the picture itself is untouched."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Is the removal lossless?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -314,7 +322,7 @@
             <tr><th>Data</th><th>What it says about you</th><th>After this tool</th></tr>
           </thead>
           <tbody>
-            <tr><td>GPS coordinates</td><td>Where you stood, to within a few metres — home, work, school</td><td>Removed</td></tr>
+            <tr><td>GPS coordinates <em>(latitude and longitude)</em></td><td>Where you stood, to within a few metres — home, work, school</td><td>Removed</td></tr>
             <tr><td>Date and exact time</td><td>Your routines and movements over time</td><td>Removed</td></tr>
             <tr><td>Device make, model and serial</td><td>Which phone you own; can tie photos to one device</td><td>Removed</td></tr>
             <tr><td>Camera settings, software, thumbnails</td><td>Fingerprinting material; embedded originals can survive edits</td><td>Removed</td></tr>
@@ -324,6 +332,8 @@
           </tbody>
         </table>
       </div>
+
+      <p>If the only thing you want is to remove location data, this is the right tool: sharing a photo with the coordinates still inside it is the exact case it exists for.</p>
 
       <h2>How the removal works — and why nothing else can change</h2>
       <p>Metadata lives in container segments that sit <em>next to</em> the compressed pixels, not inside them. This tool copies the image data through untouched and rewrites only those segments: the EXIF block (which carries the GPS coordinates), the XMP packet and the IPTC record. There is no decode step and no re-encode step, so the picture in the saved file is <strong>byte-for-byte identical</strong> to the one you dropped in — same sharpness, same colours, same file size minus the metadata.</p>
@@ -352,6 +362,10 @@
         <details class="faq__item" open>
           <summary>Does this really remove the GPS data?</summary>
           <div class="faq__body"><p>Yes. GPS coordinates live in the EXIF metadata block of the file, not in the pixels, and this tool removes that block wholesale — along with the XMP and IPTC blocks where copies of the location can hide. What each file contained is shown per row before you download anything, and you can verify the result afterwards with the site's EXIF viewer or your operating system's file properties: the location will be gone.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does the location in my photo track me after I've left a place?</summary>
+          <div class="faq__body"><p>Yes — that is the whole point of the field. The GPS record holds a latitude and a longitude that still describe the spot you were standing in weeks later, so anyone who receives the original file can drop it on a map and see where. The timestamp beside it extends the trail: two shots from the same morning place you twice. Scrubbing the metadata removes both, and the picture itself is untouched.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is the removal lossless?</summary>

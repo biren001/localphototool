@@ -478,7 +478,7 @@
           </tbody>
         </table>
       </div>
-      <p>The gap exists because mail servers re-encode attachments as base64 text during transport, which inflates them by roughly 33%. That is why a "24 MB" batch can still be rejected by a "25 MB" Gmail account. The safe play is to plan against the third column.</p>
+      <p>The gap exists because mail servers re-encode attachments as base64 text in transit — a single SMTP hop inflates everything by roughly 33%. That is why a "24 MB" batch can still be rejected by a "25 MB" Gmail account, and why an e-mail full of photos that look small on your phone can come back as "attachment too large to send" before it ever lands in the recipient's inbox. The safe play is to plan against the third column, and against the strictest 5 MB limit a legacy mail system will impose.</p>
 
       <h2>Two dials, one batch</h2>
       <p>For email there are only two decisions, and this page pre-sets both:</p>

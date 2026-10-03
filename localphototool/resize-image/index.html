@@ -612,6 +612,8 @@
   <!-- SEO content -->
   <section class="section section--subtle">
     <div class="container prose">
+      <p>Three things bring someone here, and none of them is really a question about tools. A web form says <em>photo too large to upload</em>. An email client refuses the attachment with <em>image too large to attach</em>. A template wants one exact image size and hand-setting it is not a thing anyone enjoys. In each case the picture is right and the frame around it is wrong — the fix is to change image size to the number the destination expects, before the upload rather than after it.</p>
+
       <h2>What this resizer actually does</h2>
       <p>People usually arrive here for one of three reasons. A work form rejects the file because the image is too large for its limit. An attachment is too big to send and the recipient's mail server bounces it. Or a template — a listing photo, a document header, an avatar slot — needs a smaller image at a size the template asks for, not just a smaller file. All three are the same job: change the size of the image, in pixels. That is what happens here. Shrinking the file in bytes is a different job, and the <a href="../compress/">image compressor</a> does that one.</p>
       <p>Most online resizers want your file uploaded to their server before they touch it. This one doesn't have anywhere to upload to: the picture is decoded, resampled and re-encoded inside your own browser tab, and the result comes straight back as a download. The same engine powers the site's <a href="../compress/">image compressor</a> — the difference between the two pages is "make these pixels a different size" versus "make this file smaller".</p>

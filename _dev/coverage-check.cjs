@@ -17,16 +17,16 @@ const GROUPS = {
     'image too big', 'photo too big', 'image too large', 'photo too large',
     'make it smaller', 'make an image smaller', 'make photo smaller',
     'change image size', 'change the size of', 'image dimensions', 'pixel dimensions',
-    'smaller image', 'how do i resize'
+    'smaller image', 'how do i resize', 'too large to upload', 'too large to attach'
   ],
   'heic-to-jpg': [
-    'heic', 'iphone', 'apple', 'photo won', "won't open", 'cannot open', 'can not open',
-    'open in', 'jpeg instead', 'convert heic', 'apple photo', 'screenshot iphone'
+    'heic', 'iphone', 'apple', "won't open", 'cannot open',
+    'won\'t it open', 'open in', 'jpeg', 'convert heic', 'screenshot iphone'
   ],
   'remove-background': [
-    'remove background', 'cut out', 'cut the background', 'delete the background',
-    'transparent background', 'transparent png', 'without background',
-    'background from a', 'product photo', 'logo background'
+    'remove background', 'cut out', 'cut out the', 'delete the background',
+    'transparent background', 'transparent png',
+    'background from a', 'product photo'
   ],
   'compress-photos-for-email': [
     'attach', 'attachment', 'email', 'e-mail', 'mail server', 'bounce', 'smtp',
@@ -34,7 +34,7 @@ const GROUPS = {
   ],
   'images-to-pdf': [
     'pdf', 'document', 'print', 'a4', 'letter size', 'page size', 'merge',
-    'combine', 'bind', 'photos into', 'screenshot to pdf', 'jpg to pdf', 'scan'
+    'combine', 'photos into', 'screenshot to pdf', 'jpg to pdf', 'scan'
   ],
   'watermark': [
     'watermark', 'logo', 'stamp', 'copyright', 'brand', 'transparent watermark',
@@ -46,9 +46,51 @@ const GROUPS = {
   ],
   'transfer': [
     'send', 'another device', 'another phone', 'without a cable', 'qr code',
-    'airdrop', 'share link', 'wifi', 'between computers', 'move photos',
+    'airdrop', 'share link', 'wi-fi', 'between computers', 'move photos',
     'offline transfer', 'no account'
+  ],
+  /* —— 下面这组是 v76 之后补的，之前从没单独体检过 —— */
+  'batch-rename': [
+    'rename', 'file name', 'filename', 'file names', 'batch', 'bulk',
+    'all at once', 'many photos', 'sort', 'number the', 'IMG_', 'name them',
+    'organize', 'tidy up'
+  ],
+  'image-to-base64': [
+    'base64', 'data url', 'data uri', 'embed', 'paste into', 'paste it into',
+    'encode the image', 'copy the code', 'inline', 'text box'
+  ],
+  'exif-viewer': [
+    'exif', 'metadata', 'focal length', 'iso', 'shutter',
+    'exposure', 'camera', 'lens', 'aperture', 'date taken', 'gps', 'read'
+  ],
+  'remove-gps-from-photo': [
+    'gps', 'location', 'privacy', 'latitude', 'longitude', 'coordinates',
+    'track me', 'metadata', 'sharing a photo', 'remove location'
+  ],
+  'share': [
+    'share', 'share a link', 'copy link', 'qr code', 'airdrop', 'send',
+    'without an account', 'no sign-up', 'another device', 'download'
+  ],
+  /* 合成组：本身不对应目录，展开成下面 ALIAS 里的一批页逐个查 */
+  'convert-formats': [
+    'convert', 'convert to', 'format', 'png', 'jpg', 'jpeg', 'webp', 'gif',
+    'transparent', 'lossless', 'browser', 'without uploading', 'image format'
+  ],
+  'reduce-image-size': [
+    'smaller file', 'file size', 'image file size', 'reduce the size',
+    'reduce image size', 'bytes', 'kb', 'mb', 'shrink'
+  ],
+  'compress': [
+    'compress', 'compressor', 'file size', 'smaller', 'kb', 'mb',
+    'without losing quality', 'lossy', 'quality', 'upload', 'shrink'
   ]
+};
+
+const brief = process.argv.includes('--brief');
+
+/* 合成组 → 真实目录名。没有这一层，convert-formats 会一路报 MISSING PAGE。 */
+const ALIAS = {
+  'convert-formats': ['jpg-to-png', 'jpg-to-webp', 'png-to-jpg', 'webp-to-jpg', 'webp-to-png']
 };
 
 function count(hay, needle) {
@@ -91,17 +133,22 @@ function mainOf(html) {
   return m ? m[0] : html;
 }
 
-for (const [slug, phrases] of Object.entries(GROUPS)) {
-  const html = readPage(slug);
-  if (!html) { console.log(slug + '  -> MISSING PAGE'); continue; }
-  const vis = visibleText(html);
-  console.log('=== ' + slug + '  (visible ' + vis.length + ' chars) ===');
-  let zero = 0;
-  for (const ph of phrases) {
-    const n = count(vis, ph);
-    if (n === 0) zero++;
-    console.log('  ' + (n > 0 ? 'OK  ' : 'MISS') + ' n=' + String(n).padEnd(3) + '  "' + ph + '"');
+for (const [group, phrases] of Object.entries(GROUPS)) {
+  const slugs = ALIAS[group] || [group];
+  for (const slug of slugs) {
+    const html = readPage(slug);
+    if (!html) { console.log(slug + '  -> MISSING PAGE'); continue; }
+    const vis = visibleText(html);
+    const label = slugs.length > 1 ? group + ' [' + slug + ']' : slug;
+    console.log('=== ' + label + '  (visible ' + vis.length + ' chars) ===');
+    let zero = 0;
+    for (const ph of phrases) {
+      const n = count(vis, ph);
+      if (n === 0) zero++;
+      if (brief) { if (n === 0) console.log('  MISS  "' + ph + '"'); continue; }
+      console.log('  ' + (n > 0 ? 'OK  ' : 'MISS') + ' n=' + String(n).padEnd(3) + '  "' + ph + '"');
+    }
+    console.log('  --> 可见文本里 0 命中的词: ' + zero + ' / ' + phrases.length);
+    console.log('');
   }
-  console.log('  --> 可见文本里 0 命中的词: ' + zero + ' / ' + phrases.length);
-  console.log('');
 }

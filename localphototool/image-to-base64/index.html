@@ -124,6 +124,14 @@
         },
         {
           "@type": "Question",
+          "name": "How do I get the code out, and where does it go?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The output box holds the whole string. Tap Copy to copy the code onto your clipboard, ready to paste into a stylesheet, an HTML tag or a form field that accepts a Base64 image. Nothing is uploaded — the text stays on your device."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "How much bigger does Base64 make the file?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -286,7 +294,7 @@
       <h2>What Base64 encoding actually does</h2>
       <p>Computers move images as bytes; a lot of the web moves text. Base64 is the bridge: it rewrites the raw bytes of your image using 64 safe characters — letters, digits, <code>+</code> and <code>/</code> — so the picture can live inside a CSS file, an HTML document, a JSON payload or an email template without breaking anything along the way. The result is called a <strong>data URI</strong> when it carries its own type header:</p>
       <p><code>data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...</code></p>
-      <p>Paste that anywhere a URL or a file path would go, and the image is simply there — no request, no separate file.</p>
+      <p>That form is what most people mean by a data URL. Paste it into a stylesheet, an <code>&lt;img&gt;</code> tag or a text box and the image is simply there — no request, no separate file.</p>
 
       <h2>Where a data URI earns its keep</h2>
       <ul>
@@ -304,6 +312,7 @@
       <p><code>.logo { background-image: url("data:image/png;base64,...."); }</code></p>
       <p>In HTML:</p>
       <p><code>&lt;img src="data:image/png;base64,...." alt="Logo"&gt;</code></p>
+      <p>Drop a photo into the tool above and the page will encode the image on your device; the text box fills with the string, and the copy button puts the whole thing on your clipboard.</p>
 
       <h2>Related tools</h2>
       <p>Shrink an image before you encode it with the <a href="../compress/">main compressor</a>; pin it to a specific format with <a href="../png-to-jpg/">PNG to JPG</a>, <a href="../jpg-to-webp/">JPG to WebP</a> or <a href="../heic-to-jpg/">HEIC to JPG</a>; check what metadata it carries with the <a href="../exif-viewer/">EXIF viewer</a>. Every tool on this site runs in your browser, with no upload.</p>
@@ -321,6 +330,10 @@
         <details class="faq__item">
           <summary>Should I use the data URI or the raw Base64 string?</summary>
           <div class="faq__body"><p>Use the data URI (the one starting with <code>data:image/...</code>) when pasting into HTML, CSS or anywhere the format must identify itself — it works as a drop-in image source. Use the raw string when the surrounding code already knows the type, such as a Base64 field in a JSON API or the src of an &lt;img&gt; tag that carries its own type attribute.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>How do I get the code out, and where does it go?</summary>
+          <div class="faq__body"><p>The output box holds the whole string. Tap Copy to copy the code onto your clipboard, ready to paste into a stylesheet, an HTML tag or a form field that accepts a Base64 image. Nothing is uploaded — the text stays on your device.</p></div>
         </details>
         <details class="faq__item">
           <summary>How much bigger does Base64 make the file?</summary>
