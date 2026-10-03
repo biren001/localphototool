@@ -47,6 +47,7 @@ const PAGES = [
   'transfer/index.html',
   'compress-photos-for-email/index.html',
   'compress-without-uploading/index.html',
+  'reduce-image-size/index.html',
   'image-compressor-upload-test/index.html',
   'png-to-jpg/index.html',
   'jpg-to-webp/index.html',

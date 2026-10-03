@@ -22,7 +22,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, "..", "localphototool")
 
 PAGES = ["index.html", "compress/index.html", "heic-to-jpg/index.html", "exif-viewer/index.html", "images-to-pdf/index.html", "resize-image/index.html", "watermark/index.html", "png-to-jpg/index.html", "jpg-to-webp/index.html", "jpg-to-png/index.html", "webp-to-jpg/index.html", "webp-to-png/index.html", "image-to-base64/index.html", "batch-rename/index.html", "metadata-editor/index.html",
-    "remove-background/index.html", "share/index.html"]
+    "remove-background/index.html", "share/index.html",
+    "reduce-image-size/index.html"]
 
 DETAILS_RE = re.compile(
     r'<details class="faq__item"[^>]*>\s*<summary>([\s\S]*?)</summary>\s*'

@@ -1,0 +1,18 @@
+{
+ "siteUrl": "sc-domain:localphototool.com",
+ "window": [
+  "2026-09-02",
+  "2026-09-30"
+ ],
+ "rows": [
+  {
+   "keys": [
+    "https://localphototool.com/about/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 2.7777777777777777
+  }
+ ]
+}

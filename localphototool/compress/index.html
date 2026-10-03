@@ -166,6 +166,30 @@
         },
         {
           "@type": "Question",
+          "name": "How do I make a photo smaller without losing quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is the question people ask most, so it is the one the engine is built around. Auto mode encodes a test pass at several quality levels, scores each against your original, and keeps the smallest file that still clears a ~40 dB PSNR floor — close to the point where differences stop being visible at normal viewing sizes. If you want to move that floor rather than trust a heuristic, Quality mode hands you the slider; if you want certainty instead, export PNG, which discards nothing. The measured table shows what each of those settings actually produced on real files."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my image still too large after I compressed it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three usual reasons. The budget you picked was already at or above the file you fed in, so the engine returned your original and labelled it \"already optimal\" rather than shipping something bigger. Or the format is wrong for the content — a 3 MB photograph stored as PNG cannot be meaningfully reduced losslessly, while the same pixels as WebP or AVIF came out 90% and 93% smaller in our own measurements. Or the image is genuinely already optimised, in which case there is nothing left to remove and the honest answer is to change format rather than to re-encode the same pixels again. The guide to reducing an image size without losing quality sets out what each of those options is worth, measured."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "If I shrink the file, does it shrink my resolution too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if it has to. Target size tries quality first and reaches for the pixel dimensions as a last resort, so a 4000 px photo can land under a 200 KB budget without losing a single pixel. The \"Resize — maximum edge\" option in Advanced is the one that deliberately changes dimensions, and it is off by default. When downscaling does become unavoidable we halve repeatedly instead of shrinking in one step, which keeps edge structure intact and lets the encoder spend fewer bits for the same perceived quality. If you want exact dimensions or a crop rather than a cap, the batch image resizer does that."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Does it work offline?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -282,7 +306,7 @@
         <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Compress images</span>
       </nav>
       <h1>Compress images without uploading them</h1>
-      <p class="hero__lead" style="max-width:660px">Everything runs inside your browser. Add one photo or five hundred — the engine measures each image, picks the smallest file that still looks identical, and hands it straight back to you.</p>
+      <p class="hero__lead" style="max-width:660px">Your photo is <strong>too large to upload</strong>? Too big for email? This is the fastest way to <strong>make it smaller</strong>. Everything runs inside your browser — add one photo or five hundred, the engine measures each image, picks the smallest file that still looks identical, and hands it straight back to you.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
@@ -505,7 +529,7 @@
     <div class="container prose">
       <h2>What this compressor actually does</h2>
       <p>Most online compressors work the same way: your file is uploaded, passed through a fixed preset such as "quality 80", and sent back. That preset has no idea what your image contains, so a smooth sky and a photo of tree branches receive identical treatment — one ends up unnecessarily large, the other unnecessarily degraded.</p>
-      <p>This tool inverts the process. Your image is analysed first, then encoded to fit the evidence. It is the same strategy used by professional build pipelines, running in a browser tab you can close at any time — and entirely on your own hardware, so nothing is uploaded. If you want to check that rather than believe it, the <a href="../compress-without-uploading/">compress without uploading</a> page walks through a ten-second test you can run on any tool, including this one.</p>
+      <p>This tool inverts the process. Your image is analysed first, then encoded to fit the evidence. It is the same strategy used by professional build pipelines, running in a browser tab you can close at any time — and entirely on your own hardware, so nothing is uploaded. In plain terms: you drag in a file that is <strong>too large</strong> for the form, the email or the storage quota, and you get back a file that is <strong>smaller</strong> — same picture, fewer bytes, no round trip. If you want to check that rather than believe it, the <a href="../compress-without-uploading/">compress without uploading</a> page walks through a ten-second test you can run on any tool, including this one.</p>
 
       <h3>The five things that make the output smaller</h3>
       <ol>
@@ -654,6 +678,18 @@
           <div class="faq__body"><p>Pick a budget that matches the limit you are hitting — <code>200</code> KB for an image that has to survive a chat app or an email preview, <code>1024</code> KB for most social uploads, <code>25000</code> KB for a plain email attachment — and switch the strategy to <strong>Target size</strong>. Every image is re-encoded on your own machine to land under that number, so you can bring a whole holiday album down to one consistent size and pull it out as a single ZIP. Nothing is uploaded, and the site does not add a watermark.</p></div>
         </details>
         <details class="faq__item">
+          <summary>How do I make a photo smaller without losing quality?</summary>
+          <div class="faq__body"><p>This is the question people ask most, so it is the one the engine is built around. Auto mode encodes a test pass at several quality levels, scores each against your original, and keeps the smallest file that still clears a ~40 dB PSNR floor — close to the point where differences stop being visible at normal viewing sizes. If you want to move that floor rather than trust a heuristic, Quality mode hands you the slider; if you want certainty instead, export PNG, which discards nothing. The <a href="#measured">measured table</a> shows what each of those settings actually produced on real files.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why is my image still too large after I compressed it?</summary>
+          <div class="faq__body"><p>Three usual reasons. The budget you picked was already at or above the file you fed in, so the engine returned your original and labelled it "already optimal" rather than shipping something bigger. Or the format is wrong for the content — a 3 MB photograph stored as PNG cannot be meaningfully reduced losslessly, while the same pixels as WebP or AVIF came out 90% and 93% smaller in our own measurements. Or the image is genuinely already optimised, in which case there is nothing left to remove and the honest answer is to change format rather than to re-encode the same pixels again. The <a href="../reduce-image-size/">guide to reducing an image size without losing quality</a> sets out what each of those options is worth, measured.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>If I shrink the file, does it shrink my resolution too?</summary>
+          <div class="faq__body"><p>Only if it has to. Target size tries quality first and reaches for the pixel dimensions as a last resort, so a 4000 px photo can land under a 200 KB budget without losing a single pixel. The "Resize — maximum edge" option in Advanced is the one that deliberately changes dimensions, and it is off by default. When downscaling does become unavoidable we halve repeatedly instead of shrinking in one step, which keeps edge structure intact and lets the encoder spend fewer bits for the same perceived quality. If you want exact dimensions or a crop rather than a cap, the <a href="../resize-image/">batch image resizer</a> does that.</p></div>
+        </details>
+        <details class="faq__item">
           <summary>Does it work offline?</summary>
           <div class="faq__body"><p>Yes. Once the page has loaded, compression runs entirely on your machine. Blocking the CDN only means the optional WASM codecs are unavailable; the built-in browser encoders take over automatically and everything else is identical.</p></div>
         </details>
@@ -699,6 +735,7 @@
         <h2>Tools</h2>
         <ul>
           <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../reduce-image-size/">Reduce image size</a></li>
           <li><a href="../resize-image/">Resize images</a></li>
           <li><a href="../watermark/">Text watermark</a></li>
           <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>

@@ -122,6 +122,7 @@ var SHELL = [
   'compress-to-50kb/',
   'compress-to-200kb/',
   'compress-to-500kb/',
+  'reduce-image-size/',
   'remove-gps-from-photo/',
   'transfer/',
   'transfer/app.js',

@@ -1,0 +1,90 @@
+{
+ "siteUrl": "sc-domain:localphototool.com",
+ "window": [
+  "2026-09-01",
+  "2026-09-29"
+ ],
+ "rows": [
+  {
+   "keys": [
+    "https://localphototool.com/"
+   ],
+   "clicks": 1,
+   "impressions": 9,
+   "ctr": 0.1111111111111111,
+   "position": 1.2222222222222223
+  },
+  {
+   "keys": [
+    "https://localphototool.com/compress-to-50kb/"
+   ],
+   "clicks": 1,
+   "impressions": 5,
+   "ctr": 0.2,
+   "position": 5.8
+  },
+  {
+   "keys": [
+    "https://localphototool.com/about/"
+   ],
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 2.7777777777777777
+  },
+  {
+   "keys": [
+    "https://localphototool.com/compress-to-200kb/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.6
+  },
+  {
+   "keys": [
+    "https://localphototool.com/compress-without-uploading/"
+   ],
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 5.5
+  },
+  {
+   "keys": [
+    "https://localphototool.com/heic-to-jpg/"
+   ],
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "keys": [
+    "https://localphototool.com/privacy/"
+   ],
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 3.625
+  },
+  {
+   "keys": [
+    "https://localphototool.com/remove-gps-from-photo/"
+   ],
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "keys": [
+    "https://localphototool.com/terms/"
+   ],
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 6
+  }
+ ]
+}
