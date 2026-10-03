@@ -187,6 +187,9 @@ code, kbd, samp {
   border: 1px solid var(--border);
   border-radius: var(--r-xs);
   padding: 0.1em 0.4em;
+  /* a 64-character digest used to push the whole page sideways on a phone;
+     the token only breaks when it genuinely does not fit */
+  overflow-wrap: anywhere;
 }
 
 ::selection { background: var(--brand-tint-strong); color: var(--text); }
