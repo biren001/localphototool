@@ -110,6 +110,14 @@
         },
         {
           "@type": "Question",
+          "name": "Why does compressing twice not make it any smaller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The first pass already removed the bytes a codec can describe more cheaply, so the second pass finds almost nothing left to take. Run on this engine, three photographs encoded three times at the same setting went from 1,368,828 bytes to 1,368,713 bytes. Switching codec can still find something to remove — the table below shows AVIF ranging from 0% to 37% on already-optimised photos — but re-encoding the same file in the same format is where the floor sits. If a second pass would come back bigger than the original, this tool keeps your original and says already optimal."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Can I compress a whole folder at once?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -267,6 +275,7 @@
             <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
             <li><a href="../compress-photos-for-email/">Compress for email</a></li>
             <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
             <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
             <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
             <li><a href="../exif-viewer/">EXIF viewer</a></li>
@@ -540,6 +549,11 @@
         <li><strong>Metadata removal.</strong> EXIF blocks, thumbnails embedded inside the file, GPS traces and maker notes can add tens of kilobytes on their own. They are dropped, while the orientation tag is applied to the pixels first so nothing ends up sideways.</li>
       </ol>
 
+      <h2>When the file is already as small as it gets</h2>
+      <p>Compression has a floor, and most people meet it as a complaint: they run the tool twice, the second time does nothing, and the tool is called broken. It is not. A first pass removes the bytes a codec can describe more cheaply; the second pass is then handed a file whose bytes are already close to as random as they need to be, so there is almost nothing left to find. Measured on this engine, three photographs at 2400 × 1600 were encoded three times each at the same setting: they went from 1,368,828 bytes to 1,368,713 bytes — 115 bytes across all three.</p>
+      <p>What should happen next is that the tool says so. This one labels the result <strong>already optimal</strong> and, when a re-encode would come back bigger than the original, hands you the original file you uploaded — the same bytes you dropped in, not a copy that lost quality and gained nothing. The <a href="../why-my-image-wont-get-smaller/">why your image won't get smaller</a> page walks through that measurement, the three things that usually hold a file up, and the three levers that do move the number.</p>
+      <p>The other complaints that page collects are about separate things: “it came back bigger than the original”, “it barely got smaller”, “I had to do them one at a time”. Here, none of those apply. Your photo never travels to a server, so the file you save is the same file you brought. Batch work runs over the whole folder at once rather than one at a time, so a media library of several thousand images is not something you do by hand. And there is no daily limit, no cap on how many files you bring and no account.</p>
+
       <h3>Choosing a strategy</h3>
       <div class="table-scroll">
         <table>
@@ -650,6 +664,10 @@
           <div class="faq__body"><p>Lossy formats always discard something, but Auto mode holds measured fidelity above ~40 dB PSNR, which is past the point where differences are visible at normal viewing sizes. If you want certainty rather than heuristics, use Quality mode with a high setting or export PNG, which is lossless.</p></div>
         </details>
         <details class="faq__item">
+          <summary>Why does compressing twice not make it any smaller?</summary>
+          <div class="faq__body"><p>The first pass already removed the bytes a codec can describe more cheaply, so the second pass finds almost nothing left to take. Run on this engine, three photographs encoded three times at the same setting went from 1,368,828 bytes to 1,368,713 bytes. Switching codec can still find something to remove — the table below shows AVIF ranging from 0% to 37% on already-optimised photos — but re-encoding the same file in the same format is where the floor sits. If a second pass would come back bigger than the original, this tool keeps your original and says already optimal.</p></div>
+        </details>
+        <details class="faq__item">
           <summary>Can I compress a whole folder at once?</summary>
           <div class="faq__body"><p>Select as many files as you like in the file picker, or drag a multi-selection straight onto the page. They process in parallel background workers, and <strong>Download all</strong> packages every finished file into a single ZIP — duplicate names are de-duplicated automatically.</p></div>
         </details>
@@ -750,7 +768,8 @@
           <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
           <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
           <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
-          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a>
+          <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li></li>
           <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
           <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
           <li><a href="../exif-viewer/">EXIF viewer</a></li>

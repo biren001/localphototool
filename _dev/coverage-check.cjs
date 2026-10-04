@@ -83,6 +83,17 @@ const GROUPS = {
   'compress': [
     'compress', 'compressor', 'file size', 'smaller', 'kb', 'mb',
     'without losing quality', 'lossy', 'quality', 'upload', 'shrink'
+  ],
+  /* 竞品评论区里真实出现过的抱怨措辞（v79 挖的）。这批词不在上面任何组里，
+     因为它们说的是「用户为什么走掉」而不是「用户怎么搜」。 */
+  'compress-pain-points': [
+    "won't get smaller", 'not getting smaller', 'doesn\'t get smaller',
+    'came back bigger', 'bigger than the original', 'bigger than before',
+    'keep the original', 'original bytes', 'already optimal',
+    'one at a time', 'to a server', 'random server',
+    'barely got smaller', 'barely smaller',
+    'second pass', 'run it again', 'compress it again',
+    'media library', 'by hand', 'daily limit'
   ]
 };
 
@@ -90,7 +101,10 @@ const brief = process.argv.includes('--brief');
 
 /* 合成组 → 真实目录名。没有这一层，convert-formats 会一路报 MISSING PAGE。 */
 const ALIAS = {
-  'convert-formats': ['jpg-to-png', 'jpg-to-webp', 'png-to-jpg', 'webp-to-jpg', 'webp-to-png']
+  'convert-formats': ['jpg-to-png', 'jpg-to-webp', 'png-to-jpg', 'webp-to-jpg', 'webp-to-png'],
+  /* 痛点措辞要落在「主压缩器」和「讲这件事的信息页」两处，缺一不可：
+     前者承接搜索词，后者承接"我就是想知道为什么"。 */
+  'compress-pain-points': ['compress', 'why-my-image-wont-get-smaller']
 };
 
 function count(hay, needle) {

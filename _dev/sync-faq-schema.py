@@ -31,7 +31,7 @@ PAGES = ["index.html", "compress/index.html", "heic-to-jpg/index.html", "exif-vi
     "compress-to-200kb/index.html", "compress-to-500kb/index.html",
     "compress-to-50kb/index.html", "compress-without-uploading/index.html",
     "image-compressor-upload-test/index.html", "remove-gps-from-photo/index.html",
-    "transfer/index.html"]
+    "transfer/index.html", "why-my-image-wont-get-smaller/index.html"]
 
 DETAILS_RE = re.compile(
     r'<details class="faq__item"[^>]*>\s*<summary>([\s\S]*?)</summary>\s*'

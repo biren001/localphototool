@@ -1,0 +1,110 @@
+{
+  "q": 0.6,
+  "rounds": 3,
+  "lede": {
+    "grewOnSecondPass": 0,
+    "shrankOnSecondPass": 0,
+    "totalSources": 3,
+    "medianPngChangeVsSourceJpeg": 103.9,
+    "worstPngChangeVsSourceJpeg": 191.4,
+    "medianPsnrLost": 0.03
+  },
+  "sources": [
+    {
+      "source": "photo-1-hq.jpg",
+      "sourceBytes": 890690,
+      "width": 2400,
+      "height": 1600,
+      "q": 0.6,
+      "rounds": [
+        {
+          "round": 1,
+          "bytes": 362491,
+          "encoder": "native",
+          "psnrVsOriginal": 37.882185195322435
+        },
+        {
+          "round": 2,
+          "bytes": 362450,
+          "encoder": "native",
+          "psnrVsOriginal": 37.860130173175584
+        },
+        {
+          "round": 3,
+          "bytes": 362399,
+          "encoder": "native",
+          "psnrVsOriginal": 37.85526902868852
+        }
+      ],
+      "changeFromFirstToSecond": 0,
+      "changeFromFirstToThird": 0,
+      "psnrLostOverTwoReencodes": 0.03,
+      "pngBytes": 1816238,
+      "pngChangeVsSourceJpeg": 103.9
+    },
+    {
+      "source": "photo-2-hq.jpg",
+      "sourceBytes": 670873,
+      "width": 2400,
+      "height": 1600,
+      "q": 0.6,
+      "rounds": [
+        {
+          "round": 1,
+          "bytes": 314933,
+          "encoder": "native",
+          "psnrVsOriginal": 38.83356432629994
+        },
+        {
+          "round": 2,
+          "bytes": 314909,
+          "encoder": "native",
+          "psnrVsOriginal": 38.83291131042013
+        },
+        {
+          "round": 3,
+          "bytes": 314923,
+          "encoder": "native",
+          "psnrVsOriginal": 38.83279477511572
+        }
+      ],
+      "changeFromFirstToSecond": 0,
+      "changeFromFirstToThird": 0,
+      "psnrLostOverTwoReencodes": 0,
+      "pngBytes": 1954750,
+      "pngChangeVsSourceJpeg": 191.4
+    },
+    {
+      "source": "photo-3-hq.jpg",
+      "sourceBytes": 1675584,
+      "width": 2400,
+      "height": 1600,
+      "q": 0.6,
+      "rounds": [
+        {
+          "round": 1,
+          "bytes": 691404,
+          "encoder": "native",
+          "psnrVsOriginal": 35.079867086397385
+        },
+        {
+          "round": 2,
+          "bytes": 691361,
+          "encoder": "native",
+          "psnrVsOriginal": 34.99751598010366
+        },
+        {
+          "round": 3,
+          "bytes": 691391,
+          "encoder": "native",
+          "psnrVsOriginal": 34.93567531755261
+        }
+      ],
+      "changeFromFirstToSecond": 0,
+      "changeFromFirstToThird": 0,
+      "psnrLostOverTwoReencodes": 0.14,
+      "pngBytes": 2505656,
+      "pngChangeVsSourceJpeg": 49.5
+    }
+  ]
+}

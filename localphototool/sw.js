@@ -130,6 +130,7 @@ var SHELL = [
   'transfer/vendor/qrcode.min.js',
   'compress-photos-for-email/',
   'compress-without-uploading/',
+  'why-my-image-wont-get-smaller/',
   'image-compressor-upload-test/',
   'png-to-jpg/',
   'jpg-to-webp/',

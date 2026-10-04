@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-compressor-defaults='{"format":"jpeg"}'>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Why Your Image Won't Get Smaller — Measured, Not Guessed</title>
+<meta name="description" content="Your photo refuses to shrink? We compressed the same three test photos three more times and the files shrank by 115 bytes in total. Why an image hits a floor, and what to change instead.">
+<link rel="canonical" href="https://localphototool.com/why-my-image-wont-get-smaller/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Why Your Image Won't Get Smaller — Measured, Not Guessed">
+<meta property="og:description" content="Your photo refuses to shrink? We compressed the same three test photos three more times and the files shrank by 115 bytes in total. Why an image hits a floor, and what to change instead.">
+<meta property="og:url" content="https://localphototool.com/why-my-image-wont-get-smaller/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why Your Image Won't Get Smaller — Measured, Not Guessed">
+<meta name="twitter:description" content="Your photo refuses to shrink? We compressed the same three test photos three more times and the files shrank by 115 bytes in total. Why an image hits a floor, and what to change instead.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css?v=926ed50" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=926ed50">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://localphototool.com/#app",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Client-side image compression and conversion for JPEG, PNG, WebP and AVIF. Files are processed locally in the browser and are never uploaded.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/why-my-image-wont-get-smaller/#page",
+      "url": "https://localphototool.com/why-my-image-wont-get-smaller/",
+      "name": "Why Your Image Won't Get Smaller — Measured, Not Guessed",
+      "description": "Your photo refuses to shrink? We compressed the same three test photos three more times and the files shrank by 115 bytes in total. Why an image hits a floor, and what to change instead.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://localphototool.com/why-my-image-wont-get-smaller/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://localphototool.com/why-my-image-wont-get-smaller/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress",
+          "item": "https://localphototool.com/compress/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Why Your Image Won't Get Smaller — Measured, Not Guessed",
+          "item": "https://localphototool.com/why-my-image-wont-get-smaller/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://localphototool.com/why-my-image-wont-get-smaller/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why won't my image get smaller after I've compressed it once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the first pass already removed the compressible parts. A second pass over the same file at the same setting finds almost nothing left to find, so the byte count stops moving. In a test run here, three photographs were compressed three times with the same encoder: the files went from 1,368,828 bytes to 1,368,713 bytes — a saving of 115 bytes across all three, 0.008% of what the first pass had already achieved. Nothing was broken; the file was simply at its floor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did my compressed image come back bigger than the original?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually because the format changed underneath you, or because the original already sat in a format that compressed well. A lossless PNG of the same pixels measured here weighed 1,816,238 bytes against the source JPEG's 890,690 — 104% more for identical pixels. Some tools also re-encode through a canvas that silently expands 8-bit images to 32-bit RGBA, which adds a few bytes per pixel before any encoder runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to run a compression tool twice on the same photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It works, but it is not free. Each pass decodes the file and re-encodes it, which costs a little quality every time even when it costs no bytes. Over two extra passes on the same three test photos the peak quality loss measured 0.14 dB, and the median was 0.03 dB — small, but you paid for it and got nothing back."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I really need the file smaller and it isn't shrinking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Change one of the three things that actually move the number: fewer pixels, a different codec, or a lower quality target. Dropping the long edge from 2400 to 1200 removes roughly three quarters of the pixels and therefore most of the bytes; switching from JPEG to WebP or AVIF at equal measured quality typically lands a further 20-30% lower; and a fixed budget such as 100 KB or 200 KB is reachable directly. Re-running the same operation is the one lever that never moves."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a screenshot stay huge when a photograph shrinks easily?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a photograph compresses well and a screenshot does not. A photo is a smooth gradient of millions of similar colours, which a codec can predict and then encode once. A screenshot is flat blocks of exactly one colour with hard edges — every pixel value is already unique, so there is almost no redundancy to remove. That is why a 2 MB photograph and a 2 MB PNG save-for-web screenshot can behave completely differently in the same tool."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I export my photos as PNG to make them smaller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only for graphics that need to stay sharp — logos, charts, icons, text. For photographs PNG is the wrong way round: in this test the same pixels came out 104%, 191% and 50% larger in bytes than the JPEG they started as. A PNG is lossless by definition, so it must carry every pixel exactly; it has no quality setting to turn down."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the tool here tell me when it can't make my image smaller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and it hands you your own file back rather than a worse one. When a re-encode would not make the file smaller, the result row is labelled already optimal and the save button downloads the original bytes you uploaded, unchanged — not the larger re-encoded copy."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "logo": "https://localphototool.com/favicon.svg",
+      "email": "hello@localphototool.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the compressor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <details class="nav__tools">
+          <summary>All tools<svg class="nav__tools__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul class="nav__tools__panel">
+            <li><a href="../compress/">Compress images</a></li>
+            <li><a href="../resize-image/">Resize images</a></li>
+            <li><a href="../watermark/">Text watermark</a></li>
+            <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+            <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+            <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+            <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+            <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+            <li><a href="../webp-to-png/">WebP to PNG</a></li>
+            <li><a href="../compress/">PNG optimizer</a></li>
+            <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+            <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+            <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+            <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+            <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+            <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+            <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
+            <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+            <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+            <li><a href="../exif-viewer/">EXIF viewer</a></li>
+            <li><a href="../image-to-base64/">Image to Base64</a></li>
+            <li><a href="../images-to-pdf/">Images to PDF</a></li>
+            <li><a href="../transfer/">Transfer phone to PC</a></li>
+            <li><a href="../batch-rename/">Batch rename</a></li>
+            <li><a href="../metadata-editor/">Metadata editor</a></li>
+            <li><a href="../remove-background/">Remove background</a></li>
+          </ul>
+        </details>
+        <a class="nav__link" href="../heic-to-jpg/">HEIC to JPG</a>
+        <a class="nav__link" href="../why-my-image-wont-get-smaller/">Why it won't shrink</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../compress/">Compress</a> <span aria-hidden="true">&rsaquo;</span> Why images won't get smaller</span>
+      </nav>
+      <h1>Why your image won't get smaller</h1>
+      <p class="hero__lead" style="max-width:660px">Every compressor claims a percentage. Here is the part they usually leave out: a second pass over the same photo can only remove what the first pass already removed. We ran the numbers on three test photographs, and they shrank by 115 bytes in total — less than one thousandth of one percent. If you came here because your image is still too large, the reason is almost never that the tool failed. It is that something else is holding the file up.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Nothing is uploaded
+        </li>
+        <li class="badge">Numbers measured here, not quoted</li>
+        <li class="badge">No file-count limit</li>
+        <li class="badge">Keeps your original if it can't win</li>
+      </ul>
+      <p class="hero__share" style="max-width:660px">
+        <a href="../share/">On a phone? Scan this QR code to open the tool there &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+<section class="tool" id="tool">
+  <div class="container">
+
+    <!-- Drop zone -->
+    <div class="dropzone" id="dropzone" role="group" tabindex="0" aria-label="Add images: drop files here or press Enter to browse">
+      <div class="dropzone__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </div>
+      <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your images here</h2>
+      <p class="dropzone__hint">or paste from the clipboard · <span id="pasteHint" hidden>⌘V / Ctrl+V works too</span></p>
+      <div class="dropzone__actions">
+        <button class="btn btn--grad btn--lg" id="pickBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+          Choose images
+        </button>
+      </div>
+      <p class="dropzone__formats">JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit</p>
+      <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple aria-label="Choose image files">
+    </div>
+
+    <!-- Settings -->
+    <div class="settings">
+      <div class="settings__head">
+        <h2 class="settings__title">Compression settings</h2>
+        <span class="badge badge--brand" id="settingsBadge">Applied to every image</span>
+      </div>
+
+      <div class="settings__body">
+        <div class="field">
+          <span class="field__label">Strategy</span>
+          <div class="segmented" role="radiogroup" aria-label="Compression strategy">
+            <input type="radio" name="mode" id="modeAuto" value="auto" checked>
+            <label for="modeAuto">Auto</label>
+            <input type="radio" name="mode" id="modeQuality" value="quality">
+            <label for="modeQuality">Quality</label>
+            <input type="radio" name="mode" id="modeTarget" value="target">
+            <label for="modeTarget">Target size</label>
+          </div>
+        </div>
+
+        <div class="field" id="autoNote">
+          <p class="muted mb-0" style="font-size:0.82rem">
+            Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor.
+          </p>
+        </div>
+
+        <div class="field hidden" id="qualityField">
+          <div class="field__label">
+            <label for="quality">Encoder quality</label>
+            <span class="hint">higher keeps more detail</span>
+          </div>
+          <div class="field__row">
+            <input type="range" id="quality" min="10" max="100" step="1" value="80">
+            <span class="field__value" id="qualityValue">80%</span>
+          </div>
+        </div>
+
+        <div class="field hidden" id="targetField">
+          <div class="field__label">
+            <label for="targetKB">Target file size</label>
+            <span class="hint">downscales automatically if needed</span>
+          </div>
+          <div class="input-group">
+            <input class="input" type="number" id="targetKB" min="5" max="50000" step="5" value="200" inputmode="numeric">
+            <span class="input-group__addon">KB</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field__label">Output format</span>
+          <div class="segmented segmented--wrap" role="radiogroup" aria-label="Output format">
+            <input type="radio" name="format" id="fmtAuto" value="auto" checked>
+            <label for="fmtAuto">Auto</label>
+            <input type="radio" name="format" id="fmtOriginal" value="original">
+            <label for="fmtOriginal">Keep format</label>
+            <input type="radio" name="format" id="fmtJpeg" value="jpeg">
+            <label for="fmtJpeg">JPEG</label>
+            <input type="radio" name="format" id="fmtWebp" value="webp">
+            <label for="fmtWebp">WebP</label>
+            <input type="radio" name="format" id="fmtAvif" value="avif">
+            <label for="fmtAvif">AVIF</label>
+            <input type="radio" name="format" id="fmtPng" value="png">
+            <label for="fmtPng">PNG</label>
+          </div>
+        </div>
+      </div>
+
+      <details class="advanced">
+        <summary>
+          <svg class="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          Advanced options
+        </summary>
+        <div class="advanced__body">
+          <div class="field">
+            <label class="field__label" for="maxDimension">Resize — maximum edge
+              <span class="hint">original size is preserved by default</span>
+            </label>
+            <select class="select" id="maxDimension">
+              <option value="0" selected>Keep original dimensions</option>
+              <option value="4096">4096 px — large prints</option>
+              <option value="2560">2560 px — web hero images</option>
+              <option value="2048">2048 px — retina screens</option>
+              <option value="1600">1600 px — blog &amp; article images</option>
+              <option value="1280">1280 px — email &amp; social</option>
+              <option value="1024">1024 px — thumbnails</option>
+              <option value="800">800 px — very small</option>
+            </select>
+            <p class="muted mb-0" style="font-size:0.78rem">Need exact dimensions or a centre crop instead of a cap? The <a href="../resize-image/">batch image resizer</a> does that.</p>
+          </div>
+
+          <div class="field">
+            <span class="field__label">Sharpening after resize</span>
+            <div class="segmented" role="radiogroup" aria-label="Sharpening">
+              <input type="radio" name="sharpen" id="shAuto" value="auto" checked>
+              <label for="shAuto">Auto</label>
+              <input type="radio" name="sharpen" id="shOn" value="on">
+              <label for="shOn">Always</label>
+              <input type="radio" name="sharpen" id="shOff" value="off">
+              <label for="shOff">Never</label>
+            </div>
+            <p class="muted mb-0" style="font-size:0.78rem">Auto applies a halo-free unsharp mask only when an image is scaled below 82%.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="pngColors">PNG palette reduction
+              <span class="hint">the biggest PNG win</span>
+            </label>
+            <select class="select" id="pngColors">
+              <option value="auto" selected>Auto — 256 colors for graphics</option>
+              <option value="256">256 colors</option>
+              <option value="128">128 colors</option>
+              <option value="64">64 colors</option>
+              <option value="off">Off — lossless PNG only</option>
+            </select>
+            <label class="switch switch--sm" for="dither">
+              <input type="checkbox" id="dither" checked>
+              <span class="switch__track"></span>
+              <span class="switch__text">Floyd–Steinberg dithering (smoother gradients)</span>
+            </label>
+          </div>
+
+          <div class="field">
+            <span class="field__label">When a batch finishes</span>
+            <label class="switch switch--sm" for="chimeOn">
+              <input type="checkbox" id="chimeOn" checked>
+              <span class="switch__track"></span>
+              <span class="switch__text">Play a soft chime — only if it took a while, or while you were on another tab</span>
+            </label>
+            <p class="muted mb-0" style="font-size:0.78rem">
+              Generated in your browser by a synth — no audio file is downloaded, and it stays silent when a batch finishes in a couple of seconds.
+              <button class="linkish" type="button" id="chimeTest">Preview the sound</button>
+            </p>
+          </div>
+
+          <div class="field">
+            <span class="field__label">Processing engine</span>
+            <div class="engine-status" id="engineStatus" aria-live="polite"></div>
+            <p class="muted mb-0" style="font-size:0.78rem">
+              WASM codecs are fetched from a public CDN on first use and give slightly smaller files. Every fallback still works offline.
+            </p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Results -->
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="results__head">
+        <h2 class="results__title">Results</h2>
+        <p class="results__summary" id="resSummary"></p>
+        <div class="results__actions">
+          <button class="btn btn--primary btn--sm" id="downloadAll" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4z"/><path d="M9 6V4h6v2"/><path d="M10 10h4M10 14h4"/></svg>
+            <span id="downloadAllLabel">Save all</span>
+          </button>
+          <button class="btn btn--ghost btn--sm" id="clearAll" type="button">Clear</button>
+          <button class="icon-btn chime-toggle" id="chimeToggle" type="button" aria-pressed="true" title="Sound when a batch finishes">
+            <svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            <svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/><path d="M3 3l18 18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="result-list" id="resultList"></div>
+
+      <div class="action-bar" id="actionBar" hidden>
+        <p class="save-hint" id="saveHint" hidden></p>
+        <div class="action-bar__info">
+          <span class="action-bar__big" id="actionSaved">—</span>
+          <span class="action-bar__sub" id="actionSub"></span>
+        </div>
+        <div class="action-bar__btns">
+          <button class="btn btn--grad" id="barDownload" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+            <span id="barDownloadLabel">Save all</span>
+          </button>
+          <button class="btn btn--ghost" id="barClear" type="button">Clear list</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+  <!-- SEO content -->
+  <section class="section section--subtle">
+    <div class="container prose">
+
+      <h2>The second pass, measured</h2>
+      <p>Three photographs were taken from this project's benchmark corpus — 2400 × 1600 pixels each, the shape of output a modern camera produces. Each one was encoded once, decoded back into pixels, and encoded again, twice over. Same encoder, same setting, same quality, every time. Quality was scored against the <em>original</em> photograph on every round, so a round that quietly degraded the image would show up as a falling number rather than hide behind a file that looked smaller.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Test photo</th><th>First pass</th><th>Second pass</th><th>Third pass</th><th>Total change</th><th>Quality lost</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>photo-1 &middot; 890,690 B</td><td>362,491 B</td><td>362,450 B</td><td>362,399 B</td><td>&minus;92 B</td><td>0.03 dB</td></tr>
+            <tr><td>photo-2 &middot; 670,873 B</td><td>314,933 B</td><td>314,909 B</td><td>314,923 B</td><td>&minus;10 B</td><td>0.00 dB</td></tr>
+            <tr><td>photo-3 &middot; 1,675,584 B</td><td>691,404 B</td><td>691,361 B</td><td>691,391 B</td><td>&minus;13 B</td><td>0.14 dB</td></tr>
+            <tr><td><strong>All three</strong></td><td><strong>1,368,828 B</strong></td><td><strong>1,368,714 B</strong></td><td><strong>1,368,713 B</strong></td><td><strong>&minus;115 B</strong></td><td>median 0.03 dB</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>One hundred and fifteen bytes. Across three photographs that the first pass had already cut from roughly 3.2 MB down to 1.37 MB. The three extra passes bought 0.008% — and cost a little quality to get. That is not a bug in the encoder. It is the arithmetic of compression catching up with itself.</p>
+
+      <h2>Why the file stops moving</h2>
+      <p>Compression works by finding patterns and encoding them once instead of many times. The first pass found every pattern the format could hold: repeated colour runs, predictable edges, the statistical bias in how your eye weighs detail. Once those are gone, the second pass is fed a file whose bytes are already close to as random as they need to be. There is nothing left to describe more cheaply.</p>
+      <p>One honest exception, because it keeps the table from misleading you: <strong>changing codec is not a second pass</strong>. Feeding an already-compressed JPEG to AVIF or WebP can still find real savings — a different encoder sees a different representation of the same pixels. The measured table on the <a href="../compress/">compressor page</a> puts AVIF between 0% and 37% better than the input on already-optimised photos, depending on the picture. The floor in the table above is specifically about re-encoding the same file in the same format at the same quality, which is the operation a "compress it again" button performs.</p>
+      <p>This is also why the number never goes to zero. A JPEG at quality 60 is <em>lossy</em>: the decoder may not reproduce the same bytes the encoder saw, so a round trip always costs something. Two extra passes here measured 0.03 dB and 0.14 dB — below the threshold most people can see, and still a loss. If you run a tool three times because the first two "didn't quite do it", you are paying quality for a rounding error.</p>
+
+      <h2>What actually holds a file up</h2>
+      <p>When an image will not shrink, one of four things is true. In order of how often it is the culprit:</p>
+      <ol>
+        <li><strong>The format is wrong for the picture.</strong> A lossless PNG of the same pixels measured here came out 1,816,238 bytes against the source JPEG's 890,690 — 104% bigger for an identical picture. On the other photos in the same run it was 191% and 50% bigger. This is also the usual answer to "why did my compressed image come back bigger than the original": the tool changed format underneath you, or re-encoded through a canvas that widened 8-bit colour into 32-bit RGBA, adding bytes before the encoder even started.</li>
+        <li><strong>The pixels are the reason.</strong> A 2400 × 1600 photograph is 3.84 million pixels. Six bytes of colour data each, minus whatever the codec saves. Until you change the pixel count, the floor is standing where it is. Halving each edge quarters the pixels.</li>
+        <li><strong>The image is already compressed.</strong> Screenshots, saved-for-web assets, thumbnails from a CMS, images that have already been through one compressor — these often sit close to their floor before you arrive. A screenshot is the extreme case: flat blocks of one exact colour with hard edges, where nearly every pixel value is already unique, so there is almost no redundancy for any codec to remove.</li>
+        <li><strong>Metadata was never the problem.</strong> EXIF, GPS and embedded thumbnails can be tens of kilobytes, and stripping them is real savings — but on a well-behaved photograph it is the difference between 362 KB and 358 KB, not between 362 KB and 200 KB.</li>
+      </ol>
+
+      <h2>What to do instead of pressing compress again</h2>
+      <p>Three levers move the number; the one you already tried does not.</p>
+      <ul>
+        <li><strong>Fewer pixels.</strong> The strongest lever by a wide margin. Dropping the long edge from 2400 to 1200 removes about three quarters of the pixels, and the byte count follows the pixel count. Do this in the <a href="../resize-image/">batch resizer</a>, or from the resize cap in Advanced.</li>
+        <li><strong>A better codec.</strong> At equal measured quality, WebP and AVIF land below JPEG on photographic content — the <a href="../compress/">main compressor</a> picks between them per image rather than forcing one.</li>
+        <li><strong>A hard budget.</strong> If a form, portal or inbox caps you at 100 KB or 200 KB, say so in KB and let the engine work backwards from it. The <a href="../compress-to-100kb/">compress to 100 KB</a>, <a href="../compress-to-50kb/">50 KB</a> and <a href="../compress-to-200kb/">200 KB</a> pages are built for exactly that, and the <a href="../compress-photos-for-email/">compress for email</a> page covers the attachment-limit case.</li>
+      </ul>
+      <p>And when the honest answer is "this file cannot go lower", the tool here says so. The result row is labelled <strong>already optimal</strong>, and the save button hands back <strong>the original bytes you uploaded</strong> — not a re-encoded copy that lost quality and gained nothing. That is the difference between a compressor that tells you it failed and one that tells you there was nothing to do.</p>
+      <p>You do not have to take the floor on trust. Drop the file into the compressor above and it will report when there is nothing left to take, and <strong>keep the original</strong> when a re-encode would only cost you quality. No image is sent to a server to find that out, and running it again is not how you change the answer — a media library of files that have all hit their floor is the same problem, and it is solved per file, not by hand.</p>
+
+      <p>The complaints that bring people here all mean the same thing, phrased a different way each time: the image is <strong>not getting smaller</strong>, or it <strong>doesn't get smaller</strong> on the second attempt, or the file <strong>came back bigger</strong> than the original, or the second run came out <strong>bigger than before</strong>, or the last pass only came out <strong>barely smaller</strong> while it cost quality. The move almost everyone makes next is to <strong>run it again</strong> — and then to <strong>compress it again</strong> — and the byte count lands where it landed. Nothing on that path changes the pixels, and nothing changes by handing the file to a <strong>random server</strong> either: no remote service can take a floor the pixels do not allow, and it adds a wait, an account and a <strong>daily limit</strong> to a problem you can already see in this tab. The other half of the complaint is time. A media library of 2,000 photographs is not something you shrink <strong>one at a time</strong>, and that is why the compressor above works over the whole queue without an account.</p>
+
+      <h2>How these numbers were produced</h2>
+      <p>They came out of the same engine this site runs in your browser, not out of a vendor's benchmark page. Each photograph was decoded to raw pixels, encoded with the site's own encoder, decoded again, and re-encoded, with a PSNR score measured against the original frame on every round. The script that produced them is part of this project's <code>_dev</code> folder, and the raw output is archived next to it. If a future encoder changes the result, the table will change with it — and a number nobody can re-produce is not evidence.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq mt-4">
+        <details class="faq__item" open>
+          <summary>Why won't my image get smaller after I've compressed it once?</summary>
+          <div class="faq__body"><p>Because the first pass already removed the compressible parts. A second pass over the same file at the same setting finds almost nothing left to find, so the byte count stops moving. In a test run here, three photographs were compressed three times with the same encoder: the files went from 1,368,828 bytes to 1,368,713 bytes — a saving of 115 bytes across all three, 0.008% of what the first pass had already achieved. Nothing was broken; the file was simply at its floor.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why did my compressed image come back bigger than the original?</summary>
+          <div class="faq__body"><p>Usually because the format changed underneath you, or because the original already sat in a format that compressed well. A lossless PNG of the same pixels measured here weighed 1,816,238 bytes against the source JPEG's 890,690 — 104% more for identical pixels. Some tools also re-encode through a canvas that silently expands 8-bit images to 32-bit RGBA, which adds a few bytes per pixel before any encoder runs.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is it safe to run a compression tool twice on the same photo?</summary>
+          <div class="faq__body"><p>It works, but it is not free. Each pass decodes the file and re-encodes it, which costs a little quality every time even when it costs no bytes. Over two extra passes on the same three test photos the peak quality loss measured 0.14 dB, and the median was 0.03 dB — small, but you paid for it and got nothing back.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What if I really need the file smaller and it isn't shrinking?</summary>
+          <div class="faq__body"><p>Change one of the three things that actually move the number: fewer pixels, a different codec, or a lower quality target. Dropping the long edge from 2400 to 1200 removes roughly three quarters of the pixels and therefore most of the bytes; switching from JPEG to WebP or AVIF at equal measured quality typically lands a further 20-30% lower; and a fixed budget such as 100 KB or 200 KB is reachable directly. Re-running the same operation is the one lever that never moves.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why does a screenshot stay huge when a photograph shrinks easily?</summary>
+          <div class="faq__body"><p>Because a photograph compresses well and a screenshot does not. A photo is a smooth gradient of millions of similar colours, which a codec can predict and then encode once. A screenshot is flat blocks of exactly one colour with hard edges — every pixel value is already unique, so there is almost no redundancy to remove. That is why a 2 MB photograph and a 2 MB PNG save-for-web screenshot can behave completely differently in the same tool.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Should I export my photos as PNG to make them smaller?</summary>
+          <div class="faq__body"><p>Only for graphics that need to stay sharp — logos, charts, icons, text. For photographs PNG is the wrong way round: in this test the same pixels came out 104%, 191% and 50% larger in bytes than the JPEG they started as. A PNG is lossless by definition, so it must carry every pixel exactly; it has no quality setting to turn down.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does the tool here tell me when it can't make my image smaller?</summary>
+          <div class="faq__body"><p>Yes, and it hands you your own file back rather than a worse one. When a re-encode would not make the file smaller, the result row is labelled already optimal and the save button downloads the original bytes you uploaded, unchanged — not the larger re-encoded copy.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col footer__col--tools">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../reduce-image-size/">Reduce image size</a></li>
+          <li><a href="../resize-image/">Resize images</a></li>
+          <li><a href="../watermark/">Text watermark</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+          <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+          <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+          <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+          <li><a href="../webp-to-png/">WebP to PNG</a></li>
+          <li><a href="../compress/">PNG optimizer</a></li>
+          <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+          <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+          <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+          <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+          <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+          <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+          <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+          <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
+          <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+          <li><a href="../exif-viewer/">EXIF viewer</a></li>
+          <li><a href="../image-to-base64/">Image to Base64</a></li>
+          <li><a href="../images-to-pdf/">Images to PDF</a></li>
+          <li><a href="../transfer/">Transfer phone to PC</a></li>
+          <li><a href="../batch-rename/">Batch rename</a></li>
+          <li><a href="../metadata-editor/">Metadata editor</a></li>
+          <li><a href="../remove-background/">Remove background</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#compare">Why it is better</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit 926ed50 with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>926ed50</code>+</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Before / after viewer -->
+<div class="modal" id="compareModal" hidden role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+  <div class="modal__panel">
+    <div class="modal__head">
+      <h2 class="modal__title" id="compareTitle">Comparison</h2>
+      <span class="badge badge--success" id="compareBadge"></span>
+      <button class="icon-btn" id="compareClose" type="button" aria-label="Close comparison">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="compare" id="compare" style="--split:50%;--zoom:1;--panx:0px;--pany:0px">
+      <div class="compare__layer compare__layer--base"><img id="compareBase" alt="Original image"></div>
+      <div class="compare__layer compare__layer--over"><img id="compareOver" alt="Compressed image"></div>
+      <span class="compare__label compare__label--l">Original</span>
+      <span class="compare__label compare__label--r">Compressed</span>
+      <div class="compare__handle" id="compareHandle" role="slider" tabindex="0"
+           aria-label="Comparison position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <div class="compare__grip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-4 5 4 5M15 7l4 5-4 5"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal__foot">
+      <div class="segmented" id="compareView" style="width:auto" role="group" aria-label="View mode">
+        <button class="btn btn--ghost btn--sm" data-view="split" type="button">Split</button>
+        <button class="btn btn--ghost btn--sm" data-view="original" type="button">Original</button>
+        <button class="btn btn--ghost btn--sm" data-view="result" type="button">Compressed</button>
+      </div>
+      <div class="segmented" id="compareZoom" style="width:auto" role="group" aria-label="Zoom">
+        <button class="btn btn--primary btn--sm" data-zoom="1" type="button">1×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="2" type="button">2×</button>
+        <button class="btn btn--ghost btn--sm" data-zoom="4" type="button">4×</button>
+      </div>
+      <div class="compare-stats" id="compareStats"></div>
+      <button class="btn btn--primary btn--sm" id="compareSave" type="button">Save this file</button>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/zip.js?v=926ed50"></script>
+<script src="../assets/js/compressor/engine.js?v=926ed50"></script>
+<script src="../assets/js/chime.js?v=926ed50"></script>
+<script src="../assets/js/compressor/app.js?v=926ed50"></script>
+<script src="../assets/js/share.js?v=926ed50" defer></script>
+<script src="../assets/js/site.js?v=926ed50"></script>
+<script src="../assets/js/pwa.js?v=926ed50" defer></script>
+<script src="../assets/js/stats.js?v=926ed50" defer></script>
+</body>
+</html>

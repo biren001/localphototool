@@ -48,6 +48,7 @@ const PAGES = [
   'compress-photos-for-email/index.html',
   'compress-without-uploading/index.html',
   'reduce-image-size/index.html',
+  'why-my-image-wont-get-smaller/index.html',
   'image-compressor-upload-test/index.html',
   'png-to-jpg/index.html',
   'jpg-to-webp/index.html',
@@ -68,7 +69,8 @@ const PAGES = [
    deliberately absent from both the sitemap and the shell cache. */
 const PUBLIC = ['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'watermark/', 'exif-viewer/', 'images-to-pdf/', 'compress-to-100kb/', 'compress-to-50kb/',
   'compress-to-200kb/', 'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
-  'compress-photos-for-email/', 'compress-without-uploading/', 'image-compressor-upload-test/',
+  'compress-photos-for-email/', 'compress-without-uploading/', 'why-my-image-wont-get-smaller/',
+  'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/', 'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/',
   'image-to-base64/', 'batch-rename/', 'metadata-editor/', 'remove-background/',
   'about/', 'privacy/', 'terms/', 'share/'];
@@ -260,7 +262,7 @@ PUBLIC.forEach(function (p) {
 ['', 'compress/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'share/', 'about/',
   'compress-to-100kb/', 'compress-to-50kb/', 'compress-to-200kb/',
   'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
-  'compress-photos-for-email/', 'compress-without-uploading/',
+  'compress-photos-for-email/', 'compress-without-uploading/', 'why-my-image-wont-get-smaller/',
   'image-compressor-upload-test/',
   'png-to-jpg/', 'jpg-to-webp/',
   'jpg-to-png/', 'webp-to-jpg/', 'webp-to-png/',   'image-to-base64/', 'batch-rename/',
