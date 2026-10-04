@@ -96,7 +96,7 @@ node _dev/measure-recompression.cjs
 
 | 空位 | 状态 |
 |---|---|
-| PDF 压缩页（唯一还没被占的压缩形态） | 未做 |
+| PDF 压缩页（唯一还没被占的压缩形态） | **v80 已上线**，见 `promo/pdf-compressor-notes-2026-10-04.md` |
 | `/screenshot/` 工具页 | 未排期 |
 | 外部作者渠道（vizua.io / orthogonal.info） | 已量过外链，邮件未发 |
 | 两周后回看 v74–v77 补的语言有没有换来曝光 | 未到时间 |

@@ -30,8 +30,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
 <link rel="manifest" href="../site.webmanifest">
-<link rel="preload" href="../assets/css/style.css?v=4fe6f4f" as="style">
-<link rel="stylesheet" href="../assets/css/style.css?v=4fe6f4f">
+<link rel="preload" href="../assets/css/style.css?v=613d34e" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=613d34e">
 
 <script type="application/ld+json">
 {
@@ -97,7 +97,7 @@
           "name": "Why does making a PDF smaller usually work so well?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Because a PDF from Word, Google Docs, Keynote, a scanner or a browser print has already compressed its text once, and pictures are what came back big. On a four-photo A4 document we measured, the images were 99.3% of the file. Re-encoding those images brought 1,689,943 bytes down to 761,064 — 55% smaller — while the text, the fonts and the page structure were copied through untouched. A document with one photo and body text around it went from 299,733 bytes to 135,558, which is the same 55% and the more everyday case."
+            "text": "Because a PDF from Word, Google Docs, Keynote, a scanner or a browser print has already compressed its text once, and pictures are what came back big. It is also why compressing a PDF a second time does nothing: the pictures have already been re-encoded once, and there is nothing left in them for a third pass to take. On a four-photo A4 document we measured, the images were 99.3% of the file. Re-encoding those images brought 1,689,943 bytes down to 761,064 — 55% smaller — while the text, the fonts and the page structure were copied through untouched. A document with one photo and body text around it went from 299,733 bytes to 135,558, which is the same 55% and the more everyday case."
           }
         },
         {
@@ -105,7 +105,7 @@
           "name": "Will my text still be selectable?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Only the image streams are replaced. Every other object — the page tree, the fonts, the outlines, the content streams that draw the words — is carried over the way it was, and the file's cross-reference table is then rebuilt from the offsets actually written. That table is exactly what a viewer uses to find each object, which is why it has to move when a stream changes length. The result still has selectable, searchable text and the same page count."
+            "text": "Yes. Only the image streams are replaced. You keep the text, the fonts and the page order exactly as they were, and every other object — the page tree, the outlines, the content streams that draw the words — is carried over the way it was, after which the file's cross-reference table is rebuilt from the offsets actually written. That table is exactly what a viewer uses to find each object, which is why it has to move when a stream changes length. The result still has selectable, searchable text and the same page count."
           }
         },
         {
@@ -121,7 +121,7 @@
           "name": "Does it work on encrypted or password-protected PDFs?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, and it refuses rather than guessing. If the document carries an encryption dictionary the file is passed back exactly as it came in, because the stream lengths and offsets are no longer readable in plain text and any change would produce a document that will not open. Passwords that only open a file for viewing do not stop us — but a document that was encrypted is left alone."
+            "text": "No, and it refuses rather than guessing. If the document is password protected, or carries an encryption dictionary, the file is passed back exactly as it came in: the stream lengths and offsets are no longer readable in plain text, and any change would produce a document that will not open. Passwords that only open a file for viewing do not stop us — but a document that was encrypted is left alone, and the page says so instead of pretending."
           }
         },
         {
@@ -259,6 +259,7 @@
       </nav>
       <h1>Shrink a PDF without uploading it</h1>
       <p class="hero__lead" style="max-width:680px">A PDF is mostly <strong>pictures</strong>. This reads your file on your own machine, re-encodes every image inside it, rebuilds the document's table of offsets, and hands you back a smaller file with your <strong>text still selectable</strong>. Measured on a four-photo document: <strong>55% smaller</strong>.</p>
+      <p class="muted" style="max-width:680px">How do I make a PDF smaller, or compress a PDF, without uploading it? The words inside a document were compressed long ago — the pictures were not, and they are where the bytes are. This reads your file <strong>on your own device</strong>, re-encodes the images <strong>in your browser</strong>, and hands you back a smaller file. A PDF too large to email, or one that keeps running into a file size limit or an attachment limit, is the common case here: the document never leaves your machine, and the whole job is done locally.</p>
       <ul class="trust-row mt-4">
         <li class="badge badge--success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
@@ -352,9 +353,10 @@
   <section class="section" id="measured">
     <div class="container">
       <h2>What we measured, and what it means</h2>
-      <p>Three documents were printed to PDF by the same browser and then run through this tool. The images were re-encoded at quality 60 with no downscaling, which is the default on the form above.</p>
+      <p>Three documents were printed to PDF by the same browser and then run through this tool — the same way you would shrink the PDF by hand, only without the upload. The images were re-encoded at quality 60 with no downscaling, which is the default on the form above.</p>
       <div class="card" style="margin-top:1rem">
         <ul class="fact-list">
+          <li><strong>Reduce the size of a PDF by re-encoding its pictures, and the rest of the file comes along untouched.</strong> That is what you want when you reduce the PDF size: the images are the only thing that has to change, and the words, the fonts and the page order do not. Here is what that actually looks like on measured files.</li>
           <li><strong>Four photos, four pages — 1,689,943 bytes → 761,064 bytes (−55%).</strong> The images inside were 99.3% of the file, so the rest of the document moved by almost nothing. Nothing but the picture bytes was touched.</li>
           <li><strong>One photo with body text around it — 299,733 bytes → 135,558 bytes (−54.8%).</strong> This is the ordinary case: a report or a deck where most of the bytes sit in one picture.</li>
           <li><strong>Text only, no pictures at all — 11,381 bytes, unchanged.</strong> The tool counted no image streams, so it returned the original file byte for byte instead of inventing work to do.</li>
@@ -368,6 +370,7 @@
   <section class="section" id="how-it-works">
     <div class="container">
       <h2>How it works</h2>
+      <p>Whether you want to compress a PDF, shrink a PDF, or optimize the PDF before you send it, the job is the same: the size sits in the pictures — the same thing that happens when a scanner produces a PDF, or when you compress a PDF on a laptop someone lent you. Most of the services that promise to optimize a PDF start by uploading your file first; this one reads it on your device instead.</p>
       <ol>
         <li><strong>The file is read on your machine.</strong> No upload step exists, so there is nothing to wait for and nothing to leak.</li>
         <li><strong>The document's objects are walked.</strong> Every <code>N 0 obj … endobj</code> is read, and the tool picks out the image objects — the ones stored as a plain JPEG with no alpha channel attached.</li>
@@ -384,11 +387,11 @@
       <div class="faq">
         <details class="faq__item" open>
           <summary>Why does making a PDF smaller usually work so well?</summary>
-          <div class="faq__body"><p>Because a PDF from Word, Google Docs, Keynote, a scanner or a browser print has already compressed its text once, and pictures are what came back big. On a four-photo A4 document we measured, the images were 99.3% of the file. Re-encoding those images brought 1,689,943 bytes down to 761,064 — 55% smaller — while the text, the fonts and the page structure were copied through untouched. A document with one photo and body text around it went from 299,733 bytes to 135,558, which is the same 55% and the more everyday case.</p></div>
+          <div class="faq__body"><p>Because a PDF from Word, Google Docs, Keynote, a scanner or a browser print has already compressed its text once, and pictures are what came back big. It is also why compressing a PDF a second time does nothing: the pictures have already been re-encoded once, and there is nothing left in them for a third pass to take. On a four-photo A4 document we measured, the images were 99.3% of the file. Re-encoding those images brought 1,689,943 bytes down to 761,064 — 55% smaller — while the text, the fonts and the page structure were copied through untouched. A document with one photo and body text around it went from 299,733 bytes to 135,558, which is the same 55% and the more everyday case.</p></div>
         </details>
         <details class="faq__item">
           <summary>Will my text still be selectable?</summary>
-          <div class="faq__body"><p>Yes. Only the image streams are replaced. Every other object — the page tree, the fonts, the outlines, the content streams that draw the words — is carried over the way it was, and the file's cross-reference table is then rebuilt from the offsets actually written. That table is exactly what a viewer uses to find each object, which is why it has to move when a stream changes length. The result still has selectable, searchable text and the same page count.</p></div>
+          <div class="faq__body"><p>Yes. Only the image streams are replaced. You keep the text, the fonts and the page order exactly as they were, and every other object — the page tree, the outlines, the content streams that draw the words — is carried over the way it was, after which the file's cross-reference table is rebuilt from the offsets actually written. That table is exactly what a viewer uses to find each object, which is why it has to move when a stream changes length. The result still has selectable, searchable text and the same page count.</p></div>
         </details>
         <details class="faq__item">
           <summary>My PDF came back exactly the same size. What happened?</summary>
@@ -396,7 +399,7 @@
         </details>
         <details class="faq__item">
           <summary>Does it work on encrypted or password-protected PDFs?</summary>
-          <div class="faq__body"><p>No, and it refuses rather than guessing. If the document carries an encryption dictionary the file is passed back exactly as it came in, because the stream lengths and offsets are no longer readable in plain text and any change would produce a document that will not open. Passwords that only open a file for viewing do not stop us — but a document that was encrypted is left alone.</p></div>
+          <div class="faq__body"><p>No, and it refuses rather than guessing. If the document is password protected, or carries an encryption dictionary, the file is passed back exactly as it came in: the stream lengths and offsets are no longer readable in plain text, and any change would produce a document that will not open. Passwords that only open a file for viewing do not stop us — but a document that was encrypted is left alone, and the page says so instead of pretending.</p></div>
         </details>
         <details class="faq__item">
           <summary>Is my PDF uploaded to a server?</summary>
@@ -459,7 +462,7 @@
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
-      <span class="build-stamp" title="Built from git commit 4fe6f4f with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>4fe6f4f</code>+</span>
+      <span class="build-stamp" title="Built from git commit 613d34e with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>613d34e</code>+</span>
       <span class="sep"></span>
       <span>Made for people who would rather not hand over their photos.</span>
     </div>
@@ -468,13 +471,13 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="../assets/js/compressor/engine.js?v=4fe6f4f"></script>
-<script src="../assets/js/pdfcompress.js?v=4fe6f4f"></script>
-<script src="../assets/js/chime.js?v=4fe6f4f"></script>
-<script src="../assets/js/share.js?v=4fe6f4f" defer></script>
-<script src="../assets/js/site.js?v=4fe6f4f"></script>
-<script src="../assets/js/pwa.js?v=4fe6f4f" defer></script>
-<script src="../assets/js/stats.js?v=4fe6f4f" defer></script>
+<script src="../assets/js/compressor/engine.js?v=613d34e"></script>
+<script src="../assets/js/pdfcompress.js?v=613d34e"></script>
+<script src="../assets/js/chime.js?v=613d34e"></script>
+<script src="../assets/js/share.js?v=613d34e" defer></script>
+<script src="../assets/js/site.js?v=613d34e"></script>
+<script src="../assets/js/pwa.js?v=613d34e" defer></script>
+<script src="../assets/js/stats.js?v=613d34e" defer></script>
 <script>
 (function () {
   'use strict';

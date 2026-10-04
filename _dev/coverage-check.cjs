@@ -84,6 +84,25 @@ const GROUPS = {
     'compress', 'compressor', 'file size', 'smaller', 'kb', 'mb',
     'without losing quality', 'lossy', 'quality', 'upload', 'shrink'
   ],
+  /* v80 新页的体检组：检索形状来自「想让 PDF 变小」这件事的说法 —— 有人搜动词
+     （shrink / compress / reduce / optimize），有人只说结果（too large / too big），
+     还有一批说的是顾虑（会不会上传、文字还在不在）。「PDF 压缩」这个词本身不列，
+     因为它是品类名而不是人会说出口的话。 */
+  'compress-pdf': [
+    'shrink a pdf', 'shrink the pdf', 'shrink pdf',
+    'compress a pdf', 'compressing a pdf',
+    'reduce the size of a pdf', 'reduce the pdf size',
+    'make a pdf smaller',
+    'smaller pdf', 'smaller file',
+    'pdf too large', 'too large to email',
+    'optimize a pdf', 'optimize the pdf',
+    'without uploading', 'no upload',
+    'in your browser', 'on your device', 'locally',
+    'keep the text', 'text still', 'still selectable', 'selectable',
+    'how do i make a pdf smaller',
+    'password protected', 'encrypted', 'scanned',
+    'file size limit', 'attachment'
+  ],
   /* 竞品评论区里真实出现过的抱怨措辞（v79 挖的）。这批词不在上面任何组里，
      因为它们说的是「用户为什么走掉」而不是「用户怎么搜」。 */
   'compress-pain-points': [

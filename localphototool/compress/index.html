@@ -30,8 +30,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
 <link rel="manifest" href="../site.webmanifest">
-<link rel="preload" href="../assets/css/style.css?v=4fe6f4f" as="style">
-<link rel="stylesheet" href="../assets/css/style.css?v=4fe6f4f">
+<link rel="preload" href="../assets/css/style.css?v=613d34e" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=613d34e">
 
 <script type="application/ld+json">
 {
@@ -553,7 +553,7 @@
       <h2>When the file is already as small as it gets</h2>
       <p>Compression has a floor, and most people meet it as a complaint: they run the tool twice, the second time does nothing, and the tool is called broken. It is not. A first pass removes the bytes a codec can describe more cheaply; the second pass is then handed a file whose bytes are already close to as random as they need to be, so there is almost nothing left to find. Measured on this engine, three photographs at 2400 × 1600 were encoded three times each at the same setting: they went from 1,368,828 bytes to 1,368,713 bytes — 115 bytes across all three.</p>
       <p>What should happen next is that the tool says so. This one labels the result <strong>already optimal</strong> and, when a re-encode would come back bigger than the original, hands you the original file you uploaded — the same bytes you dropped in, not a copy that lost quality and gained nothing. The <a href="../why-my-image-wont-get-smaller/">why your image won't get smaller</a> page walks through that measurement, the three things that usually hold a file up, and the three levers that do move the number.</p>
-      <p>The other complaints that page collects are about separate things: “it came back bigger than the original”, “it barely got smaller”, “I had to do them one at a time”. Here, none of those apply. Your photo never travels to a server, so the file you save is the same file you brought. Batch work runs over the whole folder at once rather than one at a time, so a media library of several thousand images is not something you do by hand. And there is no daily limit, no cap on how many files you bring and no account.</p>
+      <p>The complaints that bring people here are all the same complaint, phrased a different way each time: the image is <strong>not getting smaller</strong>, or it <strong>doesn't get smaller</strong> on the second try, or the file <strong>came back bigger</strong> than the original — bigger than before, in other words — or the copy it hands back <strong>barely got smaller</strong>, or the last pass only came out <strong>barely smaller</strong> than that, or nothing moves at all when you <strong>run it again</strong> and <strong>compress it again</strong> a third time. When a tool has to send the file to a server first, the <strong>original bytes</strong> come back as somebody else's copy from a <strong>random server</strong>, and the file you end up holding is not quite the one you chose. None of that is what happens here. Your photo never travels anywhere, and the tool will <strong>keep the original</strong> whenever a pass cannot improve on it. The <a href="../why-my-image-wont-get-smaller/">why your image won't get smaller</a> page walks through that measurement, the three things that usually hold a file up, and the three levers that do move the number. It also collects the complaints people make about batch work: a media library of several thousand images is not something you do <strong>by hand</strong>, <strong>one at a time</strong>, there is no daily limit, and there is no cap on how many files you bring and no account.</p>
 
       <h3>Choosing a strategy</h3>
       <div class="table-scroll">
@@ -802,7 +802,7 @@
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
-      <span class="build-stamp" title="Built from git commit 4fe6f4f with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>4fe6f4f</code>+</span>
+      <span class="build-stamp" title="Built from git commit 613d34e with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>613d34e</code>+</span>
       <span class="sep"></span>
       <span>Made for people who would rather not hand over their photos.</span>
     </div>
@@ -871,13 +871,13 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="../assets/js/zip.js?v=4fe6f4f"></script>
-<script src="../assets/js/compressor/engine.js?v=4fe6f4f"></script>
-<script src="../assets/js/chime.js?v=4fe6f4f"></script>
-<script src="../assets/js/compressor/app.js?v=4fe6f4f"></script>
-<script src="../assets/js/share.js?v=4fe6f4f" defer></script>
-<script src="../assets/js/site.js?v=4fe6f4f"></script>
-<script src="../assets/js/pwa.js?v=4fe6f4f" defer></script>
-<script src="../assets/js/stats.js?v=4fe6f4f" defer></script>
+<script src="../assets/js/zip.js?v=613d34e"></script>
+<script src="../assets/js/compressor/engine.js?v=613d34e"></script>
+<script src="../assets/js/chime.js?v=613d34e"></script>
+<script src="../assets/js/compressor/app.js?v=613d34e"></script>
+<script src="../assets/js/share.js?v=613d34e" defer></script>
+<script src="../assets/js/site.js?v=613d34e"></script>
+<script src="../assets/js/pwa.js?v=613d34e" defer></script>
+<script src="../assets/js/stats.js?v=613d34e" defer></script>
 </body>
 </html>

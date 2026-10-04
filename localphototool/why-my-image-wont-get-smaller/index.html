@@ -30,8 +30,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
 <link rel="manifest" href="../site.webmanifest">
-<link rel="preload" href="../assets/css/style.css?v=4fe6f4f" as="style">
-<link rel="stylesheet" href="../assets/css/style.css?v=4fe6f4f">
+<link rel="preload" href="../assets/css/style.css?v=613d34e" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=613d34e">
 
 <script type="application/ld+json">
 {
@@ -518,7 +518,7 @@
       <p>And when the honest answer is "this file cannot go lower", the tool here says so. The result row is labelled <strong>already optimal</strong>, and the save button hands back <strong>the original bytes you uploaded</strong> — not a re-encoded copy that lost quality and gained nothing. That is the difference between a compressor that tells you it failed and one that tells you there was nothing to do.</p>
       <p>You do not have to take the floor on trust. Drop the file into the compressor above and it will report when there is nothing left to take, and <strong>keep the original</strong> when a re-encode would only cost you quality. No image is sent to a server to find that out, and running it again is not how you change the answer — a media library of files that have all hit their floor is the same problem, and it is solved per file, not by hand.</p>
 
-      <p>The complaints that bring people here all mean the same thing, phrased a different way each time: the image is <strong>not getting smaller</strong>, or it <strong>doesn't get smaller</strong> on the second attempt, or the file <strong>came back bigger</strong> than the original, or the second run came out <strong>bigger than before</strong>, or the last pass only came out <strong>barely smaller</strong> while it cost quality. The move almost everyone makes next is to <strong>run it again</strong> — and then to <strong>compress it again</strong> — and the byte count lands where it landed. Nothing on that path changes the pixels, and nothing changes by handing the file to a <strong>random server</strong> either: no remote service can take a floor the pixels do not allow, and it adds a wait, an account and a <strong>daily limit</strong> to a problem you can already see in this tab. The other half of the complaint is time. A media library of 2,000 photographs is not something you shrink <strong>one at a time</strong>, and that is why the compressor above works over the whole queue without an account.</p>
+      <p>The complaints that bring people here all mean the same thing, phrased a different way each time: the image is <strong>not getting smaller</strong>, or it <strong>doesn't get smaller</strong> on the second attempt, or the file <strong>came back bigger</strong> than the original, or the second run came out <strong>bigger than before</strong>, or the last pass only came out <strong>barely smaller</strong>, or the second attempt <strong>barely got smaller</strong> while it cost quality. The move almost everyone makes next is to <strong>run it again</strong> — and then to <strong>compress it again</strong> — and the byte count lands where it landed. Nothing on that path changes the pixels, and nothing changes by handing the file to a <strong>random server</strong> either: no remote service can take a floor the pixels do not allow, and it adds a wait, an account and a <strong>daily limit</strong> to a problem you can already see in this tab. The other half of the complaint is time. A media library of 2,000 photographs is not something you shrink <strong>one at a time</strong>, and that is why the compressor above works over the whole queue without an account.</p>
 
       <h2>How these numbers were produced</h2>
       <p>They came out of the same engine this site runs in your browser, not out of a vendor's benchmark page. Each photograph was decoded to raw pixels, encoded with the site's own encoder, decoded again, and re-encoded, with a PSNR score measured against the original frame on every round. The script that produced them is part of this project's <code>_dev</code> folder, and the raw output is archived next to it. If a future encoder changes the result, the table will change with it — and a number nobody can re-produce is not evidence.</p>
@@ -624,7 +624,7 @@
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
-      <span class="build-stamp" title="Built from git commit 4fe6f4f with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>4fe6f4f</code>+</span>
+      <span class="build-stamp" title="Built from git commit 613d34e with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>613d34e</code>+</span>
       <span class="sep"></span>
       <span>Made for people who would rather not hand over their photos.</span>
     </div>
@@ -672,13 +672,13 @@
   </div>
 </div>
 
-<script src="../assets/js/zip.js?v=4fe6f4f"></script>
-<script src="../assets/js/compressor/engine.js?v=4fe6f4f"></script>
-<script src="../assets/js/chime.js?v=4fe6f4f"></script>
-<script src="../assets/js/compressor/app.js?v=4fe6f4f"></script>
-<script src="../assets/js/share.js?v=4fe6f4f" defer></script>
-<script src="../assets/js/site.js?v=4fe6f4f"></script>
-<script src="../assets/js/pwa.js?v=4fe6f4f" defer></script>
-<script src="../assets/js/stats.js?v=4fe6f4f" defer></script>
+<script src="../assets/js/zip.js?v=613d34e"></script>
+<script src="../assets/js/compressor/engine.js?v=613d34e"></script>
+<script src="../assets/js/chime.js?v=613d34e"></script>
+<script src="../assets/js/compressor/app.js?v=613d34e"></script>
+<script src="../assets/js/share.js?v=613d34e" defer></script>
+<script src="../assets/js/site.js?v=613d34e"></script>
+<script src="../assets/js/pwa.js?v=613d34e" defer></script>
+<script src="../assets/js/stats.js?v=613d34e" defer></script>
 </body>
 </html>
