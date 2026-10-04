@@ -490,8 +490,11 @@ Widened 9 → 15 tools (`_dev/measure-upload-behavior.cjs`, new probe, new marke
 **The verdict did not move, which is the finding:** TinyPNG (341,529 B → `/backend/opt/store`,
 marker 3×) and iLoveIMG (341,729 B → `api22.iloveimg.com/v1/upload`, marker 4×) are still the
 only two that send the whole file; seven kept it local. Six could not be driven under
-automation and are published as *not determined*, including `resizeimage.net`, which no longer
-resolves. iLoveIMG's endpoint was observed rotating (`api10` in September, `api22` in October),
+automation and are published as *not determined* — `resizeimage.net` reported
+`ERR_NAME_NOT_RESOLVED` during the run, but a control check afterwards saw the same `code=000`
+from hosts that are demonstrably up while another host answered 200 in the same window, so the
+network was partitioned mid-session and **that domain counts as unverified, not dead**.
+iLoveIMG's endpoint was observed rotating (`api10` in September, `api22` in October),
 so a hardcoded endpoint in copy goes stale within weeks.
 
 Two method notes for anyone re-running it: the fallback selector for file inputs is

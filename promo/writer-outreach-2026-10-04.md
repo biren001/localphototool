@@ -80,7 +80,8 @@ disclosed up front - it is one of the seven, not the reason I ran the test).
 
 Six of the fifteen we could not drive under automation and left blank rather than guessed at:
 FreeConvert, CompressPNG, iLoveIMG's JPG page, BulkCompressor, imagecompress.com and
-resizeimage.net, the last of which no longer resolves.
+resizeimage.net. One reported a DNS failure during the run while the network was clearly
+partitioned around that moment, so we do not claim anything about that host either way.
 
 Disclosure: I maintain LocalPhotoTool (https://localphototool.com/), a browser-only image
 toolkit. I am not asking you to write about it. Two of the seven local ones were already
