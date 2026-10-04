@@ -97,10 +97,33 @@ node _dev/measure-recompression.cjs
 | 空位 | 状态 |
 |---|---|
 | PDF 压缩页（唯一还没被占的压缩形态） | **v80 已上线**，见 `promo/pdf-compressor-notes-2026-10-04.md` |
+| `/pdf-to-jpg/` | **查过，不是空位** —— 见下 |
+| `/merge-pdf/` | **查过，不是空位** —— 见下 |
 | `/screenshot/` 工具页 | 未排期 |
-| 外部作者渠道（vizua.io / orthogonal.info） | 已量过外链，邮件未发 |
+| 外部作者渠道（vizua.io / orthogonal.info） | 已量过外链；2026-10-04 晚重跑 `vet-writer-targets.cjs` 仍 15 外链 / 0 blocking；**邮件发不出去：Agent 邮箱未开通**，草稿已在 `promo/writer-outreach-2026-10-04.md` 里等着 |
 | 两周后回看 v74–v77 补的语言有没有换来曝光 | 未到时间 |
 | 去背 AI 模式（u2netp 懒加载） | 依赖未就位 |
+
+### PDF 第二刀：两个候选都不是空位（2026-10-04 查证）
+
+v81 待办里写的是「`/pdf-to-jpg/` 或 `/merge-pdf/`，先确认哪个还空」。两条都查了：
+
+- **`/pdf-to-jpg/`** —— 5 个专门的浏览器端无上传工具已经排满：`pdftoimage.app`、
+  `offpdf.com`、`trulyfreepdf.com`、`freeconverto.com`、`freeconverter.app`，全部用 PDF.js
+  渲染 + canvas 导出 + JSZip 打包，功能高度同一（页范围、DPI 72/144/216、ZIP 下载）。
+  **没有空位。**
+- **`/merge-pdf/`** —— 同样 5 个：`merge-papers.com`、`digitaltoolpad.com`、`technosuffice.com`、
+  `pdfguru.online`、`utildaily.com`，全部 pdf-lib 复制页面对象 + 拖拽排序 + 无水印 + 不限数量。
+  **没有空位。**
+
+两边都只剩「同样的功能，另一层包装」，那不是差异化。
+
+**唯一还站得住的角度**：`merge-pdf` 那几家全都在说「lossless merge —— 原样拷贝，不重渲染」，
+没人回答「合并完我还是要发给别人，文件比我拖进去的还大怎么办」——
+这是我们 `/compress-pdf/` 已经能回答的问题。所以真要动，是**合并 + 重编码一遍**
+（`/merge-and-shrink-pdf/` 或者做成 `/merge-pdf/` 页里的一个开关），
+开工前先量一个东西：三份 PDF 合并成一份、且不重编码的体积，vs 合并后顺手重编码一次的体积，
+差多少、掉多少 dB。量出来是零才停手。**别先写代码。**
 
 ---
 
