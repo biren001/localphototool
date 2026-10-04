@@ -16,7 +16,7 @@ const { chromium } = require(path.join('C:/Users/Administrator/.workbuddy/binari
 const PORT = 8897, BASE = 'http://127.0.0.1:' + PORT;
 const CHROME = 'C:/Users/Administrator/AppData/Local/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-win64/chrome-headless-shell.exe';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const PAGES = ['/', '/compress/', '/heic-to-jpg/', '/share/', '/about/', '/privacy/', '/terms/', '/stats/'];
+const PAGES = ['/', '/compress/', '/compress-pdf/', '/merge-pdf/', '/heic-to-jpg/', '/share/', '/about/', '/privacy/', '/terms/', '/stats/'];
 
 let sideways = 0;
 

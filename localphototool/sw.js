@@ -114,6 +114,7 @@ var SHELL = [
   '',
   'compress/',
   'compress-pdf/', /* re-encode the images inside a PDF and rebuild its offsets, v80 */
+  'merge-pdf/', /* join several PDFs and, optionally, re-encode their pictures, v83 */
   'resize-image/',
   'watermark/',
   'exif-viewer/',

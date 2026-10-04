@@ -103,6 +103,19 @@ const GROUPS = {
     'password protected', 'encrypted', 'scanned',
     'file size limit', 'attachment'
   ],
+  /* v83 新页的体检组。检索形状分三拨：① 动词怎么换（merge / combine / join，
+     还常带数量 two / multiple），② 结果怎么说（into one pdf、single pdf、
+     merged file），③ 顾虑（要不要上传、有没有附件大小限制、扫的件带密码怎么办）。
+     「PDF 合并」「merge pdf online free」这类品类名 / 广告词不列——它不是人会打出来的话。 */
+  'merge-pdf': [
+    'merge pdf', 'merge pdf files', 'merge two pdf', 'multiple pdf files',
+    'combine pdf', 'combine pdf files', 'join pdf',
+    'into one pdf', 'single pdf', 'merged file',
+    'page order', 'without uploading', 'no upload',
+    'in your browser', 'on your device', 'locally',
+    'file size limit', 'attachment',
+    'password protected', 'encrypted', 'scanned', 'how do i merge'
+  ],
   /* 竞品评论区里真实出现过的抱怨措辞（v79 挖的）。这批词不在上面任何组里，
      因为它们说的是「用户为什么走掉」而不是「用户怎么搜」。 */
   'compress-pain-points': [

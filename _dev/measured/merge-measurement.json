@@ -1,0 +1,33 @@
+{
+  "taken": "2026-10-04T05:31:23.981Z",
+  "inputs": [
+    1689943,
+    299733,
+    11381
+  ],
+  "mergedBytes": 2001198,
+  "mergedPages": 7,
+  "smallBytes": 908204,
+  "replaced": 5,
+  "skipped": 0,
+  "mergedSha": "d2066c31389c1eb8",
+  "smallSha": "48ff0cd2c1f289c6",
+  "parts": [
+    {
+      "pages": 4,
+      "images": 4,
+      "encodable": 4
+    },
+    {
+      "pages": 2,
+      "images": 1,
+      "encodable": 1
+    },
+    {
+      "pages": 1,
+      "images": 0,
+      "encodable": 0
+    }
+  ],
+  "notes": []
+}
