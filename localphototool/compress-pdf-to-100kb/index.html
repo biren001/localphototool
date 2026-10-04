@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compress a PDF to 100 KB, in Your Browser, Without Uploading</title>
+<meta name="description" content="Compress a PDF to 100 KB — or 200, or 500 — without uploading it. The pictures inside the file are re-encoded until it fits, and the text is copied through, so it stays selectable. Measured: a two-page document comes in at 89,559 bytes under a 100 KB limit with all 3,001 characters of text still there.">
+<link rel="canonical" href="https://localphototool.com/compress-pdf-to-100kb/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Compress a PDF to 100 KB — in your browser, without uploading">
+<meta property="og:description" content="Hit an exact upload limit without losing the words. The pictures inside your PDF are re-encoded until the file fits your budget; the text, the fonts and the page order are copied through untouched.">
+<meta property="og:url" content="https://localphototool.com/compress-pdf-to-100kb/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compress a PDF to 100 KB, without uploading">
+<meta name="twitter:description" content="Measured: 89,559 bytes under a 100 KB limit, with all 3,001 characters of text still selectable.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css?v=eb07e99" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=eb07e99">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "LocalPhotoTool PDF Target Compressor",
+      "url": "https://localphototool.com/compress-pdf-to-100kb/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "description": "Reach an exact upload limit on a PDF without uploading it. Only the images embedded in the document are re-encoded; text, fonts and page structure are copied through untouched.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compress a PDF to 100 KB",
+          "item": "https://localphototool.com/compress-pdf-to-100kb/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to compress a PDF to 100 KB without uploading it",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Add the file",
+          "text": "Drop a PDF onto the page or pick it from disk."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set the size you need to land under",
+          "text": "Type the limit in kilobytes — 100 for a government form, 200 for an attachment field, 1 MB when the limit is expressed differently."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Reach the limit, keeping the words",
+          "text": "The tool re-encodes the images inside the document, walking quality down until the file fits the budget, and only resizing the pictures if quality alone cannot get there. Text, fonts and page order are copied through, so the words stay selectable."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I compress a PDF to 100 KB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Set 100 as the target and hand the file to the tool on this page — it runs in your browser, so the document never travels anywhere. The tool then looks for the largest picture quality that still lands inside 100 KB: it tries the highest quality first, measures, and walks quality down until the whole document fits. Only when quality cannot reach the budget does it start shrinking the pictures themselves, and even then it uses the widest pictures that still fit. On our two-page test document — one photograph and body text around it, 299,733 bytes — it landed at 89,559 bytes, inside the 102,400-byte limit, with only one image re-encoded and its pixel dimensions untouched. Had the browser already loaded the WASM codec, the same request would land at 100,684 bytes instead: still inside the limit, and the search would simply have stopped at a higher picture quality. The same request also turns up online spelled without a space, as “compress a PDF to 100kb”; the tool reads the number, not the spacing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my text still be selectable at 100 KB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and that is the whole reason this page exists. Most tools that answer “compress PDF to 100 KB” do it by drawing every page on a canvas and rebuilding the document out of pictures; that gets you under the limit and the words stop existing as text. This tool touches only the image streams inside the file. The content stream that draws the words, the fonts and the page tree are copied across, so the text stays text. We checked with a second, separate PDF reader rather than with our own code: a two-page document that started with 3,001 readable characters came back at 89,559 bytes with all 3,001 of them still readable, and still selectable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I compress to 200 KB or 500 KB instead?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — the same tool, and the same search. If you arrived here wanting to compress a PDF to 200 kb, or to compress a PDF to 500 kb, that is the same tool with a different number in the box: 100 is the default only because it is the figure most portals and attachment fields name. On the four-photo test document we measured 197,939 bytes against a 200 KB limit and 491,351 bytes against a 500 KB limit, and in both cases the picture dimensions stayed where they were; with the WASM codec loaded the same two budgets came out at 144,763 and 423,414. The larger the budget, the higher the quality the search can afford and the fewer pixels it has to throw away."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My PDF has no photos in it. Can it still be made 100 KB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Probably not, and the tool says so rather than pretending. A document that is nothing but text — a contract, an invoice, a report — has already compressed its words once and carries no image streams to take bytes from, so there is nothing to re-encode. Our text-only test file is exactly that case: 11,381 bytes, inside a 100 KB limit already, and it comes back at 11,381 bytes with the original bytes intact. The same thing happens if the images in a file are unusually awkward: ones with an alpha channel attached, one-bit masks, or anything the browser's decoder refuses. The result line counts those."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my PDF uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The file is read with the browser's own file reader and every step — reading the structure, decoding each embedded image, trying qualities, rebuilding the offsets — happens on your machine. There is no server-side component that accepts a PDF at all. The page loads its compression engine from this site's own assets, and the target-size search runs on top of that engine in the same tab."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it shrink my pictures, or only re-encode them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It re-encodes first and only shrinks when it has to. Shifting pixels is the destructive part: a picture resized to fit a budget is a picture that can never go back to the size it was. So the search starts at the highest quality and walks down; if the budget is reached that way, every image keeps the pixel size it had. Only for documents where quality alone is not enough does it move down a ladder of maximum edge widths — 1600, 1200, 1000, 800, 640, 480 pixels — and take the widest rung that can still reach the limit. On the four-photo test document a 100 KB budget needed 800 pixels; on the same four photos under a 500 KB budget the search finished without touching a single pixel dimension."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do you measure 100 KB as 102,400 bytes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because that is the arithmetic: 100 times 1024. Some tools treat a kilobyte as 1000 bytes and quietly hand you back something a little larger than the limit you asked for, which in practice is the same thing as failing the check on the far end. This tool compares against 100 × 1024 = 102,400 bytes and reports the result in both figures, so you can see the margin you actually have."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on encrypted or password-protected PDFs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and it refuses rather than guessing. A document that carries an encryption dictionary does not have readable offsets, so any edit risks producing a file that will not open; those are handed back exactly as they came in. The same is true of a file whose objects are packed into compressed object streams — the tool reports how many it found rather than pretending it saw inside them. Password protected documents are refused rather than guessed at."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/compress-pdf-to-100kb/#page",
+      "url": "https://localphototool.com/compress-pdf-to-100kb/",
+      "name": "Compress a PDF to 100 KB without uploading it",
+      "description": "Hit an exact PDF size limit in your browser. Pictures are re-encoded until the file fits; text, fonts and page order are copied through untouched.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "description": "Free browser-only image and PDF tools: compress, convert, resize, watermark and inspect files. Files never leave your device."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the compressor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <details class="nav__tools">
+          <summary>All tools<svg class="nav__tools__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul class="nav__tools__panel">
+            <li><a href="../compress/">Compress images</a></li>
+            <li><a href="../images-to-pdf/">Images to PDF</a></li>
+            <li><a href="../compress-pdf/">Shrink a PDF</a></li>
+          <li><a href="../merge-pdf/">Merge PDF files</a></li>
+            <li><a href="../compress-pdf-to-100kb/" aria-current="page">Compress a PDF to 100 KB</a></li>
+            <li><a href="../metadata-editor/">Metadata editor</a></li>
+            <li><a href="../resize-image/">Resize images</a></li>
+            <li><a href="../watermark/">Text watermark</a></li>
+            <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+            <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+            <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+            <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+            <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+            <li><a href="../webp-to-png/">WebP to PNG</a></li>
+            <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+            <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+            <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+            <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+            <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+            <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+            <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
+            <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+            <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+            <li><a href="../exif-viewer/">EXIF viewer</a></li>
+            <li><a href="../image-to-base64/">Image to Base64</a></li>
+            <li><a href="../transfer/">Transfer phone to PC</a></li>
+            <li><a href="../batch-rename/">Batch rename</a></li>
+            <li><a href="../remove-background/">Remove background</a></li>
+          </ul>
+        </details>
+        <a class="nav__link" href="../compress-pdf/" >Shrink PDF</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Compress a PDF to 100 KB</span>
+      </nav>
+      <h1>Compress a PDF to 100 KB and keep the text</h1>
+      <p class="hero__lead" style="max-width:700px">Upload limits are written as a number — <strong>100 KB</strong>, 200, 500 — and the usual way to hit them is to turn every page into a picture. That works, and it costs you the words. This tool re-encodes the <strong>pictures inside</strong> your PDF until the file fits, and copies the text through, so it is still <strong>selectable when you land under the limit</strong>.</p>
+      <p class="muted" style="max-width:700px">How can I compress a PDF to 100 KB without uploading it? Set the target on the form below and the tool searches for the largest picture quality that still fits the budget, on your own device, in your own browser. No upload, no account, no size ceiling on the file you bring. A PDF that is too big for an email attachment, a visa portal or a submission form is the ordinary case here — the limit you are fighting is usually a file size limit at the far end — an email attachment field, a visa portal, a submission form — and it is measured in kilobytes, which is why the tool prints the figure both ways.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Nothing is uploaded
+        </li>
+        <li class="badge">Text stays selectable</li>
+        <li class="badge">Works offline</li>
+        <li class="badge">Unlimited &amp; free</li>
+      </ul>
+      <p class="hero__share" style="max-width:700px">
+        <a href="../share/">On a phone? This runs there too — grab the QR code and share links →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="tool">
+    <div class="container">
+      <div class="dropzone" id="ptDrop" role="group" tabindex="0" aria-label="Add a PDF: drop the file here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your PDF here</h2>
+        <p class="dropzone__hint">or paste from the clipboard</p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad btn--lg" id="ptPick" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+            Choose a PDF
+          </button>
+        </div>
+        <p class="dropzone__formats">PDF — one file at a time, no size limit, nothing leaves your device</p>
+        <input type="file" id="ptInput" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
+      </div>
+
+      <div class="settings" id="ptSettings" aria-live="polite">
+        <div class="settings__head">
+          <h2 class="settings__title">The size you need to land under</h2>
+          <span class="badge badge--brand">Applied when you run it</span>
+        </div>
+        <div class="settings__body">
+          <div class="field">
+            <div class="field__label">
+              <label for="ptTarget">Target size, in kilobytes</label>
+              <span class="hint">100 KB is measured as 102,400 bytes</span>
+            </div>
+            <div class="field__row">
+              <input type="number" id="ptTarget" min="1" max="4096" step="1" value="100" inputmode="numeric" aria-describedby="ptTargetHelp">
+              <span class="field__value" id="ptTargetValue">102,400 bytes</span>
+            </div>
+            <div class="field__row" id="ptTargetHelp">
+              <button class="btn btn--ghost btn--sm" type="button" data-target="50">50 KB</button>
+              <button class="btn btn--ghost btn--sm" type="button" data-target="100">100 KB</button>
+              <button class="btn btn--ghost btn--sm" type="button" data-target="200">200 KB</button>
+              <button class="btn btn--ghost btn--sm" type="button" data-target="500">500 KB</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="checkbox" for="ptScale">
+              <input type="checkbox" id="ptScale" checked>
+              <span>Let the pictures be downscaled if quality alone cannot reach the target</span>
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="checkbox" for="ptMeta">
+              <input type="checkbox" id="ptMeta" checked>
+              <span>Keep the document metadata (title, author, keywords)</span>
+            </label>
+          </div>
+        </div>
+        <div class="settings__foot">
+          <button class="btn btn--grad btn--lg" id="ptRun" type="button" disabled>Reach the target</button>
+        </div>
+      </div>
+
+      <div class="card" id="ptReport" hidden>
+        <h2 class="card__title">What the file actually contains</h2>
+        <ul class="fact-list" id="ptFacts"></ul>
+        <p class="muted mb-0" id="ptWhy" style="font-size:0.88rem"></p>
+      </div>
+
+      <div class="card" id="ptResult" hidden>
+        <h2 class="card__title" id="ptResultTitle">Done</h2>
+        <p id="ptSummary" style="font-size:1rem"></p>
+        <p style="margin:0 0 1rem"><a class="btn btn--grad" id="ptDownload" href="#" download>Download the smaller PDF</a></p>
+        <ul class="fact-list" id="ptResultFacts"></ul>
+      </div>
+
+      <p class="muted hidden" id="ptStatus" role="status" style="margin-top:1rem"></p>
+    </div>
+  </section>
+
+  <section class="section" id="measured">
+    <div class="container">
+      <h2>What we measured, and what it means</h2>
+      <p>Three documents were printed to PDF by the same browser and then asked to hit a target — the same thing you would do by hand, only without the upload. The tool walks quality from high to low and stops at the first setting that fits, so the numbers below are the largest quality that still made the budget, not a quality somebody picked.</p>
+      <p>The file you get back also depends on which JPEG encoder the browser has already loaded. This site's encoder prefers a WASM module whenever that module has downloaded, and a module is a download, so a first visit and a later one are not the same run. Both runs are measured here, and the result panel names the encoder that answered. The figures below are the first run, which is what a new visitor gets.</p>
+      <div class="card" style="margin-top:1rem">
+        <ul class="fact-list">
+          <li><strong>Two pages, one photo, body text around it — 299,733 bytes asked for 100 KB: 89,559 bytes.</strong> Inside the 102,400-byte limit. One image was re-encoded, at quality 30, and its pixel dimensions were not touched at all.</li>
+          <li><strong>The same two-page file asked for 200 KB: 174,091 bytes, and for 500 KB: 283,032 bytes.</strong> Both inside budget, at quality 75 and 90 respectively — the bigger the budget, the sharper the pictures stay.</li>
+          <li><strong>Four photos, four pages — 1,689,943 bytes asked for 100 KB: 70,401 bytes.</strong> Here quality alone was not enough, so the search moved down its ladder and settled at an 800-pixel maximum edge, re-encoding all four pictures.</li>
+          <li><strong>The same four photos asked for 500 KB: 491,351 bytes.</strong> Same quality, and this time no pixel was resized — a comfortable budget is reached with re-encoding alone.</li>
+          <li><strong>Text only, no pictures at all — 11,381 bytes at every target from 100 KB to 500 KB.</strong> There are no image streams to take bytes from, so the original is handed back untouched instead of being rewritten for nothing. The same is true whichever encoder is live.</li>
+          <li><strong>First run or second run, the numbers move a little, and neither codec wins every time.</strong> On the two-page document under 100 KB the first run lands at 89,559 bytes and the run with the module at 100,684; on the four photos under 200 KB the first run lands at 197,939 and the module at 144,763. But at 500 KB on the four photos the first run is the smaller file, 491,351 against 423,414, and on the two-page document at 500 KB it is the other way round, 283,032 against 381,077. So the tool says which encoder it used instead of quoting one figure as if every visitor would see it.</li>
+        </ul>
+      </div>
+
+      <h2 style="margin-top:2.2rem">The same limit, by the other route</h2>
+      <p>There are two ways to get under a limit like this, and they are not the same trade. One re-encodes what is inside the file; the other throws the file away and keeps a picture of it. To keep this honest, we reproduced the second route here on the same fixtures — render each page, encode it as a JPEG, rebuild a PDF that has no text in it at all — and then asked a separate PDF reader to read the words back. It is our own reproduction of the technique, not a measurement of any vendor's build.</p>
+      <div style="overflow-x:auto;margin-top:1rem">
+        <table class="data-table">
+          <caption class="visually-hidden">Two routes to a 100 KB limit on the same two test documents, with the readable text measured back with a separate PDF reader</caption>
+          <thead>
+            <tr>
+              <th scope="col">Same fixture, same 100 KB limit</th>
+              <th scope="col">Re-encode the images inside</th>
+              <th scope="col">Draw every page as a picture</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Two pages, one photo, 3,001 characters of text</th>
+              <td>89,559 bytes — <strong>all 3,001 characters</strong> still readable</td>
+              <td>84,252 bytes — <strong>none of them</strong> readable</td>
+            </tr>
+            <tr>
+              <th scope="row">One page, no photos, 746 characters of text</th>
+              <td>11,381 bytes — <strong>all 746 characters</strong> still readable, and the original file handed back</td>
+              <td>79,348 bytes — <strong>none of them</strong> readable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:1rem;font-size:0.9rem">The picture route did, in both cases, come in under 100 KB — that is not the point of contention. It is that the budget was reached by spending the text. Search compress pdf to 100kb and the tools that answer all take the same route; several of them say so in their own copy: textify.tools writes that text becomes non-selectable in the compressed output. We have not tested their builds, so we quote them and we measure our own.</p>
+      <p class="muted" style="margin-top:0.6rem;font-size:0.9rem">The method, the fixtures and the per-image figures are kept with the rest of the project's measurements: three A4 documents generated by the browser's own print-to-PDF, run through this site's own encoder, with every target-size result read back by a second, independent PDF parser.</p>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <p>Whether you want to compress a PDF to 100 KB, to 200, or to 500, the job is the same: the bytes are in the pictures, and the words were compressed a long time ago. So the size search goes after the pictures and leaves everything else alone.</p>
+      <ol>
+        <li><strong>The file is read on your device.</strong> There is no upload step, so the whole job happens locally — nothing to wait for, nothing to leak.</li>
+        <li><strong>The document is walked and the images inside are counted.</strong> Plain JPEG image objects are picked out; ones with an alpha channel, one-bit masks and anything the browser's decoder refuses are counted and left alone.</li>
+        <li><strong>The search starts at the highest quality and walks down.</strong> Each try re-encodes the images and measures the document. The first quality that lands inside the target is the answer, which means you get the sharpest picture the budget can afford rather than the first one that happened to fit.</li>
+        <li><strong>Only when quality runs out does it downscale.</strong> It walks a ladder of maximum edges — 1600, 1200, 1000, 800, 640, 480 pixels — and takes the widest rung that can still reach the limit, so the pictures stay as large as they can be.</li>
+        <li><strong>The file is written back out.</strong> Image streams are swapped in, the byte count in each dictionary is corrected, and the cross-reference table is rebuilt from the offsets actually written — a stream that changed length moves every object after it.</li>
+      </ol>
+      <p class="muted">If the target turns out to be unreachable, the tool tells you the smallest file it could produce rather than handing you something over the limit. If the document is encrypted, or its objects are packed into compressed object streams, it reports that and gives the original back.</p>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <details class="faq__item" open>
+          <summary>How do I compress a PDF to 100 KB?</summary>
+          <div class="faq__body"><p>Set 100 as the target and hand the file to the tool on this page — it runs in your browser, so the document never travels anywhere. The tool then looks for the largest picture quality that still lands inside 100 KB: it tries the highest quality first, measures, and walks quality down until the whole document fits. Only when quality cannot reach the budget does it start shrinking the pictures themselves, and even then it uses the widest pictures that still fit. On our two-page test document — one photograph and body text around it, 299,733 bytes — it landed at 89,559 bytes, inside the 102,400-byte limit, with only one image re-encoded and its pixel dimensions untouched. Had the browser already loaded the WASM codec, the same request would land at 100,684 bytes instead: still inside the limit, and the search would simply have stopped at a higher picture quality. The same request also turns up online spelled without a space, as “compress a PDF to 100kb”; the tool reads the number, not the spacing.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Will my text still be selectable at 100 KB?</summary>
+          <div class="faq__body"><p>Yes, and that is the whole reason this page exists. Most tools that answer “compress PDF to 100 KB” do it by drawing every page on a canvas and rebuilding the document out of pictures; that gets you under the limit and the words stop existing as text. This tool touches only the image streams inside the file. The content stream that draws the words, the fonts and the page tree are copied across, so the text stays text. We checked with a second, separate PDF reader rather than with our own code: a two-page document that started with 3,001 readable characters came back at 89,559 bytes with all 3,001 of them still readable, and still selectable.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Can I compress to 200 KB or 500 KB instead?</summary>
+          <div class="faq__body"><p>Yes — the same tool, and the same search. If you arrived here wanting to compress a PDF to 200 kb, or to compress a PDF to 500 kb, that is the same tool with a different number in the box: 100 is the default only because it is the figure most portals and attachment fields name. On the four-photo test document we measured 197,939 bytes against a 200 KB limit and 491,351 bytes against a 500 KB limit, and in both cases the picture dimensions stayed where they were; with the WASM codec loaded the same two budgets came out at 144,763 and 423,414. The larger the budget, the higher the quality the search can afford and the fewer pixels it has to throw away.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>My PDF has no photos in it. Can it still be made 100 KB?</summary>
+          <div class="faq__body"><p>Probably not, and the tool says so rather than pretending. A document that is nothing but text — a contract, an invoice, a report — has already compressed its words once and carries no image streams to take bytes from, so there is nothing to re-encode. Our text-only test file is exactly that case: 11,381 bytes, inside a 100 KB limit already, and it comes back at 11,381 bytes with the original bytes intact. The same thing happens if the images in a file are unusually awkward: ones with an alpha channel attached, one-bit masks, or anything the browser's decoder refuses. The result line counts those.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is my PDF uploaded to a server?</summary>
+          <div class="faq__body"><p>No. The file is read with the browser's own file reader and every step — reading the structure, decoding each embedded image, trying qualities, rebuilding the offsets — happens on your machine. There is no server-side component that accepts a PDF at all. The page loads its compression engine from this site's own assets, and the target-size search runs on top of that engine in the same tab.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it shrink my pictures, or only re-encode them?</summary>
+          <div class="faq__body"><p>It re-encodes first and only shrinks when it has to. Shifting pixels is the destructive part: a picture resized to fit a budget is a picture that can never go back to the size it was. So the search starts at the highest quality and walks down; if the budget is reached that way, every image keeps the pixel size it had. Only for documents where quality alone is not enough does it move down a ladder of maximum edge widths — 1600, 1200, 1000, 800, 640, 480 pixels — and take the widest rung that can still reach the limit. On the four-photo test document a 100 KB budget needed 800 pixels; on the same four photos under a 500 KB budget the search finished without touching a single pixel dimension.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Why do you measure 100 KB as 102,400 bytes?</summary>
+          <div class="faq__body"><p>Because that is the arithmetic: 100 times 1024. Some tools treat a kilobyte as 1000 bytes and quietly hand you back something a little larger than the limit you asked for, which in practice is the same thing as failing the check on the far end. This tool compares against 100 × 1024 = 102,400 bytes and reports the result in both figures, so you can see the margin you actually have.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it work on encrypted or password-protected PDFs?</summary>
+          <div class="faq__body"><p>No, and it refuses rather than guessing. A document that carries an encryption dictionary does not have readable offsets, so any edit risks producing a file that will not open; those are handed back exactly as they came in. The same is true of a file whose objects are packed into compressed object streams — the tool reports how many it found rather than pretending it saw inside them. Password protected documents are refused rather than guessed at.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image and PDF toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col footer__col--tools">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../compress-pdf/">Shrink a PDF</a></li>
+          <li><a href="../compress-pdf-to-100kb/">Compress a PDF to 100 KB</a></li>
+          <li><a href="../merge-pdf/">Merge PDF files</a></li>
+          <li><a href="../images-to-pdf/">Images to PDF</a></li>
+          <li><a href="../reduce-image-size/">Reduce image size</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../metadata-editor/">Metadata editor</a></li>
+          <li><a href="../remove-background/">Remove background</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit eb07e99 with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>eb07e99</code>+</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/compressor/engine.js?v=eb07e99"></script>
+<script src="../assets/js/pdfcompress.js?v=eb07e99"></script>
+<script src="../assets/js/pdftarget.js?v=eb07e99"></script>
+<script src="../assets/js/chime.js?v=eb07e99"></script>
+<script src="../assets/js/share.js?v=eb07e99" defer></script>
+<script src="../assets/js/site.js?v=eb07e99"></script>
+<script src="../assets/js/pwa.js?v=eb07e99" defer></script>
+<script src="../assets/js/stats.js?v=eb07e99" defer></script>
+<script>
+(function () {
+  'use strict';
+  var drop = document.getElementById('ptDrop');
+  var input = document.getElementById('ptInput');
+  var pick = document.getElementById('ptPick');
+  var target = document.getElementById('ptTarget');
+  var targetValue = document.getElementById('ptTargetValue');
+  var scale = document.getElementById('ptScale');
+  var meta = document.getElementById('ptMeta');
+  /* The button variable is deliberately NOT called `run`: a `var` and a
+     `function` share one binding in the same scope, so `function run(quiet)`
+     below would have replaced the button with the function the moment the
+     declaration was hoisted -- the click listener would have been attached to
+     the function and the button would have looked live while doing nothing. */
+  var runBtn = document.getElementById('ptRun');
+  var settings = document.getElementById('ptSettings');
+  var report = document.getElementById('ptReport');
+  var facts = document.getElementById('ptFacts');
+  var why = document.getElementById('ptWhy');
+  var result = document.getElementById('ptResult');
+  var resultTitle = document.getElementById('ptResultTitle');
+  var resultFacts = document.getElementById('ptResultFacts');
+  var summary = document.getElementById('ptSummary');
+  var download = document.getElementById('ptDownload');
+  var statusLine = document.getElementById('ptStatus');
+
+  var current = null;      // { file, bytes, name }
+  var busy = false;
+
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  function kb(n) { return Math.round(n / 1024) + ' KB'; }
+
+  function li(text, strong) {
+    var el = document.createElement('li');
+    el.innerHTML = strong ? '<strong>' + text + '</strong>' : text;
+    return el;
+  }
+
+  function setStatus(msg) {
+    statusLine.textContent = msg || '';
+    statusLine.classList.toggle('hidden', !msg);
+  }
+
+  function showFactList(target, items) {
+    target.textContent = '';
+    items.forEach(function (t) { target.appendChild(li(t, true)); });
+  }
+
+  function showResult(items, outBytes, passed) {
+    result.hidden = false;
+    resultFacts.textContent = '';
+    items.forEach(function (t) { resultFacts.appendChild(li(t, true)); });
+    var blob = new Blob([outBytes], { type: 'application/pdf' });
+    var url = URL.createObjectURL(blob);
+    download.href = url;
+    download.setAttribute('download', current.name + '-' + target.value + 'kb.pdf');
+    resultTitle.textContent = passed ? 'Inside the target' : 'Could not reach the target';
+    summary.textContent = passed
+      ? 'Done — ' + fmt(outBytes.length) + ' bytes, under the ' + fmt(Math.round(targetKB() * 1024)) + '-byte limit.'
+      : 'This one will not go under ' + target.value + ' KB. Below is the smallest file the tool could produce.';
+  }
+
+  function targetKB() {
+    var v = Number(target.value);
+    if (!isFinite(v) || v < 1) v = 1;
+    if (v > 4096) v = 4096;
+    return v;
+  }
+
+  function refreshTargetValue() {
+    var v = targetKB();
+    targetValue.textContent = fmt(Math.round(v * 1024)) + ' bytes';
+  }
+
+  /* ---------- reading the file ---------- */
+
+  function take(file) {
+    if (!file) return;
+    if (busy) { setStatus('Still working on the file above — one document at a time.'); return; }
+    if (file.type && file.type.indexOf('pdf') === -1) {
+      setStatus('That is not a PDF — this tool reads documents, not images.');
+      return;
+    }
+    busy = true;
+    setStatus('Reading ' + file.name + '…');
+    file.arrayBuffer().then(function (ab) {
+      current = { file: file, bytes: new Uint8Array(ab), name: (file.name || 'document.pdf').replace(/\.pdf$/i, '') };
+      busy = false;
+      runBtn.disabled = false;
+      setStatus('Loaded ' + fmt(current.bytes.length) + ' bytes. Counting the images inside…');
+      return run(true);
+    }).catch(function (err) {
+      busy = false;
+      setStatus('That file could not be read: ' + (err && err.message ? err.message : err));
+    });
+  }
+
+  /* ---------- the search ---------- */
+
+  function run(quiet) {
+    if (!current) return Promise.resolve();
+    var T = window.LPT && window.LPT.pdftarget;
+    if (!T) { setStatus('The PDF module did not load.'); return Promise.resolve(); }
+
+    var inv = window.LPT.pdfcompress.inspect(current.bytes);
+    if (quiet) {
+      showFactList(facts, [
+        fmt(inv.size) + ' bytes · ' + inv.pages + (inv.pages === 1 ? ' page' : ' pages') + ' · ' + inv.objects + ' objects',
+        inv.images.length + ' image' + (inv.images.length === 1 ? '' : 's') + ' inside the file, taking ' +
+          fmt(inv.imageBytes) + ' bytes — ' + (inv.imageShare * 100).toFixed(1) + '% of the document',
+        inv.encodableImages + ' can be re-encoded, ' + inv.skippableImages + ' will be left alone'
+      ]);
+      if (inv.objStmCount) {
+        why.textContent = 'This file also packs several objects into compressed streams, which the tool will not touch — it reports them rather than guessing.';
+      } else if (!inv.encodableImages) {
+        why.textContent = 'There are no plain JPEG images to re-encode, so no target can change this file. It comes back exactly as it came in, not bigger.';
+      } else {
+        why.textContent = 'Only the image streams will change. Every other object is copied through byte for byte and the offsets are rebuilt from what was actually written.';
+      }
+      report.hidden = false;
+    }
+
+    var limit = targetKB() * 1024;
+    busy = true;
+    runBtn.disabled = true;
+    var tries = 0;
+    setStatus('Looking for the largest quality that fits ' + fmt(limit) + ' bytes…');
+
+    return T.shrinkToFit(current.bytes, {
+      targetKB: targetKB(),
+      dropMetadata: !meta.checked,
+      edges: scale.checked ? undefined : [0],
+      onStep: function (s) {
+        tries = s.count;
+        setStatus('Trying quality ' + Math.round(s.quality * 100) +
+          (s.maxDim ? ' with a ' + s.maxDim + ' px cap' : ' with every image at its own size') +
+          ' — ' + fmt(s.bytes) + ' bytes.');
+      }
+    }).then(function (r) {
+      busy = false;
+      runBtn.disabled = false;
+      /* A refused document has no blob, and the original bytes are the right
+         thing to hand back in that case — the encrypted branch below reads it
+         out of here, not out of a blob that was never built. */
+      var produced = !!r.blob;
+      return (produced ? r.blob.arrayBuffer() : Promise.resolve(null)).then(function (ab) {
+        return { r: r, u8: produced ? new Uint8Array(ab) : current.bytes };
+      });
+    }).then(function (got) {
+      var r = got.r;
+      if (r.encrypted) {
+        showResult(['Encrypted document — handed back untouched'], current.bytes, false);
+        why.textContent = 'The file carries an encryption dictionary, so its stream lengths cannot be read in plain text. Rewriting it would produce a document that will not open.';
+        report.hidden = false;
+        resultTitle.textContent = 'Refused';
+        setStatus('');
+        return;
+      }
+      var items = [];
+      items.push(fmt(r.sizeIn) + ' bytes → ' + fmt(r.sizeOut) + ' bytes, against a target of ' + fmt(limit) + ' bytes.');
+      items.push('Settled at quality ' + Math.round(r.quality * 100) +
+        (r.maxDim ? ', with pictures capped at ' + r.maxDim + ' px' : ', with every picture kept at its own pixel size') +
+        ' — after ' + r.steps + ' attempt' + (r.steps === 1 ? '' : 's') + ' over the file.');
+      items.push(r.replaced + ' image' + (r.replaced === 1 ? '' : 's') + ' re-encoded' +
+        (r.skipped ? ', ' + r.skipped + ' left alone' : '') + '. Pages: ' + inv.pages + ', copied through.');
+      items.push('Text: copied through untouched, so it is still selectable.');
+      /* Stated rather than implied: the same target can land on two different
+         sizes depending on which JPEG encoder answered, and a figure without
+         its encoder is a figure that cannot be reproduced. */
+      items.push('JPEG encoder: ' + (r.encoder === 'wasm'
+        ? 'the WASM module, so the figure above is the module\'s, not the browser\'s native encoder\'s'
+        : 'the browser\'s own encoder, which is what a first visit uses'));
+      if (!r.passed) {
+        items.push('The smallest this tool could get it was ' + fmt(r.floorBytes) + ' bytes, which is still over the target.');
+      }
+      showResult(items, got.u8, r.passed);
+      if (!r.passed) {
+        resultTitle.textContent = 'Could not reach the target';
+      }
+      setStatus('');
+    }).catch(function (err) {
+      busy = false;
+      runBtn.disabled = false;
+      setStatus('That could not be processed: ' + (err && err.message ? err.message : err));
+    });
+  }
+
+  /* ---------- wiring ---------- */
+
+  pick.addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', function () { take(input.files && input.files[0]); input.value = ''; });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('is-over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('is-over'); });
+  });
+  drop.addEventListener('drop', function (e) {
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    take(f);
+  });
+  drop.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+  document.addEventListener('paste', function (e) {
+    if (!e.clipboardData) return;
+    var items = e.clipboardData.items || [];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].kind === 'file' && /pdf/.test(items[i].type)) { take(items[i].getAsFile()); return; }
+    }
+  });
+
+  target.addEventListener('input', refreshTargetValue);
+  refreshTargetValue();
+  runBtn.addEventListener('click', function () { if (!busy && current) run(false); });
+  scale.addEventListener('change', function () { if (current && !busy) run(false); });
+  meta.addEventListener('change', function () { if (current && !busy) run(false); });
+})();
+</script>
+</body>
+</html>

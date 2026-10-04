@@ -116,6 +116,20 @@ const GROUPS = {
     'file size limit', 'attachment',
     'password protected', 'encrypted', 'scanned', 'how do i merge'
   ],
+  /* v84 新页的体检组。这一拨的检索形状是「一个具体的数字」，不是动词：
+     ① 数字本身（100 kb / 200 kb / 100kb，大小写和空格两种写法都列，因为人会
+     照着表单上的写法打），② 「压到某个尺寸」的说法（under 100 kb、target
+     size、limit），③ 还是那三个老顾虑——上传、可选文字、加密件。
+     「best pdf compressor」这类品类名同样不列。 */
+  'compress-pdf-to-100kb': [
+    'compress a pdf to 100 kb', 'compress pdf to 100 kb', 'compress pdf to 100kb',
+    '100 kb', '100kb', 'under 100 kb', '100 kb limit', '100 kb budget',
+    'compress a pdf to 200 kb', 'compress a pdf to 500 kb', '200 kb', '500 kb',
+    'target size', 'land under', 'upload limit', 'file size limit',
+    'without uploading', 'no upload', 'in your browser', 'on your device', 'locally',
+    'text still', 'still selectable', 'selectable', 'keep the text',
+    'password protected', 'encrypted'
+  ],
   /* 竞品评论区里真实出现过的抱怨措辞（v79 挖的）。这批词不在上面任何组里，
      因为它们说的是「用户为什么走掉」而不是「用户怎么搜」。 */
   'compress-pain-points': [

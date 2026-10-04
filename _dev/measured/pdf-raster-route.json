@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-10-04T13:57:45.598216",
+  "limit": 102400,
+  "rows": [
+    {
+      "fixture": "mixed.pdf",
+      "route": "picture",
+      "scale": 1.5,
+      "quality": 0.1,
+      "bytes": 84252,
+      "passed": true,
+      "charsIn": 3000,
+      "charsOut": 0
+    },
+    {
+      "fixture": "text-only.pdf",
+      "route": "picture",
+      "scale": 1.5,
+      "quality": 0.9,
+      "bytes": 79348,
+      "passed": true,
+      "charsIn": 746,
+      "charsOut": 0
+    }
+  ]
+}

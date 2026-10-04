@@ -115,6 +115,7 @@ var SHELL = [
   'compress/',
   'compress-pdf/', /* re-encode the images inside a PDF and rebuild its offsets, v80 */
   'merge-pdf/', /* join several PDFs and, optionally, re-encode their pictures, v83 */
+  'compress-pdf-to-100kb/', /* hit an exact KB limit on a PDF, keeping the text, v84 */
   'resize-image/',
   'watermark/',
   'exif-viewer/',
@@ -153,15 +154,17 @@ var SHELL = [
   'icon-192.png',
   'icon-512.png',
   'maskable-512.png',
-  'assets/css/style.css?v=240af0b?v=ef78fa7',
-  'assets/js/site.js?v=240af0b?v=ef78fa7',
-  'assets/js/pwa.js?v=240af0b?v=ef78fa7',
-  'assets/js/stats.js?v=240af0b?v=ef78fa7',
-  'assets/js/share.js?v=240af0b?v=ef78fa7',
-  'assets/js/chime.js?v=240af0b?v=ef78fa7',
-  'assets/js/compressor/app.js?v=240af0b?v=ef78fa7',
-  'assets/js/compressor/engine.js?v=240af0b?v=ef78fa7',
-  'assets/js/compressor/worker.js?v=240af0b?v=ef78fa7'
+  'assets/css/style.css?v=eb07e99',
+  'assets/js/site.js?v=eb07e99',
+  'assets/js/pwa.js?v=eb07e99',
+  'assets/js/stats.js?v=eb07e99',
+  'assets/js/share.js?v=eb07e99',
+  'assets/js/chime.js?v=eb07e99',
+  'assets/js/compressor/app.js?v=eb07e99',
+  'assets/js/compressor/engine.js?v=eb07e99',
+  'assets/js/pdfcompress.js?v=eb07e99',
+  'assets/js/pdftarget.js?v=eb07e99',
+  'assets/js/compressor/worker.js?v=eb07e99'
 ].map(function (p) { return ROOT + p; });
 
 var VENDOR_HOSTS = ['esm.sh', 'cdn.jsdelivr.net'];

@@ -68,6 +68,7 @@ must = {
     "index.html", "_worker.js", "_headers", "og-cover.jpg",
     "assets/js/stats.js", "assets/js/pwa.js", "assets/js/chime.js", "assets/js/share.js",
     "compress/index.html", "compress-pdf/index.html", "merge-pdf/index.html",
+    "compress-pdf-to-100kb/index.html",
     "heic-to-jpg/index.html", "sitemap.xml",
     "compress-to-100kb/index.html", "png-to-jpg/index.html", "jpg-to-webp/index.html",
     "compress-without-uploading/index.html",

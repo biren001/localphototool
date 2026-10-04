@@ -1,0 +1,1130 @@
+{
+  "generatedAt": "2026-10-04T05:45:46.504Z",
+  "sites": [
+    {
+      "name": "ilovepdf",
+      "root": "https://ilovepdf.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 1415,
+      "title": "iLovePDF | Online PDF tools for PDF lovers",
+      "intents": {
+        "delete-pages": 13,
+        "compress": 14,
+        "split": 15,
+        "to-word": 15,
+        "unlock": 13,
+        "merge": 13,
+        "rotate": 14,
+        "protect": 14,
+        "sign": 17,
+        "jpg-to-pdf": 14,
+        "pdf-to-jpg": 14
+      },
+      "examples": {
+        "delete-pages": "/remove-pages",
+        "compress": "/compress_pdf",
+        "split": "/split_pdf",
+        "to-word": "/pdf_to_word",
+        "unlock": "/unlock_pdf",
+        "merge": "/merge_pdf",
+        "rotate": "/rotate_pdf",
+        "protect": "/protect-pdf",
+        "sign": "/sign-pdf",
+        "jpg-to-pdf": "/jpg_to_pdf",
+        "pdf-to-jpg": "/pdf_to_jpg"
+      },
+      "top": [
+        [
+          "blog/…",
+          53
+        ],
+        [
+          "de/…",
+          52
+        ],
+        [
+          "es/…",
+          52
+        ],
+        [
+          "ca/…",
+          52
+        ],
+        [
+          "pt/…",
+          52
+        ],
+        [
+          "fr/…",
+          52
+        ],
+        [
+          "it/…",
+          52
+        ],
+        [
+          "ru/…",
+          52
+        ],
+        [
+          "zh-cn/…",
+          51
+        ],
+        [
+          "hi/…",
+          51
+        ],
+        [
+          "th/…",
+          51
+        ],
+        [
+          "bg/…",
+          51
+        ]
+      ],
+      "_show": [
+        "delete-pages",
+        "compress",
+        "split",
+        "to-word",
+        "unlock",
+        "merge",
+        "rotate",
+        "protect",
+        "sign",
+        "jpg-to-pdf",
+        "pdf-to-jpg"
+      ]
+    },
+    {
+      "name": "pdf24",
+      "root": "https://www.pdf24.org",
+      "status": "FAIL",
+      "via": null,
+      "total": 0,
+      "title": "Solutions for all PDF problems - 100% free - PDF24",
+      "intents": {},
+      "examples": {},
+      "top": []
+    },
+    {
+      "name": "smallpdf",
+      "root": "https://smallpdf.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 5260,
+      "title": "Smallpdf - A Free Solution to all your PDF Problems",
+      "intents": {
+        "jpg-to-pdf": 44,
+        "sign": 73,
+        "compress": 111,
+        "to-word": 90,
+        "merge": 35,
+        "split": 18,
+        "rotate": 14,
+        "delete-pages": 15,
+        "pdf-to-jpg": 37,
+        "unlock": 19,
+        "protect": 25,
+        "size-target": 29,
+        "reorder": 1
+      },
+      "examples": {
+        "jpg-to-pdf": "/cn/png-to-pdf",
+        "sign": "/cn/sign-pdf",
+        "compress": "/cn/compress-pdf",
+        "to-word": "/cn/pdf-to-word",
+        "merge": "/cn/merge-pdf",
+        "split": "/cn/split-pdf",
+        "rotate": "/cn/rotate-pdf",
+        "delete-pages": "/cn/delete-pages-from-pdf",
+        "pdf-to-jpg": "/cn/pdf-to-jpg",
+        "unlock": "/cn/unlock-pdf",
+        "protect": "/cn/protect-pdf",
+        "size-target": "/blog/compress-jpeg-to-50kb",
+        "reorder": "/blog/reorder-pdf-ai-minutes"
+      },
+      "top": [
+        [
+          "blog/…",
+          520
+        ],
+        [
+          "de/…",
+          385
+        ],
+        [
+          "templates/…",
+          376
+        ],
+        [
+          "fr/…",
+          364
+        ],
+        [
+          "it/…",
+          364
+        ],
+        [
+          "es/…",
+          363
+        ],
+        [
+          "pt/…",
+          361
+        ],
+        [
+          "id/…",
+          226
+        ],
+        [
+          "ru/…",
+          155
+        ],
+        [
+          "vi/…",
+          145
+        ],
+        [
+          "pl/…",
+          136
+        ],
+        [
+          "cn/…",
+          122
+        ]
+      ],
+      "_show": [
+        "jpg-to-pdf",
+        "sign",
+        "compress",
+        "to-word",
+        "merge",
+        "split",
+        "rotate",
+        "delete-pages",
+        "pdf-to-jpg",
+        "unlock",
+        "protect",
+        "size-target",
+        "reorder"
+      ]
+    },
+    {
+      "name": "sejda",
+      "root": "https://www.sejda.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 1396,
+      "title": "Sejda helps with your PDF tasks",
+      "intents": {
+        "compress": 29,
+        "protect": 29,
+        "pdf-to-jpg": 58,
+        "jpg-to-pdf": 29,
+        "merge": 29,
+        "to-word": 29,
+        "rotate": 29,
+        "sign": 29,
+        "split": 145,
+        "unlock": 29
+      },
+      "examples": {
+        "compress": "/compress-pdf",
+        "protect": "/encrypt-pdf",
+        "pdf-to-jpg": "/extract-images-from-pdf",
+        "jpg-to-pdf": "/jpg-to-pdf",
+        "merge": "/merge-pdf",
+        "to-word": "/pdf-to-word",
+        "rotate": "/rotate-pdf-pages",
+        "sign": "/sign-pdf",
+        "split": "/split-pdf",
+        "unlock": "/unlock-pdf"
+      },
+      "top": [
+        [
+          "ro/…",
+          47
+        ],
+        [
+          "nl/…",
+          47
+        ],
+        [
+          "no/…",
+          47
+        ],
+        [
+          "es/…",
+          47
+        ],
+        [
+          "pt/…",
+          47
+        ],
+        [
+          "de/…",
+          47
+        ],
+        [
+          "it/…",
+          47
+        ],
+        [
+          "sv/…",
+          47
+        ],
+        [
+          "pl/…",
+          47
+        ],
+        [
+          "fi/…",
+          47
+        ],
+        [
+          "fr/…",
+          47
+        ],
+        [
+          "ja/…",
+          47
+        ]
+      ],
+      "_show": [
+        "compress",
+        "protect",
+        "pdf-to-jpg",
+        "jpg-to-pdf",
+        "merge",
+        "to-word",
+        "rotate",
+        "sign",
+        "split",
+        "unlock"
+      ]
+    },
+    {
+      "name": "pdfsam",
+      "root": "https://www.pdfsam.org",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 47,
+      "title": "Split and merge PDF files. Free and open source - PDFsam",
+      "intents": {
+        "rotate": 1,
+        "split": 1,
+        "jpg-to-pdf": 1
+      },
+      "examples": {
+        "rotate": "/rotate-pdf/",
+        "split": "/split-by-content/",
+        "jpg-to-pdf": "/images-to-pdf/"
+      },
+      "top": [
+        [
+          "(root)",
+          2
+        ],
+        [
+          "downloads",
+          1
+        ],
+        [
+          "pdfsam-basic",
+          1
+        ],
+        [
+          "download-pdfsam-basic",
+          1
+        ],
+        [
+          "pdfsam-enhanced",
+          1
+        ],
+        [
+          "download-pdfsam-enhanced",
+          1
+        ],
+        [
+          "pdfsam-visual",
+          1
+        ],
+        [
+          "download-pdfsam-visual",
+          1
+        ],
+        [
+          "faq",
+          1
+        ],
+        [
+          "documentation",
+          1
+        ],
+        [
+          "contact",
+          1
+        ],
+        [
+          "pdfsam-enhanced-b2b",
+          1
+        ]
+      ],
+      "_show": [
+        "rotate",
+        "split",
+        "jpg-to-pdf"
+      ]
+    },
+    {
+      "name": "pdfcandy",
+      "root": "https://pdfcandy.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 2702,
+      "title": "90+ Free PDF Tools Online – PDF Candy",
+      "intents": {
+        "compress": 21,
+        "merge": 23,
+        "to-word": 50,
+        "jpg-to-pdf": 46,
+        "pdf-to-jpg": 83,
+        "reorder": 22,
+        "split": 20,
+        "delete-pages": 22,
+        "rotate": 19,
+        "protect": 23,
+        "unlock": 19,
+        "sign": 23
+      },
+      "examples": {
+        "compress": "/compress-pdf.html",
+        "merge": "/merge-pdf.html",
+        "to-word": "/pdf-to-word.html",
+        "jpg-to-pdf": "/jpg-to-pdf.html",
+        "pdf-to-jpg": "/pdf-to-jpg.html",
+        "reorder": "/rearrange-pdf.html",
+        "split": "/split-pdf.html",
+        "delete-pages": "/delete-pages.html",
+        "rotate": "/rotate-pdf.html",
+        "protect": "/protect-pdf.html",
+        "unlock": "/unlock-pdf.html",
+        "sign": "/sign-pdf.html"
+      },
+      "top": [
+        [
+          "blog/…",
+          234
+        ],
+        [
+          "it/…",
+          211
+        ],
+        [
+          "se/…",
+          192
+        ],
+        [
+          "de/…",
+          190
+        ],
+        [
+          "fr/…",
+          188
+        ],
+        [
+          "pt/…",
+          183
+        ],
+        [
+          "es/…",
+          106
+        ],
+        [
+          "nl/…",
+          106
+        ],
+        [
+          "cn/…",
+          106
+        ],
+        [
+          "id/…",
+          106
+        ],
+        [
+          "vn/…",
+          106
+        ],
+        [
+          "tr/…",
+          106
+        ]
+      ],
+      "_show": [
+        "compress",
+        "merge",
+        "to-word",
+        "jpg-to-pdf",
+        "pdf-to-jpg",
+        "reorder",
+        "split",
+        "delete-pages",
+        "rotate",
+        "protect",
+        "unlock",
+        "sign"
+      ]
+    },
+    {
+      "name": "updf",
+      "root": "https://www.updf.com",
+      "status": "OK",
+      "via": "robots.txt",
+      "total": 23996,
+      "title": "UPDF: AI-Powered PDF Editor | Official Site",
+      "intents": {
+        "merge": 306,
+        "compress": 316,
+        "jpg-to-pdf": 103,
+        "to-word": 339,
+        "pdf-to-jpg": 125,
+        "sign": 492,
+        "reorder": 16,
+        "rotate": 38,
+        "protect": 464,
+        "delete-pages": 23,
+        "split": 69,
+        "unlock": 12
+      },
+      "examples": {
+        "merge": "/updf-ios-user-guide/merge-files/",
+        "compress": "/updf-ios-user-guide/compress-files/",
+        "jpg-to-pdf": "/mobile-app/photo-to-pdf-scanner/",
+        "to-word": "/mac/how-to-convert-pdf-to-word-on-mac/",
+        "pdf-to-jpg": "/convert-pdf/convert-pdf-to-png/",
+        "sign": "/mobile-app/signature-app/",
+        "reorder": "/organize-pdf/rearrange-pages-in-pdf/",
+        "rotate": "/organize-pdf/rotate-pdf/",
+        "protect": "/updf-converter-user-guide/how-to-convert-password-protected-pdf/",
+        "delete-pages": "/organize-pdf/delete-pages-in-pdf/",
+        "split": "/merge-and-split/split-pdf-adobe/",
+        "unlock": "/protect-pdf/unlock-pdf/"
+      },
+      "top": [
+        [
+          "hk/…",
+          2055
+        ],
+        [
+          "it/…",
+          1962
+        ],
+        [
+          "de/…",
+          1917
+        ],
+        [
+          "fr/…",
+          1915
+        ],
+        [
+          "es/…",
+          1825
+        ],
+        [
+          "br/…",
+          1788
+        ],
+        [
+          "kr/…",
+          1550
+        ],
+        [
+          "jp/…",
+          1510
+        ],
+        [
+          "ar/…",
+          1187
+        ],
+        [
+          "cs/…",
+          917
+        ],
+        [
+          "id/…",
+          917
+        ],
+        [
+          "nl/…",
+          909
+        ]
+      ],
+      "_show": [
+        "merge",
+        "compress",
+        "jpg-to-pdf",
+        "to-word",
+        "pdf-to-jpg",
+        "sign",
+        "reorder",
+        "rotate",
+        "protect",
+        "delete-pages",
+        "split",
+        "unlock"
+      ]
+    },
+    {
+      "name": "pdfshaper",
+      "root": "https://www.pdfshaper.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 35,
+      "title": "Free PDF Software for Home and Business",
+      "intents": {
+        "pdf-to-jpg": 2,
+        "merge": 1,
+        "split": 1,
+        "rotate": 1,
+        "protect": 1,
+        "unlock": 1,
+        "sign": 1
+      },
+      "examples": {
+        "pdf-to-jpg": "/help/pdf-to-image.html",
+        "merge": "/help/merge.html",
+        "split": "/help/split.html",
+        "rotate": "/help/rotate.html",
+        "protect": "/help/encrypt.html",
+        "unlock": "/help/decrypt.html",
+        "sign": "/help/sign.html"
+      },
+      "top": [
+        [
+          "help/…",
+          22
+        ],
+        [
+          "(root)",
+          1
+        ],
+        [
+          "index.html",
+          1
+        ],
+        [
+          "features.html",
+          1
+        ],
+        [
+          "download.html",
+          1
+        ],
+        [
+          "buy.html",
+          1
+        ],
+        [
+          "support.html",
+          1
+        ],
+        [
+          "compare-editions.html",
+          1
+        ],
+        [
+          "online-manual.html",
+          1
+        ],
+        [
+          "faq.html",
+          1
+        ],
+        [
+          "eula.html",
+          1
+        ],
+        [
+          "about-us.html",
+          1
+        ]
+      ],
+      "_show": [
+        "pdf-to-jpg",
+        "merge",
+        "split",
+        "rotate",
+        "protect",
+        "unlock",
+        "sign"
+      ]
+    },
+    {
+      "name": "freeconvert",
+      "root": "https://www.freeconvert.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 101002,
+      "title": "File Converter - FreeConvert.com",
+      "intents": {
+        "to-word": 601,
+        "jpg-to-pdf": 46,
+        "pdf-to-jpg": 61,
+        "rotate": 15,
+        "compress": 47,
+        "protect": 15,
+        "unlock": 15,
+        "merge": 16,
+        "split": 15
+      },
+      "examples": {
+        "to-word": "/es/bmp-to-word",
+        "jpg-to-pdf": "/es/jpeg-to-pdf",
+        "pdf-to-jpg": "/es/pdf-to-jpeg",
+        "rotate": "/es/rotate-pdf",
+        "compress": "/es/compress-png",
+        "protect": "/es/password-protect-pdf",
+        "unlock": "/es/unlock-pdf",
+        "merge": "/es/merge-pdf",
+        "split": "/es/split-pdf"
+      },
+      "top": [
+        [
+          "es/…",
+          6730
+        ],
+        [
+          "it/…",
+          6730
+        ],
+        [
+          "fr/…",
+          6730
+        ],
+        [
+          "pt/…",
+          6730
+        ],
+        [
+          "de/…",
+          6730
+        ],
+        [
+          "nl/…",
+          6730
+        ],
+        [
+          "ja/…",
+          6730
+        ],
+        [
+          "tr/…",
+          6730
+        ],
+        [
+          "id/…",
+          6730
+        ],
+        [
+          "pl/…",
+          6730
+        ],
+        [
+          "sv/…",
+          6730
+        ],
+        [
+          "ko/…",
+          6730
+        ]
+      ],
+      "_show": [
+        "to-word",
+        "jpg-to-pdf",
+        "pdf-to-jpg",
+        "rotate",
+        "compress",
+        "protect",
+        "unlock",
+        "merge",
+        "split"
+      ]
+    },
+    {
+      "name": "merge-papers",
+      "root": "https://merge-papers.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 1,
+      "title": "Merge PDF Files Free Online — No Upload, No Signup | MergePapers",
+      "intents": {
+        "merge": 1
+      },
+      "examples": {
+        "merge": "/"
+      },
+      "top": [
+        [
+          "(root)",
+          1
+        ]
+      ],
+      "_show": [
+        "merge"
+      ]
+    },
+    {
+      "name": "digitaltoolpad",
+      "root": "https://digitaltoolpad.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 547,
+      "title": "Free Online Tools for PDF, Images, Text &amp; Code | Digital ToolPad",
+      "intents": {
+        "jpg-to-pdf": 3,
+        "merge": 4,
+        "split": 5,
+        "compress": 1,
+        "pdf-to-jpg": 3,
+        "to-word": 7,
+        "protect": 1,
+        "unlock": 1
+      },
+      "examples": {
+        "jpg-to-pdf": "/tools/jpg-to-pdf-converter",
+        "merge": "/tools/merge-pdf",
+        "split": "/tools/split-pdf",
+        "compress": "/tools/compress-pdf",
+        "pdf-to-jpg": "/tools/pdf-to-jpg-converter",
+        "to-word": "/tools/markdown-to-word",
+        "protect": "/blog/encrypt-decrypt-text",
+        "unlock": "/blog/decrypt-encrypted-text"
+      },
+      "top": [
+        [
+          "tools/…",
+          296
+        ],
+        [
+          "blog/…",
+          228
+        ],
+        [
+          "(root)",
+          1
+        ],
+        [
+          "tools",
+          1
+        ],
+        [
+          "contact",
+          1
+        ],
+        [
+          "about",
+          1
+        ],
+        [
+          "productivity-suite",
+          1
+        ],
+        [
+          "blog",
+          1
+        ],
+        [
+          "privacy-policy",
+          1
+        ],
+        [
+          "terms-of-service",
+          1
+        ],
+        [
+          "json-tools",
+          1
+        ],
+        [
+          "yaml-tools",
+          1
+        ]
+      ],
+      "_show": [
+        "jpg-to-pdf",
+        "merge",
+        "split",
+        "compress",
+        "pdf-to-jpg",
+        "to-word",
+        "protect",
+        "unlock"
+      ]
+    },
+    {
+      "name": "technosuffice",
+      "root": "https://technosuffice.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 145,
+      "title": "TechnoSuffice | Web &amp; Mobile App Development Company",
+      "intents": {
+        "split": 1,
+        "compress": 1,
+        "rotate": 1,
+        "jpg-to-pdf": 1,
+        "merge": 1,
+        "pdf-to-jpg": 2,
+        "to-word": 1,
+        "sign": 1
+      },
+      "examples": {
+        "split": "/split-pdf/",
+        "compress": "/compress-pdf/",
+        "rotate": "/rotate-pdf/",
+        "jpg-to-pdf": "/jpg-to-pdf/",
+        "merge": "/merge-pdf/",
+        "pdf-to-jpg": "/pdf-to-jpg/",
+        "to-word": "/pdf-to-word/",
+        "sign": "/sign-pdf/"
+      },
+      "top": [
+        [
+          "blog/…",
+          12
+        ],
+        [
+          "services/…",
+          6
+        ],
+        [
+          "(root)",
+          1
+        ],
+        [
+          "about-us",
+          1
+        ],
+        [
+          "services",
+          1
+        ],
+        [
+          "request-quote",
+          1
+        ],
+        [
+          "contact-us",
+          1
+        ],
+        [
+          "testimonial",
+          1
+        ],
+        [
+          "blog",
+          1
+        ],
+        [
+          "tools",
+          1
+        ],
+        [
+          "seo-checker",
+          1
+        ],
+        [
+          "meta-tag-generator",
+          1
+        ]
+      ],
+      "_show": [
+        "split",
+        "compress",
+        "rotate",
+        "jpg-to-pdf",
+        "merge",
+        "pdf-to-jpg",
+        "to-word",
+        "sign"
+      ]
+    },
+    {
+      "name": "pdfguru",
+      "root": "https://pdfguru.online",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 611,
+      "title": "PDF Guru Online – Free PDF &amp; Image Tools | Merge, Compress, Convert Instantly",
+      "intents": {
+        "merge": 75,
+        "split": 30,
+        "compress": 69,
+        "size-target": 31,
+        "rotate": 5,
+        "protect": 2,
+        "sign": 7,
+        "jpg-to-pdf": 7,
+        "to-word": 9,
+        "pdf-to-jpg": 30,
+        "delete-pages": 3,
+        "unlock": 1,
+        "reorder": 1
+      },
+      "examples": {
+        "merge": "/tools/merge-pdf-files-online-free",
+        "split": "/tools/split-pdf-online",
+        "compress": "/tools/compress-pdf-to-100kb",
+        "size-target": "/tools/compress-pdf-to-100kb",
+        "rotate": "/tools/rotate-pdf-pages-online",
+        "protect": "/tools/password-protect-pdf-online",
+        "sign": "/tools/sign-pdf-online-free",
+        "jpg-to-pdf": "/tools/jpg-to-pdf-converter",
+        "to-word": "/tools/convert-pdf-to-word-online",
+        "pdf-to-jpg": "/tools/pdf-to-jpg-converter",
+        "delete-pages": "/tools/delete-pages-from-pdf",
+        "unlock": "/s/unlock-pdf-online-free",
+        "reorder": "/s/merge-pdf-split-and-reorder"
+      },
+      "top": [
+        [
+          "s/…",
+          465
+        ],
+        [
+          "blog/…",
+          64
+        ],
+        [
+          "tools/…",
+          35
+        ],
+        [
+          "guides/…",
+          20
+        ],
+        [
+          "es/…",
+          7
+        ],
+        [
+          "zh/…",
+          5
+        ],
+        [
+          "fa/…",
+          4
+        ],
+        [
+          "ko/…",
+          4
+        ],
+        [
+          "(root)",
+          1
+        ],
+        [
+          "tools",
+          1
+        ],
+        [
+          "guides",
+          1
+        ],
+        [
+          "blog",
+          1
+        ]
+      ],
+      "_show": [
+        "merge",
+        "split",
+        "compress",
+        "size-target",
+        "rotate",
+        "protect",
+        "sign",
+        "jpg-to-pdf",
+        "to-word",
+        "pdf-to-jpg",
+        "delete-pages",
+        "unlock",
+        "reorder"
+      ]
+    },
+    {
+      "name": "utildaily",
+      "root": "https://utildaily.com",
+      "status": "OK",
+      "via": "/sitemap.xml",
+      "total": 205,
+      "title": "UtilDaily — Free Online Tools for Developers &amp; Teams",
+      "intents": {
+        "to-word": 1,
+        "compress": 2,
+        "jpg-to-pdf": 1
+      },
+      "examples": {
+        "to-word": "/tools/number-to-words/",
+        "compress": "/tools/compress-png/",
+        "jpg-to-pdf": "/blog/how-to-convert-jpg-png-to-pdf-free/"
+      },
+      "top": [
+        [
+          "tools/…",
+          133
+        ],
+        [
+          "blog/…",
+          60
+        ],
+        [
+          "guides/…",
+          4
+        ],
+        [
+          "(root)",
+          1
+        ],
+        [
+          "tools",
+          1
+        ],
+        [
+          "about",
+          1
+        ],
+        [
+          "team",
+          1
+        ],
+        [
+          "terms",
+          1
+        ],
+        [
+          "privacy",
+          1
+        ],
+        [
+          "guides",
+          1
+        ],
+        [
+          "blog",
+          1
+        ]
+      ],
+      "_show": [
+        "to-word",
+        "compress",
+        "jpg-to-pdf"
+      ]
+    }
+  ]
+}

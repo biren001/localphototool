@@ -338,7 +338,13 @@
           } else {
             E.drawResized(canvas, bmp, bmp.width, bmp.height, w, h);
           }
-          return E.encodeCanvas(canvas, 'jpeg', quality, {}).then(function (enc) {
+          /* The caller may pin the codec. The search in pdftarget re-encodes the
+             same picture at a ladder of qualities and compares the results, and
+             those comparisons are only meaningful if the same encoder answers
+             every rung — the engine prefers the WASM module whenever it happens
+             to be loaded, which is a network question, not a size question. */
+          return E.encodeCanvas(canvas, 'jpeg', quality, { allowWasm: opts.allowWasm !== false })
+            .then(function (enc) {
             return await_blob(enc.blob).then(function (u8) {
               edits[o.num] = { bytes: u8, lengthWidth: o.lengthWidth };
               report.images.push({
