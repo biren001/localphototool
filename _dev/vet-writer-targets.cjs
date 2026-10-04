@@ -48,6 +48,13 @@ const TARGETS = [
     why: 'candidate from search; suspected template farm, needs the rel and depth check to confirm',
   },
   {
+    id: 'vizua-benchmark',
+    name: 'vizua.io — image tools privacy benchmark',
+    url: 'https://vizua.io/research/image-tools-privacy-benchmark-2026',
+    why: 'a named researcher already published a benchmark on this exact question; their methodology '
+        + 'states the current version classifies from documentation and that network captures are future work',
+  },
+  {
     id: 'wildandfree-roundup',
     name: 'wildandfreetools.com — 8 compressors tested',
     url: 'https://wildandfreetools.com/blog/best-free-image-compressors-compared',

@@ -447,3 +447,55 @@ paste.
 writer-outreach row. A channel that needs to be re-learned twice is a channel that costs
 time every time it is picked up again.
 
+---
+
+## 9. The writer channel got measured, 2026-10-04 — and one target declared the gap first
+
+Instrument: `_dev/vet-writer-targets.cjs` (re-runs the whole table). Write-up with the
+paste-ready pitch: `promo/writer-outreach-2026-10-04.md`.
+
+### ✅ A single target carries the whole channel
+
+| target | page | http | external anchors | blocking | route |
+|---|---|---|---|---|---|
+| **vizua.io** | `/research/image-tools-privacy-benchmark-2026` | 200 | **15** | **0 (0%)** | `contato@vizua.io`, quoted off the page |
+| orthogonal.info | `/best-tinypng-alternatives/` | 200 | 8 | 0 (0%) | **no mailto, no `/contact/`** — socials only |
+
+vizua.io is worth more than the row suggests. It is a **research** page, not a roundup: named
+author (Rodrigo Freitas), dataset offered for download, and a methodology section that states
+*"Except for Vizua, this version classifies providers from their own current documentation
+rather than packet-level tests… A future release may add controlled network captures."*
+**They published the exact thing we built as future work.** Their 15 followed links go to
+`github.com`, `tinypng.com`, `iloveimg.com`, `compressor.io`, `shortpixel.com`,
+`compressjpg.io`, `jpegcompressor.com` — i.e. they already link out to the tools they
+discuss, which is precisely how a mention of us would be emitted.
+
+→ This is the first target on the whole file whose outbound behaviour was measured *and* whose
+subject matter is our asset. Send order: vizua.io, then orthogonal.info.
+
+### ⚠️ Two things worth recording about the sweep
+
+1. **The credible pool is small.** Five of the five top "best image compressor" results are
+   near-identical in structure — same table shape, same competitor set, same self-recommendation.
+   `compresso.io` has **0 external anchors** (cannot pass a link at all) and `wildandfreetools.com`
+   has 2, both to its own store. Recording the rejections matters more than the hits here: the
+   failure mode is spending another evening on a page that was never able to emit a link.
+2. **Competitor blogs are the trap.** `nofileupload.com`, `imgmin.pro` and `wikiplus.co` all rank
+   *themselves* against TinyPNG on this exact question. They look like targets in a search result
+   and are the opposite. Never pitch a page whose product competes with ours.
+
+### What the measurement itself returned this round
+
+Widened 9 → 15 tools (`_dev/measure-upload-behavior.cjs`, new probe, new marker, new SHA-256).
+**The verdict did not move, which is the finding:** TinyPNG (341,529 B → `/backend/opt/store`,
+marker 3×) and iLoveIMG (341,729 B → `api22.iloveimg.com/v1/upload`, marker 4×) are still the
+only two that send the whole file; seven kept it local. Six could not be driven under
+automation and are published as *not determined*, including `resizeimage.net`, which no longer
+resolves. iLoveIMG's endpoint was observed rotating (`api10` in September, `api22` in October),
+so a hardcoded endpoint in copy goes stale within weeks.
+
+Two method notes for anyone re-running it: the fallback selector for file inputs is
+`input[type=file]` → `input:not([type=hidden])` → `[accept*="image"]`, and it did **not** rescue
+BulkCompressor or iLoveIMG's JPG page — those pages are drag-drop or a JS shell with no `<input>`
+in the served document, so the run genuinely stops there.
+
