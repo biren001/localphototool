@@ -130,6 +130,21 @@ const GROUPS = {
     'text still', 'still selectable', 'selectable', 'keep the text',
     'password protected', 'encrypted'
   ],
+  /* v85 新页的体检组。这一拨的检索形状是「一个失败的动作 + 一句自问」，
+     和前面几组的动词 / 数字都不一样：① 想拿字的人怎么打（pdf to text、
+     extract text from a pdf、copy text from a pdf —— 三个动词几乎换着用），
+     ② 失败现场的自述（can't select the text、selectable text、highlight、
+     paste 出来的框是空的），③ 疑难名词（no text layer、subset font、
+     character map、encrypted、password protected、scanned pdf、ocr）。
+     「pdf to text online free」这类广告词不列。 */
+  'why-cant-i-select-the-text-in-this-pdf': [
+    'pdf to text', 'extract text from a pdf', 'copy text from a pdf',
+    "why can't i select the text", 'select the text', 'selectable text',
+    'text layer', 'no text layer',
+    'scanned pdf', 'highlight', 'paste', 'nothing to copy', 'image only',
+    'subset font', 'character map',
+    'password protected', 'encrypted', 'ocr'
+  ],
   /* 竞品评论区里真实出现过的抱怨措辞（v79 挖的）。这批词不在上面任何组里，
      因为它们说的是「用户为什么走掉」而不是「用户怎么搜」。 */
   'compress-pain-points': [

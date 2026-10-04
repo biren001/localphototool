@@ -37,6 +37,7 @@ const PAGES = [
   'compress-pdf/index.html',
   'merge-pdf/index.html',
   'compress-pdf-to-100kb/index.html',
+  'why-cant-i-select-the-text-in-this-pdf/index.html',
   'heic-to-jpg/index.html',
   'resize-image/index.html',
   'watermark/index.html',
@@ -70,7 +71,8 @@ const PAGES = [
 ];
 /* Pages that are meant to be found by a human or a crawler. /stats/ is
    deliberately absent from both the sitemap and the shell cache. */
-const PUBLIC = ['', 'compress/', 'compress-pdf/', 'merge-pdf/', 'compress-pdf-to-100kb/', 'heic-to-jpg/', 'resize-image/', 'watermark/', 'exif-viewer/', 'images-to-pdf/', 'compress-to-100kb/', 'compress-to-50kb/',
+const PUBLIC = ['', 'compress/', 'compress-pdf/', 'merge-pdf/', 'compress-pdf-to-100kb/', 'heic-to-jpg/', 'resize-image/', 'watermark/',
+'merge-pdf/', 'compress-pdf-to-100kb/', 'why-cant-i-select-the-text-in-this-pdf/', 'heic-to-jpg/', 'resize-image/', 'watermark/', 'exif-viewer/', 'images-to-pdf/', 'compress-to-100kb/', 'compress-to-50kb/',
   'compress-to-200kb/', 'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
   'compress-photos-for-email/', 'compress-without-uploading/', 'why-my-image-wont-get-smaller/',
   'image-compressor-upload-test/',
@@ -263,6 +265,7 @@ PUBLIC.forEach(function (p) {
    pages (privacy, terms) are reachable from the footer but deliberately left
    out to keep the install download down. */
 ['', 'compress/', 'compress-pdf/', 'merge-pdf/', 'compress-pdf-to-100kb/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'share/', 'about/',
+'merge-pdf/', 'compress-pdf-to-100kb/', 'why-cant-i-select-the-text-in-this-pdf/', 'heic-to-jpg/', 'resize-image/', 'exif-viewer/', 'share/', 'about/',
   'compress-to-100kb/', 'compress-to-50kb/', 'compress-to-200kb/',
   'compress-to-500kb/', 'remove-gps-from-photo/', 'transfer/',
   'compress-photos-for-email/', 'compress-without-uploading/', 'why-my-image-wont-get-smaller/',

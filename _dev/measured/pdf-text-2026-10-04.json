@@ -1,0 +1,139 @@
+{
+  "ran": "2026-10-04",
+  "rows": [
+    {
+      "fixture": "mixed.in.pdf",
+      "bytes": 299733,
+      "exhibit": true,
+      "encrypted": false,
+      "objStm": 0,
+      "totalChars": 2508,
+      "pagesWithText": 2,
+      "readable": true,
+      "reasons": [],
+      "pageCount": 2,
+      "pages": [
+        {
+          "page": 1,
+          "chars": 2432,
+          "streams": 1,
+          "notes": [],
+          "text": "Paragraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text. Paragraph of ordinary body text. Paragraph of ordinary body text.\nParagraph of ordinary body text. Paragraph of ordinary body text. Paragraph of\nordinary body text.\nAnother stretch of body text after the image. Another stretch of body text after the\nimage. Another stretch of body text after the image. Another stretch of body text\nafter the image. Another stretch of body text after the image. Another stretch of\nbody text after the image. Another stretch of body text after the image. Another\nstretch of body text after the image. Another stretch of body text after the image.\nAnother stretch of body text after the image. Another stretch of body text after the\nimage. Another stretch of body text after the image. Another stretch of body text\nafter the image. Another stretch of body text after the image. Another stretch of\nbody text after the image. Another stretch of body text after the image. Another\nstretch of body text after the image. Another stretch of body text after the image.\nAnother stretch of body text after the image. Another stretch of body text after the\nimage. Another stretch of body text after the image. Another stretch of body text\nafter the image. Another stretch of body text after the image. Another stretch of\nbody text after the image. Another stretch of body text after the image. Another\nstretch of body text after the image. Another stretch of body text after the image.\nAnother stretch of body text after the image. Another stretch of body text after the\nimage. Another stretch of body text after the image. Another stretch of body text\nafter the image. Another stretch of body text after the image. Another stretch of\nbody text after the image. Another stretch of body text after the image. Another\nstretch of body text after the image. Another stretch of body text after the image.",
+          "diag": {
+            "streamLen": 50591,
+            "fonts": "F4:22 codes (SimSun)"
+          }
+        },
+        {
+          "page": 2,
+          "chars": 76,
+          "streams": 1,
+          "notes": [],
+          "text": "Another stretch of body text after the image. Another stretch of body text after the\nimage.",
+          "diag": {
+            "streamLen": 1742,
+            "fonts": "F4:22 codes (SimSun)"
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "text-only.pdf",
+      "bytes": 11381,
+      "exhibit": true,
+      "encrypted": false,
+      "objStm": 0,
+      "totalChars": 603,
+      "pagesWithText": 1,
+      "readable": true,
+      "reasons": [],
+      "pageCount": 1,
+      "pages": [
+        {
+          "page": 1,
+          "chars": 603,
+          "streams": 1,
+          "notes": [],
+          "text": "The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.\nThe quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.",
+          "diag": {
+            "streamLen": 13977,
+            "fonts": "F4:31 codes (SimSun)"
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "photos.in.pdf",
+      "bytes": 1689943,
+      "exhibit": false,
+      "encrypted": false,
+      "objStm": 0,
+      "totalChars": 24,
+      "pagesWithText": 4,
+      "readable": true,
+      "reasons": [],
+      "pageCount": 4,
+      "pages": [
+        {
+          "page": 1,
+          "chars": 6,
+          "streams": 1,
+          "notes": [],
+          "text": "plate 1",
+          "diag": {
+            "streamLen": 400,
+            "fonts": "F6:10 codes (MicrosoftYaHei)"
+          }
+        },
+        {
+          "page": 2,
+          "chars": 6,
+          "streams": 1,
+          "notes": [],
+          "text": "plate 2",
+          "diag": {
+            "streamLen": 407,
+            "fonts": "F6:10 codes (MicrosoftYaHei)"
+          }
+        },
+        {
+          "page": 3,
+          "chars": 6,
+          "streams": 1,
+          "notes": [],
+          "text": "plate 3",
+          "diag": {
+            "streamLen": 406,
+            "fonts": "F6:10 codes (MicrosoftYaHei)"
+          }
+        },
+        {
+          "page": 4,
+          "chars": 6,
+          "streams": 1,
+          "notes": [],
+          "text": "plate 4",
+          "diag": {
+            "streamLen": 409,
+            "fonts": "F6:10 codes (MicrosoftYaHei)"
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "encrypted.pdf",
+      "bytes": 2645,
+      "exhibit": false,
+      "encrypted": true,
+      "objStm": 0,
+      "totalChars": 0,
+      "pagesWithText": 0,
+      "readable": false,
+      "reasons": [
+        "The document has an encryption dictionary, so no text can be read out of it here, in any reader."
+      ],
+      "pageCount": 0,
+      "pages": []
+    }
+  ]
+}

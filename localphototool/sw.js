@@ -116,6 +116,7 @@ var SHELL = [
   'compress-pdf/', /* re-encode the images inside a PDF and rebuild its offsets, v80 */
   'merge-pdf/', /* join several PDFs and, optionally, re-encode their pictures, v83 */
   'compress-pdf-to-100kb/', /* hit an exact KB limit on a PDF, keeping the text, v84 */
+  'why-cant-i-select-the-text-in-this-pdf/', /* say why a page has no selectable text, page by page, v85 */
   'resize-image/',
   'watermark/',
   'exif-viewer/',
