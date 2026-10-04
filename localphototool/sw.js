@@ -104,7 +104,7 @@ var OFFLINE = ROOT + 'offline.html';
    percentage, fit-inside or centre-crop, batch, ZIP) built on the shared
    compressor app with a resize layer in engine.js. New page in the shell means
    the version moves with it. */
-var VERSION = 'v97';
+var VERSION = 'v98';
 var SHELL_CACHE = 'lpt-shell-' + VERSION;
 var PAGE_CACHE = 'lpt-pages-' + VERSION;
 var VENDOR_CACHE = 'lpt-vendor-' + VERSION;
@@ -113,6 +113,7 @@ var KEEP = [SHELL_CACHE, PAGE_CACHE, VENDOR_CACHE];
 var SHELL = [
   '',
   'compress/',
+  'compress-pdf/', /* re-encode the images inside a PDF and rebuild its offsets, v80 */
   'resize-image/',
   'watermark/',
   'exif-viewer/',

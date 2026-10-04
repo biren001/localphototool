@@ -1,0 +1,112 @@
+{
+  "taken": "2026-10-04T03:32:14.590Z",
+  "method": "Chromium print-to-PDF fixtures, seeded PRNG; images re-encoded with window.LPT.engine at quality 0.60, no downscale.",
+  "fixtures": [
+    "_dev/fixtures/mixed.pdf",
+    "_dev/fixtures/photo.jpg",
+    "_dev/fixtures/photos.pdf",
+    "_dev/fixtures/rotated.heic",
+    "_dev/fixtures/sample.heic",
+    "_dev/fixtures/text-only.pdf"
+  ],
+  "engine": {
+    "wasm": "[object Object]"
+  },
+  "results": {
+    "text-only.pdf": {
+      "file": "text-only.pdf",
+      "totalBytes": 11381,
+      "pageCount": 1,
+      "objectCount": 11,
+      "imageCount": 0,
+      "imageBytes": 0,
+      "imageShareOfFile": 0,
+      "imageBytesByFilter": {},
+      "objStmCount": 0,
+      "encrypted": false,
+      "recompressedImageBytesBefore": 0,
+      "recompressedImageBytesAfter": 0,
+      "imageShrink": 0,
+      "wholeFileProjection": 11381,
+      "qualityErrors": 0,
+      "images": []
+    },
+    "photos.pdf": {
+      "file": "photos.pdf",
+      "totalBytes": 1689943,
+      "pageCount": 4,
+      "objectCount": 22,
+      "imageCount": 4,
+      "imageBytes": 1678826,
+      "imageShareOfFile": 0.9934216716185102,
+      "imageBytesByFilter": {
+        "DCTDecode": 1678826
+      },
+      "objStmCount": 0,
+      "encrypted": false,
+      "recompressedImageBytesBefore": 1678826,
+      "recompressedImageBytesAfter": 749932,
+      "imageShrink": 0.5532997463703803,
+      "wholeFileProjection": 761049,
+      "qualityErrors": 0,
+      "images": [
+        {
+          "before": 420969,
+          "after": 188029,
+          "w": 2400,
+          "h": 1600,
+          "encoder": "native"
+        },
+        {
+          "before": 411662,
+          "after": 183169,
+          "w": 2400,
+          "h": 1600,
+          "encoder": "native"
+        },
+        {
+          "before": 412229,
+          "after": 184201,
+          "w": 2400,
+          "h": 1600,
+          "encoder": "native"
+        },
+        {
+          "before": 433966,
+          "after": 194533,
+          "w": 2400,
+          "h": 1600,
+          "encoder": "native"
+        }
+      ]
+    },
+    "mixed.pdf": {
+      "file": "mixed.pdf",
+      "totalBytes": 299733,
+      "pageCount": 2,
+      "objectCount": 15,
+      "imageCount": 1,
+      "imageBytes": 288420,
+      "imageShareOfFile": 0.9622564082033009,
+      "imageBytesByFilter": {
+        "DCTDecode": 288420
+      },
+      "objStmCount": 0,
+      "encrypted": false,
+      "recompressedImageBytesBefore": 288420,
+      "recompressedImageBytesAfter": 124236,
+      "imageShrink": 0.5692531724568337,
+      "wholeFileProjection": 135549,
+      "qualityErrors": 0,
+      "images": [
+        {
+          "before": 288420,
+          "after": 124236,
+          "w": 1600,
+          "h": 1000,
+          "encoder": "native"
+        }
+      ]
+    }
+  }
+}

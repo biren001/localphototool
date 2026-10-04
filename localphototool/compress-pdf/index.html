@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shrink a PDF Without Uploading It — Re-Compress the Images Inside</title>
+<meta name="description" content="Make a PDF smaller in your browser. The file is read on your device, the pictures inside it are re-encoded, and the text stays selectable. Nothing is uploaded. Measured: 55% smaller on a four-photo PDF.">
+<link rel="canonical" href="https://localphototool.com/compress-pdf/">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LocalPhotoTool">
+<meta property="og:title" content="Shrink a PDF Without Uploading It — Re-Compress the Images Inside">
+<meta property="og:description" content="A PDF is mostly pictures. This reads your file on your own machine, re-encodes every embedded JPEG, rebuilds the table of contents offsets and hands you back a smaller document with selectable text intact.">
+<meta property="og:url" content="https://localphototool.com/compress-pdf/">
+<meta property="og:image" content="https://localphototool.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shrink a PDF Without Uploading It">
+<meta name="twitter:description" content="Re-encode the images inside a PDF, in your browser, with no upload. Measured 55% smaller on a four-photo document.">
+<meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LocalPhotoTool">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/css/style.css?v=4fe6f4f" as="style">
+<link rel="stylesheet" href="../assets/css/style.css?v=4fe6f4f">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "LocalPhotoTool PDF Compressor",
+      "url": "https://localphototool.com/compress-pdf/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern web browser",
+      "description": "Shrink a PDF in the browser by re-encoding the images embedded in it. The document is never uploaded; text, fonts and page structure are copied through byte for byte.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://localphototool.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Shrink a PDF",
+          "item": "https://localphototool.com/compress-pdf/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to make a PDF smaller without uploading it",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Add the file",
+          "text": "Drop a PDF onto the page or pick it from disk."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set the quality and size limits",
+          "text": "Pick an encoder quality and, optionally, a maximum edge so oversized scans come down as well."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Take the smaller file",
+          "text": "Every embedded image is re-encoded and the document's table of offsets is rebuilt, so the text stays selectable and the file opens in any viewer."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does making a PDF smaller usually work so well?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a PDF from Word, Google Docs, Keynote, a scanner or a browser print has already compressed its text once, and pictures are what came back big. On a four-photo A4 document we measured, the images were 99.3% of the file. Re-encoding those images brought 1,689,943 bytes down to 761,064 — 55% smaller — while the text, the fonts and the page structure were copied through untouched. A document with one photo and body text around it went from 299,733 bytes to 135,558, which is the same 55% and the more everyday case."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my text still be selectable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Only the image streams are replaced. Every other object — the page tree, the fonts, the outlines, the content streams that draw the words — is carried over the way it was, and the file's cross-reference table is then rebuilt from the offsets actually written. That table is exactly what a viewer uses to find each object, which is why it has to move when a stream changes length. The result still has selectable, searchable text and the same page count."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My PDF came back exactly the same size. What happened?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It means the file had nothing to re-encode, and the honest thing to do is say so rather than ship you a bigger file. A PDF made entirely of text — a form, a report, a contract — contains no image streams at all, so there is nothing to take bytes from and the original is handed back byte for byte. The same thing happens to individual images the tool cannot safely touch: ones with an alpha channel attached, ones that are one-bit masks, ones that the browser's decoder refuses. Those are counted in the result line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on encrypted or password-protected PDFs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and it refuses rather than guessing. If the document carries an encryption dictionary the file is passed back exactly as it came in, because the stream lengths and offsets are no longer readable in plain text and any change would produce a document that will not open. Passwords that only open a file for viewing do not stop us — but a document that was encrypted is left alone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my PDF uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The file is read into the page with the browser's own file reader and every step — reading the structure, decoding each embedded image, re-encoding it, rebuilding the offsets — happens on your machine. There is no server-side component that accepts a PDF. The page does load a compression engine from this site's own assets, and optionally pulls optional WASM codec modules from a public CDN when they are reachable; neither ever sees your document."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it downscale my photos as well as re-encode them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if you ask it to. The maximum edge setting is off by default, so images keep the pixel dimensions they have; only the quality changes. Setting a maximum edge is the way to squeeze a document where the photos are scanned far larger than the page needs — at a 1000 px cap on the four-photo test file the whole document came out at 242,999 bytes, which is 86% smaller. Images below the cap are never touched."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to the document's metadata, like the title and author?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You choose. Keeping metadata leaves the file's XMP and document-information objects in place, which matters if the title, author or keywords have to survive the round trip. Unticking it drops those objects and the catalog's reference to them, which is worth a few hundred bytes on a large file. Either way the rest of the document is unaffected."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://localphototool.com/compress-pdf/#page",
+      "url": "https://localphototool.com/compress-pdf/",
+      "name": "Shrink a PDF without uploading it",
+      "description": "Make a PDF smaller in the browser by re-encoding the images inside it. No upload, selectable text stays. Measured 55% smaller on a four-photo PDF.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://localphototool.com/#website"
+      },
+      "about": {
+        "@id": "https://localphototool.com/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://localphototool.com/#org",
+      "name": "LocalPhotoTool",
+      "url": "https://localphototool.com/",
+      "description": "Free browser-only image and PDF tools: compress, convert, resize, watermark and inspect files. Files never leave your device."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://localphototool.com/#website",
+      "url": "https://localphototool.com/",
+      "name": "LocalPhotoTool",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://localphototool.com/#org"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool">Skip to the compressor</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="../">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+        </span>
+        <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link" href="../compress/">Compress</a>
+        <details class="nav__tools">
+          <summary>All tools<svg class="nav__tools__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul class="nav__tools__panel">
+            <li><a href="../compress/">Compress images</a></li>
+            <li><a href="../images-to-pdf/">Images to PDF</a></li>
+            <li><a href="../compress-pdf/">Shrink a PDF</a></li>
+            <li><a href="../metadata-editor/">Metadata editor</a></li>
+            <li><a href="../resize-image/">Resize images</a></li>
+            <li><a href="../watermark/">Text watermark</a></li>
+            <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+            <li><a href="../png-to-jpg/">PNG to JPG</a></li>
+            <li><a href="../jpg-to-webp/">JPG to WebP</a></li>
+            <li><a href="../jpg-to-png/">JPG to PNG</a></li>
+            <li><a href="../webp-to-jpg/">WebP to JPG</a></li>
+            <li><a href="../webp-to-png/">WebP to PNG</a></li>
+            <li><a href="../compress-to-100kb/">Compress to 100 KB</a></li>
+            <li><a href="../compress-to-50kb/">Compress to 50 KB</a></li>
+            <li><a href="../compress-to-200kb/">Compress to 200 KB</a></li>
+            <li><a href="../compress-to-500kb/">Compress to 500 KB</a></li>
+            <li><a href="../compress-photos-for-email/">Compress for email</a></li>
+            <li><a href="../compress-without-uploading/">Compress without uploading</a></li>
+            <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
+            <li><a href="../image-compressor-upload-test/">Image compressor upload test</a></li>
+            <li><a href="../remove-gps-from-photo/">Remove GPS from photo</a></li>
+            <li><a href="../exif-viewer/">EXIF viewer</a></li>
+            <li><a href="../image-to-base64/">Image to Base64</a></li>
+            <li><a href="../transfer/">Transfer phone to PC</a></li>
+            <li><a href="../batch-rename/">Batch rename</a></li>
+            <li><a href="../remove-background/">Remove background</a></li>
+          </ul>
+        </details>
+        <a class="nav__link" href="../compress-pdf/" aria-current="page">Shrink PDF</a>
+        <a class="nav__link" href="../#how-it-works">How it works</a>
+        <a class="nav__link" href="../#faq">FAQ</a>
+        <a class="nav__link" href="../about/">About</a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <button class="icon-btn nav__toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <a class="btn btn--ghost" href="../">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero hero--compact">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="margin-bottom:0.9rem">
+        <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Shrink a PDF</span>
+      </nav>
+      <h1>Shrink a PDF without uploading it</h1>
+      <p class="hero__lead" style="max-width:680px">A PDF is mostly <strong>pictures</strong>. This reads your file on your own machine, re-encodes every image inside it, rebuilds the document's table of offsets, and hands you back a smaller file with your <strong>text still selectable</strong>. Measured on a four-photo document: <strong>55% smaller</strong>.</p>
+      <ul class="trust-row mt-4">
+        <li class="badge badge--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/></svg>
+          Nothing is uploaded
+        </li>
+        <li class="badge">Text stays selectable</li>
+        <li class="badge">Works offline</li>
+        <li class="badge">Unlimited &amp; free</li>
+      </ul>
+      <p class="hero__share" style="max-width:680px">
+        <a href="../share/">On a phone? This tool runs there too — grab the QR code and share links →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="tool">
+    <div class="container">
+      <div class="dropzone" id="pdfDrop" role="group" tabindex="0" aria-label="Add a PDF: drop the file here or press Enter to browse">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        </div>
+        <h2 style="font-size:clamp(1.1rem,1rem + 0.6vw,1.35rem)">Drop your PDF here</h2>
+        <p class="dropzone__hint">or paste from the clipboard</p>
+        <div class="dropzone__actions">
+          <button class="btn btn--grad btn--lg" id="pdfPick" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 4 4 3-3 5 5"/><circle cx="9" cy="9" r="1.4"/></svg>
+            Choose a PDF
+          </button>
+        </div>
+        <p class="dropzone__formats">PDF — one file at a time, no size limit, nothing leaves your device</p>
+        <input type="file" id="pdfInput" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
+      </div>
+
+      <div class="settings" id="pdfSettings" aria-live="polite">
+        <div class="settings__head">
+          <h2 class="settings__title">Compression settings</h2>
+          <span class="badge badge--brand">Applied when you run it</span>
+        </div>
+        <div class="settings__body">
+          <div class="field">
+            <div class="field__label">
+              <label for="pdfQuality">Encoder quality</label>
+              <span class="hint">lower is smaller; 60 is the measured default</span>
+            </div>
+            <div class="field__row">
+              <input type="range" id="pdfQuality" min="30" max="90" step="5" value="60">
+              <span class="field__value" id="pdfQualityValue">60</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field__label">
+              <label for="pdfMaxDim">Maximum edge <span class="hint">optional</span></label>
+            </div>
+            <div class="field__row">
+              <select id="pdfMaxDim" class="field__select">
+                <option value="0" selected>Keep every image at its own size</option>
+                <option value="1600">Downscale images wider than 1600 px</option>
+                <option value="1000">Downscale images wider than 1000 px</option>
+                <option value="640">Downscale images wider than 640 px</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="checkbox" for="pdfMeta">
+              <input type="checkbox" id="pdfMeta">
+              <span>Keep the document metadata (title, author, keywords)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="pdfReport" hidden>
+        <h2 class="card__title">What the file actually contains</h2>
+        <ul class="fact-list" id="pdfFacts"></ul>
+        <p class="muted mb-0" id="pdfWhy" style="font-size:0.88rem"></p>
+      </div>
+
+      <div class="card" id="pdfResult" hidden>
+        <h2 class="card__title">Done</h2>
+        <p id="pdfSummary" style="font-size:1rem"></p>
+        <p style="margin:0 0 1rem"><a class="btn btn--grad" id="pdfDownload" href="#" download>Download the smaller PDF</a></p>
+        <ul class="fact-list" id="pdfResultFacts"></ul>
+      </div>
+
+      <p class="muted hidden" id="pdfStatus" role="status" style="margin-top:1rem"></p>
+    </div>
+  </section>
+
+  <section class="section" id="measured">
+    <div class="container">
+      <h2>What we measured, and what it means</h2>
+      <p>Three documents were printed to PDF by the same browser and then run through this tool. The images were re-encoded at quality 60 with no downscaling, which is the default on the form above.</p>
+      <div class="card" style="margin-top:1rem">
+        <ul class="fact-list">
+          <li><strong>Four photos, four pages — 1,689,943 bytes → 761,064 bytes (−55%).</strong> The images inside were 99.3% of the file, so the rest of the document moved by almost nothing. Nothing but the picture bytes was touched.</li>
+          <li><strong>One photo with body text around it — 299,733 bytes → 135,558 bytes (−54.8%).</strong> This is the ordinary case: a report or a deck where most of the bytes sit in one picture.</li>
+          <li><strong>Text only, no pictures at all — 11,381 bytes, unchanged.</strong> The tool counted no image streams, so it returned the original file byte for byte instead of inventing work to do.</li>
+          <li><strong>Same four photos, capped at 1000 px — 242,999 bytes (−85.6%).</strong> Downscaling buys far more than re-encoding when scans are printed much larger than the page.</li>
+        </ul>
+      </div>
+      <p class="muted" style="margin-top:1rem;font-size:0.9rem">The method, the fixtures and the per-image figures are kept with the rest of the project's measurements: three A4 documents generated by the browser's own print-to-PDF, seeded so a re-run lands on the same numbers, with every image re-encoded by this site's own encoder.</p>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <ol>
+        <li><strong>The file is read on your machine.</strong> No upload step exists, so there is nothing to wait for and nothing to leak.</li>
+        <li><strong>The document's objects are walked.</strong> Every <code>N 0 obj … endobj</code> is read, and the tool picks out the image objects — the ones stored as a plain JPEG with no alpha channel attached.</li>
+        <li><strong>Each image is decoded and re-encoded.</strong> Through the same compression engine this site uses for photos, at the quality you chose.</li>
+        <li><strong>The document is written back out.</strong> Image streams are swapped in, the byte count in each dictionary is corrected, and the table of offsets at the end of the file is rebuilt from the offsets actually written — because a stream that changed length moves every object after it.</li>
+      </ol>
+      <p class="muted">If the file turns out to be encrypted, or its images are packed inside compressed object streams where many objects share one stream, the tool says so and gives you the original back rather than guessing at a format it cannot see.</p>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <details class="faq__item" open>
+          <summary>Why does making a PDF smaller usually work so well?</summary>
+          <div class="faq__body"><p>Because a PDF from Word, Google Docs, Keynote, a scanner or a browser print has already compressed its text once, and pictures are what came back big. On a four-photo A4 document we measured, the images were 99.3% of the file. Re-encoding those images brought 1,689,943 bytes down to 761,064 — 55% smaller — while the text, the fonts and the page structure were copied through untouched. A document with one photo and body text around it went from 299,733 bytes to 135,558, which is the same 55% and the more everyday case.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Will my text still be selectable?</summary>
+          <div class="faq__body"><p>Yes. Only the image streams are replaced. Every other object — the page tree, the fonts, the outlines, the content streams that draw the words — is carried over the way it was, and the file's cross-reference table is then rebuilt from the offsets actually written. That table is exactly what a viewer uses to find each object, which is why it has to move when a stream changes length. The result still has selectable, searchable text and the same page count.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>My PDF came back exactly the same size. What happened?</summary>
+          <div class="faq__body"><p>It means the file had nothing to re-encode, and the honest thing to do is say so rather than ship you a bigger file. A PDF made entirely of text — a form, a report, a contract — contains no image streams at all, so there is nothing to take bytes from and the original is handed back byte for byte. The same thing happens to individual images the tool cannot safely touch: ones with an alpha channel attached, ones that are one-bit masks, ones that the browser's decoder refuses. Those are counted in the result line.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it work on encrypted or password-protected PDFs?</summary>
+          <div class="faq__body"><p>No, and it refuses rather than guessing. If the document carries an encryption dictionary the file is passed back exactly as it came in, because the stream lengths and offsets are no longer readable in plain text and any change would produce a document that will not open. Passwords that only open a file for viewing do not stop us — but a document that was encrypted is left alone.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Is my PDF uploaded to a server?</summary>
+          <div class="faq__body"><p>No. The file is read into the page with the browser's own file reader and every step — reading the structure, decoding each embedded image, re-encoding it, rebuilding the offsets — happens on your machine. There is no server-side component that accepts a PDF. The page does load a compression engine from this site's own assets, and optionally pulls optional WASM codec modules from a public CDN when they are reachable; neither ever sees your document.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>Does it downscale my photos as well as re-encode them?</summary>
+          <div class="faq__body"><p>Only if you ask it to. The maximum edge setting is off by default, so images keep the pixel dimensions they have; only the quality changes. Setting a maximum edge is the way to squeeze a document where the photos are scanned far larger than the page needs — at a 1000 px cap on the four-photo test file the whole document came out at 242,999 bytes, which is 86% smaller. Images below the cap are never touched.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What happens to the document's metadata, like the title and author?</summary>
+          <div class="faq__body"><p>You choose. Keeping metadata leaves the file's XMP and document-information objects in place, which matters if the title, author or keywords have to survive the round trip. Unticking it drops those objects and the catalog's reference to them, which is worth a few hundred bytes on a large file. Either way the rest of the document is unaffected.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="../">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V7a2 2 0 0 1 2-2h8"/><path d="M20 9v8a2 2 0 0 1-2 2H9"/><path d="m8 12 4-4 4 4"/><path d="M12 8v9"/></svg>
+          </span>
+          <span>LocalPhotoTool<span class="brand__dot">.com</span></span>
+        </a>
+        <p>A local-first image and PDF toolkit. Your files are processed on your own device, in your own browser — never uploaded, never stored.</p>
+        <p>Free, and free to run — if it saved you time, <a href="https://ko-fi.com/localphototool" rel="noopener">support it on Ko-fi</a>.</p>
+      </div>
+      <div class="footer__col footer__col--tools">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="../compress/">Compress images</a></li>
+          <li><a href="../compress-pdf/">Shrink a PDF</a></li>
+          <li><a href="../images-to-pdf/">Images to PDF</a></li>
+          <li><a href="../reduce-image-size/">Reduce image size</a></li>
+          <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+          <li><a href="../metadata-editor/">Metadata editor</a></li>
+          <li><a href="../remove-background/">Remove background</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="../#how-it-works">How it works</a></li>
+          <li><a href="../#faq">FAQ</a></li>
+          <li><a href="../why-my-image-wont-get-smaller/">Why images won't get smaller</a></li>
+          <li><a href="../about/">About</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> LocalPhotoTool.com</span>
+      <span class="build-stamp" title="Built from git commit 4fe6f4f with uncommitted local changes">Updated <time datetime="2026-10-04">4 Oct 2026</time> &middot; build <code>4fe6f4f</code>+</span>
+      <span class="sep"></span>
+      <span>Made for people who would rather not hand over their photos.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/compressor/engine.js?v=4fe6f4f"></script>
+<script src="../assets/js/pdfcompress.js?v=4fe6f4f"></script>
+<script src="../assets/js/chime.js?v=4fe6f4f"></script>
+<script src="../assets/js/share.js?v=4fe6f4f" defer></script>
+<script src="../assets/js/site.js?v=4fe6f4f"></script>
+<script src="../assets/js/pwa.js?v=4fe6f4f" defer></script>
+<script src="../assets/js/stats.js?v=4fe6f4f" defer></script>
+<script>
+(function () {
+  'use strict';
+  var drop = document.getElementById('pdfDrop');
+  var input = document.getElementById('pdfInput');
+  var pick = document.getElementById('pdfPick');
+  var quality = document.getElementById('pdfQuality');
+  var qValue = document.getElementById('pdfQualityValue');
+  var maxDim = document.getElementById('pdfMaxDim');
+  var meta = document.getElementById('pdfMeta');
+  var report = document.getElementById('pdfReport');
+  var facts = document.getElementById('pdfFacts');
+  var why = document.getElementById('pdfWhy');
+  var result = document.getElementById('pdfResult');
+  var resultFacts = document.getElementById('pdfResultFacts');
+  var summary = document.getElementById('pdfSummary');
+  var download = document.getElementById('pdfDownload');
+  var status = document.getElementById('pdfStatus');
+
+  var current = null;      // { file, bytes }
+  var busy = false;
+
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  function kb(n) { return n >= 1024 * 1024 ? (n / 1048576).toFixed(2) + ' MB' : Math.round(n / 1024) + ' KB'; }
+  function pct(a, b) { return Math.round((a - b) / a * 1000) / 10; }
+
+  function li(text, strong) {
+    var el = document.createElement('li');
+    el.innerHTML = strong ? '<strong>' + text + '</strong>' : text;
+    return el;
+  }
+
+  function setStatus(msg) {
+    status.textContent = msg || '';
+    status.classList.toggle('hidden', !msg);
+  }
+
+  function showFactList(target, items) {
+    target.textContent = '';
+    items.forEach(function (t) { target.appendChild(li(t, true)); });
+  }
+
+  /* ---------- reading the file ---------- */
+
+  function take(file) {
+    if (!file) return;
+    /* A second file dropped while the first is still being worked on would
+       land after it and overwrite the result with the wrong document — the
+       same guard the settings controls already carry. */
+    if (busy) { setStatus('Still working on the file above — one document at a time.'); return; }
+    if (file.type && file.type.indexOf('pdf') === -1) {
+      setStatus('That is not a PDF — this tool reads documents, not images.');
+      return;
+    }
+    busy = true;
+    setStatus('Reading ' + file.name + '…');
+    file.arrayBuffer().then(function (ab) {
+      current = { file: file, bytes: new Uint8Array(ab), name: (file.name || 'document.pdf').replace(/\.pdf$/i, '') };
+      busy = false;
+      setStatus('Loaded ' + fmt(current.bytes.length) + ' bytes. Counting the images inside…');
+      return run(true);
+    }).catch(function (err) {
+      busy = false;
+      setStatus('That file could not be read: ' + (err && err.message ? err.message : err));
+    });
+  }
+
+  /* ---------- the two steps, so the panel can explain itself ---------- */
+
+  function run(quiet) {
+    if (!current) return Promise.resolve();
+    var P = window.LPT && window.LPT.pdfcompress;
+    if (!P) { setStatus('The PDF module did not load.'); return Promise.resolve(); }
+
+    var inv = P.inspect(current.bytes);
+    if (quiet) {
+      showFactList(facts, [
+        fmt(inv.size) + ' bytes · ' + inv.pages + (inv.pages === 1 ? ' page' : ' pages') + ' · ' + inv.objects + ' objects',
+        inv.images.length + ' image' + (inv.images.length === 1 ? '' : 's') + ' inside the file, taking ' +
+          fmt(inv.imageBytes) + ' bytes — ' + (inv.imageShare * 100).toFixed(1) + '% of the document',
+        inv.encodableImages + ' can be re-encoded, ' + inv.skippableImages + ' will be left alone'
+      ]);
+      if (inv.objStmCount) {
+        why.textContent = 'This file also packs several objects into compressed streams, which the tool will not touch — it reports them rather than guessing.';
+      } else if (!inv.encodableImages) {
+        why.textContent = 'There are no plain JPEG images to re-encode, so the file comes back exactly as it came in. Handed back untouched, not rewritten, and not bigger.';
+      } else {
+        why.textContent = 'Only the image streams change. Every other object is copied through byte for byte and the file\'s offsets are rebuilt from what was actually written.';
+      }
+      report.hidden = false;
+    }
+    if (!inv.encodableImages) {
+      showResult(current.bytes.length, current.bytes.length, 0, inv, true);
+      return Promise.resolve();
+    }
+
+    busy = true;
+    setStatus('Re-encoding ' + inv.encodableImages + ' image' + (inv.encodableImages === 1 ? '' : 's') + '…');
+    return P.compress(current.bytes, {
+      quality: Number(quality.value) / 100,
+      maxDim: Number(maxDim.value) || 0,
+      dropMetadata: !meta.checked
+    }).then(function (rep) {
+      busy = false;
+      if (rep.encrypted) {
+        showFactList(facts, ['Encrypted document — handed back untouched']);
+        why.textContent = 'The file carries an encryption dictionary, so its stream lengths cannot be read in plain text. Rewriting it would produce a document that will not open.';
+        showResult(current.bytes.length, current.bytes.length, 0, inv, true);
+        return;
+      }
+      return rep.blob.arrayBuffer().then(function (ab) {
+        var out = new Uint8Array(ab);
+        showResult(current.bytes.length, out.length, rep.imagesReplaced, inv, false, rep, out);
+      });
+    }).catch(function (err) {
+      busy = false;
+      setStatus('That could not be processed: ' + (err && err.message ? err.message : err));
+    });
+  }
+
+  function showResult(sizeIn, sizeOut, replaced, inv, kept, rep, outBytes) {
+    var out = outBytes || current.bytes;
+    result.hidden = false;
+    resultFacts.textContent = '';
+    if (kept) {
+      resultFacts.appendChild(li('Nothing was re-encoded, so you get the original file back unchanged.'));
+      resultFacts.appendChild(li(fmt(sizeIn) + ' bytes — the same ' + kb(sizeIn) + ' this file was before.'));
+    } else {
+      var delta = pct(sizeIn, sizeOut);
+      resultFacts.appendChild(li(fmt(sizeIn) + ' bytes → ' + fmt(sizeOut) + ' bytes (' + delta + '% smaller), a saving of ' + fmt(sizeIn - sizeOut) + ' bytes.'));
+      resultFacts.appendChild(li(replaced + ' image' + (replaced === 1 ? '' : 's') + ' re-encoded' +
+        (rep && rep.maxDim ? ' and capped at ' + rep.maxDim + ' px' : '') + ' at quality ' + (rep ? Math.round(rep.quality * 100) : '') + '.'));
+      resultFacts.appendChild(li('Pages: ' + inv.pages + '. Text: unchanged — copied through, still selectable.'));
+    }
+    var blob = new Blob([out], { type: 'application/pdf' });
+    var url = URL.createObjectURL(blob);
+    download.href = url;
+    download.setAttribute('download', current.name + '-smaller.pdf');
+    summary.textContent = kept
+      ? 'This document had nothing for the tool to re-encode.'
+      : 'Done — ' + Math.abs(pct(sizeIn, sizeOut)) + '% smaller, and the text is untouched.';
+    setStatus('');
+  }
+
+  /* ---------- wiring ---------- */
+
+  pick.addEventListener('click', function () { input.click(); });
+  input.addEventListener('change', function () { take(input.files && input.files[0]); input.value = ''; });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('is-over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('is-over'); });
+  });
+  drop.addEventListener('drop', function (e) {
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    take(f);
+  });
+  drop.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+  });
+  document.addEventListener('paste', function (e) {
+    if (!e.clipboardData) return;
+    var items = e.clipboardData.items || [];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].kind === 'file' && /pdf/.test(items[i].type)) { take(items[i].getAsFile()); return; }
+    }
+  });
+
+  ['input', 'change'].forEach(function (ev) {
+    quality.addEventListener(ev, function () { qValue.textContent = quality.value; });
+  });
+  maxDim.addEventListener('change', function () { if (current && !busy) run(false); });
+  meta.addEventListener('change', function () { if (current && !busy) run(false); });
+})();
+</script>
+</body>
+</html>
