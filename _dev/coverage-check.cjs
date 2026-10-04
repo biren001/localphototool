@@ -21,7 +21,7 @@ const GROUPS = {
   ],
   'heic-to-jpg': [
     'heic', 'iphone', 'apple', "won't open", 'cannot open',
-    'won\'t it open', 'open in', 'jpeg', 'convert heic', 'screenshot iphone'
+    'won\'t it open', 'open in', 'jpeg', 'convert heic', 'iphone screenshot'
   ],
   'remove-background': [
     'remove background', 'cut out', 'cut out the', 'delete the background',
