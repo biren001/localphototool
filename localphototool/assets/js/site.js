@@ -85,7 +85,8 @@
      one, so new tools are remembered without touching this list. */
   var NOT_A_TOOL = {
     about: 1, privacy: 1, terms: 1, share: 1, stats: 1, report: 1, faq: 1,
-    sitemap: 1, 'image-compressor-upload-test': 1, 'compress-without-uploading': 1
+    sitemap: 1, 'image-compressor-upload-test': 1, 'compress-without-uploading': 1,
+    'why-my-image-wont-get-smaller': 1
   };
   var PIN_ICON = 'M12 3l2.2 5.4 5.8.5-4.4 3.9 1.3 5.7L12 15.9 7.1 18.5l1.3-5.7L4 8.9l5.8-.5L12 3z';
   var PIN_X = 'M6 6l12 12M18 6L6 18';
