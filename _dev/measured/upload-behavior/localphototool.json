@@ -3,11 +3,11 @@
   "name": "LocalPhotoTool",
   "url": "https://localphototool.com/compress/",
   "control": true,
-  "measuredAt": "2026-09-25T02:04:34.926Z",
+  "measuredAt": "2026-10-04T01:34:21.518Z",
   "probe": {
-    "marker": "LPTPROBE-e191f205213b4f34b9b8f6408eca32b3",
+    "marker": "LPTPROBE-289dacb66e9a4d8797353350f2cc586d",
     "bytes": 341529,
-    "sha256": "f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209",
+    "sha256": "16fd7e80a37e0988544a678263f945c87cb9c08a57a580dbff5a173ece97c61c",
     "path": "generated per run, see gen-probe-image.py"
   },
   "ok": true,
@@ -20,11 +20,11 @@
     {
       "url": "/cdn-cgi/rum?",
       "method": "POST",
-      "ts": 1790301876605,
+      "ts": 1791077686813,
       "seq": 1
     }
   ],
-  "pageSnippet": "Skip to the compressor LocalPhotoTool.com Compress HEIC to JPG No upload How it works Why it is better FAQ About Home Home › Compress images Compress images without uploading them Everything runs inside your browser. Add one photo or five hundred — the engine measures each image, picks the smallest file that still looks identical, and hands it straight back to you. Nothing is uploaded JPEG · PNG · WebP · AVIF HEIC from iPhone Unlimited & free Compressing on a phone? Scan this QR code to open the tool there → Drop your images here or paste from the clipboard · ⌘V / Ctrl+V works too Choose images JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit Compression settings Applied to every image Strategy Auto Quality Target size Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor. Output format Auto Keep format JPEG WebP AVIF PNG Advanced options Results 1 image · 1 optimized Download all (.zip) Clear probe.jpg 334 KB → 262 KB · −21% · 1600×1200 · WEBP · Q92 Compare Save × −21% smaller 334 KB → 262 KB saved 71 KB Download all (.zip) Clear list What this compressor actually does Most online compressors work the same way: your file is uploaded, passed through a fixed preset such as \"quality 80\", and sent back. That preset has no idea what your image contains, so a smooth sky and a photo of tree branches receive identical treatment — ",
+  "pageSnippet": "Skip to the compressor LocalPhotoTool.com Compress All tools HEIC to JPG No upload How it works FAQ About Home Home › Compress images Compress images without uploading them Your photo is too large to upload? Too big for email? This is the fastest way to make it smaller. Everything runs inside your browser — add one photo or five hundred, the engine measures each image, picks the smallest file that still looks identical, and hands it straight back to you. Nothing is uploaded JPEG · PNG · WebP · AVIF HEIC from iPhone Unlimited & free On a phone? This tool runs there too — grab the QR code and share links → Drop your images here or paste from the clipboard · ⌘V / Ctrl+V works too Choose images JPG · JPEG · PNG · WebP · AVIF · HEIC · GIF · BMP — no file count limit Compression settings Applied to every image Strategy Auto Quality Target size Auto measures each image: it encodes a test pass at several quality levels, scores the result against the original, and keeps the smallest file that still clears a ~40 dB fidelity floor. Output format Auto Keep format JPEG WebP AVIF PNG Advanced options Results 1 image · 1 optimized Download image Clear probe.jpg 334 KB → 262 KB · −21% · 1600×1200 · WEBP · Q92 Compare Save × −21% smaller 334 KB → 262 KB Download image Clear list What this compressor actually does Most online compressors work the same way: your file is uploaded, passed through a fixed preset such as \"quality 80\", and sent back. That preset has no idea what your image contains,",
   "evidence": {
     "requestsSeen": 27,
     "hookEvents": 1,

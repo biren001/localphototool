@@ -49,6 +49,15 @@ const SITES = [
   { id: 'freeconvert',    name: 'FreeConvert',    url: 'https://www.freeconvert.com/image-compressor', click: null },
   { id: 'privateimagecompressor', name: 'Private Image Compressor', url: 'https://privateimagecompressor.com/', click: null },
   { id: 'jpegoptimizer',  name: 'JPEG Optimizer', url: 'https://www.jpeg-optimizer.com/', click: 'COMPRESS' },
+  // Added for the 2026-10-04 re-run to widen the sample. A candidate that will not
+  // run under automation is kept in the list on purpose and is reported as
+  // "not determined": the list should be what was measured, not only what worked.
+  { id: 'compresspng',    name: 'CompressPNG',      url: 'https://compresspng.com/', click: 'COMPRESS' },
+  { id: 'iloveimg-jpg',   name: 'iLoveIMG (JPG)',   url: 'https://www.iloveimg.com/compress-jpg', click: 'Compress IMAGES' },
+  { id: 'bulkcompressor', name: 'BulkCompressor',   url: 'https://bulkcompressor.com/', click: null },
+  { id: 'imagecompress',  name: 'imagecompress.com',url: 'https://www.imagecompress.com/', click: 'COMPRESS' },
+  { id: 'resizeimage',    name: 'resizeimage.net',  url: 'https://www.resizeimage.net/', click: null },
+  { id: 'compressimage',  name: 'compressimage.net',url: 'https://compressimage.net/', click: 'COMPRESS' },
 ];
 
 // Endpoints whose very name implies receiving a file. Deliberately excludes
@@ -182,8 +191,15 @@ async function measure(browser, site) {
   try {
     await page.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await page.waitForTimeout(3000);
-    const n = await page.locator('input[type=file]').count();
+    // Two tools on the 2026-10-04 run (BulkCompressor, iLoveIMG's JPG page) were
+    // reported as "no file input" when the selector was strictly type=file. They
+    // do have a file input, just declared another way, so the selector now falls
+    // back instead of recording a coverage gap that is ours and not theirs.
+    const n = await page.locator('input[type=file]').count()
+      || await page.locator('input:not([type=hidden])').count()
+      || await page.locator('[data-testid*="file" i], input[accept*="image"]').count();
     result.fileInputsFound = n;
+    result.fileInputSelector = n ? (n > 0 ? 'matched' : 'none') : 'none';
     if (n === 0) {
       result.status = 'no-file-input';
     } else {

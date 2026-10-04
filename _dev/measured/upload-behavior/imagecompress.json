@@ -1,0 +1,35 @@
+{
+  "id": "imagecompress",
+  "name": "imagecompress.com",
+  "url": "https://www.imagecompress.com/",
+  "control": false,
+  "measuredAt": "2026-10-04T01:46:14.050Z",
+  "probe": {
+    "marker": "LPTPROBE-289dacb66e9a4d8797353350f2cc586d",
+    "bytes": 341529,
+    "sha256": "16fd7e80a37e0988544a678263f945c87cb9c08a57a580dbff5a173ece97c61c",
+    "path": "generated per run, see gen-probe-image.py"
+  },
+  "ok": false,
+  "error": "page.goto: net::ERR_CONNECTION_CLOSED at https://www.imagecompress.com/\nCall log:\n\u001b[2m  - navigating to \"https://www.imagecompress.com/\", waiting until \"domcontentloaded\"\u001b[22m\n",
+  "status": "error",
+  "hookEvents": [],
+  "pageSnippet": "",
+  "evidence": {
+    "requestsSeen": 1,
+    "hookEvents": 0,
+    "bodiesWithBytes": 0,
+    "markerHits": 0,
+    "markerHitUrls": [],
+    "maxPayloadBytes": 0,
+    "fileSizedPayload": false,
+    "uploadEndpointCalls": 0,
+    "uploadEndpointUrls": [],
+    "largestPayloads": [],
+    "ingestShown": false,
+    "downloadFired": false,
+    "finalUrl": "chrome-error://chromewebdata/"
+  },
+  "verdict": "inconclusive",
+  "confidence": "low"
+}

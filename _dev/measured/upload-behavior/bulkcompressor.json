@@ -1,0 +1,49 @@
+{
+  "id": "bulkcompressor",
+  "name": "BulkCompressor",
+  "url": "https://bulkcompressor.com/",
+  "control": false,
+  "measuredAt": "2026-10-04T01:49:03.167Z",
+  "probe": {
+    "marker": "LPTPROBE-289dacb66e9a4d8797353350f2cc586d",
+    "bytes": 341529,
+    "sha256": "16fd7e80a37e0988544a678263f945c87cb9c08a57a580dbff5a173ece97c61c",
+    "path": "generated per run, see gen-probe-image.py"
+  },
+  "ok": false,
+  "fileInputsFound": 0,
+  "fileInputSelector": "none",
+  "status": "no-file-input",
+  "hookEvents": [
+    {
+      "url": "/markup/ad",
+      "method": "GET",
+      "ts": 1791078547078,
+      "seq": 1
+    },
+    {
+      "url": "https://ms.godaddy.com/i.gif?e=eyJ2IjoiMS4xNCIsImF2Ijo1ODgwNjU5LCJhdCI6MjQ0NywiYnQiOjAsImNtIjo1OTQyMTc1MjAsImNoIjo1NDQ0NSwiY2siOnt9LCJjciI6ODk2OTgwMTgxLCJkaSI6IjNlNGE3NDdlOGMxNjRkZGVhYTRhNjVhZmY5M2FlODMzIiwiZGoiOjAsImlpIjoiNzMyYzQ2YzUwNzVjNDEwYmFlNzllMGNmMzU4Y2JjYzQiLCJsZSI6WzJdLCJkbSI6MywiZmMiOjEwNzI3MzY5MzMsImZsIjo4NjI1NDA2MjQsImlwIjoiNDQuMjI1LjE3NC4wIiwibnciOjEwNjYzLCJwYyI6Miwib3AiOjIsIm1wIjoyLCJkcCI6MS4wMSwiZG4iOjEuMDEsImRnIjoxLjAxLCJlYyI6MiwiZ20iOjAsImVwIjpudWxsLCJwciI6MjUwODA0LCJydCI6MiwicnMiOjUwMCwic2EiOiI4NiIsInNiIjoiaS0wOGMwZDI2NGJhNWQ0ODg2NCIsInNwIjoyNzg1MjksInN0IjoxMjc2MjY0LCJ1ayI6InVlMS1mODg3MWY1NTJjNTU0NzRiYWZhODg1NzFmODQzYjZiMiIsInpuIjozMDc0OTUsInptIjpbMzA3NDk1XSwidHMiOjE3OTEwNzg1NDg3NzIsInBuIjoiZ2Qtd2FtLXBvczEiLCJnYyI6dHJ1ZSwiZ0MiOnRydWUsImdzIjoibm9uZSIsImRjIjoxLCJ0eiI6IkFtZXJpY2EvVG9yb250byIsImJhIjoyMCwiZnEiOjB9&s=uYPMzdcHaPcxqTOXWeNGEKiL7iA&omsId=baseline&psName=WAM_BANNER_V1&uawVersion=2.3.6&property:publisher_website_key=wam.md5.d97ebe5a2184e14f5bb588216407f4a8",
+      "method": "GET",
+      "ts": 1791078548518,
+      "seq": 2
+    }
+  ],
+  "pageSnippet": "Go from idea to live site in minutes. Get 50 free credits Start for free BULKCOMPRESSOR.COM Launching Soon Contact Us Copyright © 2026 bulkcompressor.com - All Rights Reserved. Powered by This website uses cookies. We use cookies to analyze website traffic and optimize your website experience. By accepting our use of cookies, your data will be aggregated with all other user data. ACCEPT",
+  "evidence": {
+    "requestsSeen": 48,
+    "hookEvents": 2,
+    "bodiesWithBytes": 0,
+    "markerHits": 0,
+    "markerHitUrls": [],
+    "maxPayloadBytes": 0,
+    "fileSizedPayload": false,
+    "uploadEndpointCalls": 0,
+    "uploadEndpointUrls": [],
+    "largestPayloads": [],
+    "ingestShown": false,
+    "downloadFired": false,
+    "finalUrl": "https://bulkcompressor.com/"
+  },
+  "verdict": "inconclusive",
+  "confidence": "low"
+}

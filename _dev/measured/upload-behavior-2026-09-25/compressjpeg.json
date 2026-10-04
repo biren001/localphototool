@@ -1,0 +1,486 @@
+{
+  "id": "compressjpeg",
+  "name": "CompressJPEG",
+  "url": "https://compressjpeg.com/",
+  "control": false,
+  "measuredAt": "2026-09-25T02:08:16.859Z",
+  "probe": {
+    "marker": "LPTPROBE-e191f205213b4f34b9b8f6408eca32b3",
+    "bytes": 341529,
+    "sha256": "f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209",
+    "path": "generated per run, see gen-probe-image.py"
+  },
+  "ok": true,
+  "fileInputsFound": 1,
+  "fileSet": true,
+  "clicked": [
+    "COMPRESS\n1"
+  ],
+  "downloads": 0,
+  "status": "completed",
+  "hookEvents": [
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302101895,
+      "seq": 1
+    },
+    {
+      "url": "https://stats.monohost.com/piwik.php?action_name=Reduce%20JPEG%20File%20Size%20Online&idsite=7&rec=1&r=925950&h=10&m=8&s=21&url=https%3A%2F%2Fcompressjpeg.com%2F&_id=8ec7aeb494223548&_idn=1&send_image=0&_refts=0&pv_id=ptEzO4&pf_net=1831&pf_srv=318&pf_tfr=11&pf_dm1=1244&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22153.0.8010.12%22%7D%2C%7B%22brand%22%3A%22Not_A%20Brand%22%2C%22version%22%3A%228.0.0.0%22%7D%2C%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22153.0.8010.12%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22Windows%22%2C%22platformVersion%22%3A%2210.0.0%22%7D&cookie=1&res=1280x720",
+      "method": "BEACON",
+      "ts": 1790302101993,
+      "seq": 2,
+      "body": {
+        "kind": "blob",
+        "bytes": 0,
+        "marker": false
+      }
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102467,
+      "seq": 3
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102469,
+      "seq": 4
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102475,
+      "seq": 5
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102486,
+      "seq": 6
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260923&st=env&sjk=701571370842801",
+      "method": "GET",
+      "ts": 1790302103752,
+      "seq": 7
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104375,
+      "seq": 8
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104476,
+      "seq": 9
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104671,
+      "seq": 10
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104672,
+      "seq": 11
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxV53qSCI-jrnxuNmAAaVks9-FvPzhZ1wvpp6ea5RcFUcIDjx9cUJjyjmqLlQNPNTj5EMNWHAHs8EhPdBIaQSE6Y3E95l8_A3-FUpl4ipYpzybrFw4rGsS4dQIqf0HXs8qvTmjBR1w==",
+      "method": "POST",
+      "ts": 1790302104804,
+      "seq": 12
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxVLR1XIb87bdZxrDoWmmQHsQ2oTDgGJN-wUGqg6QCGgfJYRlBlkjtFnHJSjFRdjqzwAtMGP4D0U0tuOiLg2R5ZjvpAZB3FsQmuq1Fd4JyuJlvsGKLEja-XZbFmbIwTyBwgHWSNEyA==",
+      "method": "POST",
+      "ts": 1790302104926,
+      "seq": 13
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104927,
+      "seq": 14
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302101895,
+      "seq": 1
+    },
+    {
+      "url": "https://stats.monohost.com/piwik.php?action_name=Reduce%20JPEG%20File%20Size%20Online&idsite=7&rec=1&r=925950&h=10&m=8&s=21&url=https%3A%2F%2Fcompressjpeg.com%2F&_id=8ec7aeb494223548&_idn=1&send_image=0&_refts=0&pv_id=ptEzO4&pf_net=1831&pf_srv=318&pf_tfr=11&pf_dm1=1244&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22153.0.8010.12%22%7D%2C%7B%22brand%22%3A%22Not_A%20Brand%22%2C%22version%22%3A%228.0.0.0%22%7D%2C%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22153.0.8010.12%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22Windows%22%2C%22platformVersion%22%3A%2210.0.0%22%7D&cookie=1&res=1280x720",
+      "method": "BEACON",
+      "ts": 1790302101993,
+      "seq": 2,
+      "body": {
+        "kind": "blob",
+        "bytes": 0,
+        "marker": false
+      }
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102467,
+      "seq": 3
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102469,
+      "seq": 4
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102475,
+      "seq": 5
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102486,
+      "seq": 6
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260923&st=env&sjk=701571370842801",
+      "method": "GET",
+      "ts": 1790302103752,
+      "seq": 7
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104375,
+      "seq": 8
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104476,
+      "seq": 9
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104671,
+      "seq": 10
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104672,
+      "seq": 11
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxV53qSCI-jrnxuNmAAaVks9-FvPzhZ1wvpp6ea5RcFUcIDjx9cUJjyjmqLlQNPNTj5EMNWHAHs8EhPdBIaQSE6Y3E95l8_A3-FUpl4ipYpzybrFw4rGsS4dQIqf0HXs8qvTmjBR1w==",
+      "method": "POST",
+      "ts": 1790302104804,
+      "seq": 12
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxVLR1XIb87bdZxrDoWmmQHsQ2oTDgGJN-wUGqg6QCGgfJYRlBlkjtFnHJSjFRdjqzwAtMGP4D0U0tuOiLg2R5ZjvpAZB3FsQmuq1Fd4JyuJlvsGKLEja-XZbFmbIwTyBwgHWSNEyA==",
+      "method": "POST",
+      "ts": 1790302104926,
+      "seq": 13
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104927,
+      "seq": 14
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302101895,
+      "seq": 1
+    },
+    {
+      "url": "https://stats.monohost.com/piwik.php?action_name=Reduce%20JPEG%20File%20Size%20Online&idsite=7&rec=1&r=925950&h=10&m=8&s=21&url=https%3A%2F%2Fcompressjpeg.com%2F&_id=8ec7aeb494223548&_idn=1&send_image=0&_refts=0&pv_id=ptEzO4&pf_net=1831&pf_srv=318&pf_tfr=11&pf_dm1=1244&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22153.0.8010.12%22%7D%2C%7B%22brand%22%3A%22Not_A%20Brand%22%2C%22version%22%3A%228.0.0.0%22%7D%2C%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22153.0.8010.12%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22Windows%22%2C%22platformVersion%22%3A%2210.0.0%22%7D&cookie=1&res=1280x720",
+      "method": "BEACON",
+      "ts": 1790302101993,
+      "seq": 2,
+      "body": {
+        "kind": "blob",
+        "bytes": 0,
+        "marker": false
+      }
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102467,
+      "seq": 3
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102469,
+      "seq": 4
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102475,
+      "seq": 5
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102486,
+      "seq": 6
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260923&st=env&sjk=701571370842801",
+      "method": "GET",
+      "ts": 1790302103752,
+      "seq": 7
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104375,
+      "seq": 8
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104476,
+      "seq": 9
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104671,
+      "seq": 10
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104672,
+      "seq": 11
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxV53qSCI-jrnxuNmAAaVks9-FvPzhZ1wvpp6ea5RcFUcIDjx9cUJjyjmqLlQNPNTj5EMNWHAHs8EhPdBIaQSE6Y3E95l8_A3-FUpl4ipYpzybrFw4rGsS4dQIqf0HXs8qvTmjBR1w==",
+      "method": "POST",
+      "ts": 1790302104804,
+      "seq": 12
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxVLR1XIb87bdZxrDoWmmQHsQ2oTDgGJN-wUGqg6QCGgfJYRlBlkjtFnHJSjFRdjqzwAtMGP4D0U0tuOiLg2R5ZjvpAZB3FsQmuq1Fd4JyuJlvsGKLEja-XZbFmbIwTyBwgHWSNEyA==",
+      "method": "POST",
+      "ts": 1790302104926,
+      "seq": 13
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104927,
+      "seq": 14
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302101895,
+      "seq": 1
+    },
+    {
+      "url": "https://stats.monohost.com/piwik.php?action_name=Reduce%20JPEG%20File%20Size%20Online&idsite=7&rec=1&r=925950&h=10&m=8&s=21&url=https%3A%2F%2Fcompressjpeg.com%2F&_id=8ec7aeb494223548&_idn=1&send_image=0&_refts=0&pv_id=ptEzO4&pf_net=1831&pf_srv=318&pf_tfr=11&pf_dm1=1244&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22153.0.8010.12%22%7D%2C%7B%22brand%22%3A%22Not_A%20Brand%22%2C%22version%22%3A%228.0.0.0%22%7D%2C%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22153.0.8010.12%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22Windows%22%2C%22platformVersion%22%3A%2210.0.0%22%7D&cookie=1&res=1280x720",
+      "method": "BEACON",
+      "ts": 1790302101993,
+      "seq": 2,
+      "body": {
+        "kind": "blob",
+        "bytes": 0,
+        "marker": false
+      }
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102467,
+      "seq": 3
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102469,
+      "seq": 4
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102475,
+      "seq": 5
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102486,
+      "seq": 6
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260923&st=env&sjk=701571370842801",
+      "method": "GET",
+      "ts": 1790302103752,
+      "seq": 7
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104375,
+      "seq": 8
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104476,
+      "seq": 9
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104671,
+      "seq": 10
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104672,
+      "seq": 11
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxV53qSCI-jrnxuNmAAaVks9-FvPzhZ1wvpp6ea5RcFUcIDjx9cUJjyjmqLlQNPNTj5EMNWHAHs8EhPdBIaQSE6Y3E95l8_A3-FUpl4ipYpzybrFw4rGsS4dQIqf0HXs8qvTmjBR1w==",
+      "method": "POST",
+      "ts": 1790302104804,
+      "seq": 12
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxVLR1XIb87bdZxrDoWmmQHsQ2oTDgGJN-wUGqg6QCGgfJYRlBlkjtFnHJSjFRdjqzwAtMGP4D0U0tuOiLg2R5ZjvpAZB3FsQmuq1Fd4JyuJlvsGKLEja-XZbFmbIwTyBwgHWSNEyA==",
+      "method": "POST",
+      "ts": 1790302104926,
+      "seq": 13
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104927,
+      "seq": 14
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302101895,
+      "seq": 1
+    },
+    {
+      "url": "https://stats.monohost.com/piwik.php?action_name=Reduce%20JPEG%20File%20Size%20Online&idsite=7&rec=1&r=925950&h=10&m=8&s=21&url=https%3A%2F%2Fcompressjpeg.com%2F&_id=8ec7aeb494223548&_idn=1&send_image=0&_refts=0&pv_id=ptEzO4&pf_net=1831&pf_srv=318&pf_tfr=11&pf_dm1=1244&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22153.0.8010.12%22%7D%2C%7B%22brand%22%3A%22Not_A%20Brand%22%2C%22version%22%3A%228.0.0.0%22%7D%2C%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22153.0.8010.12%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22Windows%22%2C%22platformVersion%22%3A%2210.0.0%22%7D&cookie=1&res=1280x720",
+      "method": "BEACON",
+      "ts": 1790302101993,
+      "seq": 2,
+      "body": {
+        "kind": "blob",
+        "bytes": 0,
+        "marker": false
+      }
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102467,
+      "seq": 3
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102469,
+      "seq": 4
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102475,
+      "seq": 5
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302102486,
+      "seq": 6
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260923&st=env&sjk=701571370842801",
+      "method": "GET",
+      "ts": 1790302103752,
+      "seq": 7
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104375,
+      "seq": 8
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104476,
+      "seq": 9
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104671,
+      "seq": 10
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104672,
+      "seq": 11
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxV53qSCI-jrnxuNmAAaVks9-FvPzhZ1wvpp6ea5RcFUcIDjx9cUJjyjmqLlQNPNTj5EMNWHAHs8EhPdBIaQSE6Y3E95l8_A3-FUpl4ipYpzybrFw4rGsS4dQIqf0HXs8qvTmjBR1w==",
+      "method": "POST",
+      "ts": 1790302104804,
+      "seq": 12
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxVLR1XIb87bdZxrDoWmmQHsQ2oTDgGJN-wUGqg6QCGgfJYRlBlkjtFnHJSjFRdjqzwAtMGP4D0U0tuOiLg2R5ZjvpAZB3FsQmuq1Fd4JyuJlvsGKLEja-XZbFmbIwTyBwgHWSNEyA==",
+      "method": "POST",
+      "ts": 1790302104926,
+      "seq": 13
+    },
+    {
+      "url": "https://fundingchoicesmessages.google.com/el/AGSKWxWlhHV18xAd-Zc-G3hGFwWrE0kaXw1og5jngWW048sYI5B5nsu1QTEQoAWWi15nRwHeSrebpa8Kby0qXOBRKTOSQGclV3c7rC5Fo0f_TDFdJglQ5fZL2k034HhXQghsV_kiNNNhIQ==",
+      "method": "POST",
+      "ts": 1790302104927,
+      "seq": 14
+    }
+  ],
+  "pageSnippet": "English English Deutsch Español Français Indonesia Italiano 日本語 한국어 Nederlands Polski Português Русский Türkçe Українська Tiếng việt 中文 Choose up to 20 JPG photos from your device, or drop them into the drop zone. Press COMPRESS to begin. All processing happens in your browser — your files never leave your device. Tap any thumbnail to fine-tune quality settings. Save files one by one or grab everything at once. Discover more photo Photo Archiving Service Photo Compression Guide JPEG PNG GIF EXIF SELECT FILES CLEAR probe.jpg JPG PROCESSING... ERROR -41% SAVE Drop Your Files Here COMPRESS SAVE ALL 1 probe.jpg Before: 333.5 KB After: 198.1 KB (-41%) 100% Quality APPLY Discover more Mobile Data Saving Bandwidth Saving Tools Website Speed Optimization Setup Email Hosting photography Try Photo Hosting compression Cloud Storage Optimization JPEG Compression: Complete Guide JPEG compression reduces file sizes by removing image data that the human eye typically doesn't notice. Our tool uses MozJPEG, an advanced encoder developed by Mozilla that achieves better compression ratios than standard JPEG encoders while maintaining excellent visual quality. Key Fact: A typical high-resolution photo can be compressed by 60-80% without visible quality loss. This means faster page loads, easier sharing, and significant storage savings. Why Compress JPEG Images? Large image files create real problems across many use cases: Website Performance Images typically account for 50-70% of a webpage's tot",
+  "evidence": {
+    "requestsSeen": 57,
+    "hookEvents": 70,
+    "bodiesWithBytes": 0,
+    "markerHits": 0,
+    "markerHitUrls": [],
+    "maxPayloadBytes": 0,
+    "fileSizedPayload": false,
+    "uploadEndpointCalls": 0,
+    "uploadEndpointUrls": [],
+    "largestPayloads": [],
+    "ingestShown": true,
+    "downloadFired": false,
+    "finalUrl": "https://compressjpeg.com/"
+  },
+  "verdict": "local",
+  "confidence": "medium"
+}

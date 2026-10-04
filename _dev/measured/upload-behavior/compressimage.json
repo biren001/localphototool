@@ -1,9 +1,9 @@
 {
-  "id": "squoosh",
-  "name": "Squoosh",
-  "url": "https://squoosh.app/",
+  "id": "compressimage",
+  "name": "compressimage.net",
+  "url": "https://compressimage.net/",
   "control": false,
-  "measuredAt": "2026-10-04T01:37:15.115Z",
+  "measuredAt": "2026-10-04T01:47:08.870Z",
   "probe": {
     "marker": "LPTPROBE-289dacb66e9a4d8797353350f2cc586d",
     "bytes": 341529,
@@ -17,9 +17,9 @@
   "downloads": 0,
   "status": "completed",
   "hookEvents": [],
-  "pageSnippet": "100 % Compress Original Image (probe.jpg) AVIF Browser JPEG Browser PNG JPEG XL (beta) MozJPEG OxiPNG QOI WebP WebP v2 (unstable) 342 kB 0 % Edit Resize Reduce palette Compress Original Image (probe.jpg) AVIF Browser JPEG Browser PNG JPEG XL (beta) MozJPEG OxiPNG QOI WebP WebP v2 (unstable) Quality: 75 Advanced settings 141 kB ↓ 59 %",
+  "pageSnippet": "EN Compress your images with ease Choose files probe.jpg To .jpeg Optimize Compression Settings Quality 85 Lower quality Higher quality",
   "evidence": {
-    "requestsSeen": 20,
+    "requestsSeen": 17,
     "hookEvents": 0,
     "bodiesWithBytes": 0,
     "markerHits": 0,
@@ -31,7 +31,7 @@
     "largestPayloads": [],
     "ingestShown": true,
     "downloadFired": false,
-    "finalUrl": "https://squoosh.app/editor"
+    "finalUrl": "https://www.compressimage.net/en"
   },
   "verdict": "local",
   "confidence": "medium"

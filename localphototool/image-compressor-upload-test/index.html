@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Do Image Compressors Upload Your Photos? 9 Tools Tested</title>
-<meta name="description" content="We fed a marked JPEG to nine online compressors and watched every request. Two uploaded the file, six kept it local. Method and raw data included.">
+<title>Do Image Compressors Upload Your Photos? 15 Tools Tested</title>
+<meta name="description" content="We fed a marked JPEG to fifteen online compressors and watched every request. Two uploaded the file, seven kept it local. Method and raw data included.">
 <link rel="canonical" href="https://localphototool.com/image-compressor-upload-test/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LocalPhotoTool">
 <meta property="og:title" content="Do Image Compressors Upload Your Photos? 9 Tools Tested">
-<meta property="og:description" content="We fed a marked JPEG to nine online image compressors and watched every outbound request. Two sent the whole file to a server, six did not. Method and raw data included.">
+<meta property="og:description" content="We fed a marked JPEG to fifteen online image compressors and watched every outbound request. Two sent the whole file to a server, seven did not. Method and raw data included.">
 <meta property="og:url" content="https://localphototool.com/image-compressor-upload-test/">
 <meta property="og:image" content="https://localphototool.com/og-cover.jpg">
 <meta property="og:image:width" content="1200">
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="LocalPhotoTool — image tools that run in your browser">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Do Image Compressors Upload Your Photos? 9 Tools Tested">
-<meta name="twitter:description" content="We fed a marked JPEG to nine online image compressors and watched every outbound request. Two sent the whole file to a server, six did not. Method and raw data included.">
+<meta name="twitter:description" content="We fed a marked JPEG to fifteen online image compressors and watched every outbound request. Two sent the whole file to a server, seven did not. Method and raw data included.">
 <meta name="twitter:image" content="https://localphototool.com/og-cover.jpg">
 
 <script type="application/ld+json">
@@ -70,7 +70,7 @@
           "name": "Which compressors actually keep the file on my device?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In this test: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor and LocalPhotoTool. For each of these the tool displayed a before-and-after size for our file while sending nothing that could have contained it."
+            "text": "In this test: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor, compressimage.net and LocalPhotoTool. For each of these the tool displayed a before-and-after size for our file while sending nothing that could have contained it."
           }
         },
         {
@@ -94,7 +94,15 @@
           "name": "How reliable is this test?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It is one run, one file, one browser, on one date. Tools change their code without announcing it, and a result here says nothing about what a server does with a file after receiving it. We publish the method and the raw per-site data so you can re-run it rather than take our word."
+            "text": "Fifteen tools, one run each, one file, one browser, on one date. Six of the fifteen never ran under automation and are reported as not determined rather than guessed at, so the eight real verdicts carry more weight than the raw count suggests. Tools change their code without announcing it, and a result here says nothing about what a server does with a file after receiving it. We publish the method and the raw per-site data so you can re-run it rather than take our word."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happened to the compressors with no verdict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FreeConvert, CompressPNG, iLoveIMG's JPG page, BulkCompressor, imagecompress.com and resizeimage.net. Our script could not drive any of them: they never showed the file in a way automation could use, and one address no longer resolves. We left those rows blank. A tool we failed to start is not evidence of anything either way, so it is not evidence of privacy."
           }
         }
       ]
@@ -183,8 +191,8 @@
         <span class="muted" style="font-size:0.8rem"><a href="../">Home</a> <span aria-hidden="true">›</span> Upload test</span>
       </nav>
       <h1>Do online image compressors upload your photos?</h1>
-      <p class="hero__lead">Most of them say your files never leave your device. We tested nine with a photo carrying a hidden marker, and watched every request each page made. Two sent the entire file to a server. Six did not.</p>
-      <p class="muted" style="font-size:0.82rem">Measured 25 September 2026 · one run per tool · method and raw data below</p>
+      <p class="hero__lead">Most of them say your files never leave your device. We tested fifteen with a photo carrying a hidden marker, and watched every request each page made. Exactly two sent the entire file to a server. Seven did not.</p>
+      <p class="muted" style="font-size:0.82rem">Measured 4 October 2026 · one run per tool · method and raw data below</p>
     </div>
   </section>
 
@@ -192,7 +200,7 @@
     <div class="container prose">
       <h2>How the test works</h2>
       <p>Marketing copy is not evidence, so we did not take any of it at face value. We built a 333.52 KB JPEG and hid a unique marker inside its EXIF data — a random string that exists nowhere else on the internet. If that string shows up in a request leaving the browser, then bytes from that file left the browser. There is no way to argue with it.</p>
-      <p>The probe photo is 341,529 bytes, 1600 × 1200, saved at quality 88 with GPS coordinates in its metadata, so it behaves like a real photograph rather than a test pattern. Its SHA-256 is <code>f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209</code>.</p>
+      <p>The probe photo is 341,529 bytes, 1600 × 1200, saved at quality 88 with GPS coordinates in its metadata, so it behaves like a real photograph rather than a test pattern. Its SHA-256 is <code>16fd7e80a37e0988544a678263f945c87cb9c08a57a580dbff5a173ece97c61c</code>.</p>
       <p>Then, for each tool: load the page in a headless browser, hand it the photo, press whatever button starts the work, and record every outbound request. We record from inside the page rather than from the browser's debugging protocol, because the protocol quietly drops large and streamed request bodies — using it made one upload look like a 1,144 byte request with nothing in it.</p>
       <p>We also ran the whole thing against <a href="../compress/">our own compressor</a> as a control. A test that cannot show a file staying home is not fit to show one leaving.</p>
 
@@ -204,14 +212,21 @@
           </thead>
           <tbody>
         <tr><td>TinyPNG</td><td>The whole file — 341,529 bytes, marker matched 3×</td><td><code>/backend/opt/store</code></td><td><strong>Uploads</strong></td></tr>
-        <tr><td>iLoveIMG</td><td>The whole file — 341,729 bytes, marker matched 1×</td><td><code>https://api10.iloveimg.com/v1/upload</code></td><td><strong>Uploads</strong></td></tr>
+        <tr><td>iLoveIMG</td><td>The whole file — 341,729 bytes, marker matched 4×</td><td><code>https://api22.iloveimg.com/v1/upload</code></td><td><strong>Uploads</strong></td></tr>
         <tr><td>Squoosh</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
         <tr><td>CompressJPEG</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
         <tr><td>ImageCompressor</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
         <tr><td>JPEG Optimizer</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
         <tr><td>Private Image Compressor</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
         <tr><td>LocalPhotoTool (this site)</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
-        <tr><td>FreeConvert</td><td>Nothing the size of a photo</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+        <tr><td>compressimage.net</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>LocalPhotoTool (this site)</td><td>Nothing the size of a photo</td><td>—</td><td>Stays in your browser</td></tr>
+        <tr><td>FreeConvert</td><td>Nothing measurable</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+        <tr><td>CompressPNG</td><td>Nothing measurable</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+        <tr><td>iLoveIMG (JPG page)</td><td>Nothing measurable</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+        <tr><td>BulkCompressor</td><td>Nothing measurable</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+        <tr><td>imagecompress.com</td><td>Nothing measurable</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
+        <tr><td>resizeimage.net</td><td>Nothing measurable</td><td>—</td><td><span class="muted">Not determined</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -220,9 +235,12 @@
       <p><strong>TinyPNG</strong> sent the complete file — all 341,529 bytes — and our marker was found in the request body three times. <strong>iLoveIMG</strong> sent the file to an upload endpoint as well, and the marker was found there too.</p>
       <p>Neither is doing anything wrong. Both are server-side compressors by design: that is how the product works, and both are upfront about it. What it changes is where your photo physically goes. If the photo still carries GPS coordinates, those go with it.</p>
 
-      <h3>The six that do not</h3>
-      <p>Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor and this site each showed our file's size in their own interface and produced a smaller version, while sending nothing large enough to have contained it. For those tools the claim checks out.</p>
-      <p>One tool, FreeConvert, we could not get to run under automation — it never displayed our file, so we recorded no verdict rather than invent one. Absence of evidence is not evidence of privacy.</p>
+      <h3>The seven that do not</h3>
+      <p>Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor, compressimage.net and this site each showed our file's size in their own interface and produced a smaller version, while sending nothing large enough to have contained it. For those tools the claim checks out.</p>
+
+      <h3>The six we could not reach a verdict on</h3>
+      <p>Six of the fifteen never ran under automation: FreeConvert, CompressPNG, iLoveIMG's JPG page, BulkCompressor, imagecompress.com and resizeimage.net. Each one either never displayed the file in a way our script could drive, or no longer serves the address we tested — <code>resizeimage.net</code> did not resolve at all, which is its own answer about the tool, not about its traffic.</p>
+      <p>These rows are blank on purpose. A tool we failed to start is not a tool that respects your privacy, and filling the cell with a guess would turn this into the kind of claim we set out to check. If you want these six tested, the script takes one site id at a time and the raw JSON shows exactly where each run stopped.</p>
 
       <h2>What this test cannot tell you</h2>
       <ul>
@@ -257,7 +275,7 @@
         </details>
         <details class="faq__item">
           <summary>Which compressors actually keep the file on my device?</summary>
-          <div class="faq__body"><p>In this test: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor and LocalPhotoTool. For each of these the tool displayed a before-and-after size for our file while sending nothing that could have contained it.</p></div>
+          <div class="faq__body"><p>In this test: Squoosh, CompressJPEG, ImageCompressor, JPEG Optimizer, Private Image Compressor, compressimage.net and LocalPhotoTool. For each of these the tool displayed a before-and-after size for our file while sending nothing that could have contained it.</p></div>
         </details>
         <details class="faq__item">
           <summary>How can I check a compressor myself?</summary>
@@ -269,7 +287,11 @@
         </details>
         <details class="faq__item">
           <summary>How reliable is this test?</summary>
-          <div class="faq__body"><p>It is one run, one file, one browser, on one date. Tools change their code without announcing it, and a result here says nothing about what a server does with a file after receiving it. We publish the method and the raw per-site data so you can re-run it rather than take our word.</p></div>
+          <div class="faq__body"><p>Fifteen tools, one run each, one file, one browser, on one date. Six of the fifteen never ran under automation and are reported as not determined rather than guessed at, so the eight real verdicts carry more weight than the raw count suggests. Tools change their code without announcing it, and a result here says nothing about what a server does with a file after receiving it. We publish the method and the raw per-site data so you can re-run it rather than take our word.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary>What happened to the compressors with no verdict?</summary>
+          <div class="faq__body"><p>FreeConvert, CompressPNG, iLoveIMG's JPG page, BulkCompressor, imagecompress.com and resizeimage.net. Our script could not drive any of them: they never showed the file in a way automation could use, and one address no longer resolves. We left those rows blank. A tool we failed to start is not evidence of anything either way, so it is not evidence of privacy.</p></div>
         </details>
       </div>
     </div>

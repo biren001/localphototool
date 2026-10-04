@@ -3,11 +3,11 @@
   "name": "Squoosh",
   "url": "https://squoosh.app/",
   "control": false,
-  "measuredAt": "2026-10-04T01:37:15.115Z",
+  "measuredAt": "2026-09-25T02:06:50.144Z",
   "probe": {
-    "marker": "LPTPROBE-289dacb66e9a4d8797353350f2cc586d",
+    "marker": "LPTPROBE-e191f205213b4f34b9b8f6408eca32b3",
     "bytes": 341529,
-    "sha256": "16fd7e80a37e0988544a678263f945c87cb9c08a57a580dbff5a173ece97c61c",
+    "sha256": "f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209",
     "path": "generated per run, see gen-probe-image.py"
   },
   "ok": true,

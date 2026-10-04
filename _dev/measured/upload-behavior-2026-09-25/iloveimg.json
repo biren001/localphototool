@@ -1,0 +1,319 @@
+{
+  "id": "iloveimg",
+  "name": "iLoveIMG",
+  "url": "https://www.iloveimg.com/compress-image",
+  "control": false,
+  "measuredAt": "2026-09-25T02:07:57.742Z",
+  "probe": {
+    "marker": "LPTPROBE-e191f205213b4f34b9b8f6408eca32b3",
+    "bytes": 341529,
+    "sha256": "f97c47b18f4a1a35c23a33822ce1e2afa833c114f545a1690085121ca6e5e209",
+    "path": "generated per run, see gen-probe-image.py"
+  },
+  "ok": true,
+  "fileInputsFound": 1,
+  "fileSet": true,
+  "clicked": [
+    "Compress IMAGES"
+  ],
+  "downloads": 1,
+  "status": "completed-with-download",
+  "hookEvents": [
+    {
+      "url": "https://evt.iloveimg.com?t=pageview&cmp_ck=0&release=7054aee&ev=1790302078741-2520475542&_l=zh-CN&_r=&_u=https://www.iloveimg.com/compress-image&_s=1280x720&_w=1280x720&_d=iloveimg&_m=www&_c=tool&_a=compress",
+      "method": "GET",
+      "ts": 1790302078741,
+      "seq": 1
+    },
+    {
+      "url": "https://evt.iloveimg.com?t=event&c=hack&a=selenium&cmp_ck=0&release=7054aee&ev=1790302078741-2520475542&_l=zh-CN&_r=&_u=https://www.iloveimg.com/compress-image&_s=1280x720&_w=1280x720&_d=iloveimg&_m=www&_c=tool&_a=compress",
+      "method": "GET",
+      "ts": 1790302079089,
+      "seq": 2
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302078309&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AAAAAEA&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=17&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=1&tag_exp=115938465~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121280969&sid=1790302079&sct=1&seg=0&dl=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Easily%20compress%20images%20at%20optimal%20quality%20in%20seconds.&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=1874",
+      "method": "POST",
+      "ts": 1790302079619,
+      "seq": 3
+    },
+    {
+      "url": "https://stats.g.doubleclick.net/g/collect?v=2&tid=G-Q8FHV8BBZ6&cid=413808316.1790302080&gtm=45je69n1v9118284404za200zd9118284404xf1&rcb=17&aip=1&dma=0&gcs=G111&gcd=13t3t3t3t5l1&npa=0&frm=0&tag_exp=115938465~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121280969",
+      "method": "BEACON",
+      "ts": 1790302079620,
+      "seq": 4
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302078309&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AAAAAEQ&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=17&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=2&tag_exp=115938465~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121280969&sid=1790302079&sct=1&seg=0&dl=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Easily%20compress%20images%20at%20optimal%20quality%20in%20seconds.&en=hack&_ee=1&ep.mode=selenium&_et=6&tfd=1886",
+      "method": "POST",
+      "ts": 1790302079631,
+      "seq": 5
+    },
+    {
+      "url": "https://securepubads.g.doubleclick.net/gampad/ads?pvsid=4614605277453675&correlator=409076813175932&eid=122881142&output=ldjh&gdfp_req=1&vrg=202609170101&ptt=17&impl=fifs&iu_parts=22379932707%2Ciloveimg_leaderboard%2Ciloveimg_leaderboard_compressimage&enc_prev_ius=%2F0%2F1%2F2&prev_iu_szs=728x90&ifi=1&dids=div-gpt-ad-1655799321825-0&adfs=575683238&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1790302080007&lmt=1790302080&adxs=155&adys=644&biw=1280&bih=720&scr_x=0&scr_y=0&btvi=0&ucis=1&oid=2&u_his=2&u_h=720&u_w=1280&u_ah=720&u_aw=1280&u_cd=24&u_sd=1&u_tz=480&dmc=8&bc=31&nvt=1&uach=WyJXaW5kb3dzIiwiMTAuMC4wIiwieDg2IiwiIiwiMTUzLjAuODAxMC4xMiIsbnVsbCwwLG51bGwsIjY0IixbWyJIZWFkbGVzc0Nocm9tZSIsIjE1My4wLjgwMTAuMTIiXSxbIk5vdF9BIEJyYW5kIiwiOC4wLjAuMCJdLFsiQ2hyb21pdW0iLCIxNTMuMC44MDEwLjEyIl1dLDBd&url=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&vis=1&psz=970x0&msz=970x0&fws=4&ohw=1280&a3p=Eh0KDmVzcC5jcml0ZW8uY29tGPyXx7KNNEgAUgIIZBIUCgVvcGVueBj8l8eyjTRIAFICCGQ.&dlt=1790302078301&idt=1591&cust_params=pos%3Dini&adks=3017662015&frm=20&cpu=2&eoidce=1",
+      "method": "GET",
+      "ts": 1790302080019,
+      "seq": 6
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302080969,
+      "seq": 7
+    },
+    {
+      "url": "https://rtb.openx.net/esp?url=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&rid=esp",
+      "method": "GET",
+      "ts": 1790302080974,
+      "seq": 8
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gpt&tv=m202609170101&st=env&sjk=4614605277453675",
+      "method": "GET",
+      "ts": 1790302081757,
+      "seq": 9
+    },
+    {
+      "url": "https://api10.iloveimg.com/v1/upload",
+      "method": "POST",
+      "ts": 1790302081811,
+      "seq": 10,
+      "body": {
+        "kind": "formdata",
+        "bytes": 341729,
+        "marker": true,
+        "parts": [
+          {
+            "key": "name",
+            "kind": "string",
+            "bytes": 9,
+            "marker": false
+          },
+          {
+            "key": "chunk",
+            "kind": "string",
+            "bytes": 1,
+            "marker": false
+          },
+          {
+            "key": "chunks",
+            "kind": "string",
+            "bytes": 1,
+            "marker": false
+          },
+          {
+            "key": "task",
+            "kind": "string",
+            "bytes": 180,
+            "marker": false
+          },
+          {
+            "key": "preview",
+            "kind": "string",
+            "bytes": 1,
+            "marker": false
+          },
+          {
+            "key": "pdfinfo",
+            "kind": "string",
+            "bytes": 1,
+            "marker": false
+          },
+          {
+            "key": "pdfforms",
+            "kind": "string",
+            "bytes": 1,
+            "marker": false
+          },
+          {
+            "key": "pdfresetforms",
+            "kind": "string",
+            "bytes": 1,
+            "marker": false
+          },
+          {
+            "key": "v",
+            "kind": "string",
+            "bytes": 5,
+            "marker": false
+          },
+          {
+            "key": "file",
+            "kind": "file",
+            "name": "probe.jpg",
+            "bytes": 341529,
+            "marker": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302078309&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AEAAAEQ&ae=a&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=17&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=3&tag_exp=115938465~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121280969&sid=1790302079&sct=1&seg=0&dl=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Easily%20compress%20images%20at%20optimal%20quality%20in%20seconds.&en=scroll&epn.percent_scrolled=90&_et=4&tfd=6888",
+      "method": "POST",
+      "ts": 1790302084633,
+      "seq": 11
+    },
+    {
+      "url": "//api10.iloveimg.com/v1/process",
+      "method": "POST",
+      "ts": 1790302087104,
+      "seq": 12,
+      "body": {
+        "kind": "formdata",
+        "bytes": 308,
+        "marker": false,
+        "parts": [
+          {
+            "key": "compression_level",
+            "kind": "string",
+            "bytes": 11,
+            "marker": false
+          },
+          {
+            "key": "width",
+            "kind": "string",
+            "bytes": 4,
+            "marker": false
+          },
+          {
+            "key": "height",
+            "kind": "string",
+            "bytes": 4,
+            "marker": false
+          },
+          {
+            "key": "task",
+            "kind": "string",
+            "bytes": 180,
+            "marker": false
+          },
+          {
+            "key": "tool",
+            "kind": "string",
+            "bytes": 13,
+            "marker": false
+          },
+          {
+            "key": "packaged_filename",
+            "kind": "string",
+            "bytes": 19,
+            "marker": false
+          },
+          {
+            "key": "files[0][server_filename]",
+            "kind": "string",
+            "bytes": 68,
+            "marker": false
+          },
+          {
+            "key": "files[0][filename]",
+            "kind": "string",
+            "bytes": 9,
+            "marker": false
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302078309&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AAAAAEQ&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=17&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=4&tag_exp=115938465~115938469~118012009~118897920~118897930~120213116~120385423~120469145~120469153~121280969&sid=1790302079&sct=1&seg=0&dl=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Easily%20compress%20images%20at%20optimal%20quality%20in%20seconds.&en=user_engagement&_et=9186&tfd=11076",
+      "method": "POST",
+      "ts": 1790302088821,
+      "seq": 13
+    },
+    {
+      "url": "https://evt.iloveimg.com?t=pageview&cmp_ck=0&release=7054aee&ev=1790302078741-2520475542&_l=zh-CN&_r=https://www.iloveimg.com/compress-image&_u=https://www.iloveimg.com/download/5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1/10&_s=1280x720&_w=1280x720&_d=iloveimg&_m=www&_c=download&_a=index",
+      "method": "GET",
+      "ts": 1790302088920,
+      "seq": 1
+    },
+    {
+      "url": "https://securepubads.g.doubleclick.net/gampad/ads?pvsid=7904657374893654&correlator=3117472704798369&eid=122881113%2C122881227%2C95401838%2C122881142&output=ldjh&gdfp_req=1&vrg=202609170101&ptt=17&impl=fifs&iu_parts=22379932707%2Ciloveimg_skyscraper_download_right%2Ciloveimg_skyscraper_download_left&enc_prev_ius=%2F0%2F1%2C%2F0%2F2&prev_iu_szs=120x600%7C120x60%7C160x600%7C120x30%7C120x90%7C120x240%7C120x20%7C125x125%2C120x600%7C120x60%7C160x600%7C120x30%7C120x90%7C120x240%7C120x20%7C125x125&ifi=1&dids=div-gpt-ad-1707851873760-0~div-gpt-ad-1707851812966-0&adfs=~1869591810&sfv=1-0-45&sc=1&cookie=ID%3D6c8039068dad6870%3AT%3D1790302080%3ART%3D1790302080%3AS%3DALNI_MZQiI3G8tolAwFT3Hnd17gYySufcA&gpic=UID%3D0000158621c55886%3AT%3D1790302080%3ART%3D1790302080%3AS%3DALNI_MZP7LKYERjsaxJwApvhQAyBnwrqpA&abxe=1&dt=1790302089044&lmt=1790302089&adxs=-9%2C580&adys=-9%2C278&biw=1280&bih=720&scr_x=0&scr_y=0&btvi=-1%7C0&ucis=1%7C2&oid=2&u_his=3&u_h=720&u_w=1280&u_ah=720&u_aw=1280&u_cd=24&u_sd=1&u_tz=480&dmc=8&bc=31&nvt=1&uach=WyJXaW5kb3dzIiwiMTAuMC4wIiwieDg2IiwiIiwiMTUzLjAuODAxMC4xMiIsbnVsbCwwLG51bGwsIjY0IixbWyJIZWFkbGVzc0Nocm9tZSIsIjE1My4wLjgwMTAuMTIiXSxbIk5vdF9BIEJyYW5kIiwiOC4wLjAuMCJdLFsiQ2hyb21pdW0iLCIxNTMuMC44MDEwLjEyIl1dLDBd&uas=1&url=https%3A%2F%2Fwww.iloveimg.com%2Fdownload%2F5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1%2F10&ref=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&vis=1&psz=0x-1%7C120x0&msz=0x-1%7C120x0&fws=2%2C4&ohw=0%2C1280&a3p=Eh0KDmVzcC5jcml0ZW8uY29tGPyXx7KNNEgAUgIIZBI-CgVvcGVueBIsZXlKcElqb2lkVFp3Wkdkbk9FcFNVbGRWWWk5Qk1VTTJZVXhoVVQwOUluMD0Y1abHso00SAA.&dlt=1790302088828&idt=108&cust_params=pos%3Dini&adks=4284857620%2C1867340463&frm=20&cpu=2&eo_id_str=ID%3Df4527b85d674433a%3AT%3D1790302080%3ART%3D1790302080%3AS%3DAA-AfjZpmIokzlkWHSLXy9fcJ5Nb",
+      "method": "GET",
+      "ts": 1790302089047,
+      "seq": 2
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302088836&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AAAAAEQ&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=0&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=1&tag_exp=115616985~115938466~115938469~118897920~118897930~120213116~120385423~120469145~120469153&sid=1790302079&sct=1&seg=1&dl=https%3A%2F%2Fwww.iloveimg.com%2Fdownload%2F5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1%2F10&dr=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Download%20file%20%7C%20iLoveIMG&en=page_view&_ee=1&tfd=372",
+      "method": "POST",
+      "ts": 1790302089061,
+      "seq": 3
+    },
+    {
+      "url": "https://evt.iloveimg.com?t=event&c=user&a=process&l=compressimage&cmp_ck=0&release=7054aee&ev=1790302078741-2520475542&_l=zh-CN&_r=https://www.iloveimg.com/compress-image&_u=https://www.iloveimg.com/download/5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1/10&_s=1280x720&_w=1280x720&_d=iloveimg&_m=www&_c=download&_a=index",
+      "method": "GET",
+      "ts": 1790302089129,
+      "seq": 4
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302088836&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AEAAAEQ&ae=a&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=0&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=2&tag_exp=115616985~115938466~115938469~118897920~118897930~120213116~120385423~120469145~120469153&sid=1790302079&sct=1&seg=1&dl=https%3A%2F%2Fwww.iloveimg.com%2Fdownload%2F5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1%2F10&dr=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Download%20file%20%7C%20iLoveIMG&en=scroll&epn.percent_scrolled=90&_et=20&tfd=444",
+      "method": "POST",
+      "ts": 1790302089133,
+      "seq": 5
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302088836&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AAAAAEQ&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=0&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=3&tag_exp=115616985~115938466~115938469~118897920~118897930~120213116~120385423~120469145~120469153&sid=1790302079&sct=1&seg=1&dl=https%3A%2F%2Fwww.iloveimg.com%2Fdownload%2F5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1%2F10&dr=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Download%20file%20%7C%20iLoveIMG&en=process&_c=1&_ee=1&ep.tool=compressimage&_et=69&tfd=445",
+      "method": "POST",
+      "ts": 1790302089134,
+      "seq": 6
+    },
+    {
+      "url": "https://evt.iloveimg.com?t=event&c=hack&a=selenium&cmp_ck=0&release=7054aee&ev=1790302078741-2520475542&_l=zh-CN&_r=https://www.iloveimg.com/compress-image&_u=https://www.iloveimg.com/download/5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1/10&_s=1280x720&_w=1280x720&_d=iloveimg&_m=www&_c=download&_a=index",
+      "method": "GET",
+      "ts": 1790302089190,
+      "seq": 7
+    },
+    {
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gpt&tv=m202609170101&st=env&sjk=7904657374893654",
+      "method": "GET",
+      "ts": 1790302089710,
+      "seq": 8
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/ping?e=1",
+      "method": "POST",
+      "ts": 1790302089964,
+      "seq": 9
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-Q8FHV8BBZ6&gtm=45je69n1v9118284404za200zd9118284404xf1&_p=1790302088836&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&_eu=AAAAAEQ&cid=413808316.1790302080&frm=0&pscdl=noapi&rcb=0&sr=1280x720&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=zh-cn&_s=4&tag_exp=115616985~115938466~115938469~118897920~118897930~120213116~120385423~120469145~120469153&sid=1790302079&sct=1&seg=1&dl=https%3A%2F%2Fwww.iloveimg.com%2Fdownload%2F5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1%2F10&dr=https%3A%2F%2Fwww.iloveimg.com%2Fcompress-image&dt=Download%20file%20%7C%20iLoveIMG&en=hack&_ee=1&ep.mode=selenium&_et=59&tfd=5521",
+      "method": "POST",
+      "ts": 1790302094211,
+      "seq": 10
+    }
+  ],
+  "pageSnippet": "COMPRESS IMAGE RESIZE IMAGE CROP IMAGE CONVERT TO JPG PHOTO EDITOR MORE TOOLS Login Sign up Your IMAGES have been compressed! Download compressed IMAGES 56% SAVED Your Images are now 56% smaller! 333.52 KB 149.89 KB Continue to... Resize IMAGE Crop IMAGE Rotate IMAGE Convert from JPG Watermark IMAGE How can you thank us? Spread the word! Please share the tool to inspire more productive people! Trustpilot Facebook Twitter LinkedIn Your trusted online image editor, loved by users worldwide iLoveIMG is your simple solution for editing images online. Access all the tools you need to enhance your images easily, straight from the web, with 100% security. PRODUCT Home Features Pricing Tools FAQ RESOURCES iLoveSign iLoveAPI iLovePDF LEGAL Privacy policy Terms & conditions Cookies COMPANY About us Contact us Blog Press English © iLoveIMG 2026 ® - Your Image Editor",
+  "evidence": {
+    "requestsSeen": 103,
+    "hookEvents": 23,
+    "bodiesWithBytes": 2,
+    "markerHits": 1,
+    "markerHitUrls": [
+      "https://api10.iloveimg.com/v1/upload"
+    ],
+    "maxPayloadBytes": 341729,
+    "fileSizedPayload": true,
+    "uploadEndpointCalls": 1,
+    "uploadEndpointUrls": [
+      "https://api10.iloveimg.com/v1/upload"
+    ],
+    "largestPayloads": [
+      {
+        "bytes": 341729,
+        "kind": "formdata",
+        "marker": true,
+        "url": "https://api10.iloveimg.com/v1/upload"
+      },
+      {
+        "bytes": 308,
+        "kind": "formdata",
+        "marker": false,
+        "url": "//api10.iloveimg.com/v1/process"
+      }
+    ],
+    "ingestShown": true,
+    "downloadFired": true,
+    "finalUrl": "https://www.iloveimg.com/download/5y5jg2ss7ht35A6h5zxm437A80t4zwpwmltg2bll0lfkxns7vc1qlkzfcg8nhbjrrn4j4xf3q1ymnmpqt763w72y5rltt19l3xdmgc0qtty1dgcqb82lmk868rm727wsyjvgvsjsqls72skc2qp0hc88r16fA866zc8d6jbhkkjy3ftq1zs1/10"
+  },
+  "verdict": "server-side",
+  "confidence": "high"
+}
